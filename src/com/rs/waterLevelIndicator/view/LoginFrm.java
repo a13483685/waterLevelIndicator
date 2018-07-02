@@ -185,7 +185,7 @@ public class LoginFrm extends JFrame {
 			}
 			JOptionPane.showMessageDialog(this, "»¶Ó­¡¾"+selectedItem.getName()+"¡¿£º"+admin.getName()+"µÇÂ¼±¾ÏµÍ³£¡");
 			this.dispose();
-			mainViewFrm frame = new mainViewFrm();
+			MainFrm frame = new MainFrm();
 			frame.setVisible(true);
 		}
 	}

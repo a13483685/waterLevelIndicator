@@ -3,15 +3,103 @@ JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_152-release" encoding: "UTF-8"
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
-		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
-			"$layoutConstraints": "hidemode 3"
-			"$columnConstraints": "[fill][fill]"
-			"$rowConstraints": "[][][]"
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {space :0:998:x}"
+			"$verticalGroup": "par l {space :0:445:x}"
 		} ) {
 			name: "this"
+			"$sizePolicy": 1
+			"title": "窨井盖远程管理系统"
+			"alwaysOnTop": true
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "menuBar1"
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "mRealtimeMonitor"
+					"text": "实时监控"
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem1"
+						"text": "设备监控"
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem2"
+						"text": "全局总览"
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "mLogcat"
+					"text": "日志查看"
+					"alignmentX": 5.5f
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem3"
+						"text": "设备日志"
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem4"
+						"text": "客户端日志"
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem5"
+						"text": "数据库日志"
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem6"
+						"text": "日志管理"
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "mSystemSettings"
+					"text": "系统设置"
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem7"
+						"text": "数据库连接"
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem8"
+						"text": "系统参数"
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "mDbManager"
+					"text": "数据库管理"
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem9"
+						"text": "历史数据查询"
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem10"
+						"text": "数据库表管理"
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "mDebug"
+					"text": "调试"
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "mExit"
+					"text": "退出"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "mExitActionPerformed", true ) )
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "mAbout"
+					"text": "关于"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "mAboutActionPerformed", true ) )
+					addEvent( new FormEvent( "javax.swing.event.MenuKeyListener", "menuKeyPressed", "mAboutMenuKeyPressed", true ) )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "mFunctionDetails"
+						"text": "使用说明"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "mFunctionDetailsActionPerformed", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "mAboutUs"
+						"text": "关于我们"
+						addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "mAboutUsItemStateChanged", true ) )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "mAboutUsActionPerformed", true ) )
+					} )
+				} )
+			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 300 )
+			"location": new java.awt.Point( 5, 5 )
+			"size": new java.awt.Dimension( 1000, 500 )
 		} )
 	}
 }
