@@ -63,28 +63,28 @@ public class LoginFrm extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
+
 		JLabel lblNewLabel = new JLabel("\u6C34\u4F4D\u8BA1\u7BA1\u7406\u7CFB\u7EDF\u767B\u5F55");
 		lblNewLabel.setFont(new Font("¿¬Ìå", Font.PLAIN, 25));
-		
+
 		JLabel mLabelUserName = new JLabel("\u7528\u6237\u540D\uFF1A");
 		mLabelUserName.setIcon(new ImageIcon(LoginFrm.class.getResource("/images/\u7528\u6237\u540D.png")));
-		
+
 		mTextFieldUserName = new JTextField();
 		mTextFieldUserName.setColumns(10);
-		
+
 		mLabelPassword = new JLabel("\u5BC6 \u7801\uFF1A");
 		mLabelPassword.setIcon(new ImageIcon(LoginFrm.class.getResource("/images/\u5BC6\u7801.png")));
-		
+
 		mTextFieldPassword = new JTextField();
 		mTextFieldPassword.setColumns(10);
-		
+
 		label_2 = new JLabel("\u7528\u6237\u7C7B\u578B\uFF1A");
 		label_2.setIcon(new ImageIcon(LoginFrm.class.getResource("/images/userType.png")));
-		
+
 		mComboBoxUserSlect = new JComboBox();
 		mComboBoxUserSlect.setModel(new DefaultComboBoxModel(new UserType[] {UserType.ADMIN,UserType.NORMALUSER}));
-		
+
 		JButton mButtonLogin = new JButton("\u767B\u5F55");
 		mButtonLogin.setIcon(new ImageIcon(LoginFrm.class.getResource("/images/\u767B\u5F55.png")));
 		mButtonLogin.addActionListener(new ActionListener() {
@@ -92,7 +92,7 @@ public class LoginFrm extends JFrame {
 				loginAct(ae);
 			}
 		});
-		
+
 		JButton mButtonReset = new JButton("\u91CD\u7F6E");
 		mButtonReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
@@ -102,62 +102,62 @@ public class LoginFrm extends JFrame {
 		mButtonReset.setIcon(new ImageIcon(LoginFrm.class.getResource("/images/\u91CD\u7F6E.png")));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+				gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(127)
-							.addComponent(lblNewLabel))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(129)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(label_2)
-										.addComponent(mLabelPassword)
-										.addComponent(mLabelUserName))
-									.addGap(18))
-								.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-									.addContainerGap(157, Short.MAX_VALUE)
-									.addComponent(mButtonLogin)
-									.addPreferredGap(ComponentPlacement.RELATED)))
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-									.addComponent(mTextFieldPassword)
-									.addComponent(mTextFieldUserName, 140, 140, 140)
-									.addComponent(mComboBoxUserSlect, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-									.addComponent(mButtonReset)
-									.addGap(20)))))
-					.addGap(168))
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+										.addGroup(gl_contentPane.createSequentialGroup()
+												.addGap(127)
+												.addComponent(lblNewLabel))
+										.addGroup(gl_contentPane.createSequentialGroup()
+												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+														.addGroup(gl_contentPane.createSequentialGroup()
+																.addGap(129)
+																.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+																		.addComponent(label_2)
+																		.addComponent(mLabelPassword)
+																		.addComponent(mLabelUserName))
+																.addGap(18))
+														.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+																.addContainerGap(157, Short.MAX_VALUE)
+																.addComponent(mButtonLogin)
+																.addPreferredGap(ComponentPlacement.RELATED)))
+												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+														.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+																.addComponent(mTextFieldPassword)
+																.addComponent(mTextFieldUserName, 140, 140, 140)
+																.addComponent(mComboBoxUserSlect, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+														.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+																.addComponent(mButtonReset)
+																.addGap(20)))))
+								.addGap(168))
 		);
 		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(55)
-					.addComponent(lblNewLabel)
-					.addGap(39)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(mLabelUserName)
-						.addComponent(mTextFieldUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(mLabelPassword)
-						.addComponent(mTextFieldPassword, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(24)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(mComboBoxUserSlect, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(label_2))
-					.addGap(26)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(mButtonReset)
-						.addComponent(mButtonLogin))
-					.addContainerGap(14, Short.MAX_VALUE))
+				gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+								.addGap(55)
+								.addComponent(lblNewLabel)
+								.addGap(39)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+										.addComponent(mLabelUserName)
+										.addComponent(mTextFieldUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addGap(18)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+										.addComponent(mLabelPassword)
+										.addComponent(mTextFieldPassword, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addGap(24)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+										.addComponent(mComboBoxUserSlect, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(label_2))
+								.addGap(26)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+										.addComponent(mButtonReset)
+										.addComponent(mButtonLogin))
+								.addContainerGap(14, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
-	
-	
+
+
 	protected void loginAct(ActionEvent ae) {
 		// TODO Auto-generated method stub
 		String userName = mTextFieldUserName.getText().toString();

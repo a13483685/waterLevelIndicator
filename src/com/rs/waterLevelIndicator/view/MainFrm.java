@@ -25,11 +25,11 @@ public class MainFrm extends JFrame {
     }
 
     private void aboutUs() {
-        String info = "å¦‚æ˜¯å‡ºå“\n";
-        String[] buttons = {"è¿«ä¸åŠå¾…å»çœ‹çœ‹!","å¿ƒæƒ…ä¸å¥½ä»¥åå†è¯´!".toString()};
-        int ret = JOptionPane.showOptionDialog(this, info, "å…³äºæˆ‘ä»¬", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.DEFAULT_OPTION, new ImageIcon(LoginFrm.class.getResource("/images/userType.png")), buttons, null);
+        String info = "ÈçÊÇ³öÆ·\n";
+        String[] buttons = {"ÆÈ²»¼°´ıÈ¥¿´¿´!","ĞÄÇé²»ºÃÒÔºóÔÙËµ!".toString()};
+        int ret = JOptionPane.showOptionDialog(this, info, "¹ØÓÚÎÒÃÇ", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.DEFAULT_OPTION, new ImageIcon(LoginFrm.class.getResource("/images/userType.png")), buttons, null);
         if(ret == 0){
-            //é‡‡ç”¨Java è°ƒç”¨ç³»ç»Ÿæµè§ˆå™¨æ‰“å¼€åˆ¶å®š
+            //²ÉÓÃJava µ÷ÓÃÏµÍ³ä¯ÀÀÆ÷´ò¿ªÖÆ¶¨
             try {
                 URI uri = new URI("http://http://www.suchness.cn");
                 Desktop.getDesktop().browse(uri);
@@ -39,14 +39,14 @@ public class MainFrm extends JFrame {
                 e.printStackTrace();
             }
         }else{
-            JOptionPane.showMessageDialog(this, "ä½ çœŸæ˜¯ç‹ å¿ƒï¼Œåæ·«ï¼");
+            JOptionPane.showMessageDialog(this, "ÄãÕæÊÇºİĞÄ£¬»µÒù£¡");
         }
     }
 
 
     private void mFunctionDetailsActionPerformed(ActionEvent e) {
         // TODO add your code here
-        JOptionPane.showMessageDialog(this, "ä½ çœŸæ˜¯ç‹ å¿ƒï¼Œåæ·«ï¼");
+        JOptionPane.showMessageDialog(this, "ÄãÕæÊÇºİĞÄ£¬»µÒù£¡");
     }
 
     private void mAboutUsItemStateChanged(ItemEvent e) {
@@ -92,6 +92,8 @@ public class MainFrm extends JFrame {
         mAbout = new JMenu();
         mFunctionDetails = new JMenuItem();
         mAboutUs = new JMenuItem();
+        mContentPanel = new JPanel();
+        mDeviceMonitor = new JPanel();
 
         //======== this ========
         setTitle("\u7aa8\u4e95\u76d6\u8fdc\u7a0b\u7ba1\u7406\u7cfb\u7edf");
@@ -209,15 +211,42 @@ public class MainFrm extends JFrame {
         }
         setJMenuBar(menuBar1);
 
+        //======== mContentPanel ========
+        {
+            mContentPanel.setLayout(new CardLayout());
+
+            //======== mDeviceMonitor ========
+            {
+
+                GroupLayout mDeviceMonitorLayout = new GroupLayout(mDeviceMonitor);
+                mDeviceMonitor.setLayout(mDeviceMonitorLayout);
+                mDeviceMonitorLayout.setHorizontalGroup(
+                    mDeviceMonitorLayout.createParallelGroup()
+                        .addGap(0, 978, Short.MAX_VALUE)
+                );
+                mDeviceMonitorLayout.setVerticalGroup(
+                    mDeviceMonitorLayout.createParallelGroup()
+                        .addGap(0, 433, Short.MAX_VALUE)
+                );
+            }
+            mContentPanel.add(mDeviceMonitor, "card1");
+        }
+
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGap(0, 998, Short.MAX_VALUE)
+                .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addGap(14, 14, 14)
+                    .addComponent(mContentPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap())
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGap(0, 445, Short.MAX_VALUE)
+                .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(mContentPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap())
         );
         setSize(1000, 500);
         setLocationRelativeTo(getOwner());
@@ -245,5 +274,7 @@ public class MainFrm extends JFrame {
     private JMenu mAbout;
     private JMenuItem mFunctionDetails;
     private JMenuItem mAboutUs;
+    private JPanel mContentPanel;
+    private JPanel mDeviceMonitor;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
