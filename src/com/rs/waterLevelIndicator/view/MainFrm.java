@@ -6,22 +6,22 @@ package com.rs.waterLevelIndicator.view;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.*;
 import com.intellij.uiDesigner.core.*;
+import com.rs.waterLevelIndicator.utils.ImagePanel;
 import net.miginfocom.swing.*;
 
 /**
  * @author xziea
  */
-public class MainFrm extends JFrame {
+public class MainFrm extends JFrame implements MouseListener,ActionListener{
     public MainFrm() {
         initComponents();
-    }
-
-    private void mExitActionPerformed(ActionEvent e) {
-        // TODO add your code here
     }
 
     private void aboutUs() {
@@ -31,7 +31,7 @@ public class MainFrm extends JFrame {
         if(ret == 0){
             //采用Java 调用系统浏览器打开制定
             try {
-                URI uri = new URI("http://http://www.suchness.cn");
+                URI uri = new URI("http://www.suchness.cn");
                 Desktop.getDesktop().browse(uri);
                 //Runtime.getRuntime().exec("explorer http://programmer.ischoolbar.com");
             } catch (Exception e) {
@@ -49,18 +49,6 @@ public class MainFrm extends JFrame {
         JOptionPane.showMessageDialog(this, "你真是狠心，坏淫！");
     }
 
-    private void mAboutUsItemStateChanged(ItemEvent e) {
-        // TODO add your code here
-    }
-
-    private void mAboutActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void mAboutMenuKeyPressed(MenuKeyEvent e) {
-        // TODO add your code here
-    }
-
     private void mAboutUsActionPerformed(ActionEvent e) {
         // TODO add your code here
         aboutUs();
@@ -68,25 +56,25 @@ public class MainFrm extends JFrame {
 
 
 
-
-
+    //界面初始化
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         menuBar1 = new JMenuBar();
+        mHomePage = new JMenu();
         mRealtimeMonitor = new JMenu();
-        menuItem1 = new JMenuItem();
-        menuItem2 = new JMenuItem();
+        mDeviceItem = new JMenuItem();
+        mAllReviewItem = new JMenuItem();
         mLogcat = new JMenu();
-        menuItem3 = new JMenuItem();
-        menuItem4 = new JMenuItem();
-        menuItem5 = new JMenuItem();
-        menuItem6 = new JMenuItem();
+        mDeviceLogItem = new JMenuItem();
+        mClientLogItem = new JMenuItem();
+        mDbItem = new JMenuItem();
+        mLogManageItem = new JMenuItem();
         mSystemSettings = new JMenu();
-        menuItem7 = new JMenuItem();
-        menuItem8 = new JMenuItem();
+        mDbConnectItem = new JMenuItem();
+        mSettingParaItem = new JMenuItem();
         mDbManager = new JMenu();
-        menuItem9 = new JMenuItem();
-        menuItem10 = new JMenuItem();
+        mHistoryDbItem = new JMenuItem();
+        mDbTableItem = new JMenuItem();
         mDebug = new JMenu();
         mExit = new JMenu();
         mAbout = new JMenu();
@@ -103,17 +91,26 @@ public class MainFrm extends JFrame {
         //======== menuBar1 ========
         {
 
+            //======== mHomePage ========
+            {
+                mHomePage.setText("\u9996\u9875");
+                mHomePage.addMouseListener(this);
+            }
+            menuBar1.add(mHomePage);
+
             //======== mRealtimeMonitor ========
             {
                 mRealtimeMonitor.setText("\u5b9e\u65f6\u76d1\u63a7");
 
-                //---- menuItem1 ----
-                menuItem1.setText("\u8bbe\u5907\u76d1\u63a7");
-                mRealtimeMonitor.add(menuItem1);
+                //---- mDeviceItem ----
+                mDeviceItem.setText("\u8bbe\u5907\u76d1\u63a7");
+//                mDeviceItem.addMouseListener(this);
+                mDeviceItem.addActionListener(this::actionPerformed);
+                mRealtimeMonitor.add(mDeviceItem);
 
-                //---- menuItem2 ----
-                menuItem2.setText("\u5168\u5c40\u603b\u89c8");
-                mRealtimeMonitor.add(menuItem2);
+                //---- mAllReviewItem ----
+                mAllReviewItem.setText("\u5168\u5c40\u603b\u89c8");
+                mRealtimeMonitor.add(mAllReviewItem);
             }
             menuBar1.add(mRealtimeMonitor);
 
@@ -122,21 +119,21 @@ public class MainFrm extends JFrame {
                 mLogcat.setText("\u65e5\u5fd7\u67e5\u770b");
                 mLogcat.setAlignmentX(5.5F);
 
-                //---- menuItem3 ----
-                menuItem3.setText("\u8bbe\u5907\u65e5\u5fd7");
-                mLogcat.add(menuItem3);
+                //---- mDeviceLogItem ----
+                mDeviceLogItem.setText("\u8bbe\u5907\u65e5\u5fd7");
+                mLogcat.add(mDeviceLogItem);
 
-                //---- menuItem4 ----
-                menuItem4.setText("\u5ba2\u6237\u7aef\u65e5\u5fd7");
-                mLogcat.add(menuItem4);
+                //---- mClientLogItem ----
+                mClientLogItem.setText("\u5ba2\u6237\u7aef\u65e5\u5fd7");
+                mLogcat.add(mClientLogItem);
 
-                //---- menuItem5 ----
-                menuItem5.setText("\u6570\u636e\u5e93\u65e5\u5fd7");
-                mLogcat.add(menuItem5);
+                //---- mDbItem ----
+                mDbItem.setText("\u6570\u636e\u5e93\u65e5\u5fd7");
+                mLogcat.add(mDbItem);
 
-                //---- menuItem6 ----
-                menuItem6.setText("\u65e5\u5fd7\u7ba1\u7406");
-                mLogcat.add(menuItem6);
+                //---- mLogManageItem ----
+                mLogManageItem.setText("\u65e5\u5fd7\u7ba1\u7406");
+                mLogcat.add(mLogManageItem);
             }
             menuBar1.add(mLogcat);
 
@@ -144,13 +141,13 @@ public class MainFrm extends JFrame {
             {
                 mSystemSettings.setText("\u7cfb\u7edf\u8bbe\u7f6e");
 
-                //---- menuItem7 ----
-                menuItem7.setText("\u6570\u636e\u5e93\u8fde\u63a5");
-                mSystemSettings.add(menuItem7);
+                //---- mDbConnectItem ----
+                mDbConnectItem.setText("\u6570\u636e\u5e93\u8fde\u63a5");
+                mSystemSettings.add(mDbConnectItem);
 
-                //---- menuItem8 ----
-                menuItem8.setText("\u7cfb\u7edf\u53c2\u6570");
-                mSystemSettings.add(menuItem8);
+                //---- mSettingParaItem ----
+                mSettingParaItem.setText("\u7cfb\u7edf\u53c2\u6570");
+                mSystemSettings.add(mSettingParaItem);
             }
             menuBar1.add(mSystemSettings);
 
@@ -158,13 +155,13 @@ public class MainFrm extends JFrame {
             {
                 mDbManager.setText("\u6570\u636e\u5e93\u7ba1\u7406");
 
-                //---- menuItem9 ----
-                menuItem9.setText("\u5386\u53f2\u6570\u636e\u67e5\u8be2");
-                mDbManager.add(menuItem9);
+                //---- mHistoryDbItem ----
+                mHistoryDbItem.setText("\u5386\u53f2\u6570\u636e\u67e5\u8be2");
+                mDbManager.add(mHistoryDbItem);
 
-                //---- menuItem10 ----
-                menuItem10.setText("\u6570\u636e\u5e93\u8868\u7ba1\u7406");
-                mDbManager.add(menuItem10);
+                //---- mDbTableItem ----
+                mDbTableItem.setText("\u6570\u636e\u5e93\u8868\u7ba1\u7406");
+                mDbManager.add(mDbTableItem);
             }
             menuBar1.add(mDbManager);
 
@@ -177,24 +174,13 @@ public class MainFrm extends JFrame {
             //======== mExit ========
             {
                 mExit.setText("\u9000\u51fa");
-                mExit.addActionListener(e -> mExitActionPerformed(e));
             }
             menuBar1.add(mExit);
 
             //======== mAbout ========
             {
                 mAbout.setText("\u5173\u4e8e");
-                mAbout.addActionListener(e -> mAboutActionPerformed(e));
-                mAbout.addMenuKeyListener(new MenuKeyListener() {
-                    @Override
-                    public void menuKeyPressed(MenuKeyEvent e) {
-                        mAboutMenuKeyPressed(e);
-                    }
-                    @Override
-                    public void menuKeyReleased(MenuKeyEvent e) {}
-                    @Override
-                    public void menuKeyTyped(MenuKeyEvent e) {}
-                });
+
 
                 //---- mFunctionDetails ----
                 mFunctionDetails.setText("\u4f7f\u7528\u8bf4\u660e");
@@ -203,7 +189,6 @@ public class MainFrm extends JFrame {
 
                 //---- mAboutUs ----
                 mAboutUs.setText("\u5173\u4e8e\u6211\u4eec");
-                mAboutUs.addItemListener(e -> mAboutUsItemStateChanged(e));
                 mAboutUs.addActionListener(e -> mAboutUsActionPerformed(e));
                 mAbout.add(mAboutUs);
             }
@@ -255,20 +240,21 @@ public class MainFrm extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JMenuBar menuBar1;
+    private JMenu mHomePage;
     private JMenu mRealtimeMonitor;
-    private JMenuItem menuItem1;
-    private JMenuItem menuItem2;
+    private JMenuItem mDeviceItem;
+    private JMenuItem mAllReviewItem;
     private JMenu mLogcat;
-    private JMenuItem menuItem3;
-    private JMenuItem menuItem4;
-    private JMenuItem menuItem5;
-    private JMenuItem menuItem6;
+    private JMenuItem mDeviceLogItem;
+    private JMenuItem mClientLogItem;
+    private JMenuItem mDbItem;
+    private JMenuItem mLogManageItem;
     private JMenu mSystemSettings;
-    private JMenuItem menuItem7;
-    private JMenuItem menuItem8;
+    private JMenuItem mDbConnectItem;
+    private JMenuItem mSettingParaItem;
     private JMenu mDbManager;
-    private JMenuItem menuItem9;
-    private JMenuItem menuItem10;
+    private JMenuItem mHistoryDbItem;
+    private JMenuItem mDbTableItem;
     private JMenu mDebug;
     private JMenu mExit;
     private JMenu mAbout;
@@ -276,5 +262,75 @@ public class MainFrm extends JFrame {
     private JMenuItem mAboutUs;
     private JPanel mContentPanel;
     private JPanel mDeviceMonitor;
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if(e.getSource() == mHomePage){//首页
+//            JOptionPane.showMessageDialog(this, "点击了首页");
+            mContentPanel.removeAll();
+            //首页
+            createHome();
+        }else if(e.getSource() == mDeviceItem){//设备监控
+//            JOptionPane.showMessageDialog(this, "点击了设备监控");
+//            mContentPanel.removeAll();
+//            createRealTimeMonitor();
+
+        }else if(e.getSource() == mAllReviewItem){//全局总揽
+
+        }else if(e.getSource() == mDeviceLogItem){//设备日志
+
+        }else if(e.getSource() == mClientLogItem){//客户端日志
+
+        }
+    }
+
+    //
+    private void createRealTimeMonitor() {
+
+        mContentPanel.add(new AllReviewItemJpanel());
+    }
+
+    private void createHome() {
+        try {
+            Image bgimg = ImageIO.read(new File("F:/work/java/waterLevelIndicator/src/images/background.jpg"));
+            ImagePanel centerBackground = new ImagePanel(bgimg);
+
+            mContentPanel.add(centerBackground, "Center");
+            mContentPanel.setVisible(true);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    //item的点击事件
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == mDeviceItem){
+            JOptionPane.showMessageDialog(this, "点击了设备监控");
+            mContentPanel.removeAll();
+            createRealTimeMonitor();
+            mContentPanel.setVisible(true);
+        }
+    }
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

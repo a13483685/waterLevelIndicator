@@ -1,0 +1,86 @@
+JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_152-release" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :p:40:p, comp tabbedPane2:::p:267:p, space :p:29:p, par l:::p {comp tabbedPane3:::::x, comp tabbedPane5:::::x}, space ::24:x}}"
+			"$verticalGroup": "par l {seq l {space :p:40:p, par l {comp tabbedPane2:::::x, seq {comp tabbedPane3:::p:269:p, space :::x, comp tabbedPane5:::p:332:p}}, space :p:34:p}}"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+				name: "tabbedPane2"
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTree" ) {
+						name: "mAllDevTree"
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "全部点位"
+				} )
+			} )
+			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+				name: "tabbedPane3"
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane2"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "mRealTime"
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "实时数据"
+				} )
+			} )
+			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+				name: "tabbedPane5"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq {space :p:18:p, par t {par l:::p {comp label1:::::x, comp label2:::::x}, comp mReadPara:::p::p}, par l {seq {space :::p, par l {comp mParacomboBox:::p:102:p, comp mParaValTextField:::::x}, space :p:36:p}, seq l {space :p:28:p, comp mSetPara:::p::p, space ::45:x}}, par l {comp mLogContent:::p:325:p, comp mPrintHistory:::p::p}, space :::x}}"
+					"$verticalGroup": "par l {seq {space :p:11:p, comp mPrintHistory:::p::p, par l {seq {space :::p, par b {comp label1::b:p::p, comp mParacomboBox::b:p::p}, space u:::p, par l {comp label2:::p::p, comp mParaValTextField:::p::p}, space :p:26:p, par b {comp mReadPara::b:p::p, comp mSetPara::b:p::p}}, seq l {space :p:25:p, comp mLogContent:::p:213:p}}, space ::33:x}}"
+				} ) {
+					name: "panel1"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label1"
+						"text": "参数名称："
+					} )
+					add( new FormComponent( "javax.swing.JComboBox" ) {
+						name: "mParacomboBox"
+					} )
+					add( new FormComponent( "javax.swing.JCheckBox" ) {
+						name: "mPrintHistory"
+						"text": "打印历史记录"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "mLogContent"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label2"
+						"text": "参数值："
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "mParaValTextField"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "mReadPara"
+						"text": "读参"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "mSetPara"
+						"text": "设参"
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "读参数"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {space :0:578:x}"
+					"$verticalGroup": "par l {space :0:305:x}"
+				} ) {
+					name: "panel2"
+				}, new FormLayoutConstraints( null ) {
+					"title": "控制"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 940, 675 )
+		} )
+	}
+}

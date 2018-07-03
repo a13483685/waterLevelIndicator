@@ -11,28 +11,28 @@ new FormModel {
 			"$sizePolicy": 1
 			"title": "窨井盖远程管理系统"
 			"alwaysOnTop": true
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {space :0:978:x}"
+				"$verticalGroup": "par l {space :0:433:x}"
+			} ) {
 				name: "mContentPanel"
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {space :0:978:x}"
-					"$verticalGroup": "par l {space :0:433:x}"
-				} ) {
-					name: "mDeviceMonitor"
-				}, new FormLayoutConstraints( class java.lang.String ) {
-					"value": "card1"
-				} )
 			} )
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "menuBar1"
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "mHomePage"
+					"text": "首页"
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "mHomePageMouseClicked", true ) )
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "mRealtimeMonitor"
 					"text": "实时监控"
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem1"
+						name: "mDeviceItem"
 						"text": "设备监控"
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem2"
+						name: "mAllReviewItem"
 						"text": "全局总览"
 					} )
 				} )
@@ -41,19 +41,19 @@ new FormModel {
 					"text": "日志查看"
 					"alignmentX": 5.5f
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem3"
+						name: "mDeviceLogItem"
 						"text": "设备日志"
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem4"
+						name: "mClientLogItem"
 						"text": "客户端日志"
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem5"
+						name: "mDbItem"
 						"text": "数据库日志"
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem6"
+						name: "mLogManageItem"
 						"text": "日志管理"
 					} )
 				} )
@@ -61,11 +61,11 @@ new FormModel {
 					name: "mSystemSettings"
 					"text": "系统设置"
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem7"
+						name: "mDbConnectItem"
 						"text": "数据库连接"
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem8"
+						name: "mSettingParaItem"
 						"text": "系统参数"
 					} )
 				} )
@@ -73,11 +73,11 @@ new FormModel {
 					name: "mDbManager"
 					"text": "数据库管理"
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem9"
+						name: "mHistoryDbItem"
 						"text": "历史数据查询"
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem10"
+						name: "mDbTableItem"
 						"text": "数据库表管理"
 					} )
 				} )
