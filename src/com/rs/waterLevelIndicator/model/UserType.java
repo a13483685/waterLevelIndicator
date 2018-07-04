@@ -1,7 +1,7 @@
 package com.rs.waterLevelIndicator.model;
 
 public enum UserType {
-	ADMIN("ÏµÍ³¹ÜÀíÔ±",0),NORMALUSER("ÆÕÍ¨ÓÃ»§",1);
+	ADMIN("ç³»ç»Ÿç®¡ç†å‘˜",0),NORMALUSER("æ™®é€šç”¨æˆ·",1);
 	private String name;
 	private int index;
 	private UserType(String name,int index){

@@ -7,15 +7,15 @@ import java.sql.SQLException;
 /**
  * 
  * @author xiez
- *与数据库建立连接
+ *?????????????
  */
 public class DbUtil {
-	private String dbUrl="jdbc:mysql://localhost:3306/db_waterLeverindicator?useUnicode=true&characterEncoding=utf8"; // 数据库连接地址
-	private String dbUserName="root"; // 用户名
-	private String dbPassword="123456"; // 密码
-	private String jdbcName="com.mysql.jdbc.Driver"; // 驱动名称
+	private String dbUrl="jdbc:mysql://localhost:3306/db_waterLeverindicator?useUnicode=true&characterEncoding=utf8"; // ???????????
+	private String dbUserName="root"; // ?????
+	private String dbPassword="123456"; // ????
+	private String jdbcName="com.mysql.jdbc.Driver"; // ????????
 	/**
-	 * 获取数据库连接
+	 * ????????????
 	 * @return
 	 * @throws Exception
 	 */
@@ -36,7 +36,7 @@ public class DbUtil {
 		return con;
 	}
 	/**
-	 * 关闭数据库连接
+	 * ????????????
 	 * @param con
 	 * @throws Exception
 	 */
@@ -50,11 +50,11 @@ public class DbUtil {
 		DbUtil dbUtil=new DbUtil();
 		try {
 			dbUtil.getCon();
-			System.out.println("数据库连接成功！");
+			System.out.println("?????????????");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("数据库连接失败");
+			System.out.println("????????????");
 		}
 	}
 }

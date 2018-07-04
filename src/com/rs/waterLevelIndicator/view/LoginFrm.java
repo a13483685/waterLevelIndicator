@@ -65,7 +65,7 @@ public class LoginFrm extends JFrame {
 		setContentPane(contentPane);
 
 		JLabel lblNewLabel = new JLabel("\u6C34\u4F4D\u8BA1\u7BA1\u7406\u7CFB\u7EDF\u767B\u5F55");
-		lblNewLabel.setFont(new Font("¿¬Ìå", Font.PLAIN, 25));
+		lblNewLabel.setFont(new Font("æ¥·ä½“", Font.PLAIN, 25));
 
 		JLabel mLabelUserName = new JLabel("\u7528\u6237\u540D\uFF1A");
 		mLabelUserName.setIcon(new ImageIcon(LoginFrm.class.getResource("/images/\u7528\u6237\u540D.png")));
@@ -163,15 +163,15 @@ public class LoginFrm extends JFrame {
 		String password = mTextFieldPassword.getText().toString();
 		UserType selectedItem = (UserType)mComboBoxUserSlect.getSelectedItem();
 		if(StringUtil.isEmpty(userName)){
-			JOptionPane.showMessageDialog(this, "ÓÃ»§Ãû²»ÄÜÎª¿Õ£¡");
+			JOptionPane.showMessageDialog(this, "ç”¨æˆ·åä¸èƒ½ä¸ºç©ºï¼");
 			return;
 		}
 		if(StringUtil.isEmpty(password)){
-			JOptionPane.showMessageDialog(this, "ÃÜÂë²»ÄÜÎª¿Õ£¡");
+			JOptionPane.showMessageDialog(this, "å¯†ç ä¸èƒ½ä¸ºç©ºï¼");
 			return;
 		}
 		Admin admin = null;
-		if("ÏµÍ³¹ÜÀíÔ±".equals(selectedItem.getName())){
+		if("ç³»ç»Ÿç®¡ç†å‘˜".equals(selectedItem.getName())){
 			AdminDao adminDao = new AdminDao();
 			Admin adminTmp = new Admin();
 			adminTmp.setName(userName);
@@ -179,10 +179,10 @@ public class LoginFrm extends JFrame {
 			admin = adminDao.login(adminTmp);
 			adminDao.closeDao();
 			if(admin == null){
-				JOptionPane.showMessageDialog(this, "ÓÃ»§Ãû»òÃÜÂë´íÎó£¡");
+				JOptionPane.showMessageDialog(this, "ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯ï¼");
 				return;
 			}
-			JOptionPane.showMessageDialog(this, "»¶Ó­¡¾"+selectedItem.getName()+"¡¿£º"+admin.getName()+"µÇÂ¼±¾ÏµÍ³£¡");
+			JOptionPane.showMessageDialog(this, "æ¬¢è¿ã€"+selectedItem.getName()+"ã€‘ï¼š"+admin.getName()+"ç™»å½•æœ¬ç³»ç»Ÿï¼");
 			this.dispose();
 			MainFrm frame = new MainFrm();
 			frame.setVisible(true);

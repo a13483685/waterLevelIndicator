@@ -25,11 +25,11 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
     }
 
     private void aboutUs() {
-        String info = "ÈçÊÇ³öÆ·\n";
-        String[] buttons = {"ÆÈ²»¼°´ıÈ¥¿´¿´!","ĞÄÇé²»ºÃÒÔºóÔÙËµ!".toString()};
-        int ret = JOptionPane.showOptionDialog(this, info, "¹ØÓÚÎÒÃÇ", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.DEFAULT_OPTION, new ImageIcon(LoginFrm.class.getResource("/images/userType.png")), buttons, null);
+        String info = "å¦‚æ˜¯å‡ºå“\n";
+        String[] buttons = {"è¿«ä¸åŠå¾…å»çœ‹çœ‹!","å¿ƒæƒ…ä¸å¥½ä»¥åå†è¯´!".toString()};
+        int ret = JOptionPane.showOptionDialog(this, info, "å…³äºæˆ‘ä»¬", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.DEFAULT_OPTION, new ImageIcon(LoginFrm.class.getResource("/images/userType.png")), buttons, null);
         if(ret == 0){
-            //²ÉÓÃJava µ÷ÓÃÏµÍ³ä¯ÀÀÆ÷´ò¿ªÖÆ¶¨
+            //é‡‡ç”¨Java è°ƒç”¨ç³»ç»Ÿæµè§ˆå™¨æ‰“å¼€åˆ¶å®š
             try {
                 URI uri = new URI("http://www.suchness.cn");
                 Desktop.getDesktop().browse(uri);
@@ -39,14 +39,14 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
                 e.printStackTrace();
             }
         }else{
-            JOptionPane.showMessageDialog(this, "ÄãÕæÊÇºİĞÄ£¬»µÒù£¡");
+            JOptionPane.showMessageDialog(this, "ä½ çœŸæ˜¯ç‹ å¿ƒï¼Œåæ·«ï¼");
         }
     }
 
 
     private void mFunctionDetailsActionPerformed(ActionEvent e) {
         // TODO add your code here
-        JOptionPane.showMessageDialog(this, "ÄãÕæÊÇºİĞÄ£¬»µÒù£¡");
+        JOptionPane.showMessageDialog(this, "ä½ çœŸæ˜¯ç‹ å¿ƒï¼Œåæ·«ï¼");
     }
 
     private void mAboutUsActionPerformed(ActionEvent e) {
@@ -56,7 +56,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
 
 
 
-    //½çÃæ³õÊ¼»¯
+    //ç•Œé¢åˆå§‹åŒ–
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         menuBar1 = new JMenuBar();
@@ -265,29 +265,28 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(e.getSource() == mHomePage){//Ê×Ò³
-//            JOptionPane.showMessageDialog(this, "µã»÷ÁËÊ×Ò³");
+        if(e.getSource() == mHomePage){//é¦–é¡µ
+//            JOptionPane.showMessageDialog(this, "ç‚¹å‡»äº†é¦–é¡µ");
             mContentPanel.removeAll();
-            //Ê×Ò³
+            //é¦–é¡µ
             createHome();
-        }else if(e.getSource() == mDeviceItem){//Éè±¸¼à¿Ø
-//            JOptionPane.showMessageDialog(this, "µã»÷ÁËÉè±¸¼à¿Ø");
+        }else if(e.getSource() == mDeviceItem){//è®¾å¤‡ç›‘æ§
+//            JOptionPane.showMessageDialog(this, "ç‚¹å‡»äº†è®¾å¤‡ç›‘æ§");
 //            mContentPanel.removeAll();
-//            createRealTimeMonitor();
+//            devicesMonitor();
 
-        }else if(e.getSource() == mAllReviewItem){//È«¾Ö×ÜÀ¿
+        }else if(e.getSource() == mAllReviewItem){//å…¨å±€æ€»æ½
 
-        }else if(e.getSource() == mDeviceLogItem){//Éè±¸ÈÕÖ¾
+        }else if(e.getSource() == mDeviceLogItem){//è®¾å¤‡æ—¥å¿—
 
-        }else if(e.getSource() == mClientLogItem){//¿Í»§¶ËÈÕÖ¾
+        }else if(e.getSource() == mClientLogItem){//å®¢æˆ·ç«¯æ—¥å¿—
 
         }
     }
 
     //
-    private void createRealTimeMonitor() {
-
-        mContentPanel.add(new AllReviewItemJpanel());
+    private void devicesMonitor() {
+        mContentPanel.add(new DeviceMonitorJpanel());
     }
 
     private void createHome() {
@@ -322,13 +321,13 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
 
     }
 
-    //itemµÄµã»÷ÊÂ¼ş
+    //itemçš„ç‚¹å‡»äº‹ä»¶
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == mDeviceItem){
-            JOptionPane.showMessageDialog(this, "µã»÷ÁËÉè±¸¼à¿Ø");
+            JOptionPane.showMessageDialog(this, "ç‚¹å‡»äº†è®¾å¤‡ç›‘æ§");
             mContentPanel.removeAll();
-            createRealTimeMonitor();
+            devicesMonitor();
             mContentPanel.setVisible(true);
         }
     }
