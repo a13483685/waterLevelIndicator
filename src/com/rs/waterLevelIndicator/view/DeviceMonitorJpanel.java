@@ -50,7 +50,7 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,Observ
         tabbedPane3 = new JTabbedPane();
         scrollPane2 = new JScrollPane();
 
-//        initTable();
+        initTable();
         tabbedPane5 = new JTabbedPane();
         panel1 = new JPanel();
         label1 = new JLabel();
@@ -191,27 +191,28 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,Observ
     //历史数据表
     private void initTable() {
         //这部分需要重构 在数据管理->历史数据中使用
-        List<SensorData> sensorDataList = new SenserDataDao().getSensorDataList();
-        Vector<Vector> sensorDatas= new Vector();
-        for(SensorData sd :sensorDataList){
-            Vector mItems = new Vector();
-            System.out.println("sd is :"+sd.toString());
-            mItems.add(sd.getDev_id());
-            mItems.add(sd.getGaokong());
-            mItems.add(sd.getUpload());
-            mItems.add(sd.getUpLimit());
-            mItems.add(sd.getDownLimit());
-            mItems.add(sd.getWatt());
-            mItems.add(sd.getGpsSignal());
-            mItems.add(sd.getStatus());
-            mItems.add(sd.getTime());
-            System.out.println("mItems is :"+mItems.toString());
-            sensorDatas.add(mItems);
-        }
+//        List<SensorData> sensorDataList = new SenserDataDao().getSensorDataList();
+//        Vector<Vector> sensorDatas= new Vector();
+//        for(SensorData sd :sensorDataList){
+//            Vector mItems = new Vector();
+//            System.out.println("sd is :"+sd.toString());
+//            mItems.add(sd.getDev_id());
+//            mItems.add(sd.getGaokong());
+//            mItems.add(sd.getUpload());
+//            mItems.add(sd.getUpLimit());
+//            mItems.add(sd.getDownLimit());
+//            mItems.add(sd.getWatt());
+//            mItems.add(sd.getGpsSignal());
+//            mItems.add(sd.getStatus());
+//            mItems.add(sd.getTime());
+//            System.out.println("mItems is :"+mItems.toString());
+//            sensorDatas.add(mItems);
+//        }
+//
+//        String params[] = { "设备名", "空高水位", "上报水位", "上限水位", "下限水位", "电池电压", "GPS信号强度", "状态", "时间" };
+        HistoryDataBaseTable historyDataBaseTable = new HistoryDataBaseTable();
 
-        String params[] = { "设备名", "空高水位", "上报水位", "上限水位", "下限水位", "电池电压", "GPS信号强度", "状态", "时间" };
-        BaseTableModule baseTableModule = new BaseTableModule(params, sensorDatas);
-        mRealSensorData = new JTable(baseTableModule);
+        mRealSensorData = new JTable(historyDataBaseTable.initTable());
         scrollPane2.setViewportView(mRealSensorData);
         tabbedPane3.addTab("\u5b9e\u65f6\u6570\u636e", scrollPane2);
     }
