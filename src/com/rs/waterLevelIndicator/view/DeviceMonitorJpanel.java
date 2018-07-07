@@ -13,12 +13,14 @@ import javax.swing.GroupLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Vector;
 
 /**
  * @author xziea
  */
-public class DeviceMonitorJpanel extends JPanel implements ActionListener {
+public class DeviceMonitorJpanel extends JPanel implements ActionListener,Observer {//观察者来监听数据库插入的数据，用来刷新表格界面
     JButton mReadPara = null;
     JTable mRealSensorData;//
     JScrollPane scrollPane2;
@@ -48,7 +50,7 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener {
         tabbedPane3 = new JTabbedPane();
         scrollPane2 = new JScrollPane();
 
-        initTable();
+//        initTable();
         tabbedPane5 = new JTabbedPane();
         panel1 = new JPanel();
         label1 = new JLabel();
@@ -186,8 +188,9 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener {
         );
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
+    //历史数据表
     private void initTable() {
+        //这部分需要重构 在数据管理->历史数据中使用
         List<SensorData> sensorDataList = new SenserDataDao().getSensorDataList();
         Vector<Vector> sensorDatas= new Vector();
         for(SensorData sd :sensorDataList){
@@ -219,6 +222,13 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener {
             List<SensorData> sensorDataList = new SenserDataDao().getSensorDataList();
 //            new BaseTableModule(params, sensorDataList);
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println("data changed to"+(String)arg);
+        //接下来刷新界面
+
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables

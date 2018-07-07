@@ -1,5 +1,9 @@
 package com.rs.waterLevelIndicator.net;
 
+import com.rs.waterLevelIndicator.interfaces.CallInsertIntoDbSensor;
+import com.rs.waterLevelIndicator.interfaces.IinsertIntoDbSensor;
+import com.rs.waterLevelIndicator.interfaces.InsertIntoDbSensorImp;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -7,11 +11,16 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ReceiveTCP implements Runnable {
+
     private Socket socket = null;
     private InputStream in = null;
     private OutputStream out = null;
+    private CallInsertIntoDbSensor callInsertIntoDbSensor;
+    private InsertIntoDbSensorImp insertIntoDbSensorImp;
+
     public ReceiveTCP(Socket s) {
         this.socket = s;
+        callInsertIntoDbSensor = new CallInsertIntoDbSensor();
     }
 
     @Override
@@ -27,7 +36,7 @@ public class ReceiveTCP implements Runnable {
             {
                 in.read(recData);
                 String data = new String(recData);
-                InsertInToDatabase();//将数据插入到数据库
+                InsertInToDatabase(data);//将数据插入到数据库
                 System.out.println("读取到客户端发送来的数据：" + data);
                 //返回给客户端的消息
                 out.write("Hello client I am server".getBytes());
@@ -38,9 +47,18 @@ public class ReceiveTCP implements Runnable {
             e.printStackTrace();
         }
     }
+    //往数据库插入数据
+    private void InsertInToDatabase(String str) {
 
-    private void InsertInToDatabase() {
-
+        insertIntoDbSensorImp = new InsertIntoDbSensorImp();
+        callInsertIntoDbSensor.setOnCallInsertIntoDbSensor(insertIntoDbSensorImp,str);//往数据库插入数据
+//        insertIntoDbSensorImp.insertInToDbSensor(str);
+//        callInsertIntoDbSensor.setOnCallInsertIntoDbSensor(new IinsertIntoDbSensor() {
+//            @Override
+//            public void insertInToDbSensor(String SensorInfo) {
+//                System.out.println("insertInToDbSensor"+SensorInfo);
+//            }
+//        },str);
     }
 }
 
@@ -76,7 +94,7 @@ class TCPThreadServerDemo implements Runnable{
                  * 服务端使用多线程方便多客户端的连接
                  * 这里将服务端的socket传给内部类，方便每个客户端都创建一个线程
                  */
-                Thread t = new Thread(new ReceiveUDP(s));
+                Thread t = new Thread(new ReceiveTCP(s));
                 t.start();
             }
         } catch (IOException e) {

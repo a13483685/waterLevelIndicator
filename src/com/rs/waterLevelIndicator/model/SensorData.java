@@ -1,89 +1,88 @@
 package com.rs.waterLevelIndicator.model;
 
-import java.math.BigDecimal;
 import java.sql.Time;
 
 public class SensorData {
-    private int dev_id;
-    private BigDecimal gaokong ;
-    private BigDecimal upload ;
-    private BigDecimal upLimit ;
-    private BigDecimal downLimit ;
-    private BigDecimal watt ;
-    private BigDecimal gpsSignal ;
-    private BigDecimal status ;
-    private Time time ;
+    private String dev_id;
+    private String gaokong ;
+    private String upload ;
+    private String upLimit ;
+    private String downLimit ;
+    private String watt ;
+    private String gpsSignal ;
+    private String status ;
+    private String time ;
     
 
-    public int getDev_id() {
+    public String getDev_id() {
         return dev_id;
     }
 
-    public void setDev_id(int dev_id) {
+    public void setDev_id(String dev_id) {
         this.dev_id = dev_id;
     }
 
-    public BigDecimal getGaokong() {
+    public String getGaokong() {
         return gaokong;
     }
 
-    public void setGaokong(BigDecimal gaokong) {
+    public void setGaokong(String gaokong) {
         this.gaokong = gaokong;
     }
 
-    public BigDecimal getUpload() {
+    public String getUpload() {
         return upload;
     }
 
-    public void setUpload(BigDecimal upload) {
+    public void setUpload(String upload) {
         this.upload = upload;
     }
 
-    public BigDecimal getUpLimit() {
+    public String getUpLimit() {
         return upLimit;
     }
 
-    public void setUpLimit(BigDecimal upLimit) {
+    public void setUpLimit(String upLimit) {
         this.upLimit = upLimit;
     }
 
-    public BigDecimal getDownLimit() {
+    public String getDownLimit() {
         return downLimit;
     }
 
-    public void setDownLimit(BigDecimal downLimit) {
+    public void setDownLimit(String downLimit) {
         this.downLimit = downLimit;
     }
 
-    public BigDecimal getWatt() {
+    public String getWatt() {
         return watt;
     }
 
-    public void setWatt(BigDecimal watt) {
+    public void setWatt(String watt) {
         this.watt = watt;
     }
 
-    public BigDecimal getGpsSignal() {
+    public String getGpsSignal() {
         return gpsSignal;
     }
 
-    public void setGpsSignal(BigDecimal gpsSignal) {
+    public void setGpsSignal(String gpsSignal) {
         this.gpsSignal = gpsSignal;
     }
 
-    public BigDecimal getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(BigDecimal status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
