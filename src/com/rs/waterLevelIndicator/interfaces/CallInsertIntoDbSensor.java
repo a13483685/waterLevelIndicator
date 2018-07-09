@@ -6,6 +6,4 @@ public class CallInsertIntoDbSensor {
         this.insertIntoDbSensor = insertIntoDbSensor;
         this.insertIntoDbSensor.insertInToDbSensor(str);
     }
-
-
 }

@@ -22,8 +22,8 @@ import java.util.Vector;
  */
 public class DeviceMonitorJpanel extends JPanel implements ActionListener,Observer {//观察者来监听数据库插入的数据，用来刷新表格界面
     JButton mReadPara = null;
-    JTable mRealSensorData;//
-    JScrollPane scrollPane2;
+//    JTable mRealSensorData;//
+//    JScrollPane scrollPane2;
     JTabbedPane tabbedPane3;
     public DeviceMonitorJpanel() {
         initView();
@@ -48,7 +48,7 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,Observ
         JPanel panel2;
         scrollPane1 = new JScrollPane();
         tabbedPane3 = new JTabbedPane();
-        scrollPane2 = new JScrollPane();
+//        scrollPane2 = new JScrollPane();
 
         initTable();
         tabbedPane5 = new JTabbedPane();
@@ -189,6 +189,7 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,Observ
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
     //历史数据表
+    //改为实时数据表格
     private void initTable() {
         //这部分需要重构 在数据管理->历史数据中使用
 //        List<SensorData> sensorDataList = new SenserDataDao().getSensorDataList();
@@ -210,11 +211,13 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,Observ
 //        }
 //
 //        String params[] = { "设备名", "空高水位", "上报水位", "上限水位", "下限水位", "电池电压", "GPS信号强度", "状态", "时间" };
-        HistoryDataBaseTable historyDataBaseTable = new HistoryDataBaseTable();
+//        HistoryDataBaseTable historyDataBaseTable = new HistoryDataBaseTable();
 
-        mRealSensorData = new JTable(historyDataBaseTable.initTable());
-        scrollPane2.setViewportView(mRealSensorData);
-        tabbedPane3.addTab("\u5b9e\u65f6\u6570\u636e", scrollPane2);
+//        mRealSensorData = new JTable(historyDataBaseTable.initTable());
+//        scrollPane2.setViewportView(historyDataBaseTable.initTable());
+//        tabbedPane3.addTab("\u5b9e\u65f6\u6570\u636e", scrollPane2);
+        RealtimeDataPanel realtimeData = new RealtimeDataPanel();
+        tabbedPane3.addTab("实时数据", realtimeData);//改变内容就行
     }
 
     @Override

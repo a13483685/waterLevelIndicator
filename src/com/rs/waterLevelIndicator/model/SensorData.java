@@ -10,9 +10,26 @@ public class SensorData {
     private String downLimit ;
     private String watt ;
     private String gpsSignal ;
-    private String status ;
+    private String ComStatus ;
     private String time ;
-    
+    private String devStatus ;
+    private String waterLevel ;
+
+    public String getDevStatus() {
+        return devStatus;
+    }
+
+    public void setDevStatus(String devStatus) {
+        this.devStatus = devStatus;
+    }
+
+    public String getWaterLevel() {
+        return waterLevel;
+    }
+
+    public void setWaterLevel(String waterLevel) {
+        this.waterLevel = waterLevel;
+    }
 
     public String getDev_id() {
         return dev_id;
@@ -70,12 +87,12 @@ public class SensorData {
         this.gpsSignal = gpsSignal;
     }
 
-    public String getStatus() {
-        return status;
+    public String getComStatus() {
+        return ComStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setComStatus(String ComStatus) {
+        this.ComStatus = ComStatus;
     }
 
     public String getTime() {
@@ -89,15 +106,17 @@ public class SensorData {
     @Override
     public String toString() {
         return "SensorData{" +
-                "dev_id=" + dev_id +
-                ", gaokong=" + gaokong +
-                ", upload=" + upload +
-                ", upLimit=" + upLimit +
-                ", downLimit=" + downLimit +
-                ", watt=" + watt +
-                ", gpsSignal=" + gpsSignal +
-                ", status=" + status +
-                ", time=" + time +
+                "dev_id='" + dev_id + '\'' +
+                ", gaokong='" + gaokong + '\'' +
+                ", upload='" + upload + '\'' +
+                ", upLimit='" + upLimit + '\'' +
+                ", downLimit='" + downLimit + '\'' +
+                ", watt='" + watt + '\'' +
+                ", gpsSignal='" + gpsSignal + '\'' +
+                ", ComStatus='" + ComStatus + '\'' +
+                ", time='" + time + '\'' +
+                ", devStatus='" + devStatus + '\'' +
+                ", waterLevel='" + waterLevel + '\'' +
                 '}';
     }
 }

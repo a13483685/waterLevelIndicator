@@ -2,9 +2,9 @@ package com.rs.waterLevelIndicator.interfaces;
 
 
 import com.rs.waterLevelIndicator.dao.SenserDataDao;
-//½Ó¿ÚÊµÏÖº¯Êı
+//æ¥å£å®ç°å‡½æ•°
 public class InsertIntoDbSensorImp implements IinsertIntoDbSensor{
-    //½«½ÓÊÕµ½µÄ´«¸ĞÆ÷Êı¾İ²åÈëµ½Êı¾İ¿âÖĞ
+    //å°†æ¥æ”¶åˆ°çš„ä¼ æ„Ÿå™¨æ•°æ®æ’å…¥åˆ°æ•°æ®åº“ä¸­
     @Override
     public void insertInToDbSensor(String SensorInfo) {
         System.out.println("SensorInfo is :"+SensorInfo);
