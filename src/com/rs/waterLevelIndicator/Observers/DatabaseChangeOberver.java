@@ -10,7 +10,7 @@ public class DatabaseChangeOberver extends Observable {
     public synchronized void addObserver(Observer o) {
         super.addObserver(o);
     }
-    public void changeeValues(String data){
+    public void changeValues(String data){
         this.data = data;
         setChanged();
     }
