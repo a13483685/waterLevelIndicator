@@ -216,7 +216,7 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,Observ
 //        mRealSensorData = new JTable(historyDataBaseTable.initTable());
 //        scrollPane2.setViewportView(historyDataBaseTable.initTable());
 //        tabbedPane3.addTab("\u5b9e\u65f6\u6570\u636e", scrollPane2);
-        RealtimeDataPanel realtimeData = new RealtimeDataPanel();
+        RealtimeData realtimeData = new RealtimeData();
         tabbedPane3.addTab("实时数据", realtimeData);//改变内容就行
     }
 
