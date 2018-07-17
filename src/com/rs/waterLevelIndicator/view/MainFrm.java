@@ -157,6 +157,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
 
                 //---- mHistoryDbItem ----
                 mHistoryDbItem.setText("\u5386\u53f2\u6570\u636e\u67e5\u8be2");
+                mHistoryDbItem.addActionListener(this);
                 mDbManager.add(mHistoryDbItem);
 
                 //---- mDbTableItem ----
@@ -329,7 +330,16 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
             mContentPanel.removeAll();
             devicesMonitor();
             mContentPanel.setVisible(true);
+        }else if(e.getSource() == mHistoryDbItem){
+            JOptionPane.showMessageDialog(this, "点击了历史数据查询");
+            mContentPanel.removeAll();
+            historyDbPanel();
         }
+
+    }
+    //历史数据界面
+    private void historyDbPanel() {
+        mContentPanel.add(new HistoryDbPanel());
     }
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

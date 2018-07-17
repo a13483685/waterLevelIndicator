@@ -1,0 +1,80 @@
+JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_152-release" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :p:24:p, comp tabbedPane1:::p:337:p, space :p:27:p, comp panel2:::p::p, space :::x}}"
+			"$verticalGroup": "par l {seq {par l {seq {space :::p, comp panel2:::p::p}, seq l {space :p:22:p, comp tabbedPane1:::p:590:p}}, space ::39:x}}"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq l {space :p:26:p, par l {comp mTables:::p:620:p, seq {comp label1:::p::p, space s:::p, comp mStartTimeButton:::p:132:p, space :p:32:p, comp label2:::p:70:p, space s:::p, comp mEndTimeButton:::p:129:p, space :p:52:p, comp mQueryButton:::p::p}}, space ::15:x}}"
+				"$verticalGroup": "par l {seq l {space :p:12:p, par b {comp mQueryButton::b:p::p, comp label1::b:p:24:p, comp mStartTimeButton::b:p::p, comp mEndTimeButton::b:p::p, comp label2::b:p::p}, space s:::p, comp mTables:::::x, space :::p}}"
+			} ) {
+				name: "panel2"
+				add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+					name: "mTables"
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {space :0:618:x}"
+						"$verticalGroup": "par l {space :0:547:x}"
+					} ) {
+						name: "mHistoryTable"
+					}, new FormLayoutConstraints( null ) {
+						"title": "历史记录"
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {space :0:618:x}"
+						"$verticalGroup": "par l {space :0:547:x}"
+					} ) {
+						name: "mEventTable"
+					}, new FormLayoutConstraints( null ) {
+						"title": "事件记录"
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {space :0:618:x}"
+						"$verticalGroup": "par l {space :0:547:x}"
+					} ) {
+						name: "mWarnningTable"
+					}, new FormLayoutConstraints( null ) {
+						"title": "报警记录"
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "mStartTimeButton"
+					"text": "起始时间"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "mEndTimeButton"
+					"text": "结束时间"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "起始时间："
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"text": "结束时间："
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "mQueryButton"
+					"text": "查询"
+				} )
+			} )
+			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+				name: "tabbedPane1"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {space :0:335:x}"
+					"$verticalGroup": "par l {space :0:563:x}"
+				} ) {
+					name: "panel1"
+				}, new FormLayoutConstraints( null ) {
+					"title": "全部点位"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 1010, 685 )
+		} )
+	}
+}

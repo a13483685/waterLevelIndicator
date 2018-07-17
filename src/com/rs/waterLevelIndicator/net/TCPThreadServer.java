@@ -3,6 +3,7 @@ package com.rs.waterLevelIndicator.net;
 import com.rs.waterLevelIndicator.interfaces.CallInsertIntoDbSensor;
 import com.rs.waterLevelIndicator.interfaces.ISenserDataChange;
 import com.rs.waterLevelIndicator.interfaces.InsertIntoDbSensorImp;
+import com.rs.waterLevelIndicator.view.RealtimeData;
 import com.rs.waterLevelIndicator.view.RealtimeDataPanel;
 
 import java.io.IOException;
@@ -15,10 +16,6 @@ import java.util.Observer;
 
 public class TCPThreadServer implements Runnable{
     private static final int PORT = 6666;
-    RealtimeDataPanel mRealtimeDataPanel = null;
-    public TCPThreadServer(RealtimeDataPanel mRealtimeDataPanel){
-        this.mRealtimeDataPanel = mRealtimeDataPanel;
-    }
 
 //    public static void main(String[] args) {
 //        new Thread(new TCPThreadServer()).start();
@@ -49,7 +46,7 @@ public class TCPThreadServer implements Runnable{
                  * 服务端使用多线程方便多客户端的连接
                  * 这里将服务端的socket传给内部类，方便每个客户端都创建一个线程
                  */
-                Thread t = new Thread(new ReceiveTCP(s,mRealtimeDataPanel));
+                Thread t = new Thread(new ReceiveTCP(s));
                 t.start();
             }
         } catch (IOException e) {
@@ -67,11 +64,9 @@ public class TCPThreadServer implements Runnable{
         private CallInsertIntoDbSensor callInsertIntoDbSensor;
         private InsertIntoDbSensorImp insertIntoDbSensorImp;
         private ISenserDataChange senserDataChange;
-        RealtimeDataPanel mRealtimeDataPanel = null;
-        public ReceiveTCP(Socket s,RealtimeDataPanel mRealtimeDataPanel) {
+        public ReceiveTCP(Socket s) {
             this.socket = s;
             callInsertIntoDbSensor = new CallInsertIntoDbSensor();
-            this.mRealtimeDataPanel = mRealtimeDataPanel;
         }
 
 

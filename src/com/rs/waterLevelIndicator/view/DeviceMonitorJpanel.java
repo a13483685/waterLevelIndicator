@@ -20,7 +20,7 @@ import java.util.Vector;
 /**
  * @author xziea
  */
-public class DeviceMonitorJpanel extends JPanel implements ActionListener,Observer {//观察者来监听数据库插入的数据，用来刷新表格界面
+public class DeviceMonitorJpanel extends JPanel implements ActionListener{//观察者来监听数据库插入的数据，用来刷新表格界面
     JButton mReadPara = null;
 //    JTable mRealSensorData;//
 //    JScrollPane scrollPane2;
@@ -228,12 +228,6 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,Observ
         }
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        System.out.println("data changed to"+(String)arg);
-        //接下来刷新界面
-
-    }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 

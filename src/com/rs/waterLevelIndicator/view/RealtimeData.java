@@ -4,9 +4,13 @@
 
 package com.rs.waterLevelIndicator.view;
 
+import com.rs.waterLevelIndicator.dao.SenserDataDao;
 import com.rs.waterLevelIndicator.model.SensorData;
+import com.rs.waterLevelIndicator.net.TCPThreadServer;
 
 import java.awt.*;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.*;
 import javax.swing.table.*;
 
@@ -27,8 +31,11 @@ public class RealtimeData extends JPanel {
     private JScrollPane scrollPane1;
     private JTable tableContents;
 
-
-    private void SetData(SensorData sensorData) {
+//定时执行 刷新界面
+    private void SetData() {
+        //查询数据库最近一条的记录
+        SenserDataDao senserDataDao = new SenserDataDao();
+        SensorData sensorData = senserDataDao.selectLastRecord();
         String downLimit = sensorData.getDownLimit();
         String gaokong = sensorData.getGaokong();
         String gpsSignal = sensorData.getGpsSignal();
@@ -40,60 +47,62 @@ public class RealtimeData extends JPanel {
         String dev_id = sensorData.getDev_id();
         String waterLevel = sensorData.getWaterLevel();
         String devStatus = sensorData.getDevStatus();
-        for (int i = 0; i < 9; i++) {
+
+//        System.out.println("SetData is :"+"downLimit is :"+downLimit+
+//                "gaokong is :"+gaokong+
+//                "gpsSignal is :"+gpsSignal+
+//                "upload is :"+upload+
+//                "comStatus is :"+comStatus+
+//                "upLimit is :"+upLimit+
+//                "time is :"+time+
+//                "watt is :"+watt+
+//                "dev_id is :"+dev_id+
+//                "waterLevel is :"+waterLevel+
+//                "devStatus is :"+devStatus
+//        );
+        for (int i = 0; i < 10; i++) {
             switch (i) {
                 case KONG_GAO:
-                    datas[i][1] = gaokong;
+                    datas[i][2] = gaokong;
                     break;
                 case UP_LOAD:
-                    datas[i][1] = upload;
+                    datas[i][2] = upload;
                     break;
                 case UP_LIMIT:
-                    datas[i][1] = upLimit;
+                    datas[i][2] = upLimit;
                     break;
                 case DOWN_LIMIT:
-                    datas[i][1] = downLimit;
+                    datas[i][2] = downLimit;
                     break;
                 case GPS_SIGNAL:
-                    datas[i][1] = gpsSignal;
+                    datas[i][2] = gpsSignal;
                     break;
                 case COM_STATUS:
-                    datas[i][1] = comStatus;
+                    datas[i][2] = comStatus;
                     break;
                 case WATT:
-                    datas[i][1] = watt;
+                    datas[i][2] = watt;
                     break;
                 case TIME:
-                    datas[i][1] = time;//预留
+                    datas[i][2] = time;//预留
+                    break;
                 case WATER_LEVEL:
-                    datas[i][1] = waterLevel;
+                    datas[i][2] = waterLevel;
                     break;
                 case DEV_STATUS:
-                    datas[i][1] = devStatus;
+                    datas[i][2] = devStatus;
                     break;
-
             }
         }
     }
-
-    //            preparedStatement.setString(1,konggao);
-//            preparedStatement.setString(2,Upload);
-//            preparedStatement.setString(3,UpLimit);
-//            preparedStatement.setString(4,DownLimit);
-//            preparedStatement.setString(5,GpsSignal);
-//            preparedStatement.setString(6,comStatus);
-//            preparedStatement.setString(7,Watt);
-//            preparedStatement.setString(8,"123");
-//            preparedStatement.setString(9,waterLevel);
-//            preparedStatement.setString(10,devStatus);
     Object[][] datas = new Object[][]{
             {1, "空高", "全部中断", ""},
             {2, "上报水位", "全部中断", "m"},
             {3, "水位上线报警", "未知", null},
             {4, "水位下限报警", "未知", null},
-            {5, "电压", "未知", "v"},
-            {6, "GPS信号强度", "未知", "db"},
-            {7, "通讯状态", "未知", null},
+            {5, "GPS信号强度", "未知", "db"},
+            {6, "通讯状态", "未知", null},
+            {7,"电压","未知","v"},
             {8, "时间", "2018-07-04 13：59：58", null},
             {9, "水位", "未知", null},
             {10, "设备状态", "未知", null},
@@ -101,12 +110,35 @@ public class RealtimeData extends JPanel {
     String[] titles = new String[]{"序号", "量名称", "量值", "单位"};
 
     public RealtimeData() {
+        TCPThreadServer tcpThreadServer = new TCPThreadServer();
+        new Thread(tcpThreadServer).start();
         initView();
     }
 
     private void initView() {
         scrollPane1 = new JScrollPane();
+//        initTable();
+        initTimer();
+        GroupLayout layout = new GroupLayout(this);
+        setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup()
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
+                                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+                layout.createParallelGroup()
+                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 10, Short.MAX_VALUE)
+                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE))
+        );
+    }
+
+    private void initTable() {
         tableContents = new JTable();
+
         tableContents.setModel(new DefaultTableModel(datas, titles) {
             Class<?>[] columnTypes = new Class<?>[]{
                     Integer.class, String.class, Object.class, Object.class};
@@ -123,28 +155,30 @@ public class RealtimeData extends JPanel {
                 return columnEditable[columnIndex];
             }
         });
+
         TableColumnModel cm = tableContents.getColumnModel();
         cm.getColumn(0).setResizable(false);
         cm.getColumn(0).setMinWidth(35);
         tableContents.setPreferredScrollableViewportSize(null);
         tableContents.setAlignmentX(2.5F);
         scrollPane1.setViewportView(tableContents);
+    }
 
-        GroupLayout layout = new GroupLayout(this);
-        setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup()
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
-                                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup()
-                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 10, Short.MAX_VALUE)
-                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE))
-        );
+    private void initTimer() {
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("comming....");
+                SetData();
+                initTable();
+//                scrollPane1.validate();
+//                scrollPane1.updateUI();
+//                tableContents.validate();
+//                tableContents.updateUI();
+            }
+        };
+        timer.schedule(timerTask,0,2000);
     }
 
 }

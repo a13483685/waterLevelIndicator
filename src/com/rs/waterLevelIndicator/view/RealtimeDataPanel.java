@@ -34,6 +34,9 @@ public class RealtimeDataPanel extends JPanel  {
 
 
     private void SetData(SensorData sensorData) {
+
+        //设置一个定时任务 来刷新界面
+
         String downLimit = sensorData.getDownLimit();
         String gaokong = sensorData.getGaokong();
         String gpsSignal = sensorData.getGpsSignal();
@@ -106,9 +109,9 @@ public class RealtimeDataPanel extends JPanel  {
     String[] titles = new String[]{"序号", "量名称", "量值", "单位"};
 
     public RealtimeDataPanel() {
-        TCPThreadServer tcpThreadServer = new TCPThreadServer(this);
+//        TCPThreadServer tcpThreadServer = new TCPThreadServer(this);
 
-        new Thread(tcpThreadServer).start();
+//        new Thread(tcpThreadServer).start();
         initView();
     }
 
@@ -154,6 +157,14 @@ public class RealtimeDataPanel extends JPanel  {
                                 .addGap(0, 10, Short.MAX_VALUE)
                                 .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE))
         );
+    }
+
+    private static class MyTask implements Runnable {
+
+        @Override
+        public void run() {
+
+        }
     }
 
 }
