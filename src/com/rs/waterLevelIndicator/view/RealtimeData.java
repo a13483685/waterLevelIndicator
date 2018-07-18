@@ -110,8 +110,8 @@ public class RealtimeData extends JPanel {
     String[] titles = new String[]{"序号", "量名称", "量值", "单位"};
 
     public RealtimeData() {
-        TCPThreadServer tcpThreadServer = new TCPThreadServer();
-        new Thread(tcpThreadServer).start();
+//        TCPThreadServer tcpThreadServer = new TCPThreadServer();
+//        new Thread(tcpThreadServer).start();
         initView();
     }
 

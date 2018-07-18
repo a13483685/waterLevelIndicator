@@ -63,14 +63,6 @@ new FormModel {
 			} )
 			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
 				name: "tabbedPane1"
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {space :0:335:x}"
-					"$verticalGroup": "par l {space :0:563:x}"
-				} ) {
-					name: "panel1"
-				}, new FormLayoutConstraints( null ) {
-					"title": "全部点位"
-				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

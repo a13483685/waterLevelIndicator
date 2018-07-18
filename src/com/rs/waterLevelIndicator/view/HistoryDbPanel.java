@@ -20,16 +20,19 @@ public class HistoryDbPanel extends JPanel {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel2 = new JPanel();
         mTables = new JTabbedPane();
-        mHistoryTable = new JPanel();
+        HistoryDataBaseTable historyDataBaseTable = new HistoryDataBaseTable();
+        JScrollPane mHistoryTable = historyDataBaseTable.initTable();
+//        mHistoryTable = new JPanel();
+//        mHistoryTable.add(jScrollPane);
+
         mEventTable = new JPanel();
         mWarnningTable = new JPanel();
-        mStartTimeButton = new JButton();
-        mEndTimeButton = new JButton();
+        mStartTimeButton = new DateChooserJButton();
+        mEndTimeButton = new DateChooserJButton();
         label1 = new JLabel();
         label2 = new JLabel();
         mQueryButton = new JButton();
-        tabbedPane1 = new JTabbedPane();
-        panel1 = new JPanel();
+        tabbedPane1 = new DevTree();
 
         //======== this ========
 
@@ -42,18 +45,18 @@ public class HistoryDbPanel extends JPanel {
                 //======== mHistoryTable ========
                 {
 
-                    GroupLayout mHistoryTableLayout = new GroupLayout(mHistoryTable);
-                    mHistoryTable.setLayout(mHistoryTableLayout);
-                    mHistoryTableLayout.setHorizontalGroup(
-                        mHistoryTableLayout.createParallelGroup()
-                            .addGap(0, 618, Short.MAX_VALUE)
-                    );
-                    mHistoryTableLayout.setVerticalGroup(
-                        mHistoryTableLayout.createParallelGroup()
-                            .addGap(0, 547, Short.MAX_VALUE)
-                    );
+//                    GroupLayout mHistoryTableLayout = new GroupLayout(mHistoryTable);
+//                    mHistoryTable.setLayout(mHistoryTableLayout);
+//                    mHistoryTableLayout.setHorizontalGroup(
+//                        mHistoryTableLayout.createParallelGroup()
+//                            .addGap(0, 618, Short.MAX_VALUE)
+//                    );
+//                    mHistoryTableLayout.setVerticalGroup(
+//                        mHistoryTableLayout.createParallelGroup()
+//                            .addGap(0, 547, Short.MAX_VALUE)
+//                    );
                 }
-                mTables.addTab("\u5386\u53f2\u8bb0\u5f55", mHistoryTable);
+                mTables.addTab("历史记录", mHistoryTable);
 
                 //======== mEventTable ========
                 {
@@ -69,7 +72,7 @@ public class HistoryDbPanel extends JPanel {
                             .addGap(0, 547, Short.MAX_VALUE)
                     );
                 }
-                mTables.addTab("\u4e8b\u4ef6\u8bb0\u5f55", mEventTable);
+                mTables.addTab("时间记录", mEventTable);
 
                 //======== mWarnningTable ========
                 {
@@ -85,7 +88,7 @@ public class HistoryDbPanel extends JPanel {
                             .addGap(0, 547, Short.MAX_VALUE)
                     );
                 }
-                mTables.addTab("\u62a5\u8b66\u8bb0\u5f55", mWarnningTable);
+                mTables.addTab("报警记录", mWarnningTable);
             }
 
             //---- mStartTimeButton ----
@@ -139,26 +142,6 @@ public class HistoryDbPanel extends JPanel {
             );
         }
 
-        //======== tabbedPane1 ========
-        {
-
-            //======== panel1 ========
-            {
-
-                GroupLayout panel1Layout = new GroupLayout(panel1);
-                panel1.setLayout(panel1Layout);
-                panel1Layout.setHorizontalGroup(
-                    panel1Layout.createParallelGroup()
-                        .addGap(0, 335, Short.MAX_VALUE)
-                );
-                panel1Layout.setVerticalGroup(
-                    panel1Layout.createParallelGroup()
-                        .addGap(0, 563, Short.MAX_VALUE)
-                );
-            }
-            tabbedPane1.addTab("\u5168\u90e8\u70b9\u4f4d", panel1);
-        }
-
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
         layout.setHorizontalGroup(
@@ -196,7 +179,6 @@ public class HistoryDbPanel extends JPanel {
     private JLabel label1;
     private JLabel label2;
     private JButton mQueryButton;
-    private JTabbedPane tabbedPane1;
-    private JPanel panel1;
+    private DevTree tabbedPane1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
