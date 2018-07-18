@@ -3,27 +3,20 @@ package com.rs.waterLevelIndicator.view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
-import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
 import java.awt.Font;
 
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 
 import com.rs.waterLevelIndicator.dao.AdminDao;
 import com.rs.waterLevelIndicator.model.Admin;
 import com.rs.waterLevelIndicator.model.UserType;
 import com.rs.waterLevelIndicator.utils.StringUtil;
+import org.jvnet.substance.SubstanceLookAndFeel;
+import org.jvnet.substance.theme.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -41,6 +34,17 @@ public class LoginFrm extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel(new SubstanceLookAndFeel());
+			JFrame.setDefaultLookAndFeelDecorated(true);
+			JDialog.setDefaultLookAndFeelDecorated(true);
+//			SubstanceLookAndFeel.setCurrentTheme(new SubstanceTerracottaTheme());//这个主题很好看
+			SubstanceLookAndFeel.setCurrentTheme(new SubstanceBrownTheme());
+		} catch (UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
+
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

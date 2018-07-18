@@ -22,6 +22,8 @@ import net.miginfocom.swing.*;
  */
 public class MainFrm extends JFrame implements MouseListener,ActionListener{
     public MainFrm() {
+
+
         TCPThreadServer tcpThreadServer = new TCPThreadServer();
         new Thread(tcpThreadServer).start();
         initComponents();
