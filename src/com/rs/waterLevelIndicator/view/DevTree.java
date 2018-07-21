@@ -17,7 +17,7 @@ public class DevTree extends JTabbedPane implements ActionListener{
         JPopupMenu popMenu; //菜单
         JMenuItem mDataSelectItem;//数据查询
         JMenuItem mDevInfoItem;//设备信息
-        JTree mAllDevTree;
+        JTree mAllDevTree;//设备数菜单
         JScrollPane scrollPane1;
         scrollPane1 = new JScrollPane();
 

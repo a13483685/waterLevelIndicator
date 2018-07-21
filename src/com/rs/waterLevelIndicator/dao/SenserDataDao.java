@@ -1,5 +1,7 @@
 package com.rs.waterLevelIndicator.dao;
 
+import com.rs.waterLevelIndicator.interfaces.MessageMapper;
+import com.rs.waterLevelIndicator.model.DbPageMesReq;
 import com.rs.waterLevelIndicator.model.SensorData;
 import com.rs.waterLevelIndicator.utils.StringUtil;
 
@@ -12,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Observer;
 
-public class SenserDataDao extends BaseDao{
+public class SenserDataDao extends BaseDao implements MessageMapper {
     private String TAG ="SenserDataDao";
 
 //    private T t;
@@ -67,29 +69,31 @@ public class SenserDataDao extends BaseDao{
         }
         return sd;
     }
-    public List<SensorData> getSensorDataList(){
+    public List<SensorData> getSensorDataList(DbPageMesReq req){
         List<SensorData> sensorDatas = new ArrayList<SensorData>();
-        String sql = "select * from  s_sensorData";
+        String sql = "select * from  s_sensorData limit ?,?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,req.getCurrentPage());
+            ps.setInt(2,req.getPageSize());
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){
                 SensorData sd = new SensorData();
                 String id = resultSet.getString("id");
                 String gaokong = resultSet.getString("konggao");
-                System.out.println("konggao is :"+gaokong);
+//                System.out.println("konggao is :"+gaokong);
                 String upload = resultSet.getString("upload");
                 String upLimit = resultSet.getString("upLimit");
                 String dowmLimit = resultSet.getString("dowmLimit");
                 String GPS_signal = resultSet.getString("GPS_signal");
                 String status = resultSet.getString("comStatus");
                 String watt = resultSet.getString("watt");
-                System.out.println("watt is :"+watt);
+//                System.out.println("watt is :"+watt);
                 String time = resultSet.getString("time");
                 String waterLevel = resultSet.getString("waterLevel");
-                System.out.println("waterLevel is :"+waterLevel);
+//                System.out.println("waterLevel is :"+waterLevel);
                 String devStatus = resultSet.getString("devStatus");
-                System.out.println("devStatus is :"+devStatus);
+//                System.out.println("devStatus is :"+devStatus);
 
                 sd.setDev_id(id);
                 sd.setDownLimit(dowmLimit);
@@ -102,7 +106,7 @@ public class SenserDataDao extends BaseDao{
                 sd.setWaterLevel(waterLevel);
                 sd.setDevStatus(devStatus);
                 sd.setWatt(watt);
-                System.out.println("SensorData is :"+sd.toString());
+//                System.out.println("SensorData is :"+sd.toString());
                 sensorDatas.add(sd);
 //                System.out.println("get sensordata id:"+ id +" gaokong :"+gaokong +
 //                " upload :"+upload + " upLimit :" + upLimit + " dowmLimit :" +dowmLimit
@@ -185,6 +189,34 @@ public class SenserDataDao extends BaseDao{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+
+    /**
+     * MessageMapper接口中的方法，用于分页查询
+     * @param msg
+     * @return
+     */
+    @Override
+    public List<SensorData> queryMessage(DbPageMesReq msg) {
+        return null;
+    }
+
+    @Override
+    public int getMessageNum() {
+        String sql = "select count(*) as total from s_sensordata";
+        PreparedStatement ps = null;
+        int total = 0;
+        try {
+            ps = con.prepareStatement(sql);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                total = resultSet.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return total;
     }
 
     //查询数据库最近一条记录

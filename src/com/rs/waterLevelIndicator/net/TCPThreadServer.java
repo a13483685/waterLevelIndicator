@@ -3,16 +3,12 @@ package com.rs.waterLevelIndicator.net;
 import com.rs.waterLevelIndicator.interfaces.CallInsertIntoDbSensor;
 import com.rs.waterLevelIndicator.interfaces.ISenserDataChange;
 import com.rs.waterLevelIndicator.interfaces.InsertIntoDbSensorImp;
-import com.rs.waterLevelIndicator.view.RealtimeData;
-import com.rs.waterLevelIndicator.view.RealtimeDataPanel;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Observable;
-import java.util.Observer;
 
 public class TCPThreadServer implements Runnable{
     private static final int PORT = 6666;

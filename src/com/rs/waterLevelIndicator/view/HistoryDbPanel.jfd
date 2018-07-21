@@ -4,20 +4,20 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :p:24:p, comp tabbedPane1:::p:337:p, space :p:27:p, comp panel2:::p::p, space :::x}}"
-			"$verticalGroup": "par l {seq {par l {seq {space :::p, comp panel2:::p::p}, seq l {space :p:22:p, comp tabbedPane1:::p:590:p}}, space ::39:x}}"
+			"$horizontalGroup": "par l {seq {space :p:24:p, comp tabbedPane1:::p:313:p, space :p:35:p, comp panel2:::p::p, space :::p}}"
+			"$verticalGroup": "par l {seq {par l {seq {space :p:22:p, comp tabbedPane1:::p:590:p}, seq l {space :::p, comp panel2:::p::p}}, space ::21:x}}"
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :p:26:p, par l {comp mTables:::p:620:p, seq {comp label1:::p::p, space s:::p, comp mStartTimeButton:::p:132:p, space :p:32:p, comp label2:::p:70:p, space s:::p, comp mEndTimeButton:::p:129:p, space :p:52:p, comp mQueryButton:::p::p}}, space ::15:x}}"
-				"$verticalGroup": "par l {seq l {space :p:12:p, par b {comp mQueryButton::b:p::p, comp label1::b:p:24:p, comp mStartTimeButton::b:p::p, comp mEndTimeButton::b:p::p, comp label2::b:p::p}, space s:::p, comp mTables:::::x, space :::p}}"
+				"$horizontalGroup": "par l {seq {space :p:26:p, par l {comp mTables:::p:620:p, seq {comp label1:::p::p, space s:::p, comp mStartTimeButton:::p:132:p, space :p:32:p, comp label2:::p:70:p, space s:::p, comp mEndTimeButton:::p:129:p, space :p:52:p, comp mQueryButton:::p::p}}, space ::8:x}, seq t {space :0:27:x, comp panel1:::p::p}}"
+				"$verticalGroup": "par l {seq l {space :p:12:p, par b {comp mQueryButton::b:p::p, comp label1::b:p:24:p, comp mStartTimeButton::b:p::p, comp mEndTimeButton::b:p::p, comp label2::b:p::p}, space s:::p, comp mTables:::p:537:p, space :::p, comp panel1:::p:29:p, space ::26:x}}"
 			} ) {
 				name: "panel2"
 				add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
 					name: "mTables"
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 						"$horizontalGroup": "par l {space :0:618:x}"
-						"$verticalGroup": "par l {space :0:547:x}"
+						"$verticalGroup": "par l {space :0:510:x}"
 					} ) {
 						name: "mHistoryTable"
 					}, new FormLayoutConstraints( null ) {
@@ -25,7 +25,7 @@ new FormModel {
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 						"$horizontalGroup": "par l {space :0:618:x}"
-						"$verticalGroup": "par l {space :0:547:x}"
+						"$verticalGroup": "par l {space :0:510:x}"
 					} ) {
 						name: "mEventTable"
 					}, new FormLayoutConstraints( null ) {
@@ -33,7 +33,7 @@ new FormModel {
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 						"$horizontalGroup": "par l {space :0:618:x}"
-						"$verticalGroup": "par l {space :0:547:x}"
+						"$verticalGroup": "par l {space :0:510:x}"
 					} ) {
 						name: "mWarnningTable"
 					}, new FormLayoutConstraints( null ) {
@@ -59,6 +59,60 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "mQueryButton"
 					"text": "查询"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq l {space :p:45:p, comp label3:::p::p, space :::p, comp label4:::p::p, space :::p, comp mTotalPage:::p::p, space :::p, comp label6:::p::p, space s:::p, comp mFirstPage:::p::p, space :::p, comp mPrePage:::p::p, space :::p, comp mNextPage:::p::p, space :::p, comp mFinalPage:::p::p, space :::p, comp label11:::p::p, space :::p, comp mCurrentPage:::p:57:p, space :::p, comp label12:::p:18:p, space u:::p, comp go:::p:53:p, space ::114:x}}"
+					"$verticalGroup": "par l {seq t {space :0:0:x, par b {comp label4::b:p::p, comp mTotalPage::b:p::p, comp label6::b:p::p, comp mFirstPage::b:p::p, comp mPrePage::b:p::p, comp mNextPage::b:p::p, comp mFinalPage::b:p::p, comp label11::b:p::p, comp label3::b:p::p, comp go::b:p::p, comp label12::b:p::p, comp mCurrentPage::b::0:x}}}"
+				} ) {
+					name: "panel1"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label3"
+						"text": "第1页"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label4"
+						"text": "共"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "mTotalPage"
+						"text": "text"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label6"
+						"text": "页"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "mFirstPage"
+						"text": "首页"
+						"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "mPrePage"
+						"text": "上一页"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "mNextPage"
+						"text": "下一页"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "mFinalPage"
+						"text": "最后一页"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label11"
+						"text": "跳转到"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label12"
+						"text": "页"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "mCurrentPage"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "go"
+						"text": "GO"
+					} )
 				} )
 			} )
 			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {

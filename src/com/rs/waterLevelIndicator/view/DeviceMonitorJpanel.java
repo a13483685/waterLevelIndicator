@@ -223,7 +223,7 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener{//иІВе
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == mReadPara) {
-            List<SensorData> sensorDataList = new SenserDataDao().getSensorDataList();
+//            List<SensorData> sensorDataList = new SenserDataDao().getSensorDataList(reg);
 //            new BaseTableModule(params, sensorDataList);
         }
     }

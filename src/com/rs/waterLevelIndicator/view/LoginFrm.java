@@ -38,8 +38,8 @@ public class LoginFrm extends JFrame {
 			UIManager.setLookAndFeel(new SubstanceLookAndFeel());
 			JFrame.setDefaultLookAndFeelDecorated(true);
 			JDialog.setDefaultLookAndFeelDecorated(true);
-//			SubstanceLookAndFeel.setCurrentTheme(new SubstanceTerracottaTheme());//这个主题很好看
-			SubstanceLookAndFeel.setCurrentTheme(new SubstanceBrownTheme());
+			SubstanceLookAndFeel.setCurrentTheme(new SubstanceTerracottaTheme());//这个主题很好看
+//			SubstanceLookAndFeel.setCurrentTheme(new SubstanceBrownTheme());
 		} catch (UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
