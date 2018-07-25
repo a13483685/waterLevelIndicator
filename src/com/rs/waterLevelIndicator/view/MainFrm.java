@@ -14,6 +14,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import com.intellij.uiDesigner.core.*;
 import com.rs.waterLevelIndicator.net.TCPThreadServer;
+import com.rs.waterLevelIndicator.net.TcpServerNonBlockingNIO;
 import com.rs.waterLevelIndicator.utils.ImagePanel;
 import net.miginfocom.swing.*;
 
@@ -24,8 +25,9 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
     public MainFrm() {
 
 
-        TCPThreadServer tcpThreadServer = new TCPThreadServer();
-        new Thread(tcpThreadServer).start();
+//        TCPThreadServer tcpThreadServer = new TCPThreadServer();
+//        new Thread(tcpThreadServer).start();
+        new TcpServerNonBlockingNIO();//Tcp开启
         initComponents();
     }
 

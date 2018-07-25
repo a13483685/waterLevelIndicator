@@ -22,25 +22,25 @@ public class TCPThreadServer implements Runnable{
         int count = 1;
         try {
             /**
-             * ´´½¨Ò»¸öServerSocket¶ÔÏó£¬²¢¸øËüÖÆ¶¨Ò»¸ö¶Ë¿ÚºÅ£¬
-             * Í¨¹ıÕâ¸ö¶Ë¿ÚºÅÀ´¼àÌı¿Í»§¶ËµÄÁ¬½Ó£¬·şÎñ¶Ë½ÓÊÜ¿Í»§¶ËÁ¬½ÓµÄÇëÇóÊÇ
-             * ²»¼ä¶ÏµØ½ÓÊÜµÄ£¬ËùÒÔ·şÎñ¶ËµÄ±à³ÌÒ»°ã¶¼ÓÀÎŞĞİÖ¹µÄÔËĞĞ
+             * åˆ›å»ºä¸€ä¸ªServerSocketå¯¹è±¡ï¼Œå¹¶ç»™å®ƒåˆ¶å®šä¸€ä¸ªç«¯å£å·ï¼Œ
+             * é€šè¿‡è¿™ä¸ªç«¯å£å·æ¥ç›‘å¬å®¢æˆ·ç«¯çš„è¿æ¥ï¼ŒæœåŠ¡ç«¯æ¥å—å®¢æˆ·ç«¯è¿æ¥çš„è¯·æ±‚æ˜¯
+             * ä¸é—´æ–­åœ°æ¥å—çš„ï¼Œæ‰€ä»¥æœåŠ¡ç«¯çš„ç¼–ç¨‹ä¸€èˆ¬éƒ½æ°¸æ— ä¼‘æ­¢çš„è¿è¡Œ
              */
             ServerSocket ss = new ServerSocket(PORT);
-            System.out.println("·şÎñÆ÷ÒÑ¾­Æô¶¯¡£¡£¡£");
+            System.out.println("æœåŠ¡å™¨å·²ç»å¯åŠ¨ã€‚ã€‚ã€‚");
             while (true) {
                 /**
-                 * ÔÚ·şÎñ¶Ëµ÷ÓÃaccept()·½·¨½ÓÊÜ¿Í»§¶ËµÄÁ¬½Ó¶ÔÏó£¬accept()·½·¨ÊÇ
-                 * Ò»¸ö×èÈûÊ½µÄ·½·¨£¬Ò»Ö±ÉµÉµµØµÈ´ı×ÅÊÇ·ñÓĞ¿Í»§¶ËÉêÇëÁ¬½Ó
+                 * åœ¨æœåŠ¡ç«¯è°ƒç”¨accept()æ–¹æ³•æ¥å—å®¢æˆ·ç«¯çš„è¿æ¥å¯¹è±¡ï¼Œaccept()æ–¹æ³•æ˜¯
+                 * ä¸€ä¸ªé˜»å¡å¼çš„æ–¹æ³•ï¼Œä¸€ç›´å‚»å‚»åœ°ç­‰å¾…ç€æ˜¯å¦æœ‰å®¢æˆ·ç«¯ç”³è¯·è¿æ¥
                  */
 
-                Socket s = ss.accept();//×èÈûÁË µ«ÊÇÏß³Ì»¹ÊÇÔÚÔËĞĞ
-                System.out.println("µÚ" + count + "¸öÁ¬½Ó,IPµØÖ·ÊÇ£º"
+                Socket s = ss.accept();//é˜»å¡äº† ä½†æ˜¯çº¿ç¨‹è¿˜æ˜¯åœ¨è¿è¡Œ
+                System.out.println("ç¬¬" + count + "ä¸ªè¿æ¥,IPåœ°å€æ˜¯ï¼š"
                         + s.getInetAddress());
                 count++;
                 /**
-                 * ·şÎñ¶ËÊ¹ÓÃ¶àÏß³Ì·½±ã¶à¿Í»§¶ËµÄÁ¬½Ó
-                 * ÕâÀï½«·şÎñ¶ËµÄsocket´«¸øÄÚ²¿Àà£¬·½±ãÃ¿¸ö¿Í»§¶Ë¶¼´´½¨Ò»¸öÏß³Ì
+                 * æœåŠ¡ç«¯ä½¿ç”¨å¤šçº¿ç¨‹æ–¹ä¾¿å¤šå®¢æˆ·ç«¯çš„è¿æ¥
+                 * è¿™é‡Œå°†æœåŠ¡ç«¯çš„socketä¼ ç»™å†…éƒ¨ç±»ï¼Œæ–¹ä¾¿æ¯ä¸ªå®¢æˆ·ç«¯éƒ½åˆ›å»ºä¸€ä¸ªçº¿ç¨‹
                  */
                 Thread t = new Thread(new ReceiveTCP(s));
                 t.start();
@@ -51,9 +51,9 @@ public class TCPThreadServer implements Runnable{
     }
 
 
-    class ReceiveTCP  implements Runnable {//¼Ì³Ğ×Ô¹Û²ìÕß£¬Îª¼àÌıÆ÷
+    class ReceiveTCP  implements Runnable {//ç»§æ‰¿è‡ªè§‚å¯Ÿè€…ï¼Œä¸ºç›‘å¬å™¨
 
-        private String data;//·â×°ÏûÏ¢Êı¾İ
+        private String data;//å°è£…æ¶ˆæ¯æ•°æ®
         private Socket socket = null;
         private InputStream in = null;
         private OutputStream out = null;
@@ -69,20 +69,20 @@ public class TCPThreadServer implements Runnable{
         @Override
         public void run() {
             try {
-                //»ñÈ¡·şÎñ¶ËÊäÈëµÄÏûÏ¢
+                //è·å–æœåŠ¡ç«¯è¾“å…¥çš„æ¶ˆæ¯
                 in = socket.getInputStream();
-                //·şÎñ¶Ë·µ»ØµÄÏûÏ¢
+                //æœåŠ¡ç«¯è¿”å›çš„æ¶ˆæ¯
                 out = socket.getOutputStream();
-                //ÓÃÒ»¸ö×Ö½ÚÊı×ÖÀ´´æ·ÅÏûÏ¢£¬Ìá¸ßĞ§ÂÊ
+                //ç”¨ä¸€ä¸ªå­—èŠ‚æ•°å­—æ¥å­˜æ”¾æ¶ˆæ¯ï¼Œæé«˜æ•ˆç‡
                 byte[] recData = new byte[1024];
                 while (true)
                 {
                     in.read(recData);
                     String data = new String(recData);
-                    InsertInToDatabase(data);//½«Êı¾İ²åÈëµ½Êı¾İ¿â
+                    InsertInToDatabase(data);//å°†æ•°æ®æ’å…¥åˆ°æ•°æ®åº“
 //                    this.mRealtimeDataPanel.
-                    System.out.println("¶ÁÈ¡µ½¿Í»§¶Ë·¢ËÍÀ´µÄÊı¾İ£º" + data);
-                    //·µ»Ø¸ø¿Í»§¶ËµÄÏûÏ¢
+                    System.out.println("è¯»å–åˆ°å®¢æˆ·ç«¯å‘é€æ¥çš„æ•°æ®ï¼š" + data);
+                    //è¿”å›ç»™å®¢æˆ·ç«¯çš„æ¶ˆæ¯
                     out.write("Hello client I am server".getBytes());
                 }
 
@@ -91,18 +91,11 @@ public class TCPThreadServer implements Runnable{
                 e.printStackTrace();
             }
         }
-        //ÍùÊı¾İ¿â²åÈëÊı¾İ
+        //å¾€æ•°æ®åº“æ’å…¥æ•°æ®
         private void InsertInToDatabase(String str) {
 
             insertIntoDbSensorImp = new InsertIntoDbSensorImp();
-            callInsertIntoDbSensor.setOnCallInsertIntoDbSensor(insertIntoDbSensorImp,str);//ÍùÊı¾İ¿â²åÈëÊı¾İ
-//        insertIntoDbSensorImp.insertInToDbSensor(str);
-//        callInsertIntoDbSensor.setOnCallInsertIntoDbSensor(new IinsertIntoDbSensor() {
-//            @Override
-//            public void insertInToDbSensor(String SensorInfo) {
-//                System.out.println("insertInToDbSensor"+SensorInfo);
-//            }
-//        },str);
+            callInsertIntoDbSensor.setOnCallInsertIntoDbSensor(insertIntoDbSensorImp,str);//å¾€æ•°æ®åº“æ’å…¥æ•°æ®
         }
     }
 }
