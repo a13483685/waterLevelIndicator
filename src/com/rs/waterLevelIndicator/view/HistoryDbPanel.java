@@ -355,7 +355,8 @@ public class HistoryDbPanel extends JPanel {
             if(e.getSource()== mQueryButton){
                 System.out.println("mQueryButton pressed");
             }
-            historyDataBaseTable.initTable(this.req);
+//            historyDataBaseTable.initTable(this.req);
+            historyDataBaseTable.refreshTable(this.req);
         }
     }
 }

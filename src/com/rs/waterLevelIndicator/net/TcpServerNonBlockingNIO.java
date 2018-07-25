@@ -102,22 +102,26 @@ public class TcpServerNonBlockingNIO {
 
 		MyThread thread = new MyThread();
 		thread.start();
-		new Thread(){
-			@Override
-			public void run() {
-				super.run();
-				while (true){
-					try {
-						sleep(2000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					System.out.println("test:"+new Date().toString());
-				}
-			}
-		}.start();
+//		new Thread(){
+//			@Override
+//			public void run() {
+//				super.run();
+//				while (true){
+//					try {
+//						sleep(2000);
+//					} catch (InterruptedException e) {
+//						e.printStackTrace();
+//					}
+//					System.out.println("test:"+new Date().toString());
+//				}
+//			}
+//		}.start();
 	}
 
+	/**
+	 * just for test
+	 * @param str
+	 */
 	public static void main(String str[]){
 		MyThread thread = new MyThread();
 		thread.start();

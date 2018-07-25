@@ -74,8 +74,12 @@ public class SenserDataDao extends BaseDao implements MessageMapper {
         String sql = "select * from  s_sensorData limit ?,?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1,req.getCurrentPage());
-            ps.setInt(2,req.getPageSize());
+            int startIndex = req.getCurrentPage()*req.getPageSize();
+            int offsetIndex = req.getPageSize();
+            ps.setInt(1,startIndex);
+            ps.setInt(2,offsetIndex);
+
+            System.out.println("recode is from :"+startIndex+"to"+(startIndex+offsetIndex));
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){
                 SensorData sd = new SensorData();

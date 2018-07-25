@@ -28,7 +28,7 @@ public class PageQuery implements IDbPageManager{
         return page;
 
     }
-
+    //初始化页数
     private DbPage<SensorData> initPage(DbPage<SensorData> page, int pageCount, DbPageMesReq req) {
         page.setTotalRecord(pageCount);
         page.setCurrentPage(req.getCurrentPage());
