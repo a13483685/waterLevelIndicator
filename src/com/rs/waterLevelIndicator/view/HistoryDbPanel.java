@@ -14,7 +14,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 /**
- * @author xziea
+ * @author xz
  */
 public class HistoryDbPanel extends JPanel {
     private JPanel panel2;

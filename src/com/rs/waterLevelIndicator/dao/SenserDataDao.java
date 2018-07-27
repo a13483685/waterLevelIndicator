@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Observer;
 
-public class SenserDataDao extends BaseDao implements MessageMapper {
+public class SenserDataDao extends BaseDao  {
     private String TAG ="SenserDataDao";
 
 //    private T t;
@@ -198,17 +198,7 @@ public class SenserDataDao extends BaseDao implements MessageMapper {
     }
 
 
-    /**
-     * MessageMapper接口中的方法，用于分页查询
-     * @param msg
-     * @return
-     */
-    @Override
-    public List<SensorData> queryMessage(DbPageMesReq msg) {
-        return null;
-    }
 
-    @Override
     public int getMessageNum() {
         String sql = "select count(*) as total from s_sensordata";
         PreparedStatement ps = null;
@@ -224,6 +214,7 @@ public class SenserDataDao extends BaseDao implements MessageMapper {
         }
         return total;
     }
+
 
     //查询数据库最近一条记录
 

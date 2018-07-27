@@ -8,7 +8,7 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 
 /**
- * @author xziea
+ * @author xz
  */
 public class demo extends JPanel {
     public demo() {

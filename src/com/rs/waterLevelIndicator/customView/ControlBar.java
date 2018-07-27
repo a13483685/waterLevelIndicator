@@ -1,153 +1,198 @@
 /*
- * Created by JFormDesigner on Fri Jul 27 10:42:18 CST 2018
+ * Created by JFormDesigner on Fri Jul 27 11:28:25 CST 2018
  */
 
 package com.rs.waterLevelIndicator.customView;
 
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import com.rs.waterLevelIndicator.model.DbPageMesReq;
+
 import javax.swing.*;
-import javax.swing.GroupLayout;
 
 /**
- * @author xziea
+ * @author xz
  */
-public class ControlBar extends JPanel {
-    public ControlBar() {
-        initComponents();
-    }
-
-    private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        panel1 = new JPanel();
-        label3 = new JLabel();
-        label4 = new JLabel();
-        mTotalPage = new JLabel();
-        label6 = new JLabel();
-        mFirstPage = new JLabel();
-        mPrePage = new JLabel();
-        mNextPage = new JLabel();
-        mFinalPage = new JLabel();
-        label11 = new JLabel();
-        label12 = new JLabel();
-        mCurrentPage = new JTextField();
-        go = new JButton();
-        label5 = new JLabel();
-        mNum = new JLabel();
-
-        //======== panel1 ========
-        {
-
-            //---- label3 ----
-            label3.setText("\u7b2c");
-
-            //---- label4 ----
-            label4.setText("\u5171");
-
-            //---- mTotalPage ----
-            mTotalPage.setText("text");
-
-            //---- label6 ----
-            label6.setText("\u9875");
-
-            //---- mFirstPage ----
-            mFirstPage.setText("\u9996\u9875");
-            mFirstPage.setBorder(null);
-
-            //---- mPrePage ----
-            mPrePage.setText("\u4e0a\u4e00\u9875");
-
-            //---- mNextPage ----
-            mNextPage.setText("\u4e0b\u4e00\u9875");
-
-            //---- mFinalPage ----
-            mFinalPage.setText("\u6700\u540e\u4e00\u9875");
-
-            //---- label11 ----
-            label11.setText("\u8df3\u8f6c\u5230");
-
-            //---- label12 ----
-            label12.setText("\u9875");
-
-            //---- go ----
-            go.setText("GO");
-
-            //---- label5 ----
-            label5.setText("\u9875");
-
-            //---- mNum ----
-            mNum.setText("1");
-
-            GroupLayout panel1Layout = new GroupLayout(panel1);
-            panel1.setLayout(panel1Layout);
-            panel1Layout.setHorizontalGroup(
-                panel1Layout.createParallelGroup()
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(label3)
-                        .addGap(14, 14, 14)
-                        .addComponent(mNum)
-                        .addGap(18, 18, 18)
-                        .addComponent(label5, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(label4)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(mTotalPage)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(label6)
-                        .addGap(18, 18, 18)
-                        .addComponent(mFirstPage)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mPrePage)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mNextPage)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mFinalPage)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(label11)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mCurrentPage, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(label12, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(go, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                        .addContainerGap())
-            );
-            panel1Layout.setVerticalGroup(
-                panel1Layout.createParallelGroup()
-                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(mTotalPage)
-                        .addComponent(label6)
-                        .addComponent(mFirstPage)
-                        .addComponent(mPrePage)
-                        .addComponent(mNextPage)
-                        .addComponent(mFinalPage)
-                        .addComponent(label11)
-                        .addComponent(label12)
-                        .addComponent(mCurrentPage)
-                        .addComponent(label4)
-                        .addComponent(label5)
-                        .addComponent(label3)
-                        .addComponent(mNum)
-                        .addComponent(go))
-            );
-        }
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents
-    }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JPanel panel1;
+public abstract class ControlBar extends JPanel {
     private JLabel label3;
-    private JLabel label4;
+    private JLabel mCurrentPage;
+    private JLabel label10;
+    private JLabel label11;
     private JLabel mTotalPage;
-    private JLabel label6;
+    private JLabel label13;
     private JLabel mFirstPage;
     private JLabel mPrePage;
     private JLabel mNextPage;
-    private JLabel mFinalPage;
-    private JLabel label11;
-    private JLabel label12;
-    private JTextField mCurrentPage;
-    private JButton go;
-    private JLabel label5;
-    private JLabel mNum;
+    private JLabel mLastPage;
+    private JTextField mSomePage;
+    private JLabel label18;
+    private JButton mGo;
+    ControlBarMouseAdapter controlBarMouseAdapter;
+    DbPageMesReq req = null;
+    //需要req来控制table，所以需要传入这两个参数
+    public ControlBar(DbPageMesReq req) {
+        controlBarMouseAdapter = new ControlBarMouseAdapter(req);
+        this.req = req;
+        initComponents();
+//        initTable();
+    }
+    //不同的界面如报警记录查询界面，和设备管理界面调用的方法不一样
+    public abstract void refreshTable(DbPageMesReq req);
+
+    private void initComponents() {
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        label3 = new JLabel();
+        mCurrentPage = new JLabel();
+        label10 = new JLabel();
+        label11 = new JLabel();
+        mTotalPage = new JLabel();
+        label13 = new JLabel();
+        mFirstPage = new JLabel();
+        mPrePage = new JLabel();
+        mNextPage = new JLabel();
+        mLastPage = new JLabel();
+        mSomePage = new JTextField();
+        label18 = new JLabel();
+        mGo = new JButton();
+
+        //======== this ========
+        setPreferredSize(new Dimension(290, 25));
+
+        //---- label3 ----
+        label3.setText("\u7b2c");
+
+        //---- mCurrentPage ----
+        mCurrentPage.setText("1");
+        mCurrentPage.addMouseListener(controlBarMouseAdapter);
+
+        //---- label10 ----
+        label10.setText("\u9875");
+
+        //---- label11 ----
+        label11.setText("\u5171");
+
+        //---- mTotalPage ----
+        mTotalPage.setText("text");
+
+        //---- label13 ----
+        label13.setText("\u9875");
+
+        //---- mFirstPage ----
+        mFirstPage.setText("\u9996\u9875");
+        mFirstPage.addMouseListener(controlBarMouseAdapter);
+        //---- mPrePage ----
+        mPrePage.setText("\u4e0a\u4e00\u9875");
+        mPrePage.addMouseListener(controlBarMouseAdapter);
+        //---- mNextPage ----
+        mNextPage.setText("\u4e0b\u4e00\u9875");
+        mNextPage.addMouseListener(controlBarMouseAdapter);
+        //---- mLastPage ----
+        mLastPage.setText("\u672b\u9875");
+        mLastPage.addMouseListener(controlBarMouseAdapter);
+        //---- label18 ----
+        label18.setText("\u9875");
+
+        //---- mGo ----
+        mGo.setText("\u8df3\u8f6c");
+        mGo.setIcon(null);
+        mGo.addMouseListener(controlBarMouseAdapter);
+
+        GroupLayout layout = new GroupLayout(this);
+        setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup()
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(label3)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(mCurrentPage)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(label10)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(label11)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(mTotalPage)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(label13)
+                    .addGap(18, 18, 18)
+                    .addComponent(mFirstPage)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(mPrePage)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(mNextPage)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(mLastPage)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(mSomePage, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(label18)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(mGo, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(110, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup()
+                .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(label3)
+                        .addComponent(mCurrentPage)
+                        .addComponent(label10)
+                        .addComponent(label11)
+                        .addComponent(mTotalPage)
+                        .addComponent(label13)
+                        .addComponent(mFirstPage)
+                        .addComponent(mPrePage)
+                        .addComponent(mNextPage)
+                        .addComponent(mLastPage)
+                        .addComponent(mSomePage, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(label18)
+                        .addComponent(mGo))
+                    .addGap(0, 0, Short.MAX_VALUE))
+        );
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
+
+    class ControlBarMouseAdapter extends MouseAdapter {
+        DbPageMesReq req = null;
+        public ControlBarMouseAdapter(DbPageMesReq req){
+            this.req = req;
+        }
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
+            int currentPage = this.req.getCurrentPage();
+            int mTotalPage = this.req.getTotalPage();
+
+            if(e.getSource() == mFirstPage){
+                currentPage = 1;
+                System.out.println("mFirstPage pressed");
+            }
+            if(e.getSource() == mPrePage){
+                currentPage= currentPage-1;
+                System.out.println("mPrePage pressed");
+            }
+            if(e.getSource() == mNextPage){
+                currentPage= currentPage+1;
+                System.out.println("mNextPage pressed");
+            }
+            if(e.getSource() == mLastPage){
+                currentPage = mTotalPage;
+                System.out.println("mLastPage pressed");
+            }
+            if(e.getSource() == mGo){
+                System.out.println("mGo pressed");
+            }
+            this.req.setCurrentPage(currentPage);
+            this.req.setStartIndexEndIndex();
+
+            mCurrentPage.setText(String.valueOf(this.req.getCurrentPage()));
+            refreshTable(this.req);
+        }
+    }
+
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

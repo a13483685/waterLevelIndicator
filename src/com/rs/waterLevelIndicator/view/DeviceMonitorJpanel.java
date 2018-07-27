@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * @author xziea
+ * @author xz
  */
 public class DeviceMonitorJpanel extends JPanel implements ActionListener{//观察者来监听数据库插入的数据，用来刷新表格界面
     JButton mReadPara = null;

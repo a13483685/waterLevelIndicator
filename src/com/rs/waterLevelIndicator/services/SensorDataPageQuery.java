@@ -14,16 +14,23 @@ import java.util.List;
  */
 public class SensorDataPageQuery implements MessageMapper<SensorData> {
 
+    private SenserDataDao senserDataDao;
+    public SensorDataPageQuery(){
+        senserDataDao = new SenserDataDao();
+    }
     @Override
     public List<SensorData> queryMessage(DbPageMesReq msg) {
-        SenserDataDao senserDataDao = new SenserDataDao();
         return  senserDataDao.getSensorDataList(msg);
     }
 
     @Override
     public int getMessageNum() {
-        SenserDataDao senserDataDao = new SenserDataDao();
         return senserDataDao.getMessageNum();
+    }
+
+    @Override
+    public void QueryClose() {
+        senserDataDao.closeDao();
     }
 
 //    //    初始化页数

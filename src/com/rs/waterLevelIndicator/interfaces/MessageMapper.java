@@ -10,4 +10,6 @@ public interface MessageMapper<T> {
     List<T> queryMessage(DbPageMesReq msg);
     //查询总条数
     int getMessageNum();
+
+    void QueryClose();
 }

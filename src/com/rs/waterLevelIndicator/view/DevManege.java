@@ -4,8 +4,10 @@
 
 package com.rs.waterLevelIndicator.view;
 
+import com.rs.waterLevelIndicator.customView.ControlBar;
+import com.rs.waterLevelIndicator.customView.DevControlBar;
 import com.rs.waterLevelIndicator.customView.DevTable;
-import org.junit.Test;
+import com.rs.waterLevelIndicator.model.DbPageMesReq;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +16,7 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 
 /**
- * @author xziea
+ * @author xz
  */
 public class DevManege extends JFrame implements ActionListener {
     private JButton mAdd;
@@ -24,6 +26,8 @@ public class DevManege extends JFrame implements ActionListener {
     private JScrollPane scrollPane1;
     private JTable mDevs;
     private JLabel label1;
+    private JPanel panel2;
+    private ControlBar label2;
     public DevManege() {
         initComponents();
     }
@@ -39,7 +43,14 @@ public class DevManege extends JFrame implements ActionListener {
         mMod = new JButton();
         panel1 = new JPanel();
         scrollPane1 = new JScrollPane();
-        mDevs = new DevTable().initTable();
+
+        panel2 = new JPanel();
+        DbPageMesReq req = new DbPageMesReq();
+        req.setPageSize(4);
+        DevTable devTable = new DevTable();
+        mDevs = devTable.initTable(req);
+//        mDevs.initTable(req);
+        label2 = new DevControlBar(devTable,req);
         label1 = new JLabel();
 
         //======== this ========
@@ -70,16 +81,45 @@ public class DevManege extends JFrame implements ActionListener {
                 scrollPane1.setViewportView(mDevs);
             }
 
+            //======== panel2 ========
+            {
+
+                //---- label2 ----
+//                label2.setText("2");
+
+                GroupLayout panel2Layout = new GroupLayout(panel2);
+                panel2.setLayout(panel2Layout);
+                panel2Layout.setHorizontalGroup(
+                    panel2Layout.createParallelGroup()
+                        .addGroup(panel2Layout.createSequentialGroup()
+//                            .addGap(79, 79, 79)
+                            .addComponent(label2)
+                            .addContainerGap(0, Short.MAX_VALUE))
+                );
+                panel2Layout.setVerticalGroup(
+                    panel2Layout.createParallelGroup()
+                        .addGroup(GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
+                            .addGap(0, 10, Short.MAX_VALUE)
+                            .addComponent(label2))
+                );
+            }
+
             GroupLayout panel1Layout = new GroupLayout(panel1);
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
                 panel1Layout.createParallelGroup()
                     .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
             );
         }
@@ -123,9 +163,6 @@ public class DevManege extends JFrame implements ActionListener {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==mAdd) {
@@ -138,5 +175,16 @@ public class DevManege extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, "修改");
         }
     }
+
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+//    private JButton mAdd;
+//    private JButton mDel;
+//    private JButton mMod;
+//    private JPanel panel1;
+//    private JScrollPane scrollPane1;
+//    private JTable mDevs;
+//    private JPanel panel2;
+
+//    private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

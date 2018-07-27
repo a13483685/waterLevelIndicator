@@ -15,7 +15,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 /**
- * @author xziea
+ * @author xz
  */
 public class RealtimeData extends JPanel {
     private static final int KONG_GAO = 0;

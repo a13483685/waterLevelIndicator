@@ -9,7 +9,7 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
 
 /**
- * @author xziea
+ * @author xz
  */
 public class AllReviewItemJpanel extends JPanel {
     public AllReviewItemJpanel() {

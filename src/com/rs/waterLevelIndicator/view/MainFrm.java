@@ -19,7 +19,7 @@ import com.rs.waterLevelIndicator.utils.ImagePanel;
 import net.miginfocom.swing.*;
 
 /**
- * @author xziea
+ * @author xz
  */
 public class MainFrm extends JFrame implements MouseListener,ActionListener{
     public MainFrm() {
