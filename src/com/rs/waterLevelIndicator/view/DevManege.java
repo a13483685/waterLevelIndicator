@@ -7,7 +7,9 @@ package com.rs.waterLevelIndicator.view;
 import com.rs.waterLevelIndicator.customView.ControlBar;
 import com.rs.waterLevelIndicator.customView.DevControlBar;
 import com.rs.waterLevelIndicator.customView.DevTable;
+import com.rs.waterLevelIndicator.dao.DevicesDao;
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
+import com.rs.waterLevelIndicator.services.DevicePageQuery;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -45,11 +47,19 @@ public class DevManege extends JFrame implements ActionListener {
         scrollPane1 = new JScrollPane();
 
         panel2 = new JPanel();
+        /**
+         * 设置分页参数
+         */
         DbPageMesReq req = new DbPageMesReq();
-        req.setPageSize(4);
+        req.setPageSize(10);
+        DevicePageQuery devicePageQuery = new DevicePageQuery();
+        int messageNum = devicePageQuery.getMessageNum();
+        req.setTotalRecord(messageNum);//这个值应该会变
+
         DevTable devTable = new DevTable();
         mDevs = devTable.initTable(req);
 //        mDevs.initTable(req);
+
         label2 = new DevControlBar(devTable,req);
         label1 = new JLabel();
 
@@ -166,14 +176,22 @@ public class DevManege extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==mAdd) {
-            JOptionPane.showMessageDialog(this, "增加");
+            AddDeviceFrm addDeviceFrm = new AddDeviceFrm();
+            addDeviceFrm.setVisible(true);
         }
         if (e.getSource()==mDel){
-            JOptionPane.showMessageDialog(this, "删除");
+            int row = mDevs.getSelectedRow();
+            String value = (String) mDevs.getModel().getValueAt(row, 1);
+            System.out.println("value is :"+value);
+            DeleteFromDb(value);
         }
         if (e.getSource()==mMod){
-            JOptionPane.showMessageDialog(this, "修改");
         }
+    }
+
+    private void DeleteFromDb(String devName) {
+        DevicesDao devicesDao = new DevicesDao();
+        devicesDao.deleteDevice(devName);
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables

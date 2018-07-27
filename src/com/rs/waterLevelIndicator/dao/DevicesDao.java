@@ -77,7 +77,9 @@ public class DevicesDao extends BaseDao {
         try {
             ps = con.prepareStatement(Constans.sqlTotla+"s_devices");
             ResultSet resultSet = ps.executeQuery();
-            total = resultSet.getInt("total");
+            while (resultSet.next()){
+                total = resultSet.getInt("total");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -97,18 +99,34 @@ public class DevicesDao extends BaseDao {
         }
         return 0;
     }
-    private Boolean insertDevice(){
+    public Boolean insertDevice(String address,String devName){
+        boolean isSuccess = false;
         try {
             getId();
             ps = con.prepareStatement(sqlInsert);
             ps.setInt(1,++id);
-            ps.setString(2,"医药园");
-            ps.setString(3,"no5");
+            ps.setString(2,address);
+            ps.setString(3,devName);
 //            ps.executeQuery();
             if(ps.execute()){
                 //数据插入成功
 //                id++;
+                isSuccess = true;
+                return isSuccess;
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return isSuccess;
+    }
+
+    public boolean deleteDevice(String devName){
+        String sqlDelete = "delete from s_devices where devName = ?";
+
+        try {
+            ps = con.prepareStatement(sqlDelete);
+            ps.setString(1,devName);
+            ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -118,10 +136,10 @@ public class DevicesDao extends BaseDao {
      * just for test
      * @param string
      */
-    public static void main(String string[]){
-        DevicesDao devicesDao = new DevicesDao();
-        devicesDao.insertDevice();
-        devicesDao.getAllDevices();
-        devicesDao.closeDao();
-    }
+//    public static void main(String string[]){
+//        DevicesDao devicesDao = new DevicesDao();
+//        devicesDao.insertDevice();
+//        devicesDao.getAllDevices();
+//        devicesDao.closeDao();
+//    }
 }

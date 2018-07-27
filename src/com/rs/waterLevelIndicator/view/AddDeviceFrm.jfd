@@ -1,0 +1,46 @@
+JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_152-release" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {space :p:41:p, par l:::p {seq {par l:::p {comp label1:::::x, comp label2:::::x}, space :::p, par l:::p {comp mAddress::::166:x, comp mDevName::::166:x}}, seq {comp mOK:::p::p, space ::64:x, comp mReset:::p::p}}, space ::42:x}}"
+			"$verticalGroup": "par l {seq l {space :p:32:p, par b {comp label1::b:p:29:p, comp mAddress::b:p::p}, space :p:31:p, par b {comp label2::b:p:28:p, comp mDevName::b:p::p}, space ::26:x, par b {comp mReset::b:p::p, comp mOK::b:p::p}, space :p:24:p}}"
+		} ) {
+			name: "this"
+			"font": new java.awt.Font( "Dialog", 0, 22 )
+			"iconImage": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\添加设备.png" )
+			"alwaysOnTop": true
+			"background": new java.awt.Color( 102, 153, 255, 255 )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "地点："
+				"maximumSize": new java.awt.Dimension( 36, 21 )
+				"horizontalAlignment": 0
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "设备名："
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "mAddress"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "mDevName"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "mOK"
+				"text": "确定"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/images/确认.png" )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "mReset"
+				"text": "重置"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/images/重置.png" )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 20, 0 )
+			"size": new java.awt.Dimension( 305, 235 )
+		} )
+	}
+}

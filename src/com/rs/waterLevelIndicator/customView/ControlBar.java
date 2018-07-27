@@ -74,7 +74,7 @@ public abstract class ControlBar extends JPanel {
         label11.setText("\u5171");
 
         //---- mTotalPage ----
-        mTotalPage.setText("text");
+        mTotalPage.setText(String.valueOf(this.req.getTotalPage()));
 
         //---- label13 ----
         label13.setText("\u9875");
@@ -163,7 +163,7 @@ public abstract class ControlBar extends JPanel {
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
             int currentPage = this.req.getCurrentPage();
-            int mTotalPage = this.req.getTotalPage();
+            int mTotal = this.req.getTotalPage();
 
             if(e.getSource() == mFirstPage){
                 currentPage = 1;
@@ -178,10 +178,12 @@ public abstract class ControlBar extends JPanel {
                 System.out.println("mNextPage pressed");
             }
             if(e.getSource() == mLastPage){
-                currentPage = mTotalPage;
+                currentPage = mTotal;
                 System.out.println("mLastPage pressed");
             }
             if(e.getSource() == mGo){
+                Integer integer = Integer.valueOf(mSomePage.getText());
+                currentPage = integer.intValue();
                 System.out.println("mGo pressed");
             }
             this.req.setCurrentPage(currentPage);
