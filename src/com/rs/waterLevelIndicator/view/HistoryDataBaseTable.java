@@ -1,11 +1,10 @@
 package com.rs.waterLevelIndicator.view;
 
 import com.rs.waterLevelIndicator.dao.SenserDataDao;
-import com.rs.waterLevelIndicator.interfaces.PageQuery;
+import com.rs.waterLevelIndicator.services.SensorDataPageQuery;
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
 import com.rs.waterLevelIndicator.model.SensorData;
 import com.rs.waterLevelIndicator.utils.BaseTableModule;
-import com.rs.waterLevelIndicator.utils.DbPage;
 
 import javax.swing.*;
 import java.util.List;
@@ -23,7 +22,7 @@ public class HistoryDataBaseTable {
 
     public void refreshTable(DbPageMesReq req){
 //        List<SensorData> sensorDataList = new SenserDataDao().getSensorDataList(req);//拿到的数据
-        PageQuery pageQuery = new PageQuery();
+        SensorDataPageQuery pageQuery = new SensorDataPageQuery();
         List<SensorData> sensorDataList = pageQuery.queryMessage(req);
         for(SensorData sd :sensorDataList)
         {

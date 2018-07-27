@@ -4,7 +4,9 @@
 
 package com.rs.waterLevelIndicator.view;
 
-import com.rs.waterLevelIndicator.interfaces.PageQuery;
+import com.rs.waterLevelIndicator.customView.DateChooserJButton;
+import com.rs.waterLevelIndicator.customView.DevTree;
+import com.rs.waterLevelIndicator.services.SensorDataPageQuery;
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
 
 import java.awt.*;
@@ -58,8 +60,7 @@ public class HistoryDbPanel extends JPanel {
          *
          */
 
-
-        PageQuery pageQuery = new PageQuery();
+        SensorDataPageQuery pageQuery = new SensorDataPageQuery();
         mTotalRecord = pageQuery.getMessageNum();
         mPage = new DbPageMesReq();
         mPage.setTotalRecord(mTotalRecord);

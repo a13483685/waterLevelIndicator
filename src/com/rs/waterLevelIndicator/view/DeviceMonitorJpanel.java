@@ -4,18 +4,12 @@
 
 package com.rs.waterLevelIndicator.view;
 
-import com.rs.waterLevelIndicator.dao.SenserDataDao;
-import com.rs.waterLevelIndicator.model.SensorData;
-import com.rs.waterLevelIndicator.utils.BaseTableModule;
+import com.rs.waterLevelIndicator.customView.DevTree;
 
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Vector;
 
 /**
  * @author xziea

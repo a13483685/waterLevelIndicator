@@ -1,6 +1,7 @@
-package com.rs.waterLevelIndicator.interfaces;
+package com.rs.waterLevelIndicator.services;
 
 import com.rs.waterLevelIndicator.dao.SenserDataDao;
+import com.rs.waterLevelIndicator.interfaces.MessageMapper;
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
 import com.rs.waterLevelIndicator.model.SensorData;
 import com.rs.waterLevelIndicator.utils.DbPage;
@@ -11,22 +12,7 @@ import java.util.List;
 /**
  *分页查询实际类
  */
-public class PageQuery implements MessageMapper{
-//    private SenserDataDao messageMapper;
-//    @Override
-//    public DbPage<SensorData> queryMessage(DbPageMesReq req) {
-//        DbPage<SensorData> page = new DbPage<SensorData>();
-//        messageMapper = new SenserDataDao();
-//        int pageCount = messageMapper.getMessageNum();//得到总条数
-//        System.out.println("总数为："+pageCount);
-//        page = initPage(page, pageCount, req);
-//
-//        List<SensorData> message= messageMapper.queryMessage(req);//分页查询
-//        if (!message.isEmpty()) {
-//            page.setDatas(message);
-//        }
-//        return page;
-//    }
+public class SensorDataPageQuery implements MessageMapper<SensorData> {
 
     @Override
     public List<SensorData> queryMessage(DbPageMesReq msg) {

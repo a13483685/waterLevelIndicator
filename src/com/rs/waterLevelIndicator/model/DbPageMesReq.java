@@ -1,21 +1,21 @@
 package com.rs.waterLevelIndicator.model;
-//·ÖÒ³²éÑ¯Êı¾İ¿âÊµÌåÀà
+//åˆ†é¡µæŸ¥è¯¢æ•°æ®åº“å®ä½“ç±»
 public class DbPageMesReq {
-    private String memberId;//»áÔ±id
-    private int currentPage =1;//µ±Ç°Ò³
-    private int pageSize = 30;//Ò»Ò³¶àÉÙÌõ¼ÇÂ¼
-    private int startIndex = 1;//´ÓÄÄÒ»ĞĞ¿ªÊ¼
-    private int endIndex;//´ÓÄÄÒ»ĞĞ½áÊø
+    private String memberId;//ä¼šå‘˜id
+    private int currentPage =1;//å½“å‰é¡µ
+    private int pageSize = 30;//ä¸€é¡µå¤šå°‘æ¡è®°å½•
+    private int startIndex = 1;//ä»å“ªä¸€è¡Œå¼€å§‹
+    private int endIndex;//ä»å“ªä¸€è¡Œç»“æŸ
 
-    private int totalPage = 0; //×ÜÒ³Êı
-    private int totalRecord = 0; //×Ü¼ÇÂ¼Êı
+    private int totalPage = 0; //æ€»é¡µæ•°
+    private int totalRecord = 0; //æ€»è®°å½•æ•°
 
     public int getTotalPage() {
         if(totalRecord <= 0) {
             return 0;
         }
-        int size = totalRecord / pageSize;//×ÜÌõÊı/Ã¿Ò³ÏÔÊ¾µÄÌõÊı=×ÜÒ³Êı
-        int mod = totalRecord % pageSize;//×îºóÒ»Ò³µÄÌõÊı
+        int size = totalRecord / pageSize;//æ€»æ¡æ•°/æ¯é¡µæ˜¾ç¤ºçš„æ¡æ•°=æ€»é¡µæ•°
+        int mod = totalRecord % pageSize;//æœ€åä¸€é¡µçš„æ¡æ•°
         if(mod != 0) {
             size++;
         }
@@ -65,7 +65,7 @@ public class DbPageMesReq {
     public void setEndIndex(int endIndex) {
         this.endIndex = endIndex;
     }
-    //¸ù¾İµ±Ç°ËùÔÚÒ³ÊıºÍÃ¿Ò³ÏÔÊ¾¼ÇÂ¼Êı¼ÆËã³östartIndexºÍendIndex
+    //æ ¹æ®å½“å‰æ‰€åœ¨é¡µæ•°å’Œæ¯é¡µæ˜¾ç¤ºè®°å½•æ•°è®¡ç®—å‡ºstartIndexå’ŒendIndex
     public void setStartIndexEndIndex(){
         this.startIndex=(this.getCurrentPage()-1)*this.getPageSize();
         this.endIndex= (this.getCurrentPage()-1)*this.getPageSize()+this.getPageSize();

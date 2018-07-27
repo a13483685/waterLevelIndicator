@@ -4,10 +4,10 @@ import com.rs.waterLevelIndicator.model.DbPageMesReq;
 import com.rs.waterLevelIndicator.model.SensorData;
 
 import java.util.List;
-//Êı¾İ¿â·ÖÒ³²éÑ¯
-public interface MessageMapper {
-    //·ÖÒ³²éÑ¯
-     List<SensorData> queryMessage(DbPageMesReq msg);
-    //²éÑ¯×ÜÌõÊı
-     int getMessageNum();
+//æ•°æ®åº“åˆ†é¡µæŸ¥è¯¢
+public interface MessageMapper<T> {
+    //åˆ†é¡µæŸ¥è¯¢
+    List<T> queryMessage(DbPageMesReq msg);
+    //æŸ¥è¯¢æ€»æ¡æ•°
+    int getMessageNum();
 }

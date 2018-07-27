@@ -1,0 +1,72 @@
+JFDML JFormDesigner: "6.0.2.0.116" Java: "1.8.0_152-release" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :p:47:p, comp label3:::p::p, space :p:14:p, comp mNum:::p::p, space s:::p, comp label5:::p:15:p, space :p:2:p, comp label4:::p::p, space u:::p, comp mTotalPage:::p::p, space :::p, comp label6:::p::p, space s:::p, comp mFirstPage:::p::p, space :::p, comp mPrePage:::p::p, space :::p, comp mNextPage:::p::p, space :::p, comp mFinalPage:::p::p, space :::p, comp label11:::p::p, space :::p, comp mCurrentPage:::p:57:p, space :::p, comp label12:::p:18:p, space u:::p, comp go::::61:x, space :::p}}"
+			"$verticalGroup": "par l {par b {comp mTotalPage::b:p::p, comp label6::b:p::p, comp mFirstPage::b:p::p, comp mPrePage::b:p::p, comp mNextPage::b:p::p, comp mFinalPage::b:p::p, comp label11::b:p::p, comp label12::b:p::p, comp mCurrentPage::b:::x, comp label4::b:p::p, comp label5::b:p::p, comp label3::b:p::p, comp mNum::b:p::p, comp go::b:p::p}}"
+		} ) {
+			name: "panel1"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "第"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"text": "共"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "mTotalPage"
+				"text": "text"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label6"
+				"text": "页"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "mFirstPage"
+				"text": "首页"
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "mPrePage"
+				"text": "上一页"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "mNextPage"
+				"text": "下一页"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "mFinalPage"
+				"text": "最后一页"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label11"
+				"text": "跳转到"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label12"
+				"text": "页"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "mCurrentPage"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "go"
+				"text": "GO"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label5"
+				"text": "页"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "mNum"
+				"text": "1"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 566, 29 )
+		} )
+	}
+}

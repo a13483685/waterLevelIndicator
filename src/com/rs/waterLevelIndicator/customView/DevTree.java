@@ -1,4 +1,4 @@
-package com.rs.waterLevelIndicator.view;
+package com.rs.waterLevelIndicator.customView;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
