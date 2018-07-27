@@ -33,8 +33,8 @@ public class BaseTableModule extends AbstractTableModel {
 			rows.add(v);
 		}
 //		this.rows = items;
-		System.out.println("0 is :"+items.get(0).toString());
-		System.out.println("1 is :"+items.get(1).toString());
+//		System.out.println("0 is :"+items.get(0).toString());
+//		System.out.println("1 is :"+items.get(1).toString());
 	}
 
 	@Override

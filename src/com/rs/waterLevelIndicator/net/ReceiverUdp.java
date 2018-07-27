@@ -20,13 +20,13 @@ public class ReceiverUdp implements Runnable{
         while (true){
             try {
                 ds.receive(dp);
-                String id = dp.getAddress().getHostAddress();//»ñµÃip
+                String id = dp.getAddress().getHostAddress();//è·å¾—ip
                 int port = dp.getPort();
                 String str = new String(dp.getData(), 0, dp.getLength());
                 if("xie".equalsIgnoreCase(str)){
-                    System.out.println("½ÓÊÕµ½Êı¾İ");
+                    System.out.println("æ¥æ”¶åˆ°æ•°æ®");
                 }
-                System.out.println("ip:--"+id+",¶Ë¿Ú£º"+port+"£º£º"+str);
+                System.out.println("ip:--"+id+",ç«¯å£ï¼š"+port+"ï¼šï¼š"+str);
 
             } catch (IOException e) {
                 e.printStackTrace();

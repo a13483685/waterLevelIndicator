@@ -2,6 +2,7 @@ package com.rs.waterLevelIndicator.view;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,10 @@ public class DevTree extends JTabbedPane implements ActionListener{
         JMenuItem mDevInfoItem;//设备信息
         JTree mAllDevTree;//设备数菜单
         JScrollPane scrollPane1;
+        DefaultMutableTreeNode root, child;
+        DefaultTreeModel model;
+
+
         scrollPane1 = new JScrollPane();
 
         popMenu = new JPopupMenu();
@@ -31,14 +36,16 @@ public class DevTree extends JTabbedPane implements ActionListener{
 
 
         { //树的初始化
-            DefaultMutableTreeNode node1 = new DefaultMutableTreeNode("检测系统");
-            DefaultMutableTreeNode node2 = new DefaultMutableTreeNode("区域");
-            DefaultMutableTreeNode node3 = new DefaultMutableTreeNode("单位");
-            DefaultMutableTreeNode node4 = new DefaultMutableTreeNode("测点");
-            node3.add(node4);
-            node2.add(node3);
-            node1.add(node2);
-            mAllDevTree = new JTree(node1);
+//            DefaultMutableTreeNode node1 = new DefaultMutableTreeNode("检测系统");
+//            DefaultMutableTreeNode node2 = new DefaultMutableTreeNode("区域");
+//            DefaultMutableTreeNode node3 = new DefaultMutableTreeNode("单位");
+//            DefaultMutableTreeNode node4 = new DefaultMutableTreeNode("测点");
+//            node3.add(node4);
+//            node2.add(node3);
+//            node1.add(node2);
+            root = new DefaultMutableTreeNode("所有设备");
+            mAllDevTree = new JTree(root);
+            model = (DefaultTreeModel) mAllDevTree.getModel();
             mAllDevTree.setAutoscrolls(true);
             //右键点击菜单
             mAllDevTree.addMouseListener(new MouseListener() {
@@ -87,5 +94,21 @@ public class DevTree extends JTabbedPane implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 
+    }
+
+    class Branch {
+        DefaultMutableTreeNode r;
+
+        // DefaultMutableTreeNode是树的数据结构中的通用节点,节点也可以有多个子节点。
+        public Branch(String[] data) {
+            r = new DefaultMutableTreeNode(data[0]);
+            for (int i = 1; i < data.length; i++)
+                r.add(new DefaultMutableTreeNode(data[i]));
+            // 给节点r添加多个子节点
+        }
+
+        public DefaultMutableTreeNode node() {// 返回节点
+            return r;
+        }
     }
 }

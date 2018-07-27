@@ -4,6 +4,7 @@
 
 package com.rs.waterLevelIndicator.view;
 
+import com.rs.waterLevelIndicator.interfaces.PageQuery;
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
 
 import java.awt.*;
@@ -39,21 +40,39 @@ public class HistoryDbPanel extends JPanel {
     private JButton go;
     private JTabbedPane tabbedPane1;
     private MyMouseAdapter myMouseAdapter;
+    private JLabel label5;
+    private JLabel mNum;
+    private DbPageMesReq mPage = null;
+    private int mTotalRecord = 0;
+    private int mTotalPages = 0;
+
     public HistoryDbPanel() {
         initComponents();
     }
 
     private void initComponents() {
+        /**
+         * 获取总页数的方法
+         * 1 .数据库查询记录总数
+         * 2 .
+         *
+         */
 
+
+        PageQuery pageQuery = new PageQuery();
+        mTotalRecord = pageQuery.getMessageNum();
+        mPage = new DbPageMesReq();
+        mPage.setTotalRecord(mTotalRecord);
+        mTotalPages = mPage.getTotalPage();
 
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel2 = new JPanel();
         mTables = new JTabbedPane();
         //历史数据表格
         HistoryDataBaseTable historyDataBaseTable = new HistoryDataBaseTable();
-        DbPageMesReq req = new DbPageMesReq();
-        JScrollPane mHistoryTable = historyDataBaseTable.initTable(req);
-        myMouseAdapter =  new MyMouseAdapter(historyDataBaseTable,req);
+//        DbPageMesReq req = new DbPageMesReq();
+        JScrollPane mHistoryTable = historyDataBaseTable.initTable(mPage);
+        myMouseAdapter =  new MyMouseAdapter(historyDataBaseTable,mPage);
 //        mHistoryTable = new JPanel();
 //        mHistoryTable.add(jScrollPane);
 
@@ -70,8 +89,9 @@ public class HistoryDbPanel extends JPanel {
         label4 = new JLabel();
         mTotalPage = new JLabel();
         label6 = new JLabel();
+        label5 = new JLabel();
+        mNum= new JLabel();
         mFirstPage = new JLabel();
-
         mPrePage = new JLabel();
         mNextPage = new JLabel();
         mFinalPage = new JLabel();
@@ -157,13 +177,13 @@ public class HistoryDbPanel extends JPanel {
             {
 
                 //---- label3 ----
-                label3.setText("\u7b2c1\u9875");
+                label3.setText("\u7b2c");
 
                 //---- label4 ----
                 label4.setText("\u5171");
 
                 //---- mTotalPage ----
-                mTotalPage.setText("text");
+                mTotalPage.setText(String.valueOf(mTotalPages));
 
                 //---- label6 ----
                 label6.setText("\u9875");
@@ -193,16 +213,26 @@ public class HistoryDbPanel extends JPanel {
                 //---- go ----
                 go.setText("GO");
                 go.addMouseListener(myMouseAdapter);
+                //---- label5 ----
+                label5.setText("\u9875");
+
+                //---- mNum ----
+                mNum.setText("1");
+
                 GroupLayout panel1Layout = new GroupLayout(panel1);
                 panel1.setLayout(panel1Layout);
                 panel1Layout.setHorizontalGroup(
                     panel1Layout.createParallelGroup()
                         .addGroup(panel1Layout.createSequentialGroup()
-                            .addGap(45, 45, 45)
+                            .addGap(47, 47, 47)
                             .addComponent(label3)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addGap(14, 14, 14)
+                            .addComponent(mNum)
+                            .addGap(18, 18, 18)
+                            .addComponent(label5, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+                            .addGap(2, 2, 2)
                             .addComponent(label4)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(mTotalPage)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(label6)
@@ -221,26 +251,26 @@ public class HistoryDbPanel extends JPanel {
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(label12, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(go, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(114, Short.MAX_VALUE))
+                            .addComponent(go, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                            .addContainerGap())
                 );
                 panel1Layout.setVerticalGroup(
                     panel1Layout.createParallelGroup()
-                        .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                            .addGap(0, 0, Short.MAX_VALUE)
-                            .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(label4)
-                                .addComponent(mTotalPage)
-                                .addComponent(label6)
-                                .addComponent(mFirstPage)
-                                .addComponent(mPrePage)
-                                .addComponent(mNextPage)
-                                .addComponent(mFinalPage)
-                                .addComponent(label11)
-                                .addComponent(label3)
-                                .addComponent(go)
-                                .addComponent(label12)
-                                .addComponent(mCurrentPage, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)))
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(mTotalPage)
+                            .addComponent(label6)
+                            .addComponent(mFirstPage)
+                            .addComponent(mPrePage)
+                            .addComponent(mNextPage)
+                            .addComponent(mFinalPage)
+                            .addComponent(label11)
+                            .addComponent(label12)
+                            .addComponent(mCurrentPage)
+                            .addComponent(label4)
+                            .addComponent(label5)
+                            .addComponent(label3)
+                            .addComponent(mNum)
+                            .addComponent(go))
                 );
             }
 
@@ -261,11 +291,9 @@ public class HistoryDbPanel extends JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(mEndTimeButton, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
                                 .addGap(52, 52, 52)
-                                .addComponent(mQueryButton)))
+                                .addComponent(mQueryButton))
+                            .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(8, Short.MAX_VALUE))
-                    .addGroup(GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
-                        .addGap(0, 27, Short.MAX_VALUE)
-                        .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             );
             panel2Layout.setVerticalGroup(
                 panel2Layout.createParallelGroup()
@@ -313,8 +341,6 @@ public class HistoryDbPanel extends JPanel {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 
-
-
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     class MyMouseAdapter extends MouseAdapter{
@@ -329,33 +355,46 @@ public class HistoryDbPanel extends JPanel {
         public void mouseClicked(MouseEvent e) {
 
             super.mouseClicked(e);
+            int currentPage = this.req.getCurrentPage();
+            int mTotalPage = this.req.getTotalPage();
             if (e.getSource()== mPrePage){
-                int currentPage = this.req.getCurrentPage();
+
                 currentPage= currentPage-1;
-                this.req.setCurrentPage(currentPage);
+//                this.req.setCurrentPage(currentPage);
 
                 System.out.println("mPrePage pressed");
             }
             if (e.getSource() == mNextPage){
-                int currentPage = this.req.getCurrentPage();
+//                int currentPage = this.req.getCurrentPage();
                 currentPage= currentPage+1;
-                this.req.setCurrentPage(currentPage);
+//                this.req.setCurrentPage(currentPage);
+                mNum.setText(String.valueOf(this.req.getCurrentPage()));
                 System.out.println("mNextPage pressed");
             }
             if (e.getSource() == mFinalPage){
                 System.out.println("mFinalPage pressed");
+                currentPage = mTotalPage;
             }
             if (e.getSource() == mFirstPage){
-                req.setCurrentPage(1);
+//                req.setCurrentPage(1);
+                currentPage = 1;
                 System.out.println("mFirstPage pressed");
             }
             if(e.getSource() == go){
                 System.out.println("go");
+                Integer integer = Integer.valueOf(mCurrentPage.getText());
+                currentPage = integer.intValue();
+
+//                mCurrentPage.getText();
             }
             if(e.getSource()== mQueryButton){
                 System.out.println("mQueryButton pressed");
             }
-//            historyDataBaseTable.initTable(this.req);
+            this.req.setCurrentPage(currentPage);
+            this.req.setStartIndexEndIndex();
+
+            mNum.setText(String.valueOf(this.req.getCurrentPage()));
+            System.out.println("start index is "+this.req.getStartIndex() +"end index is :" + this.req.getEndIndex());
             historyDataBaseTable.refreshTable(this.req);
         }
     }

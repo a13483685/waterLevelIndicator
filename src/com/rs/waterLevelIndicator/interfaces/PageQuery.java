@@ -11,38 +11,50 @@ import java.util.List;
 /**
  *分页查询实际类
  */
-public class PageQuery implements IDbPageManager{
-    private SenserDataDao messageMapper;
+public class PageQuery implements MessageMapper{
+//    private SenserDataDao messageMapper;
+//    @Override
+//    public DbPage<SensorData> queryMessage(DbPageMesReq req) {
+//        DbPage<SensorData> page = new DbPage<SensorData>();
+//        messageMapper = new SenserDataDao();
+//        int pageCount = messageMapper.getMessageNum();//得到总条数
+//        System.out.println("总数为："+pageCount);
+//        page = initPage(page, pageCount, req);
+//
+//        List<SensorData> message= messageMapper.queryMessage(req);//分页查询
+//        if (!message.isEmpty()) {
+//            page.setDatas(message);
+//        }
+//        return page;
+//    }
+
     @Override
-    public DbPage<SensorData> queryMessage(DbPageMesReq req) {
-        DbPage<SensorData> page = new DbPage<SensorData>();
-        messageMapper = new SenserDataDao();
-        int pageCount = messageMapper.getMessageNum();//得到总条数
-        System.out.println("总数为："+pageCount);
-        page = initPage(page, pageCount, req);
+    public List<SensorData> queryMessage(DbPageMesReq msg) {
+        SenserDataDao senserDataDao = new SenserDataDao();
+        return  senserDataDao.getSensorDataList(msg);
+    }
 
-        List<SensorData> message= messageMapper.queryMessage(req);//分页查询
-        if (!message.isEmpty()) {
-            page.setDatas(message);
-        }
-        return page;
+    @Override
+    public int getMessageNum() {
+        SenserDataDao senserDataDao = new SenserDataDao();
+        return senserDataDao.getMessageNum();
+    }
 
-    }
-    //初始化页数
-    private DbPage<SensorData> initPage(DbPage<SensorData> page, int pageCount, DbPageMesReq req) {
-        page.setTotalRecord(pageCount);
-        page.setCurrentPage(req.getCurrentPage());
-        page.setPageSize(req.getPageSize());
-        req.setStartIndexEndIndex();
-        System.out.println("page is :"+page.toString());
-        return page;
-    }
-    @Test
-    public void test(){
-        DbPageMesReq dbPageMesReq = new DbPageMesReq();
-        dbPageMesReq.setCurrentPage(1);
-        dbPageMesReq.setStartIndex(1);
-        PageQuery iDbPageManagerImp = new PageQuery();
-        iDbPageManagerImp.queryMessage(dbPageMesReq);
-    }
+//    //    初始化页数
+//    private DbPage<SensorData> initPage(DbPage<SensorData> page, int pageCount, DbPageMesReq req) {
+//        page.setTotalRecord(pageCount);
+//        page.setCurrentPage(req.getCurrentPage());
+//        page.setPageSize(req.getPageSize());
+//        req.setStartIndexEndIndex();
+//        System.out.println("page is :"+page.toString());
+//        return page;
+//    }
+//    @Test
+//    public void test(){
+//        DbPageMesReq dbPageMesReq = new DbPageMesReq();
+//        dbPageMesReq.setCurrentPage(1);
+//        dbPageMesReq.setStartIndex(1);
+//        PageQuery iDbPageManagerImp = new PageQuery();
+//        iDbPageManagerImp.queryMessage(dbPageMesReq);
+//    }
 }

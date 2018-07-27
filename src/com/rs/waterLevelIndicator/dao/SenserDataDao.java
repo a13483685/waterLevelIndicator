@@ -69,12 +69,14 @@ public class SenserDataDao extends BaseDao implements MessageMapper {
         }
         return sd;
     }
+    //数据库分页查询
     public List<SensorData> getSensorDataList(DbPageMesReq req){
         List<SensorData> sensorDatas = new ArrayList<SensorData>();
         String sql = "select * from  s_sensorData limit ?,?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            int startIndex = req.getCurrentPage()*req.getPageSize();
+//            int startIndex = req.getStartIndex()*req.getPageSize();
+            int startIndex = req.getStartIndex();
             int offsetIndex = req.getPageSize();
             ps.setInt(1,startIndex);
             ps.setInt(2,offsetIndex);

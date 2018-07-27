@@ -70,7 +70,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
         mHomePage = new JMenu();
         mRealtimeMonitor = new JMenu();
         mDeviceItem = new JMenuItem();
-        mAllReviewItem = new JMenuItem();
+        mDevManerge = new JMenuItem();
         mLogcat = new JMenu();
         mDeviceLogItem = new JMenuItem();
         mClientLogItem = new JMenuItem();
@@ -107,7 +107,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
 
             //======== mRealtimeMonitor ========
             {
-                mRealtimeMonitor.setText("\u5b9e\u65f6\u76d1\u63a7");
+                mRealtimeMonitor.setText("设备");
 
                 //---- mDeviceItem ----
                 mDeviceItem.setText("\u8bbe\u5907\u76d1\u63a7");
@@ -115,9 +115,10 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
                 mDeviceItem.addActionListener(this::actionPerformed);
                 mRealtimeMonitor.add(mDeviceItem);
 
-                //---- mAllReviewItem ----
-                mAllReviewItem.setText("\u5168\u5c40\u603b\u89c8");
-                mRealtimeMonitor.add(mAllReviewItem);
+                //---- mDevManerge ----
+                mDevManerge.setText("设备管理");
+                mDevManerge.addActionListener(this::actionPerformed);
+                mRealtimeMonitor.add(mDevManerge);
             }
             menuBar1.add(mRealtimeMonitor);
 
@@ -251,7 +252,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
     private JMenu mHomePage;
     private JMenu mRealtimeMonitor;
     private JMenuItem mDeviceItem;
-    private JMenuItem mAllReviewItem;
+    private JMenuItem mDevManerge;
     private JMenu mLogcat;
     private JMenuItem mDeviceLogItem;
     private JMenuItem mClientLogItem;
@@ -283,7 +284,9 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
 //            mContentPanel.removeAll();
 //            devicesMonitor();
 
-        }else if(e.getSource() == mAllReviewItem){//全局总揽
+        }else if(e.getSource() == mDevManerge){//添加设备
+//            mContentPanel.removeAll();
+            
 
         }else if(e.getSource() == mDeviceLogItem){//设备日志
 
@@ -298,15 +301,15 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
     }
 
     private void createHome() {
-        try {
-            Image bgimg = ImageIO.read(new File("F:/work/java/waterLevelIndicator/src/images/background.jpg"));
-            ImagePanel centerBackground = new ImagePanel(bgimg);
-
-            mContentPanel.add(centerBackground, "Center");
-            mContentPanel.setVisible(true);
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
+//        try {
+//            Image bgimg = ImageIO.read(new File("F:/work/java/waterLevelIndicator/src/images/background.jpg"));
+//            ImagePanel centerBackground = new ImagePanel(bgimg);
+//
+//            mContentPanel.add(centerBackground, "Center");
+//            mContentPanel.setVisible(true);
+//        } catch (IOException e1) {
+//            e1.printStackTrace();
+//        }
     }
 
     @Override
@@ -333,17 +336,26 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == mDeviceItem){
-            JOptionPane.showMessageDialog(this, "点击了设备监控");
             mContentPanel.removeAll();
+            JOptionPane.showMessageDialog(this, "点击了设备监控");
+//            mContentPanel.removeAll();
             devicesMonitor();
             mContentPanel.setVisible(true);
         }else if(e.getSource() == mHistoryDbItem){
-            JOptionPane.showMessageDialog(this, "点击了历史数据查询");
             mContentPanel.removeAll();
+            JOptionPane.showMessageDialog(this, "点击了历史数据查询");
             historyDbPanel();
+        }else if(e.getSource() == mDevManerge){
+            JOptionPane.showMessageDialog(this, "点击了设备管理");
+            deviceManege();
         }
-
     }
+
+    private void deviceManege() {
+        DevManege devManege = new DevManege();
+        devManege.setVisible(true);
+    }
+
     //历史数据界面
     private void historyDbPanel() {
         mContentPanel.add(new HistoryDbPanel());

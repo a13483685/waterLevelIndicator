@@ -8,7 +8,6 @@ import java.util.List;
 public interface MessageMapper {
     //分页查询
      List<SensorData> queryMessage(DbPageMesReq msg);
-
     //查询总条数
      int getMessageNum();
 }

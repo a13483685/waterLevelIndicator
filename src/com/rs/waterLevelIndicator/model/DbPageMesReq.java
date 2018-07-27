@@ -7,19 +7,37 @@ public class DbPageMesReq {
     private int startIndex = 1;//从哪一行开始
     private int endIndex;//从哪一行结束
 
-    public String getMemberId() {
-        return memberId;
+    private int totalPage = 0; //总页数
+    private int totalRecord = 0; //总记录数
+
+    public int getTotalPage() {
+        if(totalRecord <= 0) {
+            return 0;
+        }
+        int size = totalRecord / pageSize;//总条数/每页显示的条数=总页数
+        int mod = totalRecord % pageSize;//最后一页的条数
+        if(mod != 0) {
+            size++;
+        }
+        totalPage = size;
+        return totalPage;
     }
 
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
+
+    public void setTotalRecord(int totalRecord) {
+        this.totalRecord = totalRecord;
     }
+
 
     public int getCurrentPage() {
+        if(currentPage <= 0) {
+            return 1;
+        }
         return currentPage;
     }
 
     public void setCurrentPage(int currentPage) {
+
         this.currentPage = currentPage;
     }
 
@@ -32,12 +50,13 @@ public class DbPageMesReq {
     }
 
     public int getStartIndex() {
+        startIndex = (getCurrentPage() - 1) * pageSize;
         return startIndex;
     }
 
-    public void setStartIndex(int startIndex) {
-        this.startIndex = startIndex;
-    }
+//    public void setStartIndex(int startIndex) {
+//
+//    }
 
     public int getEndIndex() {
         return endIndex;
