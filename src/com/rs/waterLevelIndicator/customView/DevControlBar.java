@@ -15,6 +15,4 @@ public class DevControlBar extends ControlBar{
     public void refreshTable(DbPageMesReq req) {
         this.devTable.refreshTable(req);
     }
-
-
 }

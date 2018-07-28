@@ -174,7 +174,11 @@ public abstract class ControlBar extends JPanel {
                 System.out.println("mPrePage pressed");
             }
             if(e.getSource() == mNextPage){
+
                 currentPage= currentPage+1;
+                if(currentPage>mTotal){
+                    currentPage = mTotal;
+                }
                 System.out.println("mNextPage pressed");
             }
             if(e.getSource() == mLastPage){

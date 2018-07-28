@@ -3,11 +3,11 @@ package com.rs.waterLevelIndicator.utils;
 import java.util.List;
 
 public class DbPage<T> {
-    private int currentPage = 1; // µ±Ç°Ò³
-    private int pageSize = 20; //Ã¿Ò³ÏÔÊ¾¼ÇÂ¼Êý
-    private int startRecord = 1; //ÆðÊ¼²éÑ¯¼ÇÂ¼
-    private int totalPage = 0; //×ÜÒ³Êý
-    private int totalRecord = 0; //×Ü¼ÇÂ¼Êý
+    private int currentPage = 1; // ï¿½ï¿½Ç°Ò³
+    private int pageSize = 20; //Ã¿Ò³ï¿½ï¿½Ê¾ï¿½ï¿½Â¼ï¿½ï¿½
+    private int startRecord = 1; //ï¿½ï¿½Ê¼ï¿½ï¿½Ñ¯ï¿½ï¿½Â¼
+    private int totalPage = 0; //ï¿½ï¿½Ò³ï¿½ï¿½
+    private int totalRecord = 0; //ï¿½Ü¼ï¿½Â¼ï¿½ï¿½
 
     private List<T> datas;
     public DbPage(){}
@@ -34,6 +34,9 @@ public class DbPage<T> {
     public int getCurrentPage() {
         if(currentPage <= 0) {
             return 1;
+        }
+        if(currentPage>totalPage){
+            return totalPage;
         }
         return currentPage;
     }
@@ -68,8 +71,8 @@ public class DbPage<T> {
         if(totalRecord <= 0) {
             return 0;
         }
-        int size = totalRecord / pageSize;//×ÜÌõÊý/Ã¿Ò³ÏÔÊ¾µÄÌõÊý=×ÜÒ³Êý
-        int mod = totalRecord % pageSize;//×îºóÒ»Ò³µÄÌõÊý
+        int size = totalRecord / pageSize;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/Ã¿Ò³ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½=ï¿½ï¿½Ò³ï¿½ï¿½
+        int mod = totalRecord % pageSize;//ï¿½ï¿½ï¿½Ò»Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if(mod != 0) {
             size++;
         }
