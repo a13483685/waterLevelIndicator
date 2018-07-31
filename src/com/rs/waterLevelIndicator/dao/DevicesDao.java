@@ -1,8 +1,10 @@
 package com.rs.waterLevelIndicator.dao;
 
+import com.rs.waterLevelIndicator.customView.DevTable;
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
 import com.rs.waterLevelIndicator.model.Device;
 import com.rs.waterLevelIndicator.model.SensorData;
+import com.rs.waterLevelIndicator.services.DevicePageQuery;
 import com.rs.waterLevelIndicator.utils.Constans;
 
 import java.sql.PreparedStatement;
@@ -17,11 +19,20 @@ public class DevicesDao extends BaseDao {
     String sqlId = "select id from s_devices";
     PreparedStatement ps = null;
     List<Device> devices = null;
+    private DevTable dt= null;
+    private DbPageMesReq req;
     private int id;
 
+    public DevicesDao(DevTable dt,DbPageMesReq req){
+        this.dt = dt;
+        this.req = req;
+    }
+    public DevicesDao(){
+
+    }
 
     //数据分页查询
-    public List<Device> getDevList(DbPageMesReq req){
+    public List<Device>  getDevList(DbPageMesReq req){
         List<Device> Devices = new ArrayList<>();
         String sql = "select * from  s_devices limit ?,?";
         try {
@@ -108,12 +119,27 @@ public class DevicesDao extends BaseDao {
             ps.setString(2,address);
             ps.setString(3,devName);
 //            ps.executeQuery();
-            if(ps.execute()){
+            if(!ps.execute()){
                 //数据插入成功
 //                id++;
                 isSuccess = true;
                 return isSuccess;
             }
+
+//            DbPageMesReq req = new DbPageMesReq();
+//            DevicePageQuery devicePageQuery = new DevicePageQuery();
+////            devicePageQuery.QueryClose();
+//            int messageNum = devicePageQuery.getMessageNum();
+//
+//            req.setTotalRecord(messageNum);//这个值应该会变
+
+
+
+//            if(dt!=null)
+//            {
+//                dt.refreshTable(req);
+//            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -122,15 +148,18 @@ public class DevicesDao extends BaseDao {
 
     public boolean deleteDevice(String devName){
         String sqlDelete = "delete from s_devices where devName = ?";
-
+        boolean isSuccess = false;
         try {
             ps = con.prepareStatement(sqlDelete);
             ps.setString(1,devName);
-            ps.execute();
+            if(!ps.execute()){
+                isSuccess = true;
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return isSuccess;
     }
     /**
      * just for test

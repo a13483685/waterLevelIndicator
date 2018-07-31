@@ -36,7 +36,7 @@ public class DevTable extends JTable{
     }
 
     public void refreshTable(DbPageMesReq req) {
-        devicesDao = new DevicesDao();
+        devicesDao = new DevicesDao(this,req);
         mDevDatas = new Vector<>();
         List<Device> allDevices = devicesDao.getDevList(req);
         for(Device device:allDevices){

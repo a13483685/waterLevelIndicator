@@ -4,18 +4,21 @@
 
 package com.rs.waterLevelIndicator.view;
 
+import com.rs.waterLevelIndicator.Observers.DevDbOberver;
 import com.rs.waterLevelIndicator.customView.ControlBar;
 import com.rs.waterLevelIndicator.customView.DevControlBar;
 import com.rs.waterLevelIndicator.customView.DevTable;
 import com.rs.waterLevelIndicator.dao.DevicesDao;
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
 import com.rs.waterLevelIndicator.services.DevicePageQuery;
+import com.rs.waterLevelIndicator.manage.ObserverManage;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.GroupLayout;
+
 
 /**
  * @author xz
@@ -29,8 +32,11 @@ public class DevManege extends JFrame implements ActionListener {
     private JTable mDevs;
     private JLabel label1;
     private JPanel panel2;
-    private ControlBar label2;
+    private DevControlBar mControlBar;
+
+//    private ObserverManage observerManerge = null;
     public DevManege() {
+//        this.observerManerge = new ObserverManage();
         initComponents();
     }
 
@@ -53,14 +59,18 @@ public class DevManege extends JFrame implements ActionListener {
         DbPageMesReq req = new DbPageMesReq();
         req.setPageSize(10);
         DevicePageQuery devicePageQuery = new DevicePageQuery();
+//        devicePageQuery.QueryClose();
         int messageNum = devicePageQuery.getMessageNum();
+
         req.setTotalRecord(messageNum);//这个值应该会变
 
         DevTable devTable = new DevTable();
         mDevs = devTable.initTable(req);
 //        mDevs.initTable(req);
 
-        label2 = new DevControlBar(devTable,req);
+        mControlBar = new DevControlBar(devTable,req);
+//        this.observerManerge.atach((DevDbOberver)mControlBar);
+
         label1 = new JLabel();
 
         //======== this ========
@@ -94,8 +104,8 @@ public class DevManege extends JFrame implements ActionListener {
             //======== panel2 ========
             {
 
-                //---- label2 ----
-//                label2.setText("2");
+                //---- mControlBar ----
+//                mControlBar.setText("2");
 
                 GroupLayout panel2Layout = new GroupLayout(panel2);
                 panel2.setLayout(panel2Layout);
@@ -103,14 +113,14 @@ public class DevManege extends JFrame implements ActionListener {
                     panel2Layout.createParallelGroup()
                         .addGroup(panel2Layout.createSequentialGroup()
 //                            .addGap(79, 79, 79)
-                            .addComponent(label2)
+                            .addComponent(mControlBar)
                             .addContainerGap(0, Short.MAX_VALUE))
                 );
                 panel2Layout.setVerticalGroup(
                     panel2Layout.createParallelGroup()
                         .addGroup(GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
                             .addGap(0, 10, Short.MAX_VALUE)
-                            .addComponent(label2))
+                            .addComponent(mControlBar))
                 );
             }
 
@@ -176,7 +186,8 @@ public class DevManege extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==mAdd) {
-            AddDeviceFrm addDeviceFrm = new AddDeviceFrm();
+
+            AddDeviceFrm addDeviceFrm = new AddDeviceFrm(mControlBar);
             addDeviceFrm.setVisible(true);
         }
         if (e.getSource()==mDel){
@@ -191,7 +202,10 @@ public class DevManege extends JFrame implements ActionListener {
 
     private void DeleteFromDb(String devName) {
         DevicesDao devicesDao = new DevicesDao();
-        devicesDao.deleteDevice(devName);
+        boolean b = devicesDao.deleteDevice(devName);
+        if(b){
+            System.out.println("数据删除成功！");
+        }
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables

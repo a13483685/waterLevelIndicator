@@ -4,7 +4,13 @@
 
 package com.rs.waterLevelIndicator.view;
 
+import com.rs.waterLevelIndicator.customView.ControlBar;
+import com.rs.waterLevelIndicator.customView.DevControlBar;
+import com.rs.waterLevelIndicator.customView.DevTable;
 import com.rs.waterLevelIndicator.dao.DevicesDao;
+import com.rs.waterLevelIndicator.manage.ObserverManage;
+import com.rs.waterLevelIndicator.model.DbPageMesReq;
+import com.rs.waterLevelIndicator.services.DevicePageQuery;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,9 +23,16 @@ import javax.swing.border.*;
  * @author xziea
  */
 public class AddDeviceFrm extends JFrame implements ActionListener {
-    public AddDeviceFrm() {
+    private ObserverManage observerManerge = null;
+    public AddDeviceFrm(DevControlBar mControlBar) {
+        observerManerge = new ObserverManage();
+        observerManerge.atach(mControlBar);
         initComponents();
     }
+//
+//    public AddDeviceFrm(DevControlBar mControlBar) {
+//        observerManerge.atach(mControlBar);
+//}
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -112,8 +125,13 @@ public class AddDeviceFrm extends JFrame implements ActionListener {
             String address = mAddress.getText().trim();
             String devName = mDevName.getText().trim();
 
-            DevicesDao devicesDao = new DevicesDao();
-            insetIntoDb( address, devName);
+//            DevicesDao devicesDao = new DevicesDao();
+            //判断是增删改查那个功能再刷新
+            Boolean isSuccess = insetIntoDb(address, devName);
+            if(isSuccess){
+                System.out.println("isSuccess ?"+ isSuccess);
+                observerManerge.notifyMsg();
+            }
 
         }else if(e.getSource() == mReset){
             mAddress.setText("");
@@ -121,12 +139,19 @@ public class AddDeviceFrm extends JFrame implements ActionListener {
         }
     }
 
-    private void insetIntoDb(String address,String devName) {
+    private Boolean insetIntoDb(String address,String devName) {
+        Boolean isSuccess = false;
         DevicesDao devicesDao = new DevicesDao();
         Boolean isSuccessAdd = devicesDao.insertDevice(address, devName);
+        if(isSuccessAdd){
+            //数据插入成功
+
+            //通知界面刷新
+            isSuccess = true;
+        }
         devicesDao.closeDao();
-        System.out.println("isSuccess ?"+ isSuccessAdd);
         this.dispose();
+        return isSuccess;
     }
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

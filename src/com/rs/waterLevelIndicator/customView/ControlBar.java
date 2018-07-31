@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
+import com.rs.waterLevelIndicator.services.DevicePageQuery;
 
 import javax.swing.*;
 
@@ -32,9 +33,19 @@ public abstract class ControlBar extends JPanel {
     ControlBarMouseAdapter controlBarMouseAdapter;
     DbPageMesReq req = null;
     //需要req来控制table，所以需要传入这两个参数
+    public void upDate(){
+        req = new DbPageMesReq();
+        req.setPageSize(10);
+        DevicePageQuery devicePageQuery = new DevicePageQuery();
+//        devicePageQuery.QueryClose();
+        int messageNum = devicePageQuery.getMessageNum();
+        req.setTotalRecord(messageNum);//这个值应该会变
+        controlBarMouseAdapter = new ControlBarMouseAdapter(this.req);
+    }
     public ControlBar(DbPageMesReq req) {
-        controlBarMouseAdapter = new ControlBarMouseAdapter(req);
-        this.req = req;
+        upDate();
+//        controlBarMouseAdapter = new ControlBarMouseAdapter(this.req);
+//        this.req = req;
         initComponents();
 //        initTable();
     }
