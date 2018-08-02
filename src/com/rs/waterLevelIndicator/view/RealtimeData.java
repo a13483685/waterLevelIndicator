@@ -65,18 +65,18 @@ public class RealtimeData extends JPanel {
         String waterLevel = sensorData.getWaterLevel();
         String devStatus = sensorData.getDevStatus();
 
-        System.out.println("SetData is :"+"downLimit is :"+downLimit+
-                "gaokong is :"+gaokong+
-                "gpsSignal is :"+gpsSignal+
-                "upload is :"+upload+
-                "comStatus is :"+comStatus+
-                "upLimit is :"+upLimit+
-                "time is :"+time+
-                "watt is :"+watt+
-                "dev_id is :"+dev_id+
-                "waterLevel is :"+waterLevel+
-                "devStatus is :"+devStatus
-        );
+//        System.out.println("SetData is :"+"downLimit is :"+downLimit+
+//                "gaokong is :"+gaokong+
+//                "gpsSignal is :"+gpsSignal+
+//                "upload is :"+upload+
+//                "comStatus is :"+comStatus+
+//                "upLimit is :"+upLimit+
+//                "time is :"+time+
+//                "watt is :"+watt+
+//                "dev_id is :"+dev_id+
+//                "waterLevel is :"+waterLevel+
+//                "devStatus is :"+devStatus
+//        );
         for (int i = 0; i < 10; i++) {
             switch (i) {
                 case KONG_GAO:

@@ -11,16 +11,13 @@ public class ObserverManage {
     public void atach(DevDbOberver obs){
         observers.add(obs);
     }
-
     public void detach(DevDbOberver obs){
         if(obs!=null)
             observers.remove(obs);
     }
-
     public void notifyMsg(){
         for (DevDbOberver observer:observers) {
             observer.update(true);
         }
     }
-
 }

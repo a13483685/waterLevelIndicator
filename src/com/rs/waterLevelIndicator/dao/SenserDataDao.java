@@ -22,8 +22,8 @@ public class SenserDataDao extends BaseDao  {
 //        this.t = t;
 //    }
     public SensorData selectLastRecord(String dev){
-//        String sql = "select * from s_sensordata where id = "+ dev +" order by id desc LIMIT 1";
-        String sql = "select * from s_sensordata order by id desc LIMIT 1";
+        String sql = "select * from s_sensordata where id = "+ dev +" order by id desc LIMIT 1";
+//        String sql = "select * from s_sensordata order by id desc LIMIT 1";
         System.out.println("sql is :"+sql);
         SensorData data = getData(sql);
         return data;
@@ -83,8 +83,8 @@ public class SenserDataDao extends BaseDao  {
     //数据库分页查询
     public List<SensorData> getSensorDataList(DbPageMesReq req,String dev){
         List<SensorData> sensorDatas = new ArrayList<SensorData>();
-//        String sql = "select * from  s_sensorData where id = "+dev+" limit ?,? ";
-        String sql = "select * from  s_sensorData limit ?,? ";
+        String sql = "select * from  s_sensorData where dev_id = "+dev+" limit ?,? ";
+//        String sql = "select * from  s_sensorData limit ?,? ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
 //            int startIndex = req.getStartIndex()*req.getPageSize();
@@ -97,7 +97,7 @@ public class SenserDataDao extends BaseDao  {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){
                 SensorData sd = new SensorData();
-                String id = resultSet.getString("id");
+                String id = resultSet.getString("dev_id");
                 String gaokong = resultSet.getString("konggao");
 //                System.out.println("konggao is :"+gaokong);
                 String upload = resultSet.getString("upload");

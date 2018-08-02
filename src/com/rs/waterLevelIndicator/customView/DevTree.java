@@ -112,7 +112,7 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
 //            SensorData sensorData = senserDataDao.selectLastRecord(selNode.toString());
             Constans.mWhichDevIsSelected = selNode.toString();
             FunctionHelper.SaveSelectedDevToFile(Constans.mWhichDevIsSelected);
-
+            //刷新历史数据表格
         }
     }
 
