@@ -21,9 +21,20 @@ public class SenserDataDao extends BaseDao  {
 //    public SenserDataDao(T t) {
 //        this.t = t;
 //    }
+    public SensorData selectLastRecord(String dev){
+//        String sql = "select * from s_sensordata where id = "+ dev +" order by id desc LIMIT 1";
+        String sql = "select * from s_sensordata order by id desc LIMIT 1";
+        System.out.println("sql is :"+sql);
+        SensorData data = getData(sql);
+        return data;
+    }
 
     public SensorData selectLastRecord(){
         String sql = "select * from s_sensordata order by id desc LIMIT 1";
+        SensorData data = getData(sql);
+        return data;
+    }
+    public SensorData getData(String sql){
         PreparedStatement ps = null;
         SensorData sd = null;
         try {
@@ -70,9 +81,10 @@ public class SenserDataDao extends BaseDao  {
         return sd;
     }
     //数据库分页查询
-    public List<SensorData> getSensorDataList(DbPageMesReq req){
+    public List<SensorData> getSensorDataList(DbPageMesReq req,String dev){
         List<SensorData> sensorDatas = new ArrayList<SensorData>();
-        String sql = "select * from  s_sensorData limit ?,?";
+//        String sql = "select * from  s_sensorData where id = "+dev+" limit ?,? ";
+        String sql = "select * from  s_sensorData limit ?,? ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
 //            int startIndex = req.getStartIndex()*req.getPageSize();
@@ -80,7 +92,7 @@ public class SenserDataDao extends BaseDao  {
             int offsetIndex = req.getPageSize();
             ps.setInt(1,startIndex);
             ps.setInt(2,offsetIndex);
-
+            System.out.println("sql is :"+sql);
             System.out.println("recode is from :"+startIndex+"to"+(startIndex+offsetIndex));
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){

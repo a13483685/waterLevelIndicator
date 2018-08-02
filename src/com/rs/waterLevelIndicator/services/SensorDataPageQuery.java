@@ -14,13 +14,15 @@ import java.util.List;
  */
 public class SensorDataPageQuery implements MessageMapper<SensorData> {
 
+    private String dev;
     private SenserDataDao senserDataDao;
-    public SensorDataPageQuery(){
+    public SensorDataPageQuery(String dev){
         senserDataDao = new SenserDataDao();
+        this.dev = dev;
     }
     @Override
     public List<SensorData> queryMessage(DbPageMesReq msg) {
-        return  senserDataDao.getSensorDataList(msg);
+        return  senserDataDao.getSensorDataList(msg,this.dev);
     }
 
     @Override

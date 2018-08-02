@@ -15,8 +15,8 @@ public class DevControlBar extends ControlBar implements DevDbOberver {
     }
     @Override
     public void refreshTable(DbPageMesReq req) {
+        upDate();
         this.devTable.refreshTable(req);
-//        upDate();
     }
 //观察数据是否发送改变
     @Override

@@ -6,13 +6,19 @@ package com.rs.waterLevelIndicator.view;
 
 import com.rs.waterLevelIndicator.customView.DateChooserJButton;
 import com.rs.waterLevelIndicator.customView.DevTree;
+import com.rs.waterLevelIndicator.model.SensorData;
 import com.rs.waterLevelIndicator.services.SensorDataPageQuery;
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
+import com.rs.waterLevelIndicator.utils.Constans;
+import com.rs.waterLevelIndicator.utils.FunctionHelper;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
+
+import static com.rs.waterLevelIndicator.view.MainFrm.devTree;
+
 /**
  * @author xz
  */
@@ -40,13 +46,14 @@ public class HistoryDbPanel extends JPanel {
     private JLabel label12;
     private JTextField mCurrentPage;
     private JButton go;
-    private JTabbedPane tabbedPane1;
+//    private JTabbedPane tabbedPane1;
     private MyMouseAdapter myMouseAdapter;
     private JLabel label5;
     private JLabel mNum;
     private DbPageMesReq mPage = null;
     private int mTotalRecord = 0;
     private int mTotalPages = 0;
+    private boolean isFirstEnter;
 
     public HistoryDbPanel() {
         initComponents();
@@ -60,7 +67,23 @@ public class HistoryDbPanel extends JPanel {
          *
          */
 
-        SensorDataPageQuery pageQuery = new SensorDataPageQuery();
+//        SensorData sensorData = null;
+        SensorDataPageQuery pageQuery = null;
+        if(isFirstEnter)
+        {
+            //首次进来，在文件中读取
+            String lastSelectedDevToFile = FunctionHelper.getLastSelectedDevToFile();
+//            sensorData = senserDataDao.selectLastRecord(lastSelectedDevToFile);
+            pageQuery = new SensorDataPageQuery(lastSelectedDevToFile);
+
+            Constans.mWhichDevIsSelected = lastSelectedDevToFile;
+            isFirstEnter = false;
+        }else {
+//            sensorData = senserDataDao.selectLastRecord(Constans.mWhichDevIsSelected);
+            pageQuery = new SensorDataPageQuery(Constans.mWhichDevIsSelected );
+        }
+
+
         mTotalRecord = pageQuery.getMessageNum();
         mPage = new DbPageMesReq();
         mPage.setTotalRecord(mTotalRecord);
@@ -100,7 +123,7 @@ public class HistoryDbPanel extends JPanel {
         label12 = new JLabel();
         mCurrentPage = new JTextField();
         go = new JButton();
-        tabbedPane1 = new DevTree();
+//        tabbedPane1 = new DevTree();
 
         //======== this ========
 
@@ -320,7 +343,7 @@ public class HistoryDbPanel extends JPanel {
             layout.createParallelGroup()
                 .addGroup(layout.createSequentialGroup()
                     .addGap(24, 24, 24)
-                    .addComponent(tabbedPane1, GroupLayout.PREFERRED_SIZE, 313, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(devTree, GroupLayout.PREFERRED_SIZE, 313, GroupLayout.PREFERRED_SIZE)
                     .addGap(35, 35, 35)
                     .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addContainerGap())
@@ -331,7 +354,7 @@ public class HistoryDbPanel extends JPanel {
                     .addGroup(layout.createParallelGroup()
                         .addGroup(layout.createSequentialGroup()
                             .addGap(22, 22, 22)
-                            .addComponent(tabbedPane1, GroupLayout.PREFERRED_SIZE, 590, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(devTree, GroupLayout.PREFERRED_SIZE, 590, GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))

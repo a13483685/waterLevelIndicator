@@ -6,25 +6,23 @@ package com.rs.waterLevelIndicator.view;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
 import java.net.URI;
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.event.*;
-import com.intellij.uiDesigner.core.*;
-import com.rs.waterLevelIndicator.net.TCPThreadServer;
+import com.rs.waterLevelIndicator.customView.DevTree;
 import com.rs.waterLevelIndicator.net.TcpServerNonBlockingNIO;
-import com.rs.waterLevelIndicator.utils.ImagePanel;
-import net.miginfocom.swing.*;
+import com.rs.waterLevelIndicator.utils.Constans;
+import com.rs.waterLevelIndicator.utils.FunctionHelper;
 
 /**
  * @author xz
  */
 public class MainFrm extends JFrame implements MouseListener,ActionListener{
+    static JTabbedPane devTree = new DevTree();
     public MainFrm() {
-
-
+          //设置静态变量
+        //有bug 如果文件不存在
+        String lastSelectedDevToFile = FunctionHelper.getLastSelectedDevToFile();
+        Constans.mWhichDevIsSelected = lastSelectedDevToFile;
 //        TCPThreadServer tcpThreadServer = new TCPThreadServer();
 //        new Thread(tcpThreadServer).start();
         new TcpServerNonBlockingNIO();//Tcp开启
@@ -46,7 +44,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
                 e.printStackTrace();
             }
         }else{
-            JOptionPane.showMessageDialog(this, "你真是狠心，坏淫！");
+            JOptionPane.showMessageDialog(this, "byebye");
         }
     }
 

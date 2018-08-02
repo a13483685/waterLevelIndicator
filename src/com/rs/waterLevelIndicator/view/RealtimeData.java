@@ -7,12 +7,17 @@ package com.rs.waterLevelIndicator.view;
 import com.rs.waterLevelIndicator.dao.SenserDataDao;
 import com.rs.waterLevelIndicator.model.SensorData;
 import com.rs.waterLevelIndicator.net.TCPThreadServer;
+import com.rs.waterLevelIndicator.utils.Constans;
+import com.rs.waterLevelIndicator.utils.FunctionHelper;
 
 import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.*;
 import javax.swing.table.*;
+
+import static com.rs.waterLevelIndicator.customView.DevTree.getWhichDevIsSelected;
+import static com.rs.waterLevelIndicator.view.MainFrm.devTree;
 
 /**
  * @author xz
@@ -30,12 +35,24 @@ public class RealtimeData extends JPanel {
     private static final int DEV_STATUS = 9;
     private JScrollPane scrollPane1;
     private JTable tableContents;
+    private boolean isFirstEnter = true;
 
 //定时执行 刷新界面
     private void SetData() {
         //查询数据库最近一条的记录
         SenserDataDao senserDataDao = new SenserDataDao();
-        SensorData sensorData = senserDataDao.selectLastRecord();
+
+        SensorData sensorData = null;
+        if(isFirstEnter)
+        {
+            //首次进来，在文件中读取
+            String lastSelectedDevToFile = FunctionHelper.getLastSelectedDevToFile();
+            sensorData = senserDataDao.selectLastRecord(lastSelectedDevToFile);
+            Constans.mWhichDevIsSelected = lastSelectedDevToFile;
+            isFirstEnter = false;
+        }else {
+            sensorData = senserDataDao.selectLastRecord(Constans.mWhichDevIsSelected);
+        }
         String downLimit = sensorData.getDownLimit();
         String gaokong = sensorData.getGaokong();
         String gpsSignal = sensorData.getGpsSignal();
@@ -48,18 +65,18 @@ public class RealtimeData extends JPanel {
         String waterLevel = sensorData.getWaterLevel();
         String devStatus = sensorData.getDevStatus();
 
-//        System.out.println("SetData is :"+"downLimit is :"+downLimit+
-//                "gaokong is :"+gaokong+
-//                "gpsSignal is :"+gpsSignal+
-//                "upload is :"+upload+
-//                "comStatus is :"+comStatus+
-//                "upLimit is :"+upLimit+
-//                "time is :"+time+
-//                "watt is :"+watt+
-//                "dev_id is :"+dev_id+
-//                "waterLevel is :"+waterLevel+
-//                "devStatus is :"+devStatus
-//        );
+        System.out.println("SetData is :"+"downLimit is :"+downLimit+
+                "gaokong is :"+gaokong+
+                "gpsSignal is :"+gpsSignal+
+                "upload is :"+upload+
+                "comStatus is :"+comStatus+
+                "upLimit is :"+upLimit+
+                "time is :"+time+
+                "watt is :"+watt+
+                "dev_id is :"+dev_id+
+                "waterLevel is :"+waterLevel+
+                "devStatus is :"+devStatus
+        );
         for (int i = 0; i < 10; i++) {
             switch (i) {
                 case KONG_GAO:

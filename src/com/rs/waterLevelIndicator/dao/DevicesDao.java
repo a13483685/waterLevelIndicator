@@ -34,7 +34,7 @@ public class DevicesDao extends BaseDao {
     //数据分页查询
     public List<Device>  getDevList(DbPageMesReq req){
         List<Device> Devices = new ArrayList<>();
-        String sql = "select * from  s_devices limit ?,?";
+        String sql = "select * from  s_devices order by id DESC limit ?,?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
 //            int startIndex = req.getStartIndex()*req.getPageSize();
@@ -74,7 +74,7 @@ public class DevicesDao extends BaseDao {
                 String devName = resultSet.getString("devName");
                 dev.setmAddress(address);
                 dev.setmDeviceName(devName);
-                System.out.println("dev is :"+dev.toString());
+//                System.out.println("dev is :"+dev.toString());
                 devices.add(dev);
             }
         } catch (SQLException e) {

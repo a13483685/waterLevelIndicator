@@ -5,6 +5,7 @@ import com.rs.waterLevelIndicator.services.SensorDataPageQuery;
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
 import com.rs.waterLevelIndicator.model.SensorData;
 import com.rs.waterLevelIndicator.utils.BaseTableModule;
+import com.rs.waterLevelIndicator.utils.Constans;
 
 import javax.swing.*;
 import java.util.List;
@@ -22,7 +23,7 @@ public class HistoryDataBaseTable {
 
     public void refreshTable(DbPageMesReq req){
 //        List<SensorData> sensorDataList = new SenserDataDao().getSensorDataList(req);//拿到的数据
-        SensorDataPageQuery pageQuery = new SensorDataPageQuery();
+        SensorDataPageQuery pageQuery = new SensorDataPageQuery(Constans.mWhichDevIsSelected );
         List<SensorData> sensorDataList = pageQuery.queryMessage(req);
         for(SensorData sd :sensorDataList)
         {
@@ -49,7 +50,10 @@ public class HistoryDataBaseTable {
     //查询所有的数据
     public JScrollPane initTable(DbPageMesReq req) {
         scrollPane2 = new JScrollPane();
-        List<SensorData> sensorDataList = new SenserDataDao().getSensorDataList(req);//拿到的数据
+
+
+
+        List<SensorData> sensorDataList = new SenserDataDao().getSensorDataList(req,Constans.mWhichDevIsSelected );//拿到的数据
 
         for(SensorData sd :sensorDataList)
         {

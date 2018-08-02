@@ -4,6 +4,7 @@
 
 package com.rs.waterLevelIndicator.view;
 
+import com.rs.waterLevelIndicator.Observers.DevDbOberver;
 import com.rs.waterLevelIndicator.customView.ControlBar;
 import com.rs.waterLevelIndicator.customView.DevControlBar;
 import com.rs.waterLevelIndicator.customView.DevTable;
@@ -20,13 +21,14 @@ import javax.swing.GroupLayout;
 import javax.swing.border.*;
 
 /**
- * @author xziea
+ * @author xz
  */
 public class AddDeviceFrm extends JFrame implements ActionListener {
     private ObserverManage observerManerge = null;
     public AddDeviceFrm(DevControlBar mControlBar) {
         observerManerge = new ObserverManage();
         observerManerge.atach(mControlBar);
+        observerManerge.atach((DevDbOberver) MainFrm.devTree);
         initComponents();
     }
 //

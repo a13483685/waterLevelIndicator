@@ -3,7 +3,7 @@ package com.rs.waterLevelIndicator.model;
 public class DbPageMesReq {
     private String memberId;//会员id
     private int currentPage =1;//当前页
-    private int pageSize = 10;//一页多少条记录
+    private int pageSize = 30;//一页多少条记录
     private int startIndex = 1;//从哪一行开始
     private int endIndex;//从哪一行结束
 
@@ -28,6 +28,10 @@ public class DbPageMesReq {
         this.totalRecord = totalRecord;
     }
 
+
+    public int getTotalRecord() {
+        return totalRecord;
+    }
 
     public int getCurrentPage() {
         if(currentPage <= 0) {

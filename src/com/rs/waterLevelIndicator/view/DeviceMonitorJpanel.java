@@ -11,6 +11,9 @@ import javax.swing.GroupLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static com.rs.waterLevelIndicator.view.MainFrm.devTree;
+
+
 /**
  * @author xz
  */
@@ -19,12 +22,13 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener{//иІВе
 //    JTable mRealSensorData;//
 //    JScrollPane scrollPane2;
     JTabbedPane tabbedPane3;
+
     public DeviceMonitorJpanel() {
         initView();
     }
     private void initView() {
 
-        JTabbedPane tabbedPane2 = new DevTree();
+
         JScrollPane scrollPane1;
 
 
@@ -161,7 +165,7 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener{//иІВе
                 layout.createParallelGroup()
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
-                                .addComponent(tabbedPane2, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(devTree, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE)
                                 .addGap(29, 29, 29)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                         .addComponent(tabbedPane3)
@@ -173,7 +177,7 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener{//иІВе
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
                                 .addGroup(layout.createParallelGroup()
-                                        .addComponent(tabbedPane2)
+                                        .addComponent(devTree)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(tabbedPane3, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

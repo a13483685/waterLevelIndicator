@@ -8,11 +8,8 @@ package com.rs.waterLevelIndicator.utils;
  * 
  * */
 
-import com.rs.waterLevelIndicator.model.SensorData;
 
 import javax.swing.table.AbstractTableModel;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
 
 public class BaseTableModule extends AbstractTableModel {
