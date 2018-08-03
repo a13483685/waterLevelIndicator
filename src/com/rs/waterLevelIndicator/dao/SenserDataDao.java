@@ -17,16 +17,35 @@ import java.util.Observer;
 public class SenserDataDao extends BaseDao  {
     private String TAG ="SenserDataDao";
 
-//    private T t;
+
+    //    private T t;
 //    public SenserDataDao(T t) {
 //        this.t = t;
 //    }
     public SensorData selectLastRecord(String dev){
-        String sql = "select * from s_sensordata where id = "+ dev +" order by id desc LIMIT 1";
+        String sql = "select * from s_sensordata where dev_id = "+ dev +" order by id desc LIMIT 1";
 //        String sql = "select * from s_sensordata order by id desc LIMIT 1";
         System.out.println("sql is :"+sql);
         SensorData data = getData(sql);
         return data;
+    }
+
+//防止没有选中的设备在数据库中没有数据，导致线程退出
+    public List<Integer> getAllDevId(){
+        String sql = "SELECT distinct dev_id from s_sensordata";
+        List<Integer> ids = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet resultSet = ps.executeQuery();
+            ids = new ArrayList<>();
+            while (resultSet.next()){
+                int getDevId = resultSet.getInt("dev_id");
+                ids.add(getDevId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ids;
     }
 
     public SensorData selectLastRecord(){
@@ -182,20 +201,21 @@ public class SenserDataDao extends BaseDao  {
 
 
         System.out.println("sensorData -----------------"+sensorData.toString());
-        String sql = "insert into s_sensorData values(null,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into s_sensorData values(null,?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement preparedStatement = con.prepareStatement(sql);
-            preparedStatement.setString(1,konggao);
-            preparedStatement.setString(2,Upload);
-            preparedStatement.setString(3,UpLimit);
-            preparedStatement.setString(4,DownLimit);
-            preparedStatement.setString(5,GpsSignal);
-            preparedStatement.setString(6,comStatus);
-            preparedStatement.setString(7,Watt);
-            preparedStatement.setString(8,time);
-            preparedStatement.setString(9,waterLevel);
-            preparedStatement.setString(10,devStatus);
+            preparedStatement.setString(1,dev_id);
+            preparedStatement.setString(2,konggao);
+            preparedStatement.setString(3,Upload);
+            preparedStatement.setString(4,UpLimit);
+            preparedStatement.setString(5,DownLimit);
+            preparedStatement.setString(6,GpsSignal);
+            preparedStatement.setString(7,comStatus);
+            preparedStatement.setString(8,Watt);
+            preparedStatement.setString(9,time);
+            preparedStatement.setString(10,waterLevel);
+            preparedStatement.setString(11,devStatus);
             if(preparedStatement.executeUpdate() >0){//更新界面
 //                //插入数据成功
 //                DatabaseChangeOberver databaseChangeOberver = new DatabaseChangeOberver();

@@ -10,7 +10,7 @@ public class DevControlBar extends ControlBar implements DevDbOberver {
     int messageNum = 0;
     DevTable devTable = null;
     public DevControlBar(DevTable jTable, DbPageMesReq req){
-        super(req);
+//        super(req);
         this.devTable = jTable;
     }
     @Override

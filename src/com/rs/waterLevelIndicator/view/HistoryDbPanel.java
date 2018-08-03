@@ -33,6 +33,7 @@ public class HistoryDbPanel extends JPanel {
     private JLabel label1;
     private JLabel label2;
     private JButton mQueryButton;
+    private JButton mRefreshButton;
     private JPanel panel1;
     private JLabel label3;
     private JLabel label4;
@@ -108,6 +109,8 @@ public class HistoryDbPanel extends JPanel {
         label2 = new JLabel();
         mQueryButton = new JButton();
         mQueryButton.addMouseListener(myMouseAdapter);
+        mRefreshButton = new JButton();
+        mRefreshButton.addMouseListener(myMouseAdapter);
         panel1 = new JPanel();
         label3 = new JLabel();
         label4 = new JLabel();
@@ -196,7 +199,7 @@ public class HistoryDbPanel extends JPanel {
 
             //---- mQueryButton ----
             mQueryButton.setText("\u67e5\u8be2");
-
+            mRefreshButton.setText("刷新");
             //======== panel1 ========
             {
 
@@ -310,12 +313,15 @@ public class HistoryDbPanel extends JPanel {
                                 .addComponent(label1)
                                 .addGap(18, 18, 18)
                                 .addComponent(mStartTimeButton, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
+//                                .addGap(32, 32, 32)
+                                .addGap(18,18,18)
                                 .addComponent(label2, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(mEndTimeButton, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)
+//                                .addGap(52, 52, 52)
+                                .addGap(18, 18, 18)
                                 .addComponent(mQueryButton))
+                                .addGap(18,18,18)
                             .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(8, Short.MAX_VALUE))
             );

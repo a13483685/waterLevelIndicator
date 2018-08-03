@@ -107,11 +107,26 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        boolean DevExist = false;
         if(e.getSource() == mDataSelectItem){
+
+            SenserDataDao senserDataDao = new SenserDataDao();
+            List<Integer> allDevId = senserDataDao.getAllDevId();
+            for (Integer devId:allDevId) {
+                  if(String.valueOf(devId).equals(selNode.toString())) {
+                      Constans.mWhichDevIsSelected = selNode.toString();
+                      FunctionHelper.SaveSelectedDevToFile(Constans.mWhichDevIsSelected);
+                      DevExist = true;
+                  }
+            }
+            if(!DevExist){
+                JOptionPane.showMessageDialog(this,"无设备数据");
+            }
+
 //            SenserDataDao senserDataDao = new SenserDataDao();
 //            SensorData sensorData = senserDataDao.selectLastRecord(selNode.toString());
-            Constans.mWhichDevIsSelected = selNode.toString();
-            FunctionHelper.SaveSelectedDevToFile(Constans.mWhichDevIsSelected);
+
+//            FunctionHelper.SaveSelectedDevToFile(Constans.mWhichDevIsSelected);
             //刷新历史数据表格
         }
     }

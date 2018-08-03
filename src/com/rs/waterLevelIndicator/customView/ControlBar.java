@@ -32,11 +32,9 @@ public abstract class ControlBar extends JPanel {
     private JButton mGo;
     ControlBarMouseAdapter controlBarMouseAdapter;
     DbPageMesReq req = null;
+    DevicePageQuery devicePageQuery = null;
     //需要req来控制table，所以需要传入这两个参数
     public void upDate(){
-        req = new DbPageMesReq();
-        req.setPageSize(10);
-        DevicePageQuery devicePageQuery = new DevicePageQuery();
 //        devicePageQuery.QueryClose();
         int messageNum = devicePageQuery.getMessageNum();
         req.setTotalRecord(messageNum);//这个值应该会变
@@ -44,7 +42,10 @@ public abstract class ControlBar extends JPanel {
         controlBarMouseAdapter = new ControlBarMouseAdapter(this.req);
     }
 //    DbPageMesReq这个值由外面传进来，不合理
-    public ControlBar(DbPageMesReq req) {
+    public ControlBar() {
+        req = new DbPageMesReq();
+        req.setPageSize(10);
+        devicePageQuery = new DevicePageQuery();
         upDate();
 //        controlBarMouseAdapter = new ControlBarMouseAdapter(this.req);
 //        this.req = req;
