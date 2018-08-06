@@ -44,10 +44,13 @@ import static com.rs.waterLevelIndicator.net.TcpServerNonBlockingNIO.server;
  * 
  */
 public class TcpServerNonBlockingNIO {
-
-
+	private static SocketChannel sChannel;
+	private static SelectionKey sk;
 	//服务端
 //	@Test
+
+
+
 	public static void server() throws IOException{
 		//1. 获取通道
 		ServerSocketChannel ssChannel = ServerSocketChannel.open();
@@ -73,18 +76,19 @@ public class TcpServerNonBlockingNIO {
 
 			while(it.hasNext()){
 				//8. 获取准备“就绪”的是事件
-				SelectionKey sk = it.next();
+				sk = it.next();
 
 				//9. 判断具体是什么事件准备就绪
 				if(sk.isAcceptable()){
 //					10. 若“接收就绪”，获取客户端连接
-					SocketChannel sChannel = ssChannel.accept();
+					sChannel = ssChannel.accept();
 
 					//11. 切换非阻塞模式
 					sChannel.configureBlocking(false);
 
 					//12. 将该通道注册到选择器上
 					sChannel.register(selector, SelectionKey.OP_READ);
+
 				}
 				else if(sk.isReadable()){
 					ReadThread run1 = new ReadThread(sk);
@@ -96,26 +100,26 @@ public class TcpServerNonBlockingNIO {
 			}
 		}
 	}
-
+	public static void writeMsg(String msg) throws IOException {
+//        SocketChannel channel = (SocketChannel) key.channel();
+//        Object obj = key.attachment();
+//        key.attach("");
+		  sChannel.write(ByteBuffer.wrap(msg.getBytes()));
+//        if (obj.toString().equals("close")) {
+//            key.cancel();
+//            channel.socket().close();
+//            channel.close();
+//            return;
+//        }else {
+//            channel.write(ByteBuffer.wrap(obj.toString().getBytes()));
+//        }
+		sk.interestOps(SelectionKey.OP_READ);
+	}
 
 	public TcpServerNonBlockingNIO(){
 
 		MyThread thread = new MyThread();
 		thread.start();
-//		new Thread(){
-//			@Override
-//			public void run() {
-//				super.run();
-//				while (true){
-//					try {
-//						sleep(2000);
-//					} catch (InterruptedException e) {
-//						e.printStackTrace();
-//					}
-//					System.out.println("test:"+new Date().toString());
-//				}
-//			}
-//		}.start();
 	}
 
 	/**
@@ -176,7 +180,6 @@ class ReadThread implements Runnable{
 				}
 				buf.clear();
 			}
-
 		}catch (IOException e){
 			e.printStackTrace();
 		}

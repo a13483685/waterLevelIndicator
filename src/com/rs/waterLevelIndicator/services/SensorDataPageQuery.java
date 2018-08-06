@@ -20,14 +20,22 @@ public class SensorDataPageQuery implements MessageMapper<SensorData> {
         senserDataDao = new SenserDataDao();
         this.dev = dev;
     }
+
+    public SensorDataPageQuery(){
+        senserDataDao = new SenserDataDao();
+    }
     @Override
     public List<SensorData> queryMessage(DbPageMesReq msg) {
-        return  senserDataDao.getSensorDataList(msg,this.dev);
+        if(this.dev==null){
+            return senserDataDao.getSensorDataList(msg);
+        }else {
+            return  senserDataDao.getSensorDataList(msg,this.dev);
+        }
     }
 
     @Override
     public int getMessageNum() {
-        return senserDataDao.getMessageNum();
+        return senserDataDao.getMessageNum(this.dev);
     }
 
     @Override

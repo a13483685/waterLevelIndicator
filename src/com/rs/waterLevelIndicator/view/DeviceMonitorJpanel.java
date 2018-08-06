@@ -4,12 +4,21 @@
 
 package com.rs.waterLevelIndicator.view;
 
-import com.rs.waterLevelIndicator.customView.DevTree;
+import com.rs.waterLevelIndicator.Observers.ObserverData;
+import com.rs.waterLevelIndicator.Observers.ObserverDataOne;
+import com.rs.waterLevelIndicator.model.SetParMsg;
+import com.rs.waterLevelIndicator.net.netty.client.ClientService;
+import com.rs.waterLevelIndicator.utils.Constans;
+import com.rs.waterLevelIndicator.utils.StringUtil;
 
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.rs.waterLevelIndicator.view.MainFrm.devTree;
 
@@ -17,32 +26,47 @@ import static com.rs.waterLevelIndicator.view.MainFrm.devTree;
 /**
  * @author xz
  */
-public class DeviceMonitorJpanel extends JPanel implements ActionListener{//观察者来监听数据库插入的数据，用来刷新表格界面
+public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemListener {//观察者来监听数据库插入的数据，用来刷新表格界面
+    private String paraMsg = "";
+    private String Val = "";
     JButton mReadPara = null;
 //    JTable mRealSensorData;//
 //    JScrollPane scrollPane2;
     JTabbedPane tabbedPane3;
+    JButton mSetPara;
+    JComboBox mParacomboBox;
+    private JTextField mParaValTextField;
+    private SetParMsg setParMsg;
+    private ClientService service;
 
+    //    ChatServer server = null;
     public DeviceMonitorJpanel() {
+//        this.server = server;
+
+        initServer();
         initView();
     }
+
+    private void initServer() {
+//        Client.main();
+        service = ClientService.getInstance();
+    }
+
     private void initView() {
 
 
         JScrollPane scrollPane1;
-
-
 //        JTable mRealSensorData;
         JTabbedPane tabbedPane5;
         JPanel panel1;
         JLabel label1;
-        JComboBox mParacomboBox;
+
         JCheckBox mPrintHistory;
         JTextField mLogContent;
         JLabel label2;
-        JTextField mParaValTextField;
 
-        JButton mSetPara;
+
+
         JPanel panel2;
         scrollPane1 = new JScrollPane();
         tabbedPane3 = new JTabbedPane();
@@ -53,6 +77,10 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener{//观�
         panel1 = new JPanel();
         label1 = new JLabel();
         mParacomboBox = new JComboBox();
+        mParacomboBox.addItem(Constans.SETTING_HIGH);
+        mParacomboBox.addItem(Constans.WATER_UP_WARRNING);
+        mParacomboBox.addItem(Constans.WATER_DOWN_WARRNING);
+        mParacomboBox.addItemListener(this);
         mPrintHistory = new JCheckBox();
         mLogContent = new JTextField();
         label2 = new JLabel();
@@ -60,7 +88,9 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener{//观�
         mReadPara = new JButton();
         mReadPara.addActionListener(this);
         mSetPara = new JButton();
+        mSetPara.addActionListener(this);
         panel2 = new JPanel();
+        setParMsg = new SetParMsg();
         //表格初始化
 
 
@@ -218,11 +248,57 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener{//观�
         tabbedPane3.addTab("实时数据", realtimeData);//改变内容就行
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == mReadPara) {
 //            List<SensorData> sensorDataList = new SenserDataDao().getSensorDataList(reg);
 //            new BaseTableModule(params, sensorDataList);
+        }
+        if(e.getSource() == mSetPara){
+            Val = mParaValTextField.getText().trim().toString();
+
+            setParMsg.setHeadVal(Constans.HEAD_SERVER);
+            if(!StringUtil.isEmpty(Val)){
+                setParMsg.setmContentVal(Val);
+                service.sendMsg(setParMsg.toString());
+//                JOptionPane.showConfirmDialog(this,setParMsg.toString());
+//                Client.sendMsg(setParMsg);
+            }
+
+//            try {
+//                TcpServerNonBlockingNIO.writeMsg("demo");
+//            } catch (IOException e1) {
+//                e1.printStackTrace();
+//            }
+//            try {
+//                this.server.writeMsg("this is a demo");
+//            } catch (IOException e1) {
+//                e1.printStackTrace();
+//            }
+        }
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+
+        if(e.getStateChange() == ItemEvent.SELECTED){
+            String selectedItem = (String)mParacomboBox.getSelectedItem();
+            if(selectedItem.equals(Constans.SETTING_HIGH)){
+                setParMsg.setCmdVal(Constans.CMD_HIGH);
+//                paraMsg = Constans.SET_HIGH_MSG ;
+            }
+            if(selectedItem.equals(Constans.WATER_DOWN_WARRNING)){
+                setParMsg.setCmdVal(Constans.CMD_DOWN_LIMIT);
+//                paraMsg = Constans.SET_HIGHLIMIT_MSG ;
+            }
+            if(selectedItem.equals(Constans.WATER_UP_WARRNING)){
+                setParMsg.setCmdVal(Constans.CMD_HIGH_LIMIT);
+//                paraMsg = Constans.SET_DOWNLIMIT_MSG ;
+            }
+
+
+//            JOptionPane.showMessageDialog(this,"selectedItem is :"+selectedItem);
         }
     }
 

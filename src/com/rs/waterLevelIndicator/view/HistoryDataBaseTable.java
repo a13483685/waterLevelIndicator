@@ -50,10 +50,8 @@ public class HistoryDataBaseTable {
     //查询所有的数据
     public JScrollPane initTable(DbPageMesReq req) {
         scrollPane2 = new JScrollPane();
-
-
-
-        List<SensorData> sensorDataList = new SenserDataDao().getSensorDataList(req,Constans.mWhichDevIsSelected );//拿到的数据
+//        List<SensorData> sensorDataList = new SenserDataDao().getSensorDataList(req,Constans.mWhichDevIsSelected );//拿到的数据
+        List<SensorData> sensorDataList = new SenserDataDao().getSensorDataList(req);//拿到的数据
 
         for(SensorData sd :sensorDataList)
         {
@@ -72,8 +70,6 @@ public class HistoryDataBaseTable {
             System.out.println("mItems is :" + mItems.toString());
             sensorDatas.add(mItems);
         }
-
-
         baseTableModule = new BaseTableModule(params, sensorDatas);
         sensorDatas.clear();
         mRealSensorData = new JTable(baseTableModule);

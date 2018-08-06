@@ -4,13 +4,13 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :p:24:p, comp tabbedPane1:::p:313:p, space :p:35:p, comp panel2:::p::p, space :::p}}"
+			"$horizontalGroup": "par l {seq {space :p:24:p, comp tabbedPane1:::p:313:p, space s:::p, comp panel2:::p::p, space :::p}}"
 			"$verticalGroup": "par l {seq {par l {seq {space :p:22:p, comp tabbedPane1:::p:590:p}, seq l {space :::p, comp panel2:::p::p}}, space ::21:x}}"
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :p:26:p, par l {comp mTables:::p:620:p, seq {comp label1:::p::p, space s:::p, comp mStartTimeButton:::p:132:p, space :p:32:p, comp label2:::p:70:p, space s:::p, comp mEndTimeButton:::p:129:p, space :p:52:p, comp mQueryButton:::p::p}, comp panel1::l:p::p}, space ::8:x}}"
-				"$verticalGroup": "par l {seq l {space :p:12:p, par b {comp mQueryButton::b:p::p, comp label1::b:p:24:p, comp mStartTimeButton::b:p::p, comp mEndTimeButton::b:p::p, comp label2::b:p::p}, space s:::p, comp mTables:::p:537:p, space :::p, comp panel1:::p:29:p, space ::26:x}}"
+				"$horizontalGroup": "par l {seq l {space :p:26:p, par l {comp mTables:::p:620:p, seq {comp label1:::p::p, space :::p, comp mStartTimeButton:::p:132:p, space s:::p, comp label2:::p:84:p, space :::p, comp mEndTimeButton:::p:129:p, space u:::p, comp mQueryButton:::p:78:p, space u:::p, comp button1:::p:78:p}, comp panel1::l:p::p}, space ::10:x}}"
+				"$verticalGroup": "par l {seq l {space :p:12:p, par b {comp mStartTimeButton::b:p::p, comp mEndTimeButton::b:p::p, comp mQueryButton::b:p::p, comp button1::b:p::p, comp label1::b:p:24:p, comp label2::b:p::p}, space s:::p, comp mTables:::p:537:p, space :::p, comp panel1:::p:29:p, space ::26:x}}"
 			} ) {
 				name: "panel2"
 				add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
@@ -51,17 +51,20 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
 					"text": "起始时间："
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\开始时间.png" )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
 					"text": "结束时间："
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\结束时间.png" )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "mQueryButton"
 					"text": "查询"
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\查询.png" )
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq l {space :p:47:p, comp label3:::p::p, space :p:14:p, comp mNum:::p::p, space s:::p, comp label5:::p:15:p, space :p:2:p, comp label4:::p::p, space u:::p, comp mTotalPage:::p::p, space :::p, comp label6:::p::p, space s:::p, comp mFirstPage:::p::p, space :::p, comp mPrePage:::p::p, space :::p, comp mNextPage:::p::p, space :::p, comp mFinalPage:::p::p, space :::p, comp label11:::p::p, space :::p, comp mCurrentPage:::p:57:p, space :::p, comp label12:::p:18:p, space u:::p, comp go::::61:x, space :::p}}"
+					"$horizontalGroup": "par l {seq l {space :p:47:p, comp label3:::p::p, space :p:14:p, comp mNum:::p::p, space s:::p, comp label5:::p:15:p, space :p:2:p, comp label4:::p::p, space u:::p, comp mTotalPage:::p::p, space :::p, comp label6:::p::p, space s:::p, comp mFirstPage:::p::p, space :::p, comp mPrePage:::p::p, space :::p, comp mNextPage:::p::p, space :::p, comp mFinalPage:::p::p, space :::p, comp label11:::p::p, space :::p, comp mCurrentPage:::p:57:p, space :::p, comp label12:::p:18:p, space :::p, comp go::::67:x, space :::p}}"
 					"$verticalGroup": "par l {par b {comp mTotalPage::b:p::p, comp label6::b:p::p, comp mFirstPage::b:p::p, comp mPrePage::b:p::p, comp mNextPage::b:p::p, comp mFinalPage::b:p::p, comp label11::b:p::p, comp label12::b:p::p, comp mCurrentPage::b:::x, comp label4::b:p::p, comp label5::b:p::p, comp label3::b:p::p, comp mNum::b:p::p, comp go::b:p::p}}"
 				} ) {
 					name: "panel1"
@@ -112,6 +115,7 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "go"
 						"text": "GO"
+						"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\开始.png" )
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label5"
@@ -121,6 +125,11 @@ new FormModel {
 						name: "mNum"
 						"text": "1"
 					} )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button1"
+					"text": "刷新"
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\刷新.png" )
 				} )
 			} )
 			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {

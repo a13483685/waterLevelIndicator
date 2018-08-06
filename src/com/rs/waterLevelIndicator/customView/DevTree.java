@@ -71,7 +71,7 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
                         selNode = (DefaultMutableTreeNode)selTree.getLastPathComponent();
 
                         System.out.println("selNode is :"+ selNode.toString());//叶子节点的名称 也就是设备测点 拿到的就是设备信息
-                        if(selNode.isLeaf()){
+                        if(selNode.isLeaf()||selNode.isRoot()){
                             popMenu.show(mAllDevTree,me.getX(), me.getY());
                         }
                     }
@@ -118,6 +118,11 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
                       FunctionHelper.SaveSelectedDevToFile(Constans.mWhichDevIsSelected);
                       DevExist = true;
                   }
+            }
+            if(selNode.isRoot()){
+                Constans.mWhichDevIsSelected = "all";
+                FunctionHelper.SaveSelectedDevToFile(Constans.mWhichDevIsSelected);
+                DevExist = true;
             }
             if(!DevExist){
                 JOptionPane.showMessageDialog(this,"无设备数据");

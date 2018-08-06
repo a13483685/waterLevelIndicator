@@ -6,6 +6,7 @@ package com.rs.waterLevelIndicator.view;
 
 import com.rs.waterLevelIndicator.customView.DateChooserJButton;
 import com.rs.waterLevelIndicator.customView.DevTree;
+import com.rs.waterLevelIndicator.dao.SenserDataDao;
 import com.rs.waterLevelIndicator.model.SensorData;
 import com.rs.waterLevelIndicator.services.SensorDataPageQuery;
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
@@ -84,7 +85,6 @@ public class HistoryDbPanel extends JPanel {
             pageQuery = new SensorDataPageQuery(Constans.mWhichDevIsSelected );
         }
 
-
         mTotalRecord = pageQuery.getMessageNum();
         mPage = new DbPageMesReq();
         mPage.setTotalRecord(mTotalRecord);
@@ -116,8 +116,6 @@ public class HistoryDbPanel extends JPanel {
         label4 = new JLabel();
         mTotalPage = new JLabel();
         label6 = new JLabel();
-        label5 = new JLabel();
-        mNum= new JLabel();
         mFirstPage = new JLabel();
         mPrePage = new JLabel();
         mNextPage = new JLabel();
@@ -126,7 +124,9 @@ public class HistoryDbPanel extends JPanel {
         label12 = new JLabel();
         mCurrentPage = new JTextField();
         go = new JButton();
-//        tabbedPane1 = new DevTree();
+        label5 = new JLabel();
+        mNum = new JLabel();
+        tabbedPane1 = new JTabbedPane();
 
         //======== this ========
 
@@ -147,7 +147,7 @@ public class HistoryDbPanel extends JPanel {
 //                    );
 //                    mHistoryTableLayout.setVerticalGroup(
 //                        mHistoryTableLayout.createParallelGroup()
-//                            .addGap(0, 547, Short.MAX_VALUE)
+//                            .addGap(0, 510, Short.MAX_VALUE)
 //                    );
                 }
                 mTables.addTab("\u5386\u53f2\u8bb0\u5f55", mHistoryTable);
@@ -193,13 +193,16 @@ public class HistoryDbPanel extends JPanel {
 
             //---- label1 ----
             label1.setText("\u8d77\u59cb\u65f6\u95f4\uff1a");
+            label1.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u5f00\u59cb\u65f6\u95f4.png"));
 
             //---- label2 ----
             label2.setText("\u7ed3\u675f\u65f6\u95f4\uff1a");
+            label2.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u7ed3\u675f\u65f6\u95f4.png"));
 
             //---- mQueryButton ----
             mQueryButton.setText("\u67e5\u8be2");
-            mRefreshButton.setText("刷新");
+            mQueryButton.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u67e5\u8be2.png"));
+
             //======== panel1 ========
             {
 
@@ -240,6 +243,8 @@ public class HistoryDbPanel extends JPanel {
                 //---- go ----
                 go.setText("GO");
                 go.addMouseListener(myMouseAdapter);
+                go.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u5f00\u59cb.png"));
+
                 //---- label5 ----
                 label5.setText("\u9875");
 
@@ -277,8 +282,8 @@ public class HistoryDbPanel extends JPanel {
                             .addComponent(mCurrentPage, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(label12, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(go, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(go, GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
                             .addContainerGap())
                 );
                 panel1Layout.setVerticalGroup(
@@ -301,6 +306,10 @@ public class HistoryDbPanel extends JPanel {
                 );
             }
 
+            //---- mRefreshButton ----
+            mRefreshButton.setText("\u5237\u65b0");
+            mRefreshButton.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u5237\u65b0.png"));
+
             GroupLayout panel2Layout = new GroupLayout(panel2);
             panel2.setLayout(panel2Layout);
             panel2Layout.setHorizontalGroup(
@@ -311,29 +320,29 @@ public class HistoryDbPanel extends JPanel {
                             .addComponent(mTables, GroupLayout.PREFERRED_SIZE, 620, GroupLayout.PREFERRED_SIZE)
                             .addGroup(panel2Layout.createSequentialGroup()
                                 .addComponent(label1)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(mStartTimeButton, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)
-//                                .addGap(32, 32, 32)
-                                .addGap(18,18,18)
-                                .addComponent(label2, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
+                                .addComponent(label2, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(mEndTimeButton, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-//                                .addGap(52, 52, 52)
-                                .addGap(18, 18, 18)
-                                .addComponent(mQueryButton))
-                                .addGap(18,18,18)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(mQueryButton, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(mRefreshButton, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
                             .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(8, Short.MAX_VALUE))
+                        .addContainerGap(10, Short.MAX_VALUE))
             );
             panel2Layout.setVerticalGroup(
                 panel2Layout.createParallelGroup()
                     .addGroup(panel2Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(mQueryButton)
-                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
                             .addComponent(mStartTimeButton)
                             .addComponent(mEndTimeButton)
+                            .addComponent(mQueryButton)
+                            .addComponent(mRefreshButton)
+                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
                             .addComponent(label2))
                         .addGap(18, 18, 18)
                         .addComponent(mTables, GroupLayout.PREFERRED_SIZE, 537, GroupLayout.PREFERRED_SIZE)
@@ -350,7 +359,7 @@ public class HistoryDbPanel extends JPanel {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(24, 24, 24)
                     .addComponent(devTree, GroupLayout.PREFERRED_SIZE, 313, GroupLayout.PREFERRED_SIZE)
-                    .addGap(35, 35, 35)
+                    .addGap(18, 18, 18)
                     .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addContainerGap())
         );
@@ -368,9 +377,7 @@ public class HistoryDbPanel extends JPanel {
         );
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-
+    private JTabbedPane tabbedPane1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     class MyMouseAdapter extends MouseAdapter{
@@ -386,7 +393,7 @@ public class HistoryDbPanel extends JPanel {
 
             super.mouseClicked(e);
             int currentPage = this.req.getCurrentPage();
-            int mTotalPage = this.req.getTotalPage();
+            int mTotalPageNum = this.req.getTotalPage();
             if (e.getSource()== mPrePage){
 
                 currentPage= currentPage-1;
@@ -403,7 +410,7 @@ public class HistoryDbPanel extends JPanel {
             }
             if (e.getSource() == mFinalPage){
                 System.out.println("mFinalPage pressed");
-                currentPage = mTotalPage;
+                currentPage = mTotalPageNum;
             }
             if (e.getSource() == mFirstPage){
 //                req.setCurrentPage(1);
@@ -420,9 +427,16 @@ public class HistoryDbPanel extends JPanel {
             if(e.getSource()== mQueryButton){
                 System.out.println("mQueryButton pressed");
             }
+            if(e.getSource()== mRefreshButton){
+                System.out.println("mRefreshButton pressed");
+                currentPage = 1;
+                SenserDataDao senserDataDao = new SenserDataDao();
+                int totalNum = senserDataDao.getMessageNum(Constans.mWhichDevIsSelected);
+                req.setTotalRecord(totalNum);
+                mTotalPage.setText(String.valueOf(req.getTotalPage()));
+            }
             this.req.setCurrentPage(currentPage);
             this.req.setStartIndexEndIndex();
-
             mNum.setText(String.valueOf(this.req.getCurrentPage()));
             System.out.println("start index is "+this.req.getStartIndex() +"end index is :" + this.req.getEndIndex());
             historyDataBaseTable.refreshTable(this.req);

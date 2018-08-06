@@ -9,7 +9,7 @@ import java.awt.event.*;
 import java.net.URI;
 import javax.swing.*;
 import com.rs.waterLevelIndicator.customView.DevTree;
-import com.rs.waterLevelIndicator.net.TcpServerNonBlockingNIO;
+import com.rs.waterLevelIndicator.net.netty.Server.ChatServer;
 import com.rs.waterLevelIndicator.utils.Constans;
 import com.rs.waterLevelIndicator.utils.FunctionHelper;
 
@@ -18,6 +18,9 @@ import com.rs.waterLevelIndicator.utils.FunctionHelper;
  */
 public class MainFrm extends JFrame implements MouseListener,ActionListener{
     static JTabbedPane devTree = new DevTree();
+//    private final TcpServerNonBlockingNIO tcpServerNonBlockingNIO;
+    //    private final ChatServer server;
+
     public MainFrm() {
           //设置静态变量
         //有bug 如果文件不存在
@@ -25,7 +28,24 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
         Constans.mWhichDevIsSelected = lastSelectedDevToFile;
 //        TCPThreadServer tcpThreadServer = new TCPThreadServer();
 //        new Thread(tcpThreadServer).start();
-        new TcpServerNonBlockingNIO();//Tcp开启
+
+        //Tcp开启
+//        tcpServerNonBlockingNIO = new TcpServerNonBlockingNIO();//接受没问题
+
+//        new Thread(){
+//            @Override
+//            public void run() {
+//                try {
+//                    Server.main();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                super.run();
+//            }
+//        }.start();
+        ChatServer server = new ChatServer(6666);
+        new Thread(server).start();
+
         initComponents();
     }
 
@@ -240,7 +260,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
                     .addComponent(mContentPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap())
         );
-        setSize(1000, 500);
+        setSize(1100, 750);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
@@ -295,6 +315,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
 
     //
     private void devicesMonitor() {
+//        mContentPanel.add(new DeviceMonitorJpanel(server));
         mContentPanel.add(new DeviceMonitorJpanel());
     }
 
@@ -351,7 +372,6 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
 
     private void deviceManege() {
         DevManege devManege = new DevManege();
-        devManege.setVisible(true);
     }
 
     //历史数据界面

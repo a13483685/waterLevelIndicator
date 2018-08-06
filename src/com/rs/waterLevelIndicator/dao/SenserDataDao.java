@@ -3,8 +3,10 @@ package com.rs.waterLevelIndicator.dao;
 import com.rs.waterLevelIndicator.interfaces.MessageMapper;
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
 import com.rs.waterLevelIndicator.model.SensorData;
+import com.rs.waterLevelIndicator.utils.Constans;
 import com.rs.waterLevelIndicator.utils.StringUtil;
 
+import javax.swing.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +25,13 @@ public class SenserDataDao extends BaseDao  {
 //        this.t = t;
 //    }
     public SensorData selectLastRecord(String dev){
-        String sql = "select * from s_sensordata where dev_id = "+ dev +" order by id desc LIMIT 1";
+        String sql = "";
+        if(dev.equals("all")){
+//            JOptionPane.showInputDialog("请重新输入");
+            sql = "select * from s_sensordata where dev_id = "+Constans.DEFAULT_SELECTED_DEV +" order by id desc LIMIT 1";
+        }else {
+            sql = "select * from s_sensordata where dev_id = "+ dev +" order by id desc LIMIT 1";
+        }
 //        String sql = "select * from s_sensordata order by id desc LIMIT 1";
         System.out.println("sql is :"+sql);
         SensorData data = getData(sql);
@@ -99,11 +107,16 @@ public class SenserDataDao extends BaseDao  {
         }
         return sd;
     }
+
     //数据库分页查询
-    public List<SensorData> getSensorDataList(DbPageMesReq req,String dev){
+    public List<SensorData> getSensorDataList(DbPageMesReq req){
         List<SensorData> sensorDatas = new ArrayList<SensorData>();
-        String sql = "select * from  s_sensorData where dev_id = "+dev+" limit ?,? ";
-//        String sql = "select * from  s_sensorData limit ?,? ";
+        String sql = "select * from  s_sensorData limit ?,? ";
+        sensorDatas = getSenseData(req, sensorDatas, sql);
+        return sensorDatas;
+    }
+
+    private List<SensorData> getSenseData(DbPageMesReq req, List<SensorData> sensorDatas, String sql) {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
 //            int startIndex = req.getStartIndex()*req.getPageSize();
@@ -155,6 +168,29 @@ public class SenserDataDao extends BaseDao  {
         }
         return sensorDatas;
     }
+
+
+    //数据库分页查询
+    public List<SensorData> getSensorDataList(DbPageMesReq req,String dev){
+        List<SensorData> sensorDatas = new ArrayList<SensorData>();
+        String sql = "";
+        if(dev.equals("all")){
+            sql = "select * from  s_sensorData limit ?,? ";
+        }else {
+            sql = "select * from  s_sensorData where dev_id = "+dev+" limit ?,? ";
+        }
+        sensorDatas = getSenseData(req, sensorDatas, sql);
+        return sensorDatas;
+    }
+
+//    public List<SensorData> getSensorDataList(DbPageMesReq req){
+//        List<SensorData> sensorDatas = new ArrayList<SensorData>();
+//        String sql = "select * from  s_sensorData limit ?,? ";
+//        getSenseData(req, sensorDatas, sql);
+//        return sensorDatas;
+//    }
+
+
 //往数据库插入数据
     public void insertIntoDb(String str){
 
@@ -231,8 +267,13 @@ public class SenserDataDao extends BaseDao  {
 
 
 
-    public int getMessageNum() {
-        String sql = "select count(*) as total from s_sensordata";
+    public int getMessageNum(String dev) {
+        String sql = "";
+        if(dev.equals("all")){
+            sql = "select count(*) as total from s_sensordata";
+        }else {
+            sql = "select count(*) as total from s_sensordata where dev_id = "+dev;
+        }
         PreparedStatement ps = null;
         int total = 0;
         try {

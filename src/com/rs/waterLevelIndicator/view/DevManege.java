@@ -4,14 +4,11 @@
 
 package com.rs.waterLevelIndicator.view;
 
-import com.rs.waterLevelIndicator.Observers.DevDbOberver;
-import com.rs.waterLevelIndicator.customView.ControlBar;
 import com.rs.waterLevelIndicator.customView.DevControlBar;
 import com.rs.waterLevelIndicator.customView.DevTable;
 import com.rs.waterLevelIndicator.dao.DevicesDao;
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
 import com.rs.waterLevelIndicator.services.DevicePageQuery;
-import com.rs.waterLevelIndicator.manage.ObserverManage;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -33,11 +30,15 @@ public class DevManege extends JFrame implements ActionListener {
     private JLabel label1;
     private JPanel panel2;
     private DevControlBar mControlBar;
-
 //    private ObserverManage observerManerge = null;
     public DevManege() {
 //        this.observerManerge = new ObserverManage();
+        this.setSize(700,800);
         initComponents();
+        this.setVisible(false);
+        this.setVisible(true);
+//        this.validate();
+
     }
 
 //    public static void main(String s[]){

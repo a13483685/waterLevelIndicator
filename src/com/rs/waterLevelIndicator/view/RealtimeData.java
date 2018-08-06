@@ -47,11 +47,12 @@ public class RealtimeData extends JPanel {
         {
             //首次进来，在文件中读取
             String lastSelectedDevToFile = FunctionHelper.getLastSelectedDevToFile();
-            sensorData = senserDataDao.selectLastRecord(lastSelectedDevToFile);
             Constans.mWhichDevIsSelected = lastSelectedDevToFile;
             isFirstEnter = false;
-        }else {
-            sensorData = senserDataDao.selectLastRecord(Constans.mWhichDevIsSelected);
+        }
+        sensorData = senserDataDao.selectLastRecord(Constans.mWhichDevIsSelected);
+        if(Constans.mWhichDevIsSelected.equals("all")){
+            sensorData = senserDataDao.selectLastRecord(Constans.DEFAULT_SELECTED_DEV);
         }
         String downLimit = sensorData.getDownLimit();
         String gaokong = sensorData.getGaokong();

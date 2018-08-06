@@ -4,7 +4,7 @@ import com.rs.waterLevelIndicator.interfaces.CallInsertIntoDbSensor;
 import com.rs.waterLevelIndicator.interfaces.InsertIntoDbSensorImp;
 
 /**
- * ¹Û²ìÊÇ·ñÓÐÊý¾Ý½ÓÊÜ£¬½ÓÊÜÖ®ºóÂíÉÏ²åÈëµ½Êý¾Ý¿â
+ * ï¿½Û²ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý½ï¿½ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½Ï²ï¿½ï¿½ëµ½ï¿½ï¿½ï¿½Ý¿ï¿½
  */
 public class ObserverDataOne implements ObserverData{
     private CallInsertIntoDbSensor callInsertIntoDbSensor = null;
@@ -14,17 +14,17 @@ public class ObserverDataOne implements ObserverData{
         callInsertIntoDbSensor = new CallInsertIntoDbSensor();
     }
 
-    //ÍùÊý¾Ý¿â²åÈëÊý¾Ý
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private void InsertInToDatabase(String str) {
 
         insertIntoDbSensorImp = new InsertIntoDbSensorImp();
-        callInsertIntoDbSensor.setOnCallInsertIntoDbSensor(insertIntoDbSensorImp,str);//ÍùÊý¾Ý¿â²åÈëÊý¾Ý
+        callInsertIntoDbSensor.setOnCallInsertIntoDbSensor(insertIntoDbSensorImp,str);//ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
     @Override
     public void update(String string) {
         System.out.println("getMsg is :"+string);
-        InsertInToDatabase(string);
-        //²åÈëµ½Êý¾Ý¿â
+//        InsertInToDatabase(string);
+        //ï¿½ï¿½ï¿½ëµ½ï¿½ï¿½ï¿½Ý¿ï¿½
 
     }
 }
