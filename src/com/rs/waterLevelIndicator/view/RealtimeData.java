@@ -34,7 +34,7 @@ public class RealtimeData extends JPanel {
     private static final int WATER_LEVEL = 8;
     private static final int DEV_STATUS = 9;
     private JScrollPane scrollPane1;
-    private JTable tableContents;
+     private JTable tableContents;
     private boolean isFirstEnter = true;
 
 //定时执行 刷新界面
@@ -187,7 +187,7 @@ public class RealtimeData extends JPanel {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                System.out.println("comming....");
+      //          System.out.println("comming....");
                 SetData();
                 initTable();
 //                scrollPane1.validate();

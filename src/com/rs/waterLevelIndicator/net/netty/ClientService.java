@@ -1,4 +1,4 @@
-package com.rs.waterLevelIndicator.net.netty.client;
+package com.rs.waterLevelIndicator.net.netty;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -69,5 +69,4 @@ public class ClientService {
 		}
 		return msg;
 	}
-
 }

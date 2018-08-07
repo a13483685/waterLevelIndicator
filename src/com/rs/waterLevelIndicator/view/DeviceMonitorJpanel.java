@@ -4,10 +4,10 @@
 
 package com.rs.waterLevelIndicator.view;
 
-import com.rs.waterLevelIndicator.Observers.ObserverData;
-import com.rs.waterLevelIndicator.Observers.ObserverDataOne;
 import com.rs.waterLevelIndicator.model.SetParMsg;
-import com.rs.waterLevelIndicator.net.netty.client.ClientService;
+import com.rs.waterLevelIndicator.net.netty.ClientService;
+import com.rs.waterLevelIndicator.net.netty.server.Server;
+import com.rs.waterLevelIndicator.net.netty.server.ServerHandler;
 import com.rs.waterLevelIndicator.utils.Constans;
 import com.rs.waterLevelIndicator.utils.StringUtil;
 
@@ -17,8 +17,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.rs.waterLevelIndicator.view.MainFrm.devTree;
 
@@ -38,18 +36,18 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
     private JTextField mParaValTextField;
     private SetParMsg setParMsg;
     private ClientService service;
-
+    public static JTextField mLogContent;
     //    ChatServer server = null;
     public DeviceMonitorJpanel() {
 //        this.server = server;
 
-        initServer();
+//        initServer();
         initView();
     }
 
     private void initServer() {
 //        Client.main();
-        service = ClientService.getInstance();
+//        service = ClientService.getInstance();
     }
 
     private void initView() {
@@ -62,7 +60,7 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
         JLabel label1;
 
         JCheckBox mPrintHistory;
-        JTextField mLogContent;
+
         JLabel label2;
 
 
@@ -254,6 +252,7 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
         if(e.getSource() == mReadPara) {
 //            List<SensorData> sensorDataList = new SenserDataDao().getSensorDataList(reg);
 //            new BaseTableModule(params, sensorDataList);
+            ServerHandler.sendMsgToAll(Constans.ZHAO_CE);//发送召测命令
         }
         if(e.getSource() == mSetPara){
             Val = mParaValTextField.getText().trim().toString();
@@ -261,7 +260,8 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
             setParMsg.setHeadVal(Constans.HEAD_SERVER);
             if(!StringUtil.isEmpty(Val)){
                 setParMsg.setmContentVal(Val);
-                service.sendMsg(setParMsg.toString());
+                ServerHandler.sendMsgToAll(setParMsg.toString());
+//                service.sendMsg(setParMsg.toString());
 //                JOptionPane.showConfirmDialog(this,setParMsg.toString());
 //                Client.sendMsg(setParMsg);
             }

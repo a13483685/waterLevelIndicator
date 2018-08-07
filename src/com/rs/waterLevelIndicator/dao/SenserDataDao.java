@@ -33,7 +33,7 @@ public class SenserDataDao extends BaseDao  {
             sql = "select * from s_sensordata where dev_id = "+ dev +" order by id desc LIMIT 1";
         }
 //        String sql = "select * from s_sensordata order by id desc LIMIT 1";
-        System.out.println("sql is :"+sql);
+   //     System.out.println("sql is :"+sql);
         SensorData data = getData(sql);
         return data;
     }
@@ -104,6 +104,8 @@ public class SenserDataDao extends BaseDao  {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            closeDao();
         }
         return sd;
     }
@@ -124,7 +126,7 @@ public class SenserDataDao extends BaseDao  {
             int offsetIndex = req.getPageSize();
             ps.setInt(1,startIndex);
             ps.setInt(2,offsetIndex);
-            System.out.println("sql is :"+sql);
+          //  System.out.println("sql is :"+sql);
             System.out.println("recode is from :"+startIndex+"to"+(startIndex+offsetIndex));
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){
@@ -165,6 +167,8 @@ public class SenserDataDao extends BaseDao  {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            closeDao();
         }
         return sensorDatas;
     }
@@ -262,6 +266,8 @@ public class SenserDataDao extends BaseDao  {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            closeDao();
         }
     }
 

@@ -9,7 +9,7 @@ import java.awt.event.*;
 import java.net.URI;
 import javax.swing.*;
 import com.rs.waterLevelIndicator.customView.DevTree;
-import com.rs.waterLevelIndicator.net.netty.Server.ChatServer;
+import com.rs.waterLevelIndicator.net.netty.server.Server;
 import com.rs.waterLevelIndicator.utils.Constans;
 import com.rs.waterLevelIndicator.utils.FunctionHelper;
 
@@ -43,9 +43,17 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
 //                super.run();
 //            }
 //        }.start();
-        ChatServer server = new ChatServer(6666);
-        new Thread(server).start();
+//        Server server = new ChatServer(6666);
+//        new Thread(server).start();
 
+
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                Server.main();
+            }
+        }.start();
         initComponents();
     }
 

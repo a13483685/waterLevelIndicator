@@ -21,6 +21,10 @@ public class Constans {
 
     public static String CMD_DOWN_LIMIT = "04";
 
+    public static String SET_RESUALT_SUCCESS = "ok";
+
+    public static String SET_RESUALT_FALSE = "false";
+
     public static String SET_HIGH_MSG = "head,01,devid"+DEFAULT_SELECTED_DEV+"cmd,"+CMD_HIGH;
 
     public static String SET_HIGHLIMIT_MSG = "head,01,devid"+DEFAULT_SELECTED_DEV+"cmd,"+CMD_HIGH_LIMIT;
@@ -32,5 +36,7 @@ public class Constans {
     public static String HEAD_SERVER = "01";
 
     public static String HEAD_CLIENT = "02";
+
+    public static String ZHAO_CE = "head,01,devid,"+DEFAULT_SELECTED_DEV+",cmd,zhaoce";
 
 }
