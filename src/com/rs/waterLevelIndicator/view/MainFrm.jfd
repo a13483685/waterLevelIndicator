@@ -4,16 +4,16 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :p:14:p, comp mContentPanel:::::x, space :::p}}"
-			"$verticalGroup": "par l {seq l {space :::p, comp mContentPanel:::::x, space :::p}}"
+			"$horizontalGroup": "par l {comp mContentPanel::t:::x}"
+			"$verticalGroup": "par l {comp mContentPanel::l:::x}"
 		} ) {
 			name: "this"
 			"$sizePolicy": 1
 			"title": "窨井盖远程管理系统"
 			"alwaysOnTop": true
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {space :0:978:x}"
-				"$verticalGroup": "par l {space :0:433:x}"
+				"$horizontalGroup": "par l {space :0:998:x}"
+				"$verticalGroup": "par l {space :0:445:x}"
 			} ) {
 				name: "mContentPanel"
 			} )

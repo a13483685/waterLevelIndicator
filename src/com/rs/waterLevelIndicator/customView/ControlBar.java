@@ -38,7 +38,7 @@ public abstract class ControlBar extends JPanel {
 //        devicePageQuery.QueryClose();
         int messageNum = devicePageQuery.getMessageNum();
         req.setTotalRecord(messageNum);//这个值应该会变
-        System.out.println("msg is "+req.getTotalPage() + req.getTotalRecord());
+//        System.out.println("msg is "+req.getTotalPage() + req.getTotalRecord());
         controlBarMouseAdapter = new ControlBarMouseAdapter(this.req);
     }
 //    DbPageMesReq这个值由外面传进来，不合理

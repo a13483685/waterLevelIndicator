@@ -30,7 +30,7 @@ new FormModel {
 			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
 				name: "tabbedPane5"
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq {space :p:18:p, par t {par l:::p {comp label1:::::x, comp label2:::::x}, comp mReadPara:::p::p}, par l {seq {space :::p, par l {comp mParacomboBox:::p:102:p, comp mParaValTextField:::::x}, space :p:36:p}, seq l {space :p:28:p, comp mSetPara:::p::p, space ::45:x}}, par l {comp mLogContent:::p:325:p, comp mPrintHistory:::p::p}, space :::x}}"
+					"$horizontalGroup": "par l {seq {space :p:18:p, par t {par l:::p {comp label1:::::x, comp label2:::::x}, comp mReadPara:::p::p}, par l {seq {space :::p, par l {comp mParacomboBox:::p:102:p, comp mParaValTextField:::::x}, space :p:36:p}, seq l {space :p:28:p, comp mSetPara:::p::p, space ::45:x}}, par l {comp mPrintHistory:::p::p, comp mLogContent:::p:325:p}, space :::x}}"
 					"$verticalGroup": "par l {seq {space :p:11:p, comp mPrintHistory:::p::p, par l {seq {space :::p, par b {comp label1::b:p::p, comp mParacomboBox::b:p::p}, space u:::p, par l {comp label2:::p::p, comp mParaValTextField:::p::p}, space :p:26:p, par b {comp mReadPara::b:p::p, comp mSetPara::b:p::p}}, seq l {space :p:25:p, comp mLogContent:::p:213:p}}, space ::33:x}}"
 				} ) {
 					name: "panel1"

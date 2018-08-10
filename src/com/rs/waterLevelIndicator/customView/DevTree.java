@@ -144,7 +144,7 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
     @Override
     public void update(boolean isSuccess) {
 //        mModel.removeNodeFromParent(root);
-        System.out.println("---------------------------------------------");
+//        System.out.println("---------------------------------------------");
         DevicesDao devicesDao = new DevicesDao();
         List<Device> allDevices = devicesDao.getAllDevices();
         root.removeAllChildren();

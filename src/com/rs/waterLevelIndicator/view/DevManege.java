@@ -9,6 +9,8 @@ import com.rs.waterLevelIndicator.customView.DevTable;
 import com.rs.waterLevelIndicator.dao.DevicesDao;
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
 import com.rs.waterLevelIndicator.services.DevicePageQuery;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,8 +32,10 @@ public class DevManege extends JFrame implements ActionListener {
     private JLabel label1;
     private JPanel panel2;
     private DevControlBar mControlBar;
+    public Logger log = null;
 //    private ObserverManage observerManerge = null;
     public DevManege() {
+        log = LoggerFactory.getLogger(DevManege.class);
 //        this.observerManerge = new ObserverManage();
         this.setSize(700,800);
         initComponents();
@@ -194,7 +198,8 @@ public class DevManege extends JFrame implements ActionListener {
         if (e.getSource()==mDel){
             int row = mDevs.getSelectedRow();
             String value = (String) mDevs.getModel().getValueAt(row, 1);
-            System.out.println("value is :"+value);
+//            System.out.println("value is :"+value);
+
             DeleteFromDb(value);
         }
         if (e.getSource()==mMod){
@@ -205,7 +210,8 @@ public class DevManege extends JFrame implements ActionListener {
         DevicesDao devicesDao = new DevicesDao();
         boolean b = devicesDao.deleteDevice(devName);
         if(b){
-            System.out.println("数据删除成功！");
+            log.info("info :{}","删除设备"+devName+"成功");
+//            System.out.println("数据删除成功！");
         }
     }
 

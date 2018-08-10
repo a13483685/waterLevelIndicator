@@ -1,11 +1,15 @@
 package com.rs.waterLevelIndicator.net.netty.server;
 
+import com.rs.waterLevelIndicator.utils.Constans;
+import com.rs.waterLevelIndicator.view.DevManege;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * netty5服务端
@@ -15,6 +19,8 @@ import io.netty.handler.codec.string.StringEncoder;
 public class Server {
 
 	public static void main() {
+
+		Logger log = LoggerFactory.getLogger(Server.class);
 		//服务类
 		ServerBootstrap bootstrap = new ServerBootstrap();
 		
@@ -38,7 +44,8 @@ public class Server {
 					ch.pipeline().addLast(new StringEncoder());
 					ch.pipeline().addLast(new ServerHandler());
 					//当客户端连接事件出现，输出客户端的远程地址
-					System.out.println("SimpleChatClient:" + ch.remoteAddress() + "  channel_id :" + ch.id() + "  连接上");
+					log.info("SimpleChatClient :{}" +ch.remoteAddress() + "  channel_id :" + ch.id() + "  连接上");
+//					System.out.println("SimpleChatClient:" + );
 				}
 			});
 
@@ -54,9 +61,7 @@ public class Server {
 			
 			//绑定端口
 			ChannelFuture future = bootstrap.bind(6666);
-			
-			System.out.println("start");
-			
+			log.info("SimpleChatClient :{}" ,"服务器开始监听"+Constans.PORT+"端口.....");
 			//等待服务端关闭
 			future.channel().closeFuture().sync();
 			

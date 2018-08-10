@@ -8,6 +8,15 @@ public class SetParMsg {
     private String cmd = ",cmd,";
     private String cmdVal = Constans.CMD_DEFAULT;
     private String mContentVal = "";
+    private String devId = " ";
+
+    public String getDevId() {
+        return devId;
+    }
+
+    public void setDevId(String devId) {
+        this.devId = devId;
+    }
 
     public String getHeadVal() {
         return headVal;
@@ -34,6 +43,6 @@ public class SetParMsg {
     }
     @Override
     public String toString() {
-        return "head,"+getHeadVal()+",devid,"+Constans.DEFAULT_SELECTED_DEV+",cmd,"+getCmdVal()+","+getmContentVal();
+        return "head,"+getHeadVal()+",devid,"+getDevId()+",cmd,"+getCmdVal()+","+getmContentVal();
     }
 }

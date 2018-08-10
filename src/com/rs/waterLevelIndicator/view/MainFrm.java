@@ -8,7 +8,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.net.URI;
 import javax.swing.*;
+
 import com.rs.waterLevelIndicator.customView.DevTree;
+import com.rs.waterLevelIndicator.customView.FileChooser;
 import com.rs.waterLevelIndicator.net.netty.server.Server;
 import com.rs.waterLevelIndicator.utils.Constans;
 import com.rs.waterLevelIndicator.utils.FunctionHelper;
@@ -17,6 +19,7 @@ import com.rs.waterLevelIndicator.utils.FunctionHelper;
  * @author xz
  */
 public class MainFrm extends JFrame implements MouseListener,ActionListener{
+
     static JTabbedPane devTree = new DevTree();
 //    private final TcpServerNonBlockingNIO tcpServerNonBlockingNIO;
     //    private final ChatServer server;
@@ -56,6 +59,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
         }.start();
         initComponents();
     }
+
 
     private void aboutUs() {
         String info = "如是出品\n";
@@ -99,9 +103,15 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
         mDevManerge = new JMenuItem();
         mLogcat = new JMenu();
         mDeviceLogItem = new JMenuItem();
+        mDeviceLogItem.addActionListener(this);
         mClientLogItem = new JMenuItem();
+        mClientLogItem.addActionListener(this);
         mDbItem = new JMenuItem();
+        mDbItem.addActionListener(this);
         mLogManageItem = new JMenuItem();
+        mLogManageItem.addActionListener(this);
+        mUserManeger = new JMenuItem();
+        mUserManeger.addActionListener(this);
         mSystemSettings = new JMenu();
         mDbConnectItem = new JMenuItem();
         mSettingParaItem = new JMenuItem();
@@ -115,7 +125,6 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
         mAboutUs = new JMenuItem();
         mContentPanel = new JPanel();
         mDeviceMonitor = new JPanel();
-
         //======== this ========
         setTitle("\u7aa8\u4e95\u76d6\u8fdc\u7a0b\u7ba1\u7406\u7cfb\u7edf");
         setAlwaysOnTop(true);
@@ -168,6 +177,9 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
                 //---- mLogManageItem ----
                 mLogManageItem.setText("\u65e5\u5fd7\u7ba1\u7406");
                 mLogcat.add(mLogManageItem);
+
+                mUserManeger.setText("用户管理");
+                mSystemSettings.add(mUserManeger);
             }
             menuBar1.add(mLogcat);
 
@@ -257,16 +269,18 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(14, 14, 14)
+//                    .addGap(14, 14, 14)
                     .addComponent(mContentPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap())
+//                    .addContainerGap()
+)
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
+//                    .addContainer()
                     .addComponent(mContentPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap())
+//                    .addContainerGap()
+                )
         );
         setSize(1100, 750);
         setLocationRelativeTo(getOwner());
@@ -284,6 +298,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
     private JMenuItem mClientLogItem;
     private JMenuItem mDbItem;
     private JMenuItem mLogManageItem;
+    private JMenuItem mUserManeger;
     private JMenu mSystemSettings;
     private JMenuItem mDbConnectItem;
     private JMenuItem mSettingParaItem;
@@ -312,13 +327,8 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
 
         }else if(e.getSource() == mDevManerge){//添加设备
 //            mContentPanel.removeAll();
-            
-
-        }else if(e.getSource() == mDeviceLogItem){//设备日志
-
-        }else if(e.getSource() == mClientLogItem){//客户端日志
-
         }
+
     }
 
     //
@@ -375,7 +385,24 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
         }else if(e.getSource() == mDevManerge){
             JOptionPane.showMessageDialog(this, "点击了设备管理");
             deviceManege();
+        }else if(e.getSource() == mDeviceLogItem){//设备日志
+            new FileChooser("database_log",getGlassPane());
+        }else if(e.getSource() == mClientLogItem){//客户端日志
+            new FileChooser("server_data_log",getGlassPane());
+//            new FileChooser();
+        }else if(e.getSource() == mDbItem){//数据库日志
+            new FileChooser("database_log",getGlassPane());
+//            new FileChooser();
+        }else if(e.getSource() == mLogManageItem){//日志管理
+            new FileChooser("",getGlassPane());
+        }else if(e.getSource() == mUserManeger){
+            mContentPanel.removeAll();
+            userManeger();
         }
+    }
+
+    private void userManeger() {
+        mContentPanel.add(new UserManegerPanel());
     }
 
     private void deviceManege() {

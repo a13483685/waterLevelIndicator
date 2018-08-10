@@ -1,5 +1,9 @@
 package com.rs.waterLevelIndicator.utils;
 
+import com.rs.waterLevelIndicator.customView.TextFieldObserver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,6 +18,7 @@ public class DbUtil {
 	private String dbUserName="root"; // ?????
 	private String dbPassword=""; // ????
 	private String jdbcName="com.mysql.jdbc.Driver"; // ????????
+
 	/**
 	 * ????????????
 	 * @return

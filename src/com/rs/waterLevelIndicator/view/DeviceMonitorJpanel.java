@@ -4,6 +4,7 @@
 
 package com.rs.waterLevelIndicator.view;
 
+import com.rs.waterLevelIndicator.customView.TextFieldObserver;
 import com.rs.waterLevelIndicator.model.SetParMsg;
 import com.rs.waterLevelIndicator.net.netty.ClientService;
 import com.rs.waterLevelIndicator.net.netty.server.Server;
@@ -36,7 +37,7 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
     private JTextField mParaValTextField;
     private SetParMsg setParMsg;
     private ClientService service;
-    public static JTextField mLogContent;
+    public static TextFieldObserver mLogContent;
     //    ChatServer server = null;
     public DeviceMonitorJpanel() {
 //        this.server = server;
@@ -80,7 +81,8 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
         mParacomboBox.addItem(Constans.WATER_DOWN_WARRNING);
         mParacomboBox.addItemListener(this);
         mPrintHistory = new JCheckBox();
-        mLogContent = new JTextField();
+        if(mLogContent == null)
+        mLogContent = new TextFieldObserver();
         label2 = new JLabel();
         mParaValTextField = new JTextField();
         mReadPara = new JButton();
@@ -252,7 +254,8 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
         if(e.getSource() == mReadPara) {
 //            List<SensorData> sensorDataList = new SenserDataDao().getSensorDataList(reg);
 //            new BaseTableModule(params, sensorDataList);
-            ServerHandler.sendMsgToAll(Constans.ZHAO_CE);//发送召测命令
+            String ZHAO_CE = "head,01,devid,"+Constans.mWhichDevIsSelected+",cmd,01,zhaoce";
+            ServerHandler.sendMsgToAll(ZHAO_CE);//发送召测命令
         }
         if(e.getSource() == mSetPara){
             Val = mParaValTextField.getText().trim().toString();
@@ -260,7 +263,10 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
             setParMsg.setHeadVal(Constans.HEAD_SERVER);
             if(!StringUtil.isEmpty(Val)){
                 setParMsg.setmContentVal(Val);
+                setParMsg.setDevId(Constans.mWhichDevIsSelected);
                 ServerHandler.sendMsgToAll(setParMsg.toString());
+//                ServerHandler.sendMsgToAll("head,01,devid,2,cmd,02,13");
+
 //                service.sendMsg(setParMsg.toString());
 //                JOptionPane.showConfirmDialog(this,setParMsg.toString());
 //                Client.sendMsg(setParMsg);

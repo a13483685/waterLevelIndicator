@@ -10,6 +10,8 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +27,14 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
 	public static String mInfo = "";
 	ObserverDataOne observerDataOne = null;
 	List<ObserverData> observers = new ArrayList<>();
+	private String info;
+	public Logger log = null;
 	public ServerHandler(){
+		log = LoggerFactory.getLogger(ServerHandler.class);
 		observerDataOne= new ObserverDataOne();
 		observers.add(observerDataOne);
+//		observers.add(DeviceMonitorJpanel.mLogContent);
+
 	}
 	//2.覆盖了 handlerAdded() 事件处理方法。每当从服务端收到新的客户端连接时，客户端的 Channel 存入 ChannelGroup列表中，并通知列表中的其他客户端 Channel
 	@Override
@@ -52,45 +59,39 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
 
 	@Override
 	protected void messageReceived(ChannelHandlerContext ctx, String msg) throws Exception {
-		System.out.println("msg is :"+msg);
-//		if(msg.startsWith("head")){
-//			String[] infos = msg.split(",");
-//			if(infos.length == 7){
-//				if(infos[1] == Constans.HEAD_SERVER){
-//					mInfo = "服务器";
-//				}
-//				if(infos[5] == Constans.CMD_HIGH){
-//					mInfo += "配置客户端安装高度";
-//				}else if(infos[5] == Constans.CMD_HIGH_LIMIT){
-//					mInfo += "配置客户端水位上限报警";
-//				}else if(infos[5] == Constans.CMD_DOWN_LIMIT){
-//					mInfo += "配置客户端水位下线报警";
-//				}
-//
-//				if(infos[6] == Constans.SET_RESUALT_SUCCESS){
-//					mInfo += "成功！";
-//				}else if(infos[6] == Constans.SET_RESUALT_FALSE){
-//					mInfo += "失败！";
-//				}
-//			}
-//			DeviceMonitorJpanel.mLogContent.setText(mInfo);
-//			DeviceMonitorJpanel.mLogContent.updateUI();
-//		}
-		for (ObserverData observerData:observers){
-//			if(msg.startsWith("devid")){
-				observerData.update(msg);
-//			}
-		}
-		Channel incoming = ctx.channel();
-		for (Channel channel : channels) {//遍历ChannelGroup中的channel
-			if (channel != incoming){//找到加入到ChannelGroup中的channel后，将录入的信息回写给除去发送信息的客户端
-				channel.writeAndFlush("[" + incoming.remoteAddress() + "]" + msg + "\n");
-			}
-			else {
-				channel.writeAndFlush("[you]" + msg + "\n");
+
+		info = msg.trim();
+		log.info("netty 接收到的数据{}",info);
+
+		//解决接收到数据，但是不在DeviceMonitorJpanel界面的时候报空指针异常的bug
+		if(DeviceMonitorJpanel.mLogContent !=null){
+			if(!observers.contains(DeviceMonitorJpanel.mLogContent))
+			observers.add(DeviceMonitorJpanel.mLogContent);
+		}else {
+			if(observers.contains(DeviceMonitorJpanel.mLogContent)){
+				observers.remove(DeviceMonitorJpanel.mLogContent);
 			}
 		}
 
+		for (ObserverData observerData:observers){
+			if(info.startsWith("head")|| info.startsWith("devid")){
+				observerData.update(info);
+			}
+		}
+
+
+
+		Channel incoming = ctx.channel();
+		for (Channel channel : channels) {//遍历ChannelGroup中的channel
+			if (channel != incoming){//找到加入到ChannelGroup中的channel后，将录入的信息回写给除去发送信息的客户端
+				channel.writeAndFlush("[" + incoming.remoteAddress() + "]" + info + "\n");
+			}
+			else {
+				channel.writeAndFlush("[you]" + info + "\n");
+
+			}
+		}
+		info = "";
 	}
 
 	//6.覆盖了 channelInactive() 事件处理方法。服务端监听到客户端不活动

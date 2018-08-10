@@ -16,6 +16,7 @@ import com.rs.waterLevelIndicator.dao.AdminDao;
 import com.rs.waterLevelIndicator.model.Admin;
 import com.rs.waterLevelIndicator.model.UserType;
 import com.rs.waterLevelIndicator.utils.StringUtil;
+import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.theme.*;
 
@@ -36,20 +37,25 @@ public class LoginFrm extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+//		try {
+//			UIManager.setLookAndFeel(new SubstanceLookAndFeel());
+//			JFrame.setDefaultLookAndFeelDecorated(true);
+//			JDialog.setDefaultLookAndFeelDecorated(true);
+//			SubstanceLookAndFeel.setCurrentTheme(new SubstanceSepiaTheme());
+//
+//		} catch (UnsupportedLookAndFeelException e) {
+//			e.printStackTrace();
+//		}
+
+
 		try {
-			UIManager.setLookAndFeel(new SubstanceLookAndFeel());
-			JFrame.setDefaultLookAndFeelDecorated(true);
-			JDialog.setDefaultLookAndFeelDecorated(true);
-//			SubstanceLookAndFeel.setCurrentTheme(new SubstanceBottleGreenTheme());//还可以
-//			SubstanceLookAndFeel.setCurrentTheme(new SubstanceOliveTheme());
-			SubstanceLookAndFeel.setCurrentTheme(new SubstanceSepiaTheme());
+			// 设置窗口边框样式
+			BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.translucencyAppleLike;
+			org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+			UIManager.put("RootPane.setupButtonVisible", false);
+		} catch (Exception e) {
 
-//			SubstanceLookAndFeel.setCurrentTheme(new SubstanceBrownTheme());
-		} catch (UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
 		}
-
-
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

@@ -1,6 +1,8 @@
 package com.rs.waterLevelIndicator.utils;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class FunctionHelper {
     public static void SaveSelectedDevToFile(String selectedDev){
@@ -56,5 +58,14 @@ public class FunctionHelper {
             }
         }
         return laststr;
+    }
+
+
+    public static String getAllDate(){
+        SimpleDateFormat lFormat;
+        //格式可以自己根据需要修改
+        lFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String gRtnStr = lFormat.format(new Date());
+        return gRtnStr;
     }
 }

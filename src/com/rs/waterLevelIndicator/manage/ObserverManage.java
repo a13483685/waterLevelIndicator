@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ObserverManage {
-    List<DevDbOberver> observers = new ArrayList<>();
+    public List<DevDbOberver> observers = new ArrayList<>();
 
     public void atach(DevDbOberver obs){
         observers.add(obs);

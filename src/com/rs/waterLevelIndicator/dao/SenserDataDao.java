@@ -33,7 +33,7 @@ public class SenserDataDao extends BaseDao  {
             sql = "select * from s_sensordata where dev_id = "+ dev +" order by id desc LIMIT 1";
         }
 //        String sql = "select * from s_sensordata order by id desc LIMIT 1";
-   //     System.out.println("sql is :"+sql);
+//        System.out.println("sql is :"+sql);
         SensorData data = getData(sql);
         return data;
     }
@@ -127,7 +127,7 @@ public class SenserDataDao extends BaseDao  {
             ps.setInt(1,startIndex);
             ps.setInt(2,offsetIndex);
           //  System.out.println("sql is :"+sql);
-            System.out.println("recode is from :"+startIndex+"to"+(startIndex+offsetIndex));
+//            System.out.println("recode is from :"+startIndex+"to"+(startIndex+offsetIndex));
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){
                 SensorData sd = new SensorData();
@@ -218,29 +218,29 @@ public class SenserDataDao extends BaseDao  {
 
         String GpsSignal = SensorInfo[11];
         sensorData.setGpsSignal(GpsSignal);
-        System.out.println("GpsSignal is :"+sensorData.getGpsSignal());
+//        System.out.println("GpsSignal is :"+sensorData.getGpsSignal());
 
         String comStatus = SensorInfo[13];
         sensorData.setComStatus(comStatus);
-        System.out.println("comStatus is :"+sensorData.getComStatus());
+//        System.out.println("comStatus is :"+sensorData.getComStatus());
 
         String Watt = SensorInfo[15];
         sensorData.setWatt(Watt);
-        System.out.println("Watt is :"+sensorData.getWatt());
+//        System.out.println("Watt is :"+sensorData.getWatt());
 
         String time = SensorInfo[17];
         sensorData.setTime(time);
 
         String waterLevel = SensorInfo[19];
         sensorData.setWaterLevel(waterLevel);
-        System.out.println("waterLevel is :"+sensorData.getWaterLevel());
+//        System.out.println("waterLevel is :"+sensorData.getWaterLevel());
 
         String devStatus = SensorInfo[21];
         sensorData.setDevStatus(devStatus);
-        System.out.println("devStatus is :"+sensorData.getDevStatus());
+//        System.out.println("devStatus is :"+sensorData.getDevStatus());
 
 
-        System.out.println("sensorData -----------------"+sensorData.toString());
+//        System.out.println("sensorData -----------------"+sensorData.toString());
         String sql = "insert into s_sensorData values(null,?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
@@ -293,8 +293,5 @@ public class SenserDataDao extends BaseDao  {
         }
         return total;
     }
-
-
     //查询数据库最近一条记录
-
 }
