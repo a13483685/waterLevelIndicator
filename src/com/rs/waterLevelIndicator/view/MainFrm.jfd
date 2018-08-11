@@ -5,12 +5,13 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 			"$horizontalGroup": "par l {comp mContentPanel::t:::x}"
-			"$verticalGroup": "par l {comp mContentPanel::l:::x}"
+			"$verticalGroup": "par l {comp mContentPanel::t:::x}"
 		} ) {
 			name: "this"
 			"$sizePolicy": 1
 			"title": "窨井盖远程管理系统"
 			"alwaysOnTop": true
+			"iconImage": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\系统部署.png" )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 				"$horizontalGroup": "par l {space :0:998:x}"
 				"$verticalGroup": "par l {space :0:445:x}"
@@ -19,47 +20,58 @@ new FormModel {
 			} )
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "menuBar1"
+				"preferredSize": new java.awt.Dimension( 544, 40 )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "mHomePage"
 					"text": "首页"
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\首页.png" )
 					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "mHomePageMouseClicked", true ) )
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "mRealtimeMonitor"
 					"text": "实时监控"
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\实时数据.png" )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "mDeviceItem"
 						"text": "设备监控"
+						"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\监控.png" )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "mAllReviewItem"
 						"text": "全局总览"
+						"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\全局对齐.png" )
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "mLogcat"
 					"text": "日志查看"
 					"alignmentX": 5.5f
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\日志.png" )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "mDeviceLogItem"
 						"text": "设备日志"
+						"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\设备信息.png" )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "mClientLogItem"
 						"text": "客户端日志"
+						"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\水位传感器_o.png" )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "mDbItem"
 						"text": "数据库日志"
+						"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\dbs 数据库备份DBS.png" )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "mLogManageItem"
 						"text": "日志管理"
+						"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\日志管理.png" )
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "mSystemSettings"
 					"text": "系统设置"
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\系统管理.png" )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "mDbConnectItem"
 						"text": "数据库连接"
@@ -72,9 +84,11 @@ new FormModel {
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "mDbManager"
 					"text": "数据库管理"
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\数据库.png" )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "mHistoryDbItem"
 						"text": "历史数据查询"
+						"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\历史报表.png" )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "mDbTableItem"
@@ -88,21 +102,25 @@ new FormModel {
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "mExit"
 					"text": "退出"
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\退出 (1).png" )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "mExitActionPerformed", true ) )
 				} )
 				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 					name: "mAbout"
 					"text": "关于"
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\关于.png" )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "mAboutActionPerformed", true ) )
 					addEvent( new FormEvent( "javax.swing.event.MenuKeyListener", "menuKeyPressed", "mAboutMenuKeyPressed", true ) )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "mFunctionDetails"
 						"text": "使用说明"
+						"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\说明.png" )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "mFunctionDetailsActionPerformed", true ) )
 					} )
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "mAboutUs"
 						"text": "关于我们"
+						"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\关于我们 (1).png" )
 						addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "mAboutUsItemStateChanged", true ) )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "mAboutUsActionPerformed", true ) )
 					} )
