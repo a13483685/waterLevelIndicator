@@ -193,15 +193,15 @@ public class HistoryDbPanel extends JPanel {
 
             //---- label1 ----
             label1.setText("\u8d77\u59cb\u65f6\u95f4\uff1a");
-            label1.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u5f00\u59cb\u65f6\u95f4.png"));
+            label1.setIcon(new ImageIcon(this.getClass().getResource("/images/\u5f00\u59cb\u65f6\u95f4.png")));
 
             //---- label2 ----
             label2.setText("\u7ed3\u675f\u65f6\u95f4\uff1a");
-            label2.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u7ed3\u675f\u65f6\u95f4.png"));
+            label2.setIcon(new ImageIcon(this.getClass().getResource("/images/\u7ed3\u675f\u65f6\u95f4.png")));
 
             //---- mQueryButton ----
             mQueryButton.setText("\u67e5\u8be2");
-            mQueryButton.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u67e5\u8be2.png"));
+            mQueryButton.setIcon(new ImageIcon(this.getClass().getResource("/images/\u67e5\u8be2.png")));
 
             //======== panel1 ========
             {
@@ -243,7 +243,7 @@ public class HistoryDbPanel extends JPanel {
                 //---- go ----
                 go.setText("GO");
                 go.addMouseListener(myMouseAdapter);
-                go.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u5f00\u59cb.png"));
+                go.setIcon(new ImageIcon(this.getClass().getResource("/images/\u5f00\u59cb.png")));
 
                 //---- label5 ----
                 label5.setText("\u9875");
@@ -308,7 +308,7 @@ public class HistoryDbPanel extends JPanel {
 
             //---- mRefreshButton ----
             mRefreshButton.setText("\u5237\u65b0");
-            mRefreshButton.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u5237\u65b0.png"));
+            mRefreshButton.setIcon(new ImageIcon(this.getClass().getResource("/images/\u5237\u65b0.png")));
 
             GroupLayout panel2Layout = new GroupLayout(panel2);
             panel2.setLayout(panel2Layout);

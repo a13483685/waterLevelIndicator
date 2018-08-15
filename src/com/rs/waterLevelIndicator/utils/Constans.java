@@ -41,4 +41,6 @@ public class Constans {
 //    public static String ZHAO_CE = "head,01,devid,"+mWhichDevIsSelected+",cmd,zhaoce";
     public static String  LOG_PATH= "D:\\log\\";
 
+    public static String LocalPath = System.getProperty("user.dir");
+
 }

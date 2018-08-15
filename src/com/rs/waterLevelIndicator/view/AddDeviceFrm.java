@@ -12,6 +12,7 @@ import com.rs.waterLevelIndicator.dao.DevicesDao;
 import com.rs.waterLevelIndicator.manage.ObserverManage;
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
 import com.rs.waterLevelIndicator.services.DevicePageQuery;
+import com.rs.waterLevelIndicator.utils.Constans;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -47,7 +48,7 @@ public class AddDeviceFrm extends JFrame implements ActionListener {
 
         //======== this ========
         setFont(new Font("Dialog", Font.PLAIN, 22));
-        setIconImage(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u6dfb\u52a0\u8bbe\u5907.png").getImage());
+        setIconImage(new ImageIcon(Constans.LocalPath+"\\src\\images\\\u6dfb\u52a0\u8bbe\u5907.png").getImage());
         setAlwaysOnTop(true);
         setBackground(new Color(102, 153, 255));
         Container contentPane = getContentPane();

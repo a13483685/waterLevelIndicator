@@ -24,15 +24,15 @@ import static com.rs.waterLevelIndicator.view.MainFrm.devTree;
  */
 public class RealtimeData extends JPanel {
     private static final int KONG_GAO = 0;
-    private static final int UP_LOAD = 1;
-    private static final int UP_LIMIT = 2;
-    private static final int DOWN_LIMIT = 3;
-    private static final int GPS_SIGNAL = 4;
-    private static final int COM_STATUS = 5;
-    private static final int WATT = 6;
-    private static final int TIME = 7;
-    private static final int WATER_LEVEL = 8;
-    private static final int DEV_STATUS = 9;
+    private static final int UP_LOAD = 0;
+    private static final int UP_LIMIT = 1;
+    private static final int DOWN_LIMIT = 2;
+    private static final int GPS_SIGNAL = 3;
+    private static final int COM_STATUS = 4;
+    private static final int WATT = 4;
+    private static final int TIME = 5;
+    private static final int WATER_LEVEL = 6;
+    private static final int DEV_STATUS = 6;
     private JScrollPane scrollPane1;
      private JTable tableContents;
     private boolean isFirstEnter = true;
@@ -80,9 +80,9 @@ public class RealtimeData extends JPanel {
 //        );
         for (int i = 0; i < 10; i++) {
             switch (i) {
-                case KONG_GAO:
-                    datas[i][2] = gaokong;
-                    break;
+//                case KONG_GAO:
+//                    datas[i][2] = gaokong;
+//                    break;
                 case UP_LOAD:
                     datas[i][2] = upload;
                     break;
@@ -95,18 +95,18 @@ public class RealtimeData extends JPanel {
                 case GPS_SIGNAL:
                     datas[i][2] = gpsSignal;
                     break;
-                case COM_STATUS:
-                    datas[i][2] = comStatus;
-                    break;
+//                case COM_STATUS:
+//                    datas[i][2] = comStatus;
+//                    break;
                 case WATT:
                     datas[i][2] = watt;
                     break;
                 case TIME:
                     datas[i][2] = time;//预留
                     break;
-                case WATER_LEVEL:
-                    datas[i][2] = waterLevel;
-                    break;
+//                case WATER_LEVEL:
+//                    datas[i][2] = waterLevel;
+//                    break;
                 case DEV_STATUS:
                     datas[i][2] = devStatus;
                     break;
@@ -114,16 +114,16 @@ public class RealtimeData extends JPanel {
         }
     }
     Object[][] datas = new Object[][]{
-            {1, "空高", "全部中断", ""},
-            {2, "上报水位", "全部中断", "m"},
-            {3, "水位上线报警", "未知", null},
-            {4, "水位下限报警", "未知", null},
-            {5, "GPS信号强度", "未知", "db"},
-            {6, "通讯状态", "未知", null},
-            {7,"电压","未知","v"},
-            {8, "时间", "2018-07-04 13：59：58", null},
-            {9, "水位", "未知", null},
-            {10, "设备状态", "未知", null},
+//            {1, "空高", "全部中断", ""},
+            {1, "上报水位", "全部中断", "m"},
+            {2, "水位上线报警", "未知", "m"},
+            {3, "水位下限报警", "未知", "m"},
+            {4, "GPS信号强度", "未知", "dB"},
+//            {6, "通讯状态", "未知", null},
+            {5,"电压","未知","v"},
+            {6, "时间", "2018-07-04 13：59：58", "无"},
+//            {9, "水位", "未知", null},
+            {7, "设备状态", "未知", "无"},
     };
     String[] titles = new String[]{"序号", "量名称", "量值", "单位"};
 

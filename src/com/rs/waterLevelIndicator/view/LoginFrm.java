@@ -12,6 +12,7 @@ import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.rs.waterLevelIndicator.customView.DevTree;
+import com.rs.waterLevelIndicator.customView.WindowOpacity;
 import com.rs.waterLevelIndicator.dao.AdminDao;
 import com.rs.waterLevelIndicator.model.Admin;
 import com.rs.waterLevelIndicator.model.UserType;
@@ -50,7 +51,7 @@ public class LoginFrm extends JFrame {
 
 		try {
 			// 设置窗口边框样式
-//			BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.translucencyAppleLike;
+			BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.translucencyAppleLike;
 //			BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
 			org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
 			UIManager.put("RootPane.setupButtonVisible", false);
@@ -62,6 +63,7 @@ public class LoginFrm extends JFrame {
 				try {
 					LoginFrm frame = new LoginFrm();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -73,14 +75,15 @@ public class LoginFrm extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginFrm() {
+		new WindowOpacity(this);
 		setTitle("\u767B\u5F55\u754C\u9762");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 533, 376);
+		setBounds(50, 50, 450, 330);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+//		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		JLabel lblNewLabel = new JLabel("\u6C34\u4F4D\u8BA1\u7BA1\u7406\u7CFB\u7EDF\u767B\u5F55");
+		JLabel lblNewLabel = new JLabel("窨井水位计远程管理系统");
 		lblNewLabel.setFont(new Font("楷体", Font.PLAIN, 25));
 
 		JLabel mLabelUserName = new JLabel("\u7528\u6237\u540D\uFF1A");
@@ -121,19 +124,19 @@ public class LoginFrm extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 										.addGroup(gl_contentPane.createSequentialGroup()
-												.addGap(127)
+												.addGap(55)
 												.addComponent(lblNewLabel))
 										.addGroup(gl_contentPane.createSequentialGroup()
 												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 														.addGroup(gl_contentPane.createSequentialGroup()
-																.addGap(129)
+																.addGap(60)
 																.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 																		.addComponent(label_2)
 																		.addComponent(mLabelPassword)
 																		.addComponent(mLabelUserName))
-																.addGap(18))
+																.addGap(12))
 														.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-																.addContainerGap(157, Short.MAX_VALUE)
+																.addContainerGap(107, Short.MAX_VALUE)
 																.addComponent(mButtonLogin)
 																.addPreferredGap(ComponentPlacement.RELATED)))
 												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -143,15 +146,16 @@ public class LoginFrm extends JFrame {
 																.addComponent(mComboBoxUserSlect, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 														.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 																.addComponent(mButtonReset)
-																.addGap(20)))))
-								.addGap(168))
+																.addGap(20)
+														))))
+								.addGap(100))
 		);
 		gl_contentPane.setVerticalGroup(
 				gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-								.addGap(55)
+								.addGap(20)
 								.addComponent(lblNewLabel)
-								.addGap(39)
+								.addGap(30)
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 										.addComponent(mLabelUserName)
 										.addComponent(mTextFieldUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -159,11 +163,11 @@ public class LoginFrm extends JFrame {
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 										.addComponent(mLabelPassword)
 										.addComponent(mTextFieldPassword, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGap(24)
+								.addGap(18)
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 										.addComponent(mComboBoxUserSlect, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(label_2))
-								.addGap(26)
+								.addGap(12)
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 										.addComponent(mButtonReset)
 										.addComponent(mButtonLogin))

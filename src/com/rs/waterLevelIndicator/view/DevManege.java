@@ -9,6 +9,7 @@ import com.rs.waterLevelIndicator.customView.DevTable;
 import com.rs.waterLevelIndicator.dao.DevicesDao;
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
 import com.rs.waterLevelIndicator.services.DevicePageQuery;
+import com.rs.waterLevelIndicator.utils.Constans;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,10 +38,11 @@ public class DevManege extends JFrame implements ActionListener {
     public DevManege() {
         log = LoggerFactory.getLogger(DevManege.class);
 //        this.observerManerge = new ObserverManage();
-        this.setSize(700,800);
+//        this.setSize(650,750);
         initComponents();
-        this.setVisible(false);
+//        this.setVisible(false);
         this.setVisible(true);
+        this.setResizable(false);
 //        this.validate();
 
     }
@@ -81,7 +83,7 @@ public class DevManege extends JFrame implements ActionListener {
         //======== this ========
         setTitle("\u8bbe\u5907\u7ba1\u7406");
         setAlwaysOnTop(true);
-        setIconImage(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u8bbe\u5907\u7ba1\u7406.png").getImage());
+        setIconImage(new ImageIcon(Constans.LocalPath+"\\src\\images\\\u8bbe\u5907\u7ba1\u7406.png").getImage());
         Container contentPane = getContentPane();
 
         //---- mAdd ----
@@ -198,7 +200,6 @@ public class DevManege extends JFrame implements ActionListener {
         if (e.getSource()==mDel){
             int row = mDevs.getSelectedRow();
             String value = (String) mDevs.getModel().getValueAt(row, 1);
-//            System.out.println("value is :"+value);
 
             DeleteFromDb(value);
         }
@@ -211,19 +212,6 @@ public class DevManege extends JFrame implements ActionListener {
         boolean b = devicesDao.deleteDevice(devName);
         if(b){
             log.info("info :{}","删除设备"+devName+"成功");
-//            System.out.println("数据删除成功！");
         }
     }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-//    private JButton mAdd;
-//    private JButton mDel;
-//    private JButton mMod;
-//    private JPanel panel1;
-//    private JScrollPane scrollPane1;
-//    private JTable mDevs;
-//    private JPanel panel2;
-
-//    private JLabel label1;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

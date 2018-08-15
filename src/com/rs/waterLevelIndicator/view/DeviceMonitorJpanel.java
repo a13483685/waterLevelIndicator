@@ -44,6 +44,7 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
 
 //        initServer();
         initView();
+        this.updateUI();
     }
 
     private void initServer() {

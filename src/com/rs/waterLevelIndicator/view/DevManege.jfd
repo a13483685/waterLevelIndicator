@@ -4,7 +4,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :::p, par l:::p {comp panel1:::p::p, seq {comp label1:::p:77:p, space :p:31:p, comp mAdd:::p::p, space :::p, comp mDel:::p::p, space :::x, comp mMod:::p::p}}, space ::8:x}}"
+			"$horizontalGroup": "par l {seq l {space :::p, par l:::p {comp panel1:::p:351:p, seq {comp label1:::p:77:p, space :p:31:p, comp mAdd:::p::p, space :::p, comp mDel:::p::p, space :::x, comp mMod:::p::p}}, space ::8:x}}"
 			"$verticalGroup": "par l {seq t {space :::p, par b {comp mAdd::b:p::p, comp mDel::b:p::p, comp mMod::b:p::p, comp label1::t:::x}, space :::p, comp panel1:::::x, space :::p}}"
 		} ) {
 			name: "this"
@@ -27,7 +27,7 @@ new FormModel {
 				"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\修改.png" )
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {comp scrollPane1::l::351:x, seq l {space :::p, comp panel2:::::x, space :::p}}"
+				"$horizontalGroup": "par l {seq {space :::p, par l {comp panel2:::::x, seq {comp scrollPane1:::p:350:p, space :0:0:x}}, space :::p}}"
 				"$verticalGroup": "par l {seq l {comp scrollPane1:::p:196:p, space :::p, comp panel2:::::x, space :::p}}"
 			} ) {
 				name: "panel1"
@@ -38,7 +38,7 @@ new FormModel {
 					} )
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq l {space :p:79:p, comp label2:::p::p, space ::239:x}}"
+					"$horizontalGroup": "par l {seq l {space :p:79:p, comp label2:::p::p, space :::x}}"
 					"$verticalGroup": "par l {seq t {space :0:10:x, comp label2:::p::p}}"
 				} ) {
 					name: "panel2"

@@ -4,6 +4,8 @@
 
 package com.rs.waterLevelIndicator.view;
 
+import com.rs.waterLevelIndicator.utils.Constans;
+
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -90,7 +92,7 @@ public class UserManegerPanel extends JPanel {
 
             //---- label5 ----
             label5.setText("\u7528\u6237\u5217\u8868");
-            label5.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u7528\u6237\u5217\u8868.png"));
+            label5.setIcon(new ImageIcon(Constans.LocalPath+"\\src\\images\\\u7528\u6237\u5217\u8868.png"));
 
             //---- label6 ----
             label6.setText("\u5237\u65b0");
@@ -123,27 +125,27 @@ public class UserManegerPanel extends JPanel {
 
             //---- label7 ----
             label7.setText("\u59d3\u540d\uff1a");
-            label7.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u7528\u6237\u540d.png"));
+            label7.setIcon(new ImageIcon(Constans.LocalPath+"\\src\\images\\\u7528\u6237\u540d.png"));
 
             //---- label8 ----
             label8.setText("\u8d26\u53f7\uff1a");
-            label8.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u7528\u6237\u5217\u8868 (1).png"));
+            label8.setIcon(new ImageIcon(Constans.LocalPath+"\\src\\images\\\u7528\u6237\u5217\u8868 (1).png"));
 
             //---- label9 ----
             label9.setText("\u8054\u7cfb\u7535\u8bdd\uff1a");
-            label9.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u7535\u8bdd.png"));
+            label9.setIcon(new ImageIcon(Constans.LocalPath+"\\src\\images\\\u7535\u8bdd.png"));
 
             //---- label10 ----
             label10.setText("\u5355\u4f4d\uff1a");
-            label10.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u4e8b\u4e1a\u5355\u4f4d (1).png"));
+            label10.setIcon(new ImageIcon(Constans.LocalPath+"\\src\\images\\\u4e8b\u4e1a\u5355\u4f4d (1).png"));
 
             //---- label11 ----
             label11.setText("\u804c\u4f4d\uff1a");
-            label11.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u804c\u4f4d.png"));
+            label11.setIcon(new ImageIcon(Constans.LocalPath+"\\src\\images\\\u804c\u4f4d.png"));
 
             //---- label12 ----
             label12.setText("\u89d2\u8272\uff1a");
-            label12.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u89d2\u8272\u6743\u9650.png"));
+            label12.setIcon(new ImageIcon(Constans.LocalPath+"\\src\\images\\\u89d2\u8272\u6743\u9650.png"));
 
             //---- button1 ----
             button1.setText("\u641c\u7d22");

@@ -6,15 +6,20 @@ package com.rs.waterLevelIndicator.view;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.*;
 
 import com.rs.waterLevelIndicator.customView.DevTree;
 import com.rs.waterLevelIndicator.customView.FileChooser;
+import com.rs.waterLevelIndicator.customView.WindowOpacity;
 import com.rs.waterLevelIndicator.net.netty.server.Server;
 import com.rs.waterLevelIndicator.utils.Constans;
 import com.rs.waterLevelIndicator.utils.FunctionHelper;
+import com.rs.waterLevelIndicator.utils.ImagePanel;
 
 /**
  * @author xz
@@ -28,6 +33,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
     public MainFrm() {
           //设置静态变量
         //有bug 如果文件不存在
+        new WindowOpacity(this);
         String lastSelectedDevToFile = FunctionHelper.getLastSelectedDevToFile();
         Constans.mWhichDevIsSelected = lastSelectedDevToFile;
 //        TCPThreadServer tcpThreadServer = new TCPThreadServer();
@@ -59,6 +65,8 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
             }
         }.start();
         initComponents();
+        createHome();
+        this.setResizable(false);
     }
 
 
@@ -84,7 +92,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
 
     private void mFunctionDetailsActionPerformed(ActionEvent e) {
         // TODO add your code here
-        JOptionPane.showMessageDialog(this, "你真是狠心，坏淫！");
+//        JOptionPane.showMessageDialog(this, "你真是狠心，坏淫！");
     }
 
     private void mAboutUsActionPerformed(ActionEvent e) {
@@ -127,9 +135,10 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
         mContentPanel = new JPanel();
         mDeviceMonitor = new JPanel();
         //======== this ========
-        setTitle("\u7aa8\u4e95\u76d6\u8fdc\u7a0b\u7ba1\u7406\u7cfb\u7edf");
+        setTitle("窨井水位计远程管理系统");
         setAlwaysOnTop(true);
-        setIconImage(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u7cfb\u7edf\u90e8\u7f72.png").getImage());
+
+        setIconImage(new ImageIcon("/images/系统部署.png").getImage());
         Container contentPane = getContentPane();
 
         //======== menuBar1 ========
@@ -140,7 +149,8 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
             {
                 mHomePage.setText("\u9996\u9875");
                 mHomePage.addMouseListener(this);
-                mHomePage.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u9996\u9875.png"));
+//                mHomePage.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u9996\u9875.png"));
+                mHomePage.setIcon(new ImageIcon(MainFrm.class.getResource("/images/\u9996\u9875.png")));
 
             }
             menuBar1.add(mHomePage);
@@ -148,18 +158,19 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
             //======== mRealtimeMonitor ========
             {
                 mRealtimeMonitor.setText("\u5b9e\u65f6\u76d1\u63a7");
-                mRealtimeMonitor.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u5b9e\u65f6\u6570\u636e.png"));
+                mRealtimeMonitor.setIcon(new ImageIcon(MainFrm.class.getResource("/images/\u5b9e\u65f6\u6570\u636e.png")));
 
                 //---- mDeviceItem ----
                 mDeviceItem.setText("\u8bbe\u5907\u76d1\u63a7");
                 mDeviceItem.addActionListener(this::actionPerformed);
-                mDeviceItem.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u76d1\u63a7.png"));
+//                mDeviceItem.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u76d1\u63a7.png"));
+                mDeviceItem.setIcon(new ImageIcon(MainFrm.class.getResource("/images/\u76d1\u63a7.png")));
                 mRealtimeMonitor.add(mDeviceItem);
 
                 //---- mAllReviewItem ----
                 mDevManerge.setText("\u5168\u5c40\u603b\u89c8");
                 mDevManerge.addActionListener(this::actionPerformed);
-                mDevManerge.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u5168\u5c40\u5bf9\u9f50.png"));
+                mDevManerge.setIcon(new ImageIcon(MainFrm.class.getResource("/images/\u5168\u5c40\u5bf9\u9f50.png")));
                 mRealtimeMonitor.add(mDevManerge);
             }
             menuBar1.add(mRealtimeMonitor);
@@ -168,26 +179,26 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
             {
                 mLogcat.setText("\u65e5\u5fd7\u67e5\u770b");
                 mLogcat.setAlignmentX(5.5F);
-                mLogcat.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u65e5\u5fd7.png"));
+                mLogcat.setIcon(new ImageIcon(MainFrm.class.getResource("/images/\u65e5\u5fd7.png")));
 
                 //---- mDeviceLogItem ----
                 mDeviceLogItem.setText("\u8bbe\u5907\u65e5\u5fd7");
-                mDeviceLogItem.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u8bbe\u5907\u4fe1\u606f.png"));
+                mDeviceLogItem.setIcon(new ImageIcon(MainFrm.class.getResource("/images/\u8bbe\u5907\u4fe1\u606f.png")));
                 mLogcat.add(mDeviceLogItem);
 
                 //---- mClientLogItem ----
                 mClientLogItem.setText("\u5ba2\u6237\u7aef\u65e5\u5fd7");
-                mClientLogItem.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u6c34\u4f4d\u4f20\u611f\u5668_o.png"));
+                mClientLogItem.setIcon(new ImageIcon(MainFrm.class.getResource("/images/\u6c34\u4f4d\u4f20\u611f\u5668_o.png")));
                 mLogcat.add(mClientLogItem);
 
                 //---- mDbItem ----
                 mDbItem.setText("\u6570\u636e\u5e93\u65e5\u5fd7");
-                mDbItem.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\dbs \u6570\u636e\u5e93\u5907\u4efdDBS.png"));
+                mDbItem.setIcon(new ImageIcon(MainFrm.class.getResource("/images/数据库备份DBS.png")));
                 mLogcat.add(mDbItem);
 
                 //---- mLogManageItem ----
                 mLogManageItem.setText("\u65e5\u5fd7\u7ba1\u7406");
-                mLogManageItem.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u65e5\u5fd7\u7ba1\u7406.png"));
+                mLogManageItem.setIcon(new ImageIcon(MainFrm.class.getResource("/images/\u65e5\u5fd7\u7ba1\u7406.png")));
                 mLogcat.add(mLogManageItem);
 
                 mUserManeger.setText("用户管理");
@@ -198,7 +209,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
             //======== mSystemSettings ========
             {
                 mSystemSettings.setText("\u7cfb\u7edf\u8bbe\u7f6e");
-                mSystemSettings.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u7cfb\u7edf\u7ba1\u7406.png"));
+                mSystemSettings.setIcon(new ImageIcon(MainFrm.class.getResource("/images/\u7cfb\u7edf\u7ba1\u7406.png")));
 
                 //---- mDbConnectItem ----
                 mDbConnectItem.setText("\u6570\u636e\u5e93\u8fde\u63a5");
@@ -213,12 +224,12 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
             //======== mDbManager ========
             {
                 mDbManager.setText("\u6570\u636e\u5e93\u7ba1\u7406");
-                mDbManager.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u6570\u636e\u5e93.png"));
+                mDbManager.setIcon(new ImageIcon(MainFrm.class.getResource("/images/\u6570\u636e\u5e93.png")));
 
                 //---- mHistoryDbItem ----
                 mHistoryDbItem.setText("\u5386\u53f2\u6570\u636e\u67e5\u8be2");
                 mHistoryDbItem.addActionListener(this);
-                mHistoryDbItem.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u5386\u53f2\u62a5\u8868.png"));
+                mHistoryDbItem.setIcon(new ImageIcon(MainFrm.class.getResource("/images/\u5386\u53f2\u62a5\u8868.png")));
                 mDbManager.add(mHistoryDbItem);
 
                 //---- mDbTableItem ----
@@ -236,7 +247,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
             //======== mExit ========
             {
                 mExit.setText("\u9000\u51fa");
-                mExit.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u9000\u51fa (1).png"));
+                mExit.setIcon(new ImageIcon(MainFrm.class.getResource("/images/\u9000\u51fa (1).png")));
 //                mExit.addActionListener(e -> mExitActionPerformed(e));
             }
             menuBar1.add(mExit);
@@ -244,7 +255,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
             //======== mAbout ========
             {
                 mAbout.setText("\u5173\u4e8e");
-                mAbout.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u5173\u4e8e.png"));
+                mAbout.setIcon(new ImageIcon(MainFrm.class.getResource("/images/\u5173\u4e8e.png")));
 //                mAbout.addActionListener(e -> mAboutActionPerformed(e));
 //                mAbout.addMenuKeyListener(new MenuKeyListener() {
 //                    @Override
@@ -259,13 +270,13 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
 
                 //---- mFunctionDetails ----
                 mFunctionDetails.setText("\u4f7f\u7528\u8bf4\u660e");
-                mFunctionDetails.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u8bf4\u660e.png"));
+                mFunctionDetails.setIcon(new ImageIcon(MainFrm.class.getResource("/images/\u8bf4\u660e.png")));
                 mFunctionDetails.addActionListener(e -> mFunctionDetailsActionPerformed(e));
                 mAbout.add(mFunctionDetails);
 
                 //---- mAboutUs ----
                 mAboutUs.setText("\u5173\u4e8e\u6211\u4eec");
-                mAboutUs.setIcon(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u5173\u4e8e\u6211\u4eec (1).png"));
+                mAboutUs.setIcon(new ImageIcon(MainFrm.class.getResource("/images/\u5173\u4e8e\u6211\u4eec (1).png")));
 //                mAboutUs.addItemListener(e -> mAboutUsItemStateChanged(e));
                 mAboutUs.addActionListener(e -> mAboutUsActionPerformed(e));
                 mAbout.add(mAboutUs);
@@ -277,7 +288,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
         //======== mContentPanel ========
         {
             mContentPanel.setLayout(new CardLayout());
-
+//            mContentPanel.setBackground(Color.gray);
             //======== mDeviceMonitor ========
             {
 
@@ -305,7 +316,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
             contentPaneLayout.createParallelGroup()
                 .addComponent(mContentPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        setSize(1000, 500);
+        setSize(1100, 800);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
@@ -361,15 +372,19 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
     }
 
     private void createHome() {
-//        try {
-//            Image bgimg = ImageIO.read(new File("F:/work/java/waterLevelIndicator/src/images/background.jpg"));
-//            ImagePanel centerBackground = new ImagePanel(bgimg);
-//
-//            mContentPanel.add(centerBackground, "Center");
+        try {
+            mContentPanel.removeAll();
+//            System.out.println(this.getClass().getResource("").getPath());//user.dir指定了当前的路径
+//            this.getClass().getResource("/images/home_page.jpg").getPath();
+            Image bgimg = ImageIO.read(MainFrm.class.getResource("/images/home_page.jpg"));
+            ImagePanel centerBackground = new ImagePanel(bgimg);
+
+            mContentPanel.add(centerBackground, "Center");
 //            mContentPanel.setVisible(true);
-//        } catch (IOException e1) {
-//            e1.printStackTrace();
-//        }
+            mContentPanel.updateUI();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
     }
 
     @Override
@@ -397,16 +412,17 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == mDeviceItem){
             mContentPanel.removeAll();
-            JOptionPane.showMessageDialog(this, "点击了设备监控");
+//            JOptionPane.showMessageDialog(this, "点击了设备监控");
 //            mContentPanel.removeAll();
             devicesMonitor();
-            mContentPanel.setVisible(true);
+//            mContentPanel.setVisible(true);
+            mContentPanel.updateUI();
         }else if(e.getSource() == mHistoryDbItem){
             mContentPanel.removeAll();
-            JOptionPane.showMessageDialog(this, "点击了历史数据查询");
+//            JOptionPane.showMessageDialog(this, "点击了历史数据查询");
             historyDbPanel();
         }else if(e.getSource() == mDevManerge){
-            JOptionPane.showMessageDialog(this, "点击了设备管理");
+//            JOptionPane.showMessageDialog(this, "点击了设备管理");
             deviceManege();
         }else if(e.getSource() == mDeviceLogItem){//设备日志
             new FileChooser("database_log",getGlassPane());
@@ -435,6 +451,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
     //历史数据界面
     private void historyDbPanel() {
         mContentPanel.add(new HistoryDbPanel());
+        mContentPanel.updateUI();
     }
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
