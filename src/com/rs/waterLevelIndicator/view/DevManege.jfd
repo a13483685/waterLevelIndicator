@@ -4,31 +4,16 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :::p, par l:::p {comp panel1:::p:351:p, seq {comp label1:::p:77:p, space :p:31:p, comp mAdd:::p::p, space :::p, comp mDel:::p::p, space :::x, comp mMod:::p::p}}, space ::8:x}}"
-			"$verticalGroup": "par l {seq t {space :::p, par b {comp mAdd::b:p::p, comp mDel::b:p::p, comp mMod::b:p::p, comp label1::t:::x}, space :::p, comp panel1:::::x, space :::p}}"
+			"$horizontalGroup": "par l {comp panel1::t::368:x}"
+			"$verticalGroup": "par l {comp panel1::l:::x}"
 		} ) {
 			name: "this"
 			"title": "设备管理"
 			"alwaysOnTop": true
 			"iconImage": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\设备管理.png" )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "mAdd"
-				"text": "增加"
-				"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\添加.png" )
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "mDel"
-				"text": "删除"
-				"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\减少.png" )
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "mMod"
-				"text": "修改"
-				"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\修改.png" )
-			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :::p, par l {comp panel2:::::x, seq {comp scrollPane1:::p:350:p, space :0:0:x}}, space :::p}}"
-				"$verticalGroup": "par l {seq l {comp scrollPane1:::p:196:p, space :::p, comp panel2:::::x, space :::p}}"
+				"$horizontalGroup": "par l {seq t {space :::x, comp label1:::p:77:p, space s:::p, comp mAdd:::p::p, space s:::p, comp mMod:::p::p, space :::p, comp mDel:::p::p, space :p:11:p}, seq l {space :::p, par t:::p {comp scrollPane1::::356:x, comp panel2:::::x}, space :::x}}"
+				"$verticalGroup": "par l {seq t {space ::16:x, par l {par b:t {comp mMod::b:p::p, comp mDel::b:p::p}, par b:t {comp mAdd::b:p::p, comp label1::b:p:30:p}}, space s:::p, comp scrollPane1:::p:196:p, space :::p, comp panel2:::p::p}}"
 			} ) {
 				name: "panel1"
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -37,9 +22,19 @@ new FormModel {
 						name: "mDevs"
 					} )
 				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "mMod"
+					"text": "修改"
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\修改.png" )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "mAdd"
+					"text": "增加"
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\添加.png" )
+				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq l {space :p:79:p, comp label2:::p::p, space :::x}}"
-					"$verticalGroup": "par l {seq t {space :0:10:x, comp label2:::p::p}}"
+					"$horizontalGroup": "par l {seq l {space :p:79:p, comp label2:::p::p, space ::270:x}}"
+					"$verticalGroup": "par l {seq t {space :0:0:x, comp label2:::p::p}}"
 				} ) {
 					name: "panel2"
 					add( new FormComponent( "javax.swing.JLabel" ) {
@@ -47,10 +42,15 @@ new FormModel {
 						"text": "2"
 					} )
 				} )
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label1"
-				"text": "设备一览表"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "mDel"
+					"text": "删除"
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\减少.png" )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "设备一览表"
+				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 55 )

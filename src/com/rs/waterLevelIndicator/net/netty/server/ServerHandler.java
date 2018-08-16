@@ -2,10 +2,14 @@ package com.rs.waterLevelIndicator.net.netty.server;
 
 import com.rs.waterLevelIndicator.Observers.ObserverData;
 import com.rs.waterLevelIndicator.Observers.ObserverDataOne;
+import com.rs.waterLevelIndicator.dao.EventTypeDao;
 import com.rs.waterLevelIndicator.utils.Constans;
+import com.rs.waterLevelIndicator.utils.FunctionHelper;
+import com.rs.waterLevelIndicator.utils.StringUtil;
 import com.rs.waterLevelIndicator.view.DeviceMonitorJpanel;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelId;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
@@ -14,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -29,10 +34,13 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
 	List<ObserverData> observers = new ArrayList<>();
 	private String info;
 	public Logger log = null;
+	public static HashMap<String,String> members ;//用于记录设备号和通道号的对应关系
+
 	public ServerHandler(){
 		log = LoggerFactory.getLogger(ServerHandler.class);
 		observerDataOne= new ObserverDataOne();
 		observers.add(observerDataOne);
+		members = new HashMap<>();
 //		observers.add(DeviceMonitorJpanel.mLogContent);
 
 	}
@@ -59,9 +67,19 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
 
 	@Override
 	protected void messageReceived(ChannelHandlerContext ctx, String msg) throws Exception {
-
+		Channel incoming = ctx.channel();
+		String channelId = incoming.id().asShortText();
 		info = msg.trim();
 		log.info("netty 接收到的数据{}",info);
+		if(msg.startsWith("devid")){
+			String[] infos = info.split(",");
+			String devId = infos[1];
+			if(!members.containsKey(channelId)){
+				members.put(channelId, devId);
+				String msgInfo = devId+",上线,"+FunctionHelper.getAllDate();
+				new EventTypeDao().insertIntoDb(msgInfo);
+			}
+		}
 
 		//解决接收到数据，但是不在DeviceMonitorJpanel界面的时候报空指针异常的bug
 		if(DeviceMonitorJpanel.mLogContent !=null){
@@ -81,7 +99,6 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
 
 
 
-		Channel incoming = ctx.channel();
 		for (Channel channel : channels) {//遍历ChannelGroup中的channel
 			if (channel != incoming){//找到加入到ChannelGroup中的channel后，将录入的信息回写给除去发送信息的客户端
 				channel.writeAndFlush("[" + incoming.remoteAddress() + "]" + info + "\n");
@@ -99,6 +116,13 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception { // (6)
 		Channel incoming = ctx.channel();
 		channels.remove(incoming);
+		String  incomeId=incoming.id().asShortText();
+		String devId = members.get(incomeId);
+		members.remove(incomeId);
+		String msg = ",掉线,";
+		String date = FunctionHelper.getAllDate();
+		String content = devId+msg+date;
+		new EventTypeDao().insertIntoDb(content);
 		System.out.println("SimpleChatClient:" + incoming.remoteAddress() + "掉线");
 	}
 
@@ -124,5 +148,4 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
 			channel.writeAndFlush(msg+"\n");
 		}
 	}
-	
 }

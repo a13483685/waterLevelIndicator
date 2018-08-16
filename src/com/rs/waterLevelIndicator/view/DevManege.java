@@ -53,13 +53,14 @@ public class DevManege extends JFrame implements ActionListener {
 //    }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        mAdd = new JButton();
-        mDel = new JButton();
-        mMod = new JButton();
         panel1 = new JPanel();
         scrollPane1 = new JScrollPane();
-
+        mDevs = new JTable();
+        mMod = new JButton();
+        mAdd = new JButton();
         panel2 = new JPanel();
+        label2 = new JLabel();
+        mDel = new JButton();
         /**
          * 设置分页参数
          */
@@ -77,6 +78,7 @@ public class DevManege extends JFrame implements ActionListener {
 
         mControlBar = new DevControlBar(devTable,req);
 //        this.observerManerge.atach((DevDbOberver)mControlBar);
+
 
         label1 = new JLabel();
 
@@ -135,47 +137,67 @@ public class DevManege extends JFrame implements ActionListener {
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
                 panel1Layout.createParallelGroup()
-                    .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(label1, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(mAdd)
+                        .addGap(11, 11, 11)
+                        .addComponent(mMod)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mDel)
+                        .addGap(11, 11, 11))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                            .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
-                    .addGroup(panel1Layout.createSequentialGroup()
+                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addContainerGap(10, Short.MAX_VALUE)
+                        .addGroup(panel1Layout.createParallelGroup()
+                            .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(mMod)
+                                .addComponent(mDel))
+                            .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(mAdd)
+                                .addComponent(label1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
+//                        .addGap(18, 18, 18)
                         .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                        .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             );
         }
 
         //---- label1 ----
-        label1.setText("\u8bbe\u5907\u4e00\u89c8\u8868");
+//        label1.setText("\u8bbe\u5907\u4e00\u89c8\u8868");
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
+//                    .addContainerGap()
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                         .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addGroup(contentPaneLayout.createSequentialGroup()
                             .addComponent(label1, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
-                            .addGap(31, 31, 31)
+//                            .addGap(31, 31, 31)
                             .addComponent(mAdd)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(mDel)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mMod)))
-                    .addContainerGap(8, Short.MAX_VALUE))
+//                    .addContainerGap(8, Short.MAX_VALUE)
+                )
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
                 .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
+//                    .addContainerGap()
                     .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(mAdd)
                         .addComponent(mDel)
@@ -183,7 +205,8 @@ public class DevManege extends JFrame implements ActionListener {
                         .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap())
+//                    .addContainerGap()
+                )
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -214,4 +237,16 @@ public class DevManege extends JFrame implements ActionListener {
             log.info("info :{}","删除设备"+devName+"成功");
         }
     }
+
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+//    private JPanel panel1;
+//    private JScrollPane scrollPane1;
+//    private JTable mDevs;
+//    private JButton mMod;
+//    private JButton mAdd;
+//    private JPanel panel2;
+    private JLabel label2;
+//    private JButton mDel;
+//    private JLabel label1;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

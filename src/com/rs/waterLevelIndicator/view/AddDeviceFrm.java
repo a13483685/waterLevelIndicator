@@ -39,75 +39,90 @@ public class AddDeviceFrm extends JFrame implements ActionListener {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        label1 = new JLabel();
+        panel1 = new JPanel();
         label2 = new JLabel();
         mAddress = new JTextField();
+        label1 = new JLabel();
         mDevName = new JTextField();
         mOK = new JButton();
         mReset = new JButton();
 
         //======== this ========
         setFont(new Font("Dialog", Font.PLAIN, 22));
-        setIconImage(new ImageIcon(Constans.LocalPath+"\\src\\images\\\u6dfb\u52a0\u8bbe\u5907.png").getImage());
+        setIconImage(new ImageIcon("F:\\work\\java\\waterLevelIndicator\\src\\images\\\u6dfb\u52a0\u8bbe\u5907.png").getImage());
         setAlwaysOnTop(true);
-        setBackground(new Color(102, 153, 255));
         Container contentPane = getContentPane();
 
-        //---- label1 ----
-        label1.setText("\u5730\u70b9\uff1a");
-        label1.setMaximumSize(new Dimension(36, 21));
-        label1.setHorizontalAlignment(SwingConstants.CENTER);
+        //======== panel1 ========
+        {
 
-        //---- label2 ----
-        label2.setText("\u8bbe\u5907\u540d\uff1a");
+            //---- label2 ----
+            label2.setText("\u8bbe\u5907\u540d\uff1a");
 
-        //---- mOK ----
-        mOK.setText("\u786e\u5b9a");
-        mOK.setIcon(new ImageIcon(getClass().getResource("/images/\u786e\u8ba4.png")));
-        mOK.addActionListener(this);
+            //---- label1 ----
+            label1.setText("\u5730\u70b9\uff1a");
+            label1.setMaximumSize(new Dimension(36, 21));
+            label1.setHorizontalAlignment(SwingConstants.CENTER);
 
-        //---- mReset ----
-        mReset.setText("\u91cd\u7f6e");
-        mReset.setIcon(new ImageIcon(getClass().getResource("/images/\u91cd\u7f6e.png")));
-        mReset.addActionListener(this);
+            //---- mOK ----
+            mOK.setText("\u786e\u5b9a");
+            mOK.setIcon(new ImageIcon(getClass().getResource("/images/\u786e\u8ba4.png")));
+            mOK.addActionListener(this);
+
+            //---- mReset ----
+            mReset.setText("\u91cd\u7f6e");
+            mReset.setIcon(new ImageIcon(getClass().getResource("/images/\u91cd\u7f6e.png")));
+            mReset.addActionListener(this);
+
+            GroupLayout panel1Layout = new GroupLayout(panel1);
+            panel1.setLayout(panel1Layout);
+            panel1Layout.setHorizontalGroup(
+                panel1Layout.createParallelGroup()
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(mOK)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(mReset))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(label2)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(mAddress, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(label1, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(mDevName, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(62, Short.MAX_VALUE))
+            );
+            panel1Layout.setVerticalGroup(
+                panel1Layout.createParallelGroup()
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(label2, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mAddress, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(mDevName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(mOK)
+                            .addComponent(mReset))
+                        .addContainerGap(13, Short.MAX_VALUE))
+            );
+        }
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(41, 41, 41)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(label2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                .addComponent(mAddress, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                                .addComponent(mDevName, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)))
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addComponent(mOK)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                            .addComponent(mReset)))
-                    .addContainerGap(42, Short.MAX_VALUE))
+                .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addGap(32, 32, 32)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(label1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(mAddress, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGap(31, 31, 31)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(label2, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(mDevName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(mReset)
-                        .addComponent(mOK))
-                    .addGap(24, 24, 24))
+                .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -115,9 +130,10 @@ public class AddDeviceFrm extends JFrame implements ActionListener {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel label1;
+    private JPanel panel1;
     private JLabel label2;
     private JTextField mAddress;
+    private JLabel label1;
     private JTextField mDevName;
     private JButton mOK;
     private JButton mReset;

@@ -17,6 +17,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import static com.rs.waterLevelIndicator.view.MainFrm.devTree;
 
@@ -26,7 +28,7 @@ import static com.rs.waterLevelIndicator.view.MainFrm.devTree;
 public class HistoryDbPanel extends JPanel {
     private JPanel panel2;
     private JTabbedPane mTables;
-    private JPanel mHistoryTable;
+//    private JPanel mHistoryTable;
     private JPanel mEventTable;
     private JPanel mWarnningTable;
     private JButton mStartTimeButton;
@@ -95,13 +97,20 @@ public class HistoryDbPanel extends JPanel {
         mTables = new JTabbedPane();
         //历史数据表格
         HistoryDataBaseTable historyDataBaseTable = new HistoryDataBaseTable();
+        JScrollPane mHistoryTable = historyDataBaseTable.initTable(mPage);//最终要add进去的是一个JScrollPane
 //        DbPageMesReq req = new DbPageMesReq();
-        JScrollPane mHistoryTable = historyDataBaseTable.initTable(mPage);
-        myMouseAdapter =  new MyMouseAdapter(historyDataBaseTable,mPage);
+        //事件记录
+        EventDataBaseTable eventDataBaseTable = new EventDataBaseTable();
+        JScrollPane mEventTable = eventDataBaseTable.initTable(mPage);
+
+        //报警记录
+
+
+        myMouseAdapter =  new MyMouseAdapter(historyDataBaseTable,mPage);//这个可以加到切换选项卡的逻辑中
 //        mHistoryTable = new JPanel();
 //        mHistoryTable.add(jScrollPane);
 
-        mEventTable = new JPanel();
+//        mEventTable = new JPanel();
         mWarnningTable = new JPanel();
         mStartTimeButton = new DateChooserJButton();
         mEndTimeButton = new DateChooserJButton();
@@ -137,7 +146,7 @@ public class HistoryDbPanel extends JPanel {
             {
 
                 //======== mHistoryTable ========
-                {
+//                {
 
 //                    GroupLayout mHistoryTableLayout = new GroupLayout(mHistoryTable);
 //                    mHistoryTable.setLayout(mHistoryTableLayout);
@@ -149,23 +158,22 @@ public class HistoryDbPanel extends JPanel {
 //                        mHistoryTableLayout.createParallelGroup()
 //                            .addGap(0, 510, Short.MAX_VALUE)
 //                    );
-                }
+//                }
                 mTables.addTab("\u5386\u53f2\u8bb0\u5f55", mHistoryTable);
-
                 //======== mEventTable ========
-                {
-
-                    GroupLayout mEventTableLayout = new GroupLayout(mEventTable);
-                    mEventTable.setLayout(mEventTableLayout);
-                    mEventTableLayout.setHorizontalGroup(
-                        mEventTableLayout.createParallelGroup()
-                            .addGap(0, 618, Short.MAX_VALUE)
-                    );
-                    mEventTableLayout.setVerticalGroup(
-                        mEventTableLayout.createParallelGroup()
-                            .addGap(0, 510, Short.MAX_VALUE)
-                    );
-                }
+//                {
+//
+//                    GroupLayout mEventTableLayout = new GroupLayout(mEventTable);
+//                    mEventTable.setLayout(mEventTableLayout);
+//                    mEventTableLayout.setHorizontalGroup(
+//                        mEventTableLayout.createParallelGroup()
+//                            .addGap(0, 618, Short.MAX_VALUE)
+//                    );
+//                    mEventTableLayout.setVerticalGroup(
+//                        mEventTableLayout.createParallelGroup()
+//                            .addGap(0, 510, Short.MAX_VALUE)
+//                    );
+//                }
                 mTables.addTab("\u4e8b\u4ef6\u8bb0\u5f55", mEventTable);
 
                 //======== mWarnningTable ========
@@ -183,6 +191,23 @@ public class HistoryDbPanel extends JPanel {
                     );
                 }
                 mTables.addTab("\u62a5\u8b66\u8bb0\u5f55", mWarnningTable);
+
+                mTables.addChangeListener(new ChangeListener() {
+                    @Override
+                    public void stateChanged(ChangeEvent e) {
+
+
+                        int position = ((JTabbedPane)e.getSource()).getSelectedIndex();
+                        if(position == 0){
+
+                        }else if(position == 1){
+
+                        }else if(position == 2){
+
+                        }
+
+                    }
+                });
             }
 
             //---- mStartTimeButton ----
