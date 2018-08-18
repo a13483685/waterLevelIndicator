@@ -11,14 +11,16 @@ public class AdminDao extends BaseDao {
 	/**
 	 * ????????
 	 */
-	public Admin login(Admin admin){
+	public Admin login(Admin admin) throws SQLException {
 		String sql = "select * from s_admin where name=? and password=?";
 		Admin adminRst = null;
+		PreparedStatement prst = null;
+		ResultSet executeQuery = null;
 		try {
-			PreparedStatement prst = con.prepareStatement(sql);//??sql?????????????????
+			prst = con.prepareStatement(sql);//??sql?????????????????
 			prst.setString(1, admin.getName());
 			prst.setString(2, admin.getPassword());
-			ResultSet executeQuery = prst.executeQuery();
+			executeQuery = prst.executeQuery();
 			if(executeQuery.next()){
 				adminRst = new Admin();
 				adminRst.setId(executeQuery.getInt("id"));
@@ -26,21 +28,26 @@ public class AdminDao extends BaseDao {
 				adminRst.setPassword(executeQuery.getString("password"));
 				adminRst.setCreateDate(executeQuery.getString("createDate"));
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} finally {
+			if(executeQuery!=null)
+				executeQuery.close();
+			if(prst!=null)
+				prst.close();
+			if(con!=null)
+				con.close();
 		}
 		return adminRst;
 	}
-	public String editPassword(Admin admin,String newPassword){
+	public String editPassword(Admin admin,String newPassword) throws SQLException {
 		String sql = "select * from s_admin where id=? and password=?";
 		PreparedStatement prst = null;
+		ResultSet executeQuery = null;
 		int id = 0;
 		try {
 			prst = con.prepareStatement(sql);
 			prst.setInt(1, admin.getId());
 			prst.setString(2, admin.getPassword());
-			ResultSet executeQuery = prst.executeQuery();
+			executeQuery = prst.executeQuery();
 			if(!executeQuery.next()){
 				String retString = "?????????";
 				return retString;
@@ -60,10 +67,14 @@ public class AdminDao extends BaseDao {
 			if(rst > 0){
 				retString = "???????????";
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}//??sql?????????????????
+		}finally {
+			if(executeQuery!=null)
+			executeQuery.close();
+			if(prst!=null)
+			prst.close();
+			if(con!=null)
+			con.close();
+		}
 		return retString;
 	}
 }

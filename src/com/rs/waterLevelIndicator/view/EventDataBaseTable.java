@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Vector;
 
 public class EventDataBaseTable extends BaseDataBaseTable {
-    String[] params = {"设备名","状态","时间"};
+    String[] params = {"地点","设备名","设备id","事件类型","负责人","时间"};
     public EventDataBaseTable(){
         super();
     }
@@ -21,8 +21,11 @@ public class EventDataBaseTable extends BaseDataBaseTable {
         List<EventType> eventDataList = eventDataPageQuery.queryMessage(req);
         for(EventType eventType:eventDataList){
             Vector mItems = new Vector();
+            mItems.add(eventType.getAddress());
+            mItems.add(eventType.getDevDesc());
             mItems.add(eventType.getmDevId());
             mItems.add(eventType.getmEventType());
+            mItems.add(eventType.getDutyPerson());
             mItems.add(eventType.getmTime());
             sensorDatas.add(mItems);
         }
@@ -34,6 +37,11 @@ public class EventDataBaseTable extends BaseDataBaseTable {
 
     @Override
     public void initWidth4Table() {
-
+        mRealSensorData.getColumnModel().getColumn(0).setPreferredWidth(140);
+        mRealSensorData.getColumnModel().getColumn(1).setPreferredWidth(90);
+        mRealSensorData.getColumnModel().getColumn(2).setPreferredWidth(70);
+        mRealSensorData.getColumnModel().getColumn(3).setPreferredWidth(70);
+        mRealSensorData.getColumnModel().getColumn(4).setPreferredWidth(70);
+        mRealSensorData.getColumnModel().getColumn(5).setPreferredWidth(140);
     }
 }

@@ -241,6 +241,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
             //======== mDebug ========
             {
                 mDebug.setText("\u8c03\u8bd5");
+                mDebug.addMouseListener(this);
             }
             menuBar1.add(mDebug);
 
@@ -248,6 +249,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
             {
                 mExit.setText("\u9000\u51fa");
                 mExit.setIcon(new ImageIcon(MainFrm.class.getResource("/images/\u9000\u51fa (1).png")));
+                mExit.addMouseListener(this);
 //                mExit.addActionListener(e -> mExitActionPerformed(e));
             }
             menuBar1.add(mExit);
@@ -361,6 +363,13 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
 
         }else if(e.getSource() == mDevManerge){//添加设备
 //            mContentPanel.removeAll();
+        }else if(e.getSource() == mExit){
+            String[] buttons = {"是","否".toString()};
+            String info = "确定退出?";
+            int ret = JOptionPane.showOptionDialog(this, info, "退出", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.DEFAULT_OPTION, new ImageIcon(LoginFrm.class.getResource("/images/userType.png")), buttons, null);
+            if(ret == 0){
+                //退出操作
+            }
         }
 
     }
@@ -438,6 +447,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
             mContentPanel.removeAll();
             userManeger();
         }
+
     }
 
     private void userManeger() {

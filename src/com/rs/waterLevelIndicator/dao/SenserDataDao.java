@@ -19,11 +19,6 @@ import java.util.Observer;
 public class SenserDataDao extends BaseDao  {
     private String TAG ="SenserDataDao";
 
-
-    //    private T t;
-//    public SenserDataDao(T t) {
-//        this.t = t;
-//    }
     public SensorData selectLastRecord(String dev){
         String sql = "";
         if(dev.equals("all")){
@@ -196,47 +191,19 @@ public class SenserDataDao extends BaseDao  {
 
 
 //往数据库插入数据
-    public void insertIntoDb(String str){
+    public void  insertIntoDb(SensorData sensorData){
+        String dev_id = sensorData.getDev_id();
+        String konggao = sensorData.getGaokong();
+        String Upload = sensorData.getUpload();
+        String UpLimit = sensorData.getUpLimit();
+        String DownLimit = sensorData.getDownLimit();
+        String GpsSignal = sensorData.getGpsSignal();
+        String comStatus = sensorData.getComStatus();
+        String Watt = sensorData.getWatt();
+        String time = sensorData.getTime();
+        String waterLevel = sensorData.getWaterLevel();
+        String devStatus = sensorData.getDevStatus();
 
-        String[] SensorInfo = str.split(",");
-        SensorData sensorData = new SensorData();
-
-        String dev_id = SensorInfo[1];
-        sensorData.setDev_id(dev_id);
-
-        String konggao = SensorInfo[3];
-        sensorData.setGaokong(konggao);
-
-        String Upload = SensorInfo[5];
-        sensorData.setUpload(Upload);
-
-        String UpLimit = SensorInfo[7];
-        sensorData.setUpLimit(UpLimit);
-
-        String DownLimit = SensorInfo[9];
-        sensorData.setDownLimit(DownLimit);
-
-        String GpsSignal = SensorInfo[11];
-        sensorData.setGpsSignal(GpsSignal);
-//        System.out.println("GpsSignal is :"+sensorData.getGpsSignal());
-
-        String comStatus = SensorInfo[13];
-        sensorData.setComStatus(comStatus);
-//        System.out.println("comStatus is :"+sensorData.getComStatus());
-
-        String Watt = SensorInfo[15];
-        sensorData.setWatt(Watt);
-//        System.out.println("Watt is :"+sensorData.getWatt());
-
-        String time = SensorInfo[17];
-        sensorData.setTime(time);
-
-        String waterLevel = SensorInfo[19];
-        sensorData.setWaterLevel(waterLevel);
-//        System.out.println("waterLevel is :"+sensorData.getWaterLevel());
-
-        String devStatus = SensorInfo[21];
-        sensorData.setDevStatus(devStatus);
 //        System.out.println("devStatus is :"+sensorData.getDevStatus());
 
 
@@ -245,14 +212,15 @@ public class SenserDataDao extends BaseDao  {
 
         try {
             PreparedStatement preparedStatement = con.prepareStatement(sql);
+
             preparedStatement.setString(1,dev_id);
             preparedStatement.setString(2,konggao);
             preparedStatement.setString(3,Upload);
             preparedStatement.setString(4,UpLimit);
             preparedStatement.setString(5,DownLimit);
-            preparedStatement.setString(6,GpsSignal);
-            preparedStatement.setString(7,comStatus);
-            preparedStatement.setString(8,Watt);
+            preparedStatement.setString(6,Watt);
+            preparedStatement.setString(7,GpsSignal);
+            preparedStatement.setString(8,comStatus);
             preparedStatement.setString(9,time);
             preparedStatement.setString(10,waterLevel);
             preparedStatement.setString(11,devStatus);
@@ -270,8 +238,6 @@ public class SenserDataDao extends BaseDao  {
             closeDao();
         }
     }
-
-
 
     public int getMessageNum(String dev) {
         String sql = "";

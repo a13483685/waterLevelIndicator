@@ -12,7 +12,7 @@ import java.util.Vector;
 public class DevTable extends JTable{
     private JTable mDevTab= null;
     private BaseTableModule baseTableModule;
-    String[] title = {"地址","设备名"};
+    String[] title = {"地址","设备名","设备编号","责任人"};
     private Vector<Vector> mDevDatas;
     private DevicesDao devicesDao = null;
     public DevTable(){
@@ -26,7 +26,9 @@ public class DevTable extends JTable{
         for(Device device:allDevices){
             Vector mItems = new Vector();
             mItems.add(device.getmAddress());
-            mItems.add(device.getmDeviceName());
+            mItems.add(device.getmDevDesc());
+            mItems.add(device.getmDeviceId());
+            mItems.add(device.getmDutyPerson());
             mDevDatas.add(mItems);
         }
         baseTableModule = new BaseTableModule(title,mDevDatas);
@@ -42,7 +44,9 @@ public class DevTable extends JTable{
         for(Device device:allDevices){
             Vector mItems = new Vector();
             mItems.add(device.getmAddress());
-            mItems.add(device.getmDeviceName());
+            mItems.add(device.getmDevDesc());
+            mItems.add(device.getmDeviceId());
+            mItems.add(device.getmDutyPerson());
             mDevDatas.add(mItems);
         }
         BaseTableModule  baseTableModule = new BaseTableModule(title,mDevDatas);

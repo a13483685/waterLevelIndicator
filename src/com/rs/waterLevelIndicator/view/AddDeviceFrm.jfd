@@ -4,29 +4,28 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp panel1::l:::x}"
-			"$verticalGroup": "par l {comp panel1::l:::x}"
+			"$horizontalGroup": "par l {comp panel1::t:::x}"
+			"$verticalGroup": "par l {comp panel1::t:::x}"
 		} ) {
 			name: "this"
 			"font": new java.awt.Font( "Dialog", 0, 22 )
 			"iconImage": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\添加设备.png" )
 			"alwaysOnTop": true
-			"background": new java.awt.Color( 102, 153, 255, 255 )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :40:40:p, par l:::p {seq l {comp mOK:::p::p, space :::x, comp mReset:::p::p}, seq {comp label2:::p::p, space u:::p, comp mAddress:::p:166:p}, seq l {comp label1:::p:48:p, space u:::p, comp mDevName:::p:166:p}}, space ::62:x}}"
-				"$verticalGroup": "par l {seq l {space :p:29:p, par b {comp label2::b:p:28:p, comp mAddress::b:p::p}, space s:::p, par b {comp mDevName::b:p::p, comp label1::b:p:29:p}, space s:::p, par b {comp mOK::b:p::p, comp mReset::b:p::p}, space ::13:x}}"
+				"$horizontalGroup": "par l {seq t {space ::119:x, comp label5:::p::p, space :p:134:p}, seq l {space :p:39:p, par l:::p {seq l {space :p:13:p, comp mOK:::p::p, space :::x, comp mReset:::p::p, space :p:12:p}, seq l {comp devId:::p::p, space u:::p, comp textField1:::::x}, seq l {comp label4:::p::p, space u:::p, comp textField2:::::x}, seq l {par l {comp label1:::p::p, comp label2:::p::p}, space u:::p, par l {comp mAddress:::p:166:p, comp mDevName:::p:166:p}}}, space ::48:x}}"
+				"$verticalGroup": "par l {seq l {space :::p, comp label5:::p:17:p, space :14:14:p, par b {comp mAddress::b:p::p, comp label2::b:p:28:p}, space u:::p, par b {comp mDevName::b:p::p, comp label1::b:p::p}, space u:::p, par b {comp devId::b:::x, comp textField1::b:p::p}, space u:::p, par b {comp label4::b:p::p, comp textField2::b:p::p}, space s:::p, par b {comp mOK::b:p:26:p, comp mReset::b:p:26:p}, space :::p}}"
 			} ) {
 				name: "panel1"
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
-					"text": "设备名："
+					"text": "地点："
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "mAddress"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
-					"text": "地点："
+					"text": "设备名："
 					"maximumSize": new java.awt.Dimension( 36, 21 )
 					"horizontalAlignment": 0
 				} )
@@ -43,10 +42,29 @@ new FormModel {
 					"text": "重置"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/images/重置.png" )
 				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "devId"
+					"text": "设备ID："
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textField1"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label4"
+					"text": "责任人："
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textField2"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label5"
+					"text": "添加设备"
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 3, false )
+				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 105, 25 )
-			"size": new java.awt.Dimension( 330, 200 )
+			"location": new java.awt.Point( 230, 45 )
+			"size": new java.awt.Dimension( 315, 285 )
 		} )
 	}
 }

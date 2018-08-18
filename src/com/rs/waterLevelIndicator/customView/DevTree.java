@@ -16,7 +16,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver {
     public DefaultTreeModel mModel;
@@ -25,6 +28,7 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
     JPopupMenu popMenu; //菜单
     JMenuItem mDataSelectItem;//数据查询
     JMenuItem mDevInfoItem;//设备信息
+    public static Map<String,String> devInfos = new HashMap<>();
     private DefaultMutableTreeNode selNode;
 
     public DevTree(){
@@ -69,8 +73,8 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
                         TreePath selTree=mAllDevTree.getPathForRow(n);
                         //拿到的是叶子节点
                         selNode = (DefaultMutableTreeNode)selTree.getLastPathComponent();
-
-                        System.out.println("selNode is :"+ selNode.toString());//叶子节点的名称 也就是设备测点 拿到的就是设备信息
+                        String devId = devInfos.get(selNode.toString());
+                        System.out.println("selNode is :"+ devId);//叶子节点的名称 也就是设备测点 拿到的就是设备信息
                         if(selNode.isLeaf()||selNode.isRoot()){
                             popMenu.show(mAllDevTree,me.getX(), me.getY());
                         }
@@ -113,8 +117,8 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
             SenserDataDao senserDataDao = new SenserDataDao();
             List<Integer> allDevId = senserDataDao.getAllDevId();
             for (Integer devId:allDevId) {
-                  if(String.valueOf(devId).equals(selNode.toString())) {
-                      Constans.mWhichDevIsSelected = selNode.toString();
+                  if(String.valueOf(devId).equals(devInfos.get(selNode.toString()))) {
+                      Constans.mWhichDevIsSelected = devInfos.get(selNode.toString());
                       FunctionHelper.SaveSelectedDevToFile(Constans.mWhichDevIsSelected);
                       DevExist = true;
                   }
@@ -146,16 +150,25 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
 //        mModel.removeNodeFromParent(root);
 //        System.out.println("---------------------------------------------");
         DevicesDao devicesDao = new DevicesDao();
-        List<Device> allDevices = devicesDao.getAllDevices();
+        List<Device> allDevices = null;
+        try {
+            allDevices = devicesDao.getAllDevices();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         root.removeAllChildren();
 
         mModel = (DefaultTreeModel) mAllDevTree.getModel();
         mAllDevTree.updateUI();
         for(int i=0;i<allDevices.size();i++){
-            String address = allDevices.get(i).getmAddress();
-            String deviceName = allDevices.get(i).getmDeviceName();
+            Device device = allDevices.get(i);
+            String address = device.getmAddress();
+            String deviceName = device.getmDevDesc();
+            String deviceId = device.getmDeviceId();
+            if(!devInfos.containsKey(deviceName)){
+                devInfos.put(deviceName,deviceId);
+            }
             DefaultMutableTreeNode r = new DefaultMutableTreeNode(address);
-
             r.add(new DefaultMutableTreeNode(deviceName));
             mModel.insertNodeInto(r,root,i);
             mAllDevTree.updateUI();

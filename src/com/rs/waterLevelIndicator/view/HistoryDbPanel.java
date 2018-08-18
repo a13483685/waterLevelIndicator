@@ -104,6 +104,8 @@ public class HistoryDbPanel extends JPanel {
         JScrollPane mEventTable = eventDataBaseTable.initTable(mPage);
 
         //报警记录
+        WarnningDataBaseTable warnningDataBaseTable = new WarnningDataBaseTable();
+        JScrollPane mWarnningTable = warnningDataBaseTable.initTable(mPage);
 
 
         myMouseAdapter =  new MyMouseAdapter(historyDataBaseTable,mPage);//这个可以加到切换选项卡的逻辑中
@@ -111,7 +113,7 @@ public class HistoryDbPanel extends JPanel {
 //        mHistoryTable.add(jScrollPane);
 
 //        mEventTable = new JPanel();
-        mWarnningTable = new JPanel();
+//        mWarnningTable = new JPanel();
         mStartTimeButton = new DateChooserJButton();
         mEndTimeButton = new DateChooserJButton();
         label1 = new JLabel();
@@ -145,58 +147,15 @@ public class HistoryDbPanel extends JPanel {
             //======== mTables ========
             {
 
-                //======== mHistoryTable ========
-//                {
-
-//                    GroupLayout mHistoryTableLayout = new GroupLayout(mHistoryTable);
-//                    mHistoryTable.setLayout(mHistoryTableLayout);
-//                    mHistoryTableLayout.setHorizontalGroup(
-//                        mHistoryTableLayout.createParallelGroup()
-//                            .addGap(0, 618, Short.MAX_VALUE)
-//                    );
-//                    mHistoryTableLayout.setVerticalGroup(
-//                        mHistoryTableLayout.createParallelGroup()
-//                            .addGap(0, 510, Short.MAX_VALUE)
-//                    );
-//                }
                 mTables.addTab("\u5386\u53f2\u8bb0\u5f55", mHistoryTable);
-                //======== mEventTable ========
-//                {
-//
-//                    GroupLayout mEventTableLayout = new GroupLayout(mEventTable);
-//                    mEventTable.setLayout(mEventTableLayout);
-//                    mEventTableLayout.setHorizontalGroup(
-//                        mEventTableLayout.createParallelGroup()
-//                            .addGap(0, 618, Short.MAX_VALUE)
-//                    );
-//                    mEventTableLayout.setVerticalGroup(
-//                        mEventTableLayout.createParallelGroup()
-//                            .addGap(0, 510, Short.MAX_VALUE)
-//                    );
-//                }
+
                 mTables.addTab("\u4e8b\u4ef6\u8bb0\u5f55", mEventTable);
 
-                //======== mWarnningTable ========
-                {
-
-                    GroupLayout mWarnningTableLayout = new GroupLayout(mWarnningTable);
-                    mWarnningTable.setLayout(mWarnningTableLayout);
-                    mWarnningTableLayout.setHorizontalGroup(
-                        mWarnningTableLayout.createParallelGroup()
-                            .addGap(0, 618, Short.MAX_VALUE)
-                    );
-                    mWarnningTableLayout.setVerticalGroup(
-                        mWarnningTableLayout.createParallelGroup()
-                            .addGap(0, 510, Short.MAX_VALUE)
-                    );
-                }
                 mTables.addTab("\u62a5\u8b66\u8bb0\u5f55", mWarnningTable);
 
                 mTables.addChangeListener(new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
-
-
                         int position = ((JTabbedPane)e.getSource()).getSelectedIndex();
                         if(position == 0){
 
@@ -205,7 +164,6 @@ public class HistoryDbPanel extends JPanel {
                         }else if(position == 2){
 
                         }
-
                     }
                 });
             }

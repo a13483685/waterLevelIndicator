@@ -15,10 +15,11 @@ import java.util.List;
 
 public class DevicesDao extends BaseDao {
     String sqlSelect = "select * from s_devices";
-    String sqlInsert = "insert s_devices(id,address,devName) values(?,?,?)";
+    String sqlInsert = "insert s_devices(id,address,devId,devDesc,dutyPerson) values(?,?,?,?,?)";
     String sqlId = "select id from s_devices";
-    PreparedStatement ps = null;
     List<Device> devices = null;
+//    PreparedStatement ps = null;
+//    ResultSet resultSet = null;
     private DevTable dt= null;
     private DbPageMesReq req;
     private int id;
@@ -28,15 +29,17 @@ public class DevicesDao extends BaseDao {
         this.req = req;
     }
     public DevicesDao(){
-
+        super();
     }
 
     //数据分页查询
     public List<Device>  getDevList(DbPageMesReq req){
         List<Device> Devices = new ArrayList<>();
         String sql = "select * from  s_devices order by id DESC limit ?,?";
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
 //            int startIndex = req.getStartIndex()*req.getPageSize();
             int startIndex = req.getStartIndex();
             int offsetIndex = req.getPageSize();
@@ -44,17 +47,45 @@ public class DevicesDao extends BaseDao {
             ps.setInt(2,offsetIndex);
 
             System.out.println("recode is from :"+startIndex+"to"+(startIndex+offsetIndex));
-            ResultSet resultSet = ps.executeQuery();
+            resultSet= ps.executeQuery();
             while (resultSet.next()){
                 Device device = new Device();
                 String address = resultSet.getString("address");
-                String devName = resultSet.getString("devName");
+                String devId = resultSet.getString("devId");
+                String devDesc = resultSet.getString("devDesc");
+                String dutyPerson = resultSet.getString("dutyPerson");
+
                 device.setmAddress(address);
-                device.setmDeviceName(devName);
+                device.setmDevDesc(devDesc);
+                device.setmDeviceId(devId);
+                device.setmDutyPerson(dutyPerson);
                 Devices.add(device);
             }
         }catch (SQLException e){
 
+        }finally {
+            if(resultSet!=null){
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                if(ps!=null)
+                {
+                    try {
+                        ps.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if(con!=null){
+                    try {
+                        con.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
 
         return Devices;
@@ -63,61 +94,105 @@ public class DevicesDao extends BaseDao {
     /**
      * 获得所有的设备
      */
-    public List<Device> getAllDevices(){
+    public List<Device> getAllDevices() throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
         try {
             ps = con.prepareStatement(sqlSelect);
-            ResultSet resultSet = ps.executeQuery();
             devices = new ArrayList<>();
+            resultSet = ps.executeQuery();
             while (resultSet.next()){
-                Device dev = new Device();
+                Device device = new Device();
                 String address = resultSet.getString("address");
-                String devName = resultSet.getString("devName");
-                dev.setmAddress(address);
-                dev.setmDeviceName(devName);
-//                System.out.println("dev is :"+dev.toString());
-                devices.add(dev);
+                String devId = resultSet.getString("devId");
+                String devDesc = resultSet.getString("devDesc");
+                String dutyPerson = resultSet.getString("dutyPerson");
+
+                device.setmAddress(address);
+                device.setmDevDesc(devDesc);
+                device.setmDeviceId(devId);
+                device.setmDutyPerson(dutyPerson);
+                devices.add(device);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            if(resultSet!=null){
+                resultSet.close();
+            }
+            if(ps !=null){
+                ps.close();
+            }
+//            if(con !=null){
+//                con.close();
+//            }
         }
         return devices;
     }
 
-    public int getTotalNum(){
+    public int getTotalNum() throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
         int total = 0;
         try {
             ps = con.prepareStatement(Constans.sqlTotla+"s_devices");
-            ResultSet resultSet = ps.executeQuery();
+            resultSet = ps.executeQuery();
             while (resultSet.next()){
                 total = resultSet.getInt("total");
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            if(resultSet!=null){
+                resultSet.close();
+            }
+            if(ps !=null){
+                ps.close();
+            }
+//            if(con !=null){
+//                con.close();
+//            }
         }
         return total;
     }
 
-    private int getId(){
+    private int getId() throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
         try {
             ps = con.prepareStatement(sqlId);
-            ResultSet resultSet = ps.executeQuery();
+            resultSet = ps.executeQuery();
             while (resultSet.next()){
                 id = resultSet.getInt("id");
             }
 //            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            if(resultSet!=null){
+                resultSet.close();
+            }
+            if(ps !=null){
+                ps.close();
+            }
+//            if(con !=null){
+//                con.close();
+//            }
         }
         return 0;
     }
-    public Boolean insertDevice(String address,String devName){
+    public Boolean insertDevice(String address,String devDesc,String devId,String dutyPerson) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
         boolean isSuccess = false;
         try {
             getId();
             ps = con.prepareStatement(sqlInsert);
             ps.setInt(1,++id);
             ps.setString(2,address);
-            ps.setString(3,devName);
+            ps.setString(3,devId);
+            ps.setString(4,devDesc);
+            ps.setString(5,dutyPerson);
 //            ps.executeQuery();
             if(!ps.execute()){
                 //数据插入成功
@@ -142,22 +217,44 @@ public class DevicesDao extends BaseDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            if(resultSet!=null){
+                resultSet.close();
+            }
+            if(ps !=null){
+                ps.close();
+            }
+//            if(con !=null){
+//                con.close();
+//            }
         }
         return isSuccess;
     }
 
-    public boolean deleteDevice(String devName){
-        String sqlDelete = "delete from s_devices where devName = ?";
+    public boolean deleteDevice(String devId) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
+        String sqlDelete = "delete from s_devices where devId = ?";
         boolean isSuccess = false;
         try {
             ps = con.prepareStatement(sqlDelete);
-            ps.setString(1,devName);
+            ps.setString(1,devId);
             if(!ps.execute()){
                 isSuccess = true;
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            if(resultSet!=null){
+                resultSet.close();
+            }
+            if(ps !=null){
+                ps.close();
+            }
+//            if(con !=null){
+//                con.close();
+//            }
         }
         return isSuccess;
     }

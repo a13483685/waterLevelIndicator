@@ -23,6 +23,7 @@ import org.jvnet.substance.theme.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 public class LoginFrm extends JFrame {
 
@@ -108,7 +109,11 @@ public class LoginFrm extends JFrame {
 		mButtonLogin.setIcon(new ImageIcon(LoginFrm.class.getResource("/images/\u767B\u5F55.png")));
 		mButtonLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				loginAct(ae);
+				try {
+					loginAct(ae);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 
@@ -177,7 +182,7 @@ public class LoginFrm extends JFrame {
 	}
 
 
-	protected void loginAct(ActionEvent ae) {
+	protected void loginAct(ActionEvent ae) throws SQLException {
 		// TODO Auto-generated method stub
 		String userName = mTextFieldUserName.getText().toString();
 		String password = mTextFieldPassword.getText().toString();

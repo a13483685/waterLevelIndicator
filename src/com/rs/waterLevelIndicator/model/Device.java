@@ -5,7 +5,9 @@ package com.rs.waterLevelIndicator.model;
  */
 public class Device {
     private String mAddress;
-    private String mDeviceName;
+    private String mDeviceId;
+    private String mDevDesc;
+    private String mDutyPerson;
 
     public String getmAddress() {
         return mAddress;
@@ -15,19 +17,36 @@ public class Device {
         this.mAddress = mAddress;
     }
 
-    public String getmDeviceName() {
-        return mDeviceName;
+    public String getmDeviceId() {
+        return mDeviceId;
     }
 
-    public void setmDeviceName(String mDeviceName) {
-        this.mDeviceName = mDeviceName;
+    public void setmDeviceId(String mDeviceId) {
+        this.mDeviceId = mDeviceId;
     }
 
+    public String getmDevDesc() {
+        return mDevDesc;
+    }
+
+    public void setmDevDesc(String mDevDesc) {
+        this.mDevDesc = mDevDesc;
+    }
+
+    public String getmDutyPerson() {
+        return mDutyPerson;
+    }
+
+    public void setmDutyPerson(String mDutyPerson) {
+        this.mDutyPerson = mDutyPerson;
+    }
     @Override
     public String toString() {
-        return "Devices{" +
+        return "Device{" +
                 "mAddress='" + mAddress + '\'' +
-                ", mDeviceName='" + mDeviceName + '\'' +
+                ", mDeviceId='" + mDeviceId + '\'' +
+                ", mDevDesc='" + mDevDesc + '\'' +
+                ", mDutyPerson='" + mDutyPerson + '\'' +
                 '}';
     }
 }

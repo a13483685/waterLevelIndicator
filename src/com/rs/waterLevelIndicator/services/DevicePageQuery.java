@@ -5,6 +5,7 @@ import com.rs.waterLevelIndicator.interfaces.MessageMapper;
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
 import com.rs.waterLevelIndicator.model.Device;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class DevicePageQuery implements MessageMapper<Device> {
@@ -15,12 +16,24 @@ public class DevicePageQuery implements MessageMapper<Device> {
     }
     @Override
     public List<Device> queryMessage(DbPageMesReq msg) {
-        return devicesDao.getAllDevices();
+        List<Device> allDevices = null;
+        try {
+             allDevices= devicesDao.getAllDevices();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allDevices;
     }
 
     @Override
     public int getMessageNum() {
-        return devicesDao.getTotalNum();
+        int totalNum = 0;
+        try {
+            totalNum = devicesDao.getTotalNum();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalNum;
     }
 
     @Override

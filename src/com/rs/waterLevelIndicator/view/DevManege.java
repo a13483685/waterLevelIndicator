@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -217,24 +218,28 @@ public class DevManege extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==mAdd) {
 
-            AddDeviceFrm addDeviceFrm = new AddDeviceFrm(mControlBar);
+            DeviceInfoFrm addDeviceFrm = new DeviceInfoFrm(mControlBar);
             addDeviceFrm.setVisible(true);
         }
         if (e.getSource()==mDel){
             int row = mDevs.getSelectedRow();
-            String value = (String) mDevs.getModel().getValueAt(row, 1);
-
+            String value = (String) mDevs.getModel().getValueAt(row, 2);
             DeleteFromDb(value);
         }
         if (e.getSource()==mMod){
         }
     }
 
-    private void DeleteFromDb(String devName) {
+    private void DeleteFromDb(String devId) {
         DevicesDao devicesDao = new DevicesDao();
-        boolean b = devicesDao.deleteDevice(devName);
+        boolean b = false;
+        try {
+            b = devicesDao.deleteDevice(devId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         if(b){
-            log.info("info :{}","删除设备"+devName+"成功");
+            log.info("info :{}","删除设备"+devId+"成功");
         }
     }
 
