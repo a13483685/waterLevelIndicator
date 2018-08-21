@@ -201,20 +201,6 @@ public class DevicesDao extends BaseDao {
                 return isSuccess;
             }
 
-//            DbPageMesReq req = new DbPageMesReq();
-//            DevicePageQuery devicePageQuery = new DevicePageQuery();
-////            devicePageQuery.QueryClose();
-//            int messageNum = devicePageQuery.getMessageNum();
-//
-//            req.setTotalRecord(messageNum);//这个值应该会变
-
-
-
-//            if(dt!=null)
-//            {
-//                dt.refreshTable(req);
-//            }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -229,6 +215,38 @@ public class DevicesDao extends BaseDao {
 //            }
         }
         return isSuccess;
+    }
+
+    /**
+     * 通过设备id来返回设备对象
+     * @param devId
+     * @return  Device对象
+     */
+    public Device SelectDevMsg(String devId){
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
+        Device device = null;
+        String sqlSelete = "select * from s_devices where devId = ?";
+        try {
+            ps = con.prepareStatement(sqlSelete);
+            ps.setString(1,devId);
+            resultSet = ps.executeQuery();
+            if(resultSet.next()){
+                String address = resultSet.getString("address");
+                String deviceId = resultSet.getString("devId");
+                String devDesc = resultSet.getString("devDesc");
+                String dutyPerson = resultSet.getString("dutyPerson");
+                device = new Device();
+                device.setmAddress(address);
+                device.setmDeviceId(deviceId);
+                device.setmDevDesc(devDesc);
+                device.setmDutyPerson(dutyPerson);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return device;
     }
 
     public boolean deleteDevice(String devId) throws SQLException {
@@ -258,14 +276,27 @@ public class DevicesDao extends BaseDao {
         }
         return isSuccess;
     }
-    /**
-     * just for test
-     * @param string
-     */
-//    public static void main(String string[]){
-//        DevicesDao devicesDao = new DevicesDao();
-//        devicesDao.insertDevice();
-//        devicesDao.getAllDevices();
-//        devicesDao.closeDao();
-//    }
+
+    public boolean upDateDevMsg(String address,String devName,String devId,String dutyPerson,String selected) {
+        String sqlUpdate = "UPDATE s_devices SET address = ?,devId = ?,devDesc = ?,dutyPerson = ? WHERE devId = ?";
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
+        boolean isSuccess = false;
+        try {
+            ps = con.prepareStatement(sqlUpdate);
+            ps.setString(1,address);
+            ps.setString(2,devId);
+            ps.setString(3,devName);
+            ps.setString(4,dutyPerson);
+            ps.setString(5,selected);
+            if(!ps.execute()){
+                isSuccess = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("msg is : address is :"+address+"devId:"+devId+",devName:"+devName+",dutyPerson:"+dutyPerson+",selected is:"+selected);
+        return isSuccess;
+    }
 }

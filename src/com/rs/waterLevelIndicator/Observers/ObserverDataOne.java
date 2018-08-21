@@ -30,7 +30,7 @@ public class ObserverDataOne implements ObserverData{
         String msg = string;
         log.info("接收到客户端的数据是:{}",msg);
 //        System.out.println("接收到客户端的数据是 :"+msg);
-        if(string.startsWith("devid"))
+        if(string.startsWith("devid")&&string.length()>50)
         InsertInToDatabase(msg);
         //���뵽���ݿ�
 

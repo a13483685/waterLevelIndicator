@@ -4,6 +4,8 @@
 
 package com.rs.waterLevelIndicator.view;
 
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+import com.rs.waterLevelIndicator.customView.DevTree;
 import com.rs.waterLevelIndicator.customView.TextFieldObserver;
 import com.rs.waterLevelIndicator.model.SetParMsg;
 import com.rs.waterLevelIndicator.net.netty.ClientService;
@@ -18,6 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Map;
 
 import static com.rs.waterLevelIndicator.view.MainFrm.devTree;
 
@@ -29,32 +32,32 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
     private String paraMsg = "";
     private String Val = "";
     JButton mReadPara = null;
-//    JTable mRealSensorData;//
-//    JScrollPane scrollPane2;
     JTabbedPane tabbedPane3;
     JButton mSetPara;
     JComboBox mParacomboBox;
     private JTextField mParaValTextField;
     private SetParMsg setParMsg;
     private ClientService service;
-    public static TextFieldObserver mLogContent;
-    //    ChatServer server = null;
-    public DeviceMonitorJpanel() {
-//        this.server = server;
+    private JLabel label5;
+    private JComponent separator1;
+    private JComboBox mDevNameCb;
+    private JComponent separator2;
+    private JLabel label3;
+    private JCheckBox mOpenSelect;
+    private JButton mOKButton;
+    private boolean isOpen = true;
+    Map<String, String> devInfos;
 
-//        initServer();
+    public static TextFieldObserver mLogContent;
+    public DeviceMonitorJpanel() {
         initView();
         this.updateUI();
     }
 
-    private void initServer() {
-//        Client.main();
-//        service = ClientService.getInstance();
-    }
 
     private void initView() {
-
-
+        //查询数据库 设备名 id
+        devInfos = DevTree.devInfos;
         JScrollPane scrollPane1;
 //        JTable mRealSensorData;
         JTabbedPane tabbedPane5;
@@ -65,11 +68,10 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
 
         JLabel label2;
 
-
-
-        JPanel panel2;
+//        JPanel panel2;
         scrollPane1 = new JScrollPane();
         tabbedPane3 = new JTabbedPane();
+        DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
 //        scrollPane2 = new JScrollPane();
 
         initTable();
@@ -90,12 +92,39 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
         mReadPara.addActionListener(this);
         mSetPara = new JButton();
         mSetPara.addActionListener(this);
-        panel2 = new JPanel();
+//        panel2 = new JPanel();
         setParMsg = new SetParMsg();
-        //表格初始化
 
+        label5 = new JLabel();
+        separator1 = compFactory.createSeparator("\u8bbe\u5907\u84dd\u7259\u914d\u7f6e");
+        mDevNameCb = new JComboBox();
+        for(String key:devInfos.keySet()){
+            mDevNameCb.addItem(key);
+        }
+        separator2 = compFactory.createSeparator("\u8bbe\u5907\u53c2\u6570\u914d\u7f6e");
+        label3 = new JLabel();
+        mOpenSelect = new JCheckBox();
+        mOpenSelect.setSelected(true);
+//        mOpenSelect.addActionListener(this);
+        mOKButton = new JButton();
+        mOKButton.addActionListener(this);
 
+        //======== this ========
 
+        //======== tabbedPane2 ========
+        {
+
+            //======== scrollPane1 ========
+            {
+//                scrollPane1.setViewportView(mAllDevTree);
+            }
+//            tabbedPane2.addTab("\u5168\u90e8\u70b9\u4f4d", scrollPane1);
+        }
+
+        //======== tabbedPane3 ========
+        {
+//            tabbedPane3.addTab("\u5b9e\u65f6\u6570\u636e", scrollPane2);
+        }
 
 
         //======== tabbedPane5 ========
@@ -119,75 +148,120 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
                 //---- mSetPara ----
                 mSetPara.setText("\u8bbe\u53c2");
 
+                //---- label5 ----
+                label5.setText("\u8bbe\u5907\u540d\uff1a");
+
+                //---- label3 ----
+                label3.setText("\u72b6\u6001\uff1a");
+
+                //---- mOpenSelect ----
+                mOpenSelect.setText("\u6253\u5f00");
+
+                //---- mOKButton ----
+                mOKButton.setText("\u786e\u5b9a");
+
                 GroupLayout panel1Layout = new GroupLayout(panel1);
                 panel1.setLayout(panel1Layout);
                 panel1Layout.setHorizontalGroup(
-                        panel1Layout.createParallelGroup()
+                    panel1Layout.createParallelGroup()
+                        .addGroup(panel1Layout.createSequentialGroup()
+                            .addGroup(panel1Layout.createParallelGroup()
                                 .addGroup(panel1Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(label2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                .addComponent(mReadPara))
-                                        .addGroup(panel1Layout.createParallelGroup()
-                                                .addGroup(panel1Layout.createSequentialGroup()
-                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addGroup(panel1Layout.createParallelGroup()
-                                                                .addComponent(mParacomboBox, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(mParaValTextField))
-                                                        .addGap(36, 36, 36))
-                                                .addGroup(panel1Layout.createSequentialGroup()
-                                                        .addGap(28, 28, 28)
-                                                        .addComponent(mSetPara)
-                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)))
-                                        .addGroup(panel1Layout.createParallelGroup()
-                                                .addComponent(mLogContent, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(mPrintHistory))
-                                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(36, 36, 36)
+                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(label2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(panel1Layout.createParallelGroup()
+                                        .addComponent(mParaValTextField,GroupLayout.DEFAULT_SIZE, 100, 100)
+                                        .addComponent(mParacomboBox,GroupLayout.DEFAULT_SIZE, 120, 120))
+                                    .addGap(36, 36, 36))
+                                .addGroup(panel1Layout.createSequentialGroup()
+                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(panel1Layout.createSequentialGroup()
+                                            .addGap(35, 35, 35)
+                                            .addComponent(mReadPara)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(mSetPara))
+                                        .addGroup(panel1Layout.createSequentialGroup()
+                                            .addContainerGap()
+                                            .addComponent(separator1, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
+                                        .addGroup(panel1Layout.createSequentialGroup()
+                                            .addContainerGap()
+                                            .addComponent(separator2, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
+                                        .addGroup(panel1Layout.createSequentialGroup()
+                                            .addGap(35, 35, 35)
+                                            .addGroup(panel1Layout.createParallelGroup()
+                                                .addComponent(label5)
+                                                .addComponent(label3)
+                                                .addComponent(mOKButton))
+                                            .addGap(18, 18, 18)
+                                            .addGroup(panel1Layout.createParallelGroup()
+                                                .addComponent(mDevNameCb, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(mOpenSelect))))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(panel1Layout.createParallelGroup()
+                                .addComponent(mPrintHistory)
+                                .addComponent(mLogContent, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE))
+                            .addContainerGap()
+                        )
                 );
                 panel1Layout.setVerticalGroup(
-                        panel1Layout.createParallelGroup()
+                    panel1Layout.createParallelGroup()
+                        .addGroup(panel1Layout.createSequentialGroup()
+                            .addGap(11, 11, 11)
+                            .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                .addComponent(mPrintHistory)
+                                .addComponent(separator2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel1Layout.createParallelGroup()
                                 .addGroup(panel1Layout.createSequentialGroup()
-                                        .addGap(11, 11, 11)
-                                        .addComponent(mPrintHistory)
-                                        .addGroup(panel1Layout.createParallelGroup()
-                                                .addGroup(panel1Layout.createSequentialGroup()
-                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                                .addComponent(label1)
-                                                                .addComponent(mParacomboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addGroup(panel1Layout.createParallelGroup()
-                                                                .addComponent(label2)
-                                                                .addComponent(mParaValTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                                        .addGap(26, 26, 26)
-                                                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                                .addComponent(mReadPara)
-                                                                .addComponent(mSetPara)))
-                                                .addGroup(panel1Layout.createSequentialGroup()
-                                                        .addGap(25, 25, 25)
-                                                        .addComponent(mLogContent, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE)))
-                                        .addContainerGap(33, Short.MAX_VALUE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(label1)
+                                        .addComponent(mParacomboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(panel1Layout.createParallelGroup()
+                                        .addComponent(label2)
+                                        .addComponent(mParaValTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(mSetPara)
+                                        .addComponent(mReadPara))
+                                    .addGap(13, 13, 13)
+                                    .addComponent(separator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(label5)
+                                        .addComponent(mDevNameCb, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(label3)
+                                        .addComponent(mOpenSelect))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,28,28)
+                                    .addComponent(mOKButton))
+                                .addGroup(panel1Layout.createSequentialGroup()
+                                    .addGap(25, 25, 25)
+                                    .addComponent(mLogContent, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE)))
+                            .addContainerGap(14, Short.MAX_VALUE))
                 );
             }
-            tabbedPane5.addTab("\u8bfb\u53c2\u6570", panel1);
+            tabbedPane5.addTab("参数配置", panel1);
 
             //======== panel2 ========
             {
 
-                GroupLayout panel2Layout = new GroupLayout(panel2);
-                panel2.setLayout(panel2Layout);
-                panel2Layout.setHorizontalGroup(
-                        panel2Layout.createParallelGroup()
-                                .addGap(0, 578, Short.MAX_VALUE)
-                );
-                panel2Layout.setVerticalGroup(
-                        panel2Layout.createParallelGroup()
-                                .addGap(0, 305, Short.MAX_VALUE)
-                );
+//                GroupLayout panel2Layout = new GroupLayout(panel2);
+//                panel2.setLayout(panel2Layout);
+//                panel2Layout.setHorizontalGroup(
+//                        panel2Layout.createParallelGroup()
+//                                .addGap(0, 578, Short.MAX_VALUE)
+//                );
+//                panel2Layout.setVerticalGroup(
+//                        panel2Layout.createParallelGroup()
+//                                .addGap(0, 305, Short.MAX_VALUE)
+//                );
             }
-            tabbedPane5.addTab("\u63a7\u5236", panel2);
+//            tabbedPane5.addTab("\u63a7\u5236", panel2);
         }
 
         GroupLayout layout = new GroupLayout(this);
@@ -266,23 +340,26 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
                 setParMsg.setmContentVal(Val);
                 setParMsg.setDevId(Constans.mWhichDevIsSelected);
                 ServerHandler.sendMsgToAll(setParMsg.toString());
-//                ServerHandler.sendMsgToAll("head,01,devid,2,cmd,02,13");
-
-//                service.sendMsg(setParMsg.toString());
-//                JOptionPane.showConfirmDialog(this,setParMsg.toString());
-//                Client.sendMsg(setParMsg);
             }
-
-//            try {
-//                TcpServerNonBlockingNIO.writeMsg("demo");
-//            } catch (IOException e1) {
-//                e1.printStackTrace();
-//            }
-//            try {
-//                this.server.writeMsg("this is a demo");
-//            } catch (IOException e1) {
-//                e1.printStackTrace();
-//            }
+        }
+        if(e.getSource() == mOKButton){
+            String selectItem = "";
+            String devId = "";
+            String status = "";
+            if(mOpenSelect.isSelected()){
+                //打开蓝牙
+                selectItem = (String) mDevNameCb.getSelectedItem();
+                status = "ok";
+            }else {
+                //关闭蓝牙
+                selectItem = (String) mDevNameCb.getSelectedItem();
+                System.out.println("关闭蓝牙");
+                status = "false";
+            }
+            devId = devInfos.get(selectItem);
+            System.out.println("打开蓝牙"+"选中设备："+selectItem+"设备id :"+devId);
+            String MsgToDev = "head,02,devid,"+devId+",cmd,05,"+status;
+            ServerHandler.sendMsgToAll(MsgToDev);
         }
     }
 

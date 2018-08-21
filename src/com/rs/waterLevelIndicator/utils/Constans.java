@@ -43,4 +43,9 @@ public class Constans {
 
     public static String LocalPath = System.getProperty("user.dir");
 
+    /***********************设备管理界面相关*****************************/
+
+    public static String mdfTitle = "修改设备";
+
+    public static String devMsgTitle = "设备信息";
 }

@@ -121,9 +121,9 @@ public class RealtimeData extends JPanel {
             {4, "GPS信号强度", "未知", "dB"},
 //            {6, "通讯状态", "未知", null},
             {5,"电压","未知","v"},
-            {6, "时间", "2018-07-04 13：59：58", "无"},
+            {6, "时间", "2018-07-04 13：59：58", "-"},
 //            {9, "水位", "未知", null},
-            {7, "设备状态", "未知", "无"},
+            {7, "设备状态", "未知", "-"},
     };
     String[] titles = new String[]{"序号", "量名称", "量值", "单位"};
 
@@ -143,7 +143,7 @@ public class RealtimeData extends JPanel {
                 layout.createParallelGroup()
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
+                                .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
                                 .addContainerGap())
         );
         layout.setVerticalGroup(

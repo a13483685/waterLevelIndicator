@@ -216,30 +216,40 @@ public class DevManege extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==mAdd) {
 
-            DeviceInfoFrm addDeviceFrm = new DeviceInfoFrm(mControlBar);
+
+        if(e.getSource()==mAdd) {
+            String title = "添加设备";
+            DeviceInfoFrm addDeviceFrm = new DeviceInfoFrm(mControlBar,title);
             addDeviceFrm.setVisible(true);
         }
+
         if (e.getSource()==mDel){
             int row = mDevs.getSelectedRow();
             String value = (String) mDevs.getModel().getValueAt(row, 2);
+//            int row = mDevs.getSelectedRow();
+//            String value = (String) mDevs.getModel().getValueAt(row, 2);
             DeleteFromDb(value);
         }
         if (e.getSource()==mMod){
+            String title = "修改设备";
+            int row = mDevs.getSelectedRow();
+            String value = (String) mDevs.getModel().getValueAt(row, 2);
+            DeviceInfoFrm mdfDeviceFrm = new DeviceInfoFrm(mControlBar,title,value);
+            mdfDeviceFrm.setVisible(true);
         }
     }
 
-    private void DeleteFromDb(String devId) {
+    private void DeleteFromDb(String id) {
         DevicesDao devicesDao = new DevicesDao();
         boolean b = false;
         try {
-            b = devicesDao.deleteDevice(devId);
+            b = devicesDao.deleteDevice(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         if(b){
-            log.info("info :{}","删除设备"+devId+"成功");
+            log.info("info :{}","删除设备"+id+"成功");
         }
     }
 
