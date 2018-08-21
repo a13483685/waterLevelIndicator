@@ -7,9 +7,10 @@ package com.rs.waterLevelIndicator.view;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
+import com.jgoodies.forms.factories.*;
 
 /**
- * @author xziea
+ * @author xz
  */
 public class AllReviewItemJpanel extends JPanel {
     public AllReviewItemJpanel() {
@@ -18,6 +19,7 @@ public class AllReviewItemJpanel extends JPanel {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
         tabbedPane2 = new JTabbedPane();
         scrollPane1 = new JScrollPane();
         mAllDevTree = new JTree();
@@ -33,7 +35,13 @@ public class AllReviewItemJpanel extends JPanel {
         mParaValTextField = new JTextField();
         mReadPara = new JButton();
         mSetPara = new JButton();
-        panel2 = new JPanel();
+        label5 = new JLabel();
+        separator1 = compFactory.createSeparator("\u8bbe\u5907\u84dd\u7259\u914d\u7f6e\uff1a");
+        mDevNameCb = new JComboBox();
+        separator2 = compFactory.createSeparator("\u8bbe\u5907\u53c2\u6570\u914d\u7f6e");
+        label3 = new JLabel();
+        mOpenSelect = new JCheckBox();
+        mOKButton = new JButton();
 
         //======== this ========
 
@@ -73,38 +81,70 @@ public class AllReviewItemJpanel extends JPanel {
                 //---- mSetPara ----
                 mSetPara.setText("\u8bbe\u53c2");
 
+                //---- label5 ----
+                label5.setText("\u8bbe\u5907\u540d\uff1a");
+
+                //---- label3 ----
+                label3.setText("\u72b6\u6001\uff1a");
+
+                //---- mOpenSelect ----
+                mOpenSelect.setText("\u6253\u5f00");
+
+                //---- mOKButton ----
+                mOKButton.setText("\u786e\u5b9a");
+
                 GroupLayout panel1Layout = new GroupLayout(panel1);
                 panel1.setLayout(panel1Layout);
                 panel1Layout.setHorizontalGroup(
                     panel1Layout.createParallelGroup()
                         .addGroup(panel1Layout.createSequentialGroup()
-                            .addGap(18, 18, 18)
-                            .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(label2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addComponent(mReadPara))
                             .addGroup(panel1Layout.createParallelGroup()
                                 .addGroup(panel1Layout.createSequentialGroup()
+                                    .addGap(36, 36, 36)
+                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(label2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(panel1Layout.createParallelGroup()
-                                        .addComponent(mParacomboBox, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(mParaValTextField))
+                                        .addComponent(mParaValTextField)
+                                        .addComponent(mParacomboBox, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
                                     .addGap(36, 36, 36))
                                 .addGroup(panel1Layout.createSequentialGroup()
-                                    .addGap(28, 28, 28)
-                                    .addComponent(mSetPara)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)))
+                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(panel1Layout.createSequentialGroup()
+                                            .addGap(28, 28, 28)
+                                            .addComponent(mReadPara)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(mSetPara))
+                                        .addGroup(panel1Layout.createSequentialGroup()
+                                            .addContainerGap()
+                                            .addComponent(separator1, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
+                                        .addGroup(panel1Layout.createSequentialGroup()
+                                            .addContainerGap()
+                                            .addComponent(separator2, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
+                                        .addGroup(panel1Layout.createSequentialGroup()
+                                            .addGap(35, 35, 35)
+                                            .addGroup(panel1Layout.createParallelGroup()
+                                                .addComponent(label5)
+                                                .addComponent(label3)
+                                                .addComponent(mOKButton))
+                                            .addGap(18, 18, 18)
+                                            .addGroup(panel1Layout.createParallelGroup()
+                                                .addComponent(mDevNameCb, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(mOpenSelect))))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(panel1Layout.createParallelGroup()
                                 .addComponent(mPrintHistory)
                                 .addComponent(mLogContent, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE))
-                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addContainerGap())
                 );
                 panel1Layout.setVerticalGroup(
                     panel1Layout.createParallelGroup()
                         .addGroup(panel1Layout.createSequentialGroup()
                             .addGap(11, 11, 11)
-                            .addComponent(mPrintHistory)
+                            .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                .addComponent(mPrintHistory)
+                                .addComponent(separator2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                             .addGroup(panel1Layout.createParallelGroup()
                                 .addGroup(panel1Layout.createSequentialGroup()
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -115,33 +155,29 @@ public class AllReviewItemJpanel extends JPanel {
                                     .addGroup(panel1Layout.createParallelGroup()
                                         .addComponent(label2)
                                         .addComponent(mParaValTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                    .addGap(26, 26, 26)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(mReadPara)
-                                        .addComponent(mSetPara)))
+                                        .addComponent(mSetPara)
+                                        .addComponent(mReadPara))
+                                    .addGap(13, 13, 13)
+                                    .addComponent(separator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(label5)
+                                        .addComponent(mDevNameCb, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(label3)
+                                        .addComponent(mOpenSelect))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(mOKButton))
                                 .addGroup(panel1Layout.createSequentialGroup()
                                     .addGap(25, 25, 25)
                                     .addComponent(mLogContent, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE)))
-                            .addContainerGap(33, Short.MAX_VALUE))
+                            .addContainerGap(14, Short.MAX_VALUE))
                 );
             }
             tabbedPane5.addTab("\u8bfb\u53c2\u6570", panel1);
-
-            //======== panel2 ========
-            {
-
-                GroupLayout panel2Layout = new GroupLayout(panel2);
-                panel2.setLayout(panel2Layout);
-                panel2Layout.setHorizontalGroup(
-                    panel2Layout.createParallelGroup()
-                        .addGap(0, 578, Short.MAX_VALUE)
-                );
-                panel2Layout.setVerticalGroup(
-                    panel2Layout.createParallelGroup()
-                        .addGap(0, 305, Short.MAX_VALUE)
-                );
-            }
-            tabbedPane5.addTab("\u63a7\u5236", panel2);
         }
 
         GroupLayout layout = new GroupLayout(this);
@@ -152,9 +188,9 @@ public class AllReviewItemJpanel extends JPanel {
                     .addGap(40, 40, 40)
                     .addComponent(tabbedPane2, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE)
                     .addGap(29, 29, 29)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                        .addComponent(tabbedPane3)
-                        .addComponent(tabbedPane5))
+                    .addGroup(layout.createParallelGroup()
+                        .addComponent(tabbedPane3, GroupLayout.PREFERRED_SIZE, 580, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tabbedPane5, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
                     .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -188,6 +224,12 @@ public class AllReviewItemJpanel extends JPanel {
     private JTextField mParaValTextField;
     private JButton mReadPara;
     private JButton mSetPara;
-    private JPanel panel2;
+    private JLabel label5;
+    private JComponent separator1;
+    private JComboBox mDevNameCb;
+    private JComponent separator2;
+    private JLabel label3;
+    private JCheckBox mOpenSelect;
+    private JButton mOKButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

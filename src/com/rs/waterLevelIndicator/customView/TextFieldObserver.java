@@ -167,7 +167,7 @@ public class TextFieldObserver extends JPanel implements ObserverData,ActionList
         log.info("{}",mInfo);
         textArea1.append(mInfo);
         mInfo = "";
-        textArea1.append("------------------------------------------------------\n");
+        textArea1.append("------------------------\n");
         textArea1.selectAll();
         textArea1.setCaretPosition(textArea1.getSelectedText().length());
         textArea1.requestFocus();

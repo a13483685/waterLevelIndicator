@@ -7,6 +7,7 @@ import com.rs.waterLevelIndicator.model.Device;
 import com.rs.waterLevelIndicator.model.SensorData;
 import com.rs.waterLevelIndicator.utils.Constans;
 import com.rs.waterLevelIndicator.utils.FunctionHelper;
+import com.rs.waterLevelIndicator.view.DeviceInfoFrm;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -30,6 +31,7 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
     JMenuItem mDevInfoItem;//设备信息
     public static Map<String,String> devInfos = new HashMap<>();
     private DefaultMutableTreeNode selNode;
+    private String devId;
 
     public DevTree(){
         initComponents();
@@ -73,7 +75,7 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
                         TreePath selTree=mAllDevTree.getPathForRow(n);
                         //拿到的是叶子节点
                         selNode = (DefaultMutableTreeNode)selTree.getLastPathComponent();
-                        String devId = devInfos.get(selNode.toString());
+                        devId = devInfos.get(selNode.toString());
                         System.out.println("selNode is :"+ devId);//叶子节点的名称 也就是设备测点 拿到的就是设备信息
                         if(selNode.isLeaf()||selNode.isRoot()){
                             popMenu.show(mAllDevTree,me.getX(), me.getY());
@@ -137,6 +139,10 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
 
 //            FunctionHelper.SaveSelectedDevToFile(Constans.mWhichDevIsSelected);
             //刷新历史数据表格
+        }else if(e.getSource()==mDevInfoItem){
+            //查看设备信息
+            DeviceInfoFrm mDeviceFrm = new DeviceInfoFrm(null,Constans.devMsgTitle,devId);
+            mDeviceFrm.setVisible(true);
         }
     }
 
@@ -168,9 +174,11 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
             if(!devInfos.containsKey(deviceName)){
                 devInfos.put(deviceName,deviceId);
             }
-            DefaultMutableTreeNode r = new DefaultMutableTreeNode(address);
-            r.add(new DefaultMutableTreeNode(deviceName));
+            DefaultMutableTreeNode r = new DefaultMutableTreeNode(address);//子节点
+            r.add(new DefaultMutableTreeNode(deviceName));//添加叶子节点
             mModel.insertNodeInto(r,root,i);
+            mAllDevTree.expandRow(0);
+            mAllDevTree.expandRow(1);
             mAllDevTree.updateUI();
 //            mModel.nodeChanged(root);
         }

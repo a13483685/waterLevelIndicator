@@ -99,15 +99,15 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
 
 
 
-		for (Channel channel : channels) {//遍历ChannelGroup中的channel
-			if (channel != incoming){//找到加入到ChannelGroup中的channel后，将录入的信息回写给除去发送信息的客户端
-				channel.writeAndFlush("[" + incoming.remoteAddress() + "]" + info + "\n");
-			}
-			else {
-				channel.writeAndFlush("[you]" + info + "\n");
-
-			}
-		}
+//		for (Channel channel : channels) {//遍历ChannelGroup中的channel
+//			if (channel != incoming){//找到加入到ChannelGroup中的channel后，将录入的信息回写给除去发送信息的客户端
+//				channel.writeAndFlush("[" + incoming.remoteAddress() + "]" + info + "\n");
+//			}
+//			else {
+//				channel.writeAndFlush("[you]" + info + "\n");
+//
+//			}
+//		}
 		info = "";
 	}
 

@@ -11,6 +11,7 @@ import com.rs.waterLevelIndicator.customView.DevTable;
 import com.rs.waterLevelIndicator.dao.DevicesDao;
 import com.rs.waterLevelIndicator.manage.ObserverManage;
 import com.rs.waterLevelIndicator.model.DbPageMesReq;
+import com.rs.waterLevelIndicator.model.Device;
 import com.rs.waterLevelIndicator.services.DevicePageQuery;
 import com.rs.waterLevelIndicator.utils.Constans;
 
@@ -27,18 +28,62 @@ import javax.swing.border.*;
  */
 public class DeviceInfoFrm extends JFrame implements ActionListener {
     private ObserverManage observerManerge = null;
-    public DeviceInfoFrm(DevControlBar mControlBar) {
+    private String title = "";
+    private String daoMsg = null;
+    public DeviceInfoFrm(DevControlBar mControlBar,String title) {
+        this.title = title;
         observerManerge = new ObserverManage();
         observerManerge.atach(mControlBar);
         observerManerge.atach((DevDbOberver) MainFrm.devTree);
         initComponents();
+    }
+
+    /**
+     *
+     * @param mControlBar
+     * @param title
+     * @param daoMsg 设备id
+     */
+    public DeviceInfoFrm(DevControlBar mControlBar,String title,String daoMsg){
+        this(mControlBar,title);
+        this.daoMsg = daoMsg;
+        if(title.equals(Constans.mdfTitle)){
+            Device device = new DevicesDao().SelectDevMsg(this.daoMsg);
+            String address = device.getmAddress();
+            String devDesc = device.getmDevDesc();
+            String deviceId = device.getmDeviceId();
+            String dutyPerson = device.getmDutyPerson();
+            mAddress.setText(address);
+            mDevName.setText(devDesc);
+            mDevId.setText(deviceId);
+            mDutyPerson.setText(dutyPerson);
+        }else if(title.equals(Constans.devMsgTitle)){
+            mOK.setVisible(false);
+            mReset.setVisible(false);
+            Device device = new DevicesDao().SelectDevMsg(this.daoMsg);
+            String address = device.getmAddress();
+            String devDesc = device.getmDevDesc();
+            String deviceId = device.getmDeviceId();
+            String dutyPerson = device.getmDutyPerson();
+            mAddress.setText(address);
+            mDevName.setText(devDesc);
+            mDevId.setText(deviceId);
+            mDutyPerson.setText(dutyPerson);
+        }
     }
 //
 //    public AddDeviceFrm(DevControlBar mControlBar) {
 //        observerManerge.atach(mControlBar);
 //}
 
-
+    public boolean upDataDevMsg(String address,String devName,String devId,String dutyPerson,String selected){
+        DevicesDao devicesDao = new DevicesDao();
+//        String address = mAddress.getText().trim();
+//        String devName = mDevName.getText().trim();
+//        String devId = mDevId.getText().trim();
+//        String dutyPerson = mDutyPerson.getText().trim();
+        return devicesDao.upDateDevMsg(address,devName,devId,dutyPerson,selected);
+    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -53,7 +98,7 @@ public class DeviceInfoFrm extends JFrame implements ActionListener {
         mDevId = new JTextField();
         label4 = new JLabel();
         mDutyPerson = new JTextField();
-        label5 = new JLabel();
+        mTitle = new JLabel();
 
         //======== this ========
         setFont(new Font("Dialog", Font.PLAIN, 22));
@@ -88,9 +133,9 @@ public class DeviceInfoFrm extends JFrame implements ActionListener {
             //---- label4 ----
             label4.setText("\u8d23\u4efb\u4eba\uff1a");
 
-            //---- label5 ----
-            label5.setText("\u6dfb\u52a0\u8bbe\u5907");
-            label5.setFont(label5.getFont().deriveFont(label5.getFont().getStyle() | Font.BOLD, label5.getFont().getSize() + 3f));
+            //---- mTitle ----
+            mTitle.setText(this.title);
+            mTitle.setFont(mTitle.getFont().deriveFont(mTitle.getFont().getStyle() | Font.BOLD, mTitle.getFont().getSize() + 3f));
 
             GroupLayout panel1Layout = new GroupLayout(panel1);
             panel1.setLayout(panel1Layout);
@@ -98,7 +143,7 @@ public class DeviceInfoFrm extends JFrame implements ActionListener {
                 panel1Layout.createParallelGroup()
                     .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                         .addContainerGap(119, Short.MAX_VALUE)
-                        .addComponent(label5)
+                        .addComponent(mTitle)
                         .addGap(134, 134, 134))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
@@ -131,7 +176,7 @@ public class DeviceInfoFrm extends JFrame implements ActionListener {
                 panel1Layout.createParallelGroup()
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(label5, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(mTitle, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14)
                         .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(mAddress, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -183,10 +228,11 @@ public class DeviceInfoFrm extends JFrame implements ActionListener {
     private JTextField mDevId;
     private JLabel label4;
     private JTextField mDutyPerson;
-    private JLabel label5;
+    private JLabel mTitle;
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Boolean isSuccess = false;
         if(e.getSource() == mOK){
             String address = mAddress.getText().trim();
             String devName = mDevName.getText().trim();
@@ -195,7 +241,11 @@ public class DeviceInfoFrm extends JFrame implements ActionListener {
 
 //            DevicesDao devicesDao = new DevicesDao();
             //判断是增删改查那个功能再刷新
-            Boolean isSuccess = insetIntoDb(address, devName,devId,dutyPerson);
+            if(title.equals("添加设备")){
+                isSuccess = insetIntoDb(address, devName,devId,dutyPerson);
+            }else if(title.equals("修改设备")){
+                isSuccess = upDataDevMsg(address,devName,devId,dutyPerson,this.daoMsg);
+            }
             if(isSuccess){
                 System.out.println("isSuccess ?"+ isSuccess);
                 observerManerge.notifyMsg();
