@@ -22,6 +22,8 @@ public class Constans {
 
     public static String CMD_DOWN_LIMIT = "04";
 
+    public static String CMD_SET_BLUTOOTH = "05";
+
     public static String SET_RESUALT_SUCCESS = "ok";
 
     public static String SET_RESUALT_FALSE = "false";

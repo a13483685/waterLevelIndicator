@@ -3,11 +3,17 @@ package com.rs.waterLevelIndicator.customView;
 import com.rs.waterLevelIndicator.Observers.DevDbOberver;
 import com.rs.waterLevelIndicator.dao.DevicesDao;
 import com.rs.waterLevelIndicator.dao.SenserDataDao;
+import com.rs.waterLevelIndicator.interfaces.DevTreeSelectListener;
+import com.rs.waterLevelIndicator.manage.RegistDevSelectChange;
+import com.rs.waterLevelIndicator.model.DevSelectEvent;
 import com.rs.waterLevelIndicator.model.Device;
 import com.rs.waterLevelIndicator.model.SensorData;
 import com.rs.waterLevelIndicator.utils.Constans;
 import com.rs.waterLevelIndicator.utils.FunctionHelper;
 import com.rs.waterLevelIndicator.view.DeviceInfoFrm;
+import com.rs.waterLevelIndicator.view.DeviceMonitorJpanel;
+import com.rs.waterLevelIndicator.view.MainFrm;
+import com.rs.waterLevelIndicator.view.RealtimeData;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -30,11 +36,17 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
     JMenuItem mDataSelectItem;//数据查询
     JMenuItem mDevInfoItem;//设备信息
     public static Map<String,String> devInfos = new HashMap<>();
+    public static Map<String,String> addressInfos = new HashMap<>();
+    RegistDevSelectChange registDevSelectChange = null;
+
+
     private DefaultMutableTreeNode selNode;
     private String devId;
 
     public DevTree(){
         initComponents();
+        registDevSelectChange = new RegistDevSelectChange();
+        registDevSelectChange.addListener(MainFrm.realtimeData);
     }
 
     private void initComponents() {
@@ -76,7 +88,9 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
                         //拿到的是叶子节点
                         selNode = (DefaultMutableTreeNode)selTree.getLastPathComponent();
                         devId = devInfos.get(selNode.toString());
+
                         System.out.println("selNode is :"+ devId);//叶子节点的名称 也就是设备测点 拿到的就是设备信息
+
                         if(selNode.isLeaf()||selNode.isRoot()){
                             popMenu.show(mAllDevTree,me.getX(), me.getY());
                         }
@@ -114,7 +128,7 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
     @Override
     public void actionPerformed(ActionEvent e) {
         boolean DevExist = false;
-        if(e.getSource() == mDataSelectItem){
+        if(e.getSource() == mDataSelectItem){//设备选择
 
             SenserDataDao senserDataDao = new SenserDataDao();
             List<Integer> allDevId = senserDataDao.getAllDevId();
@@ -130,6 +144,7 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
                 FunctionHelper.SaveSelectedDevToFile(Constans.mWhichDevIsSelected);
                 DevExist = true;
             }
+            registDevSelectChange.setValue(Constans.mWhichDevIsSelected);
             if(!DevExist){
                 JOptionPane.showMessageDialog(this,"无设备数据");
             }
@@ -174,6 +189,7 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
             if(!devInfos.containsKey(deviceName)){
                 devInfos.put(deviceName,deviceId);
             }
+
             DefaultMutableTreeNode r = new DefaultMutableTreeNode(address);//子节点
             r.add(new DefaultMutableTreeNode(deviceName));//添加叶子节点
             mModel.insertNodeInto(r,root,i);

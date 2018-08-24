@@ -10,7 +10,7 @@ public class InsertIntoDbSensorImp implements IinsertIntoDbSensor{
     @Override
     public void insertInToDbSensor(String msg) {
         String[] infos = msg.split(",");
-        if(infos.length == 21){
+        if(infos.length == 22){
             SensorData sensorData = new SensorData();
 
             String dev_id = infos[1];
@@ -36,10 +36,11 @@ public class InsertIntoDbSensorImp implements IinsertIntoDbSensor{
             sensorData.setWatt(Watt);
 
             String GpsSignal = infos[13];
-            sensorData.setComStatus(GpsSignal);
+            sensorData.setGpsSignal(GpsSignal);
+
 
             String comStatus = infos[15];
-            sensorData.setGpsSignal(comStatus);
+            sensorData.setComStatus(comStatus);
 
             String time = infos[17];
             sensorData.setTime(time);

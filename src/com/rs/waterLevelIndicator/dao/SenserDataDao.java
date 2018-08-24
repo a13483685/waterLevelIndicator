@@ -64,7 +64,7 @@ public class SenserDataDao extends BaseDao  {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){
                 sd= new SensorData();
-                String id = resultSet.getString("id");
+                String id = resultSet.getString("dev_id");
                 String gaokong = resultSet.getString("konggao");
 //                System.out.println("konggao is :"+gaokong);
                 String upload = resultSet.getString("upload");
@@ -91,10 +91,6 @@ public class SenserDataDao extends BaseDao  {
                 sd.setWaterLevel(waterLevel);
                 sd.setDevStatus(devStatus);
                 sd.setWatt(watt);
-//                System.out.println(TAG +"get sensordata id:"+ id +" gaokong :"+gaokong +
-//                        " upload :"+upload + " upLimit :" + upLimit + " dowmLimit :" +dowmLimit
-//                        +" GPS_signal :"+GPS_signal+" status :"+status+" time:"+time
-//                );
             }
 
         } catch (SQLException e) {

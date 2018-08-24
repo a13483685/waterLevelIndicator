@@ -26,6 +26,7 @@ import com.rs.waterLevelIndicator.utils.ImagePanel;
  */
 public class MainFrm extends JFrame implements MouseListener,ActionListener{
 
+    public static RealtimeData realtimeData = new RealtimeData();
     static JTabbedPane devTree = new DevTree();
 //    private final TcpServerNonBlockingNIO tcpServerNonBlockingNIO;
     //    private final ChatServer server;

@@ -23,6 +23,7 @@ import java.awt.event.ItemListener;
 import java.util.Map;
 
 import static com.rs.waterLevelIndicator.view.MainFrm.devTree;
+import static com.rs.waterLevelIndicator.view.MainFrm.realtimeData;
 
 
 /**
@@ -46,6 +47,7 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
     private JCheckBox mOpenSelect;
     private JButton mOKButton;
     private boolean isOpen = true;
+//    public static RealtimeData realtimeData = null;
     Map<String, String> devInfos;
 
     public static TextFieldObserver mLogContent;
@@ -319,7 +321,7 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
 //        mRealSensorData = new JTable(historyDataBaseTable.initTable());
 //        scrollPane2.setViewportView(historyDataBaseTable.initTable());
 //        tabbedPane3.addTab("\u5b9e\u65f6\u6570\u636e", scrollPane2);
-        RealtimeData realtimeData = new RealtimeData();
+//        realtimeData = new RealtimeData();
         tabbedPane3.addTab("实时数据", realtimeData);//改变内容就行
     }
 
@@ -349,16 +351,16 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
             if(mOpenSelect.isSelected()){
                 //打开蓝牙
                 selectItem = (String) mDevNameCb.getSelectedItem();
-                status = "ok";
+                status = "open";
             }else {
                 //关闭蓝牙
                 selectItem = (String) mDevNameCb.getSelectedItem();
                 System.out.println("关闭蓝牙");
-                status = "false";
+                status = "close";
             }
             devId = devInfos.get(selectItem);
             System.out.println("打开蓝牙"+"选中设备："+selectItem+"设备id :"+devId);
-            String MsgToDev = "head,02,devid,"+devId+",cmd,05,"+status;
+            String MsgToDev = "head,01,devid,"+devId+",cmd,05,"+status;
             ServerHandler.sendMsgToAll(MsgToDev);
         }
     }

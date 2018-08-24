@@ -155,6 +155,8 @@ public class TextFieldObserver extends JPanel implements ObserverData,ActionList
                     mInfo += "水位上限报警\r\n";
                 } else if (infos[5].equals(Constans.CMD_DOWN_LIMIT) ) {
                     mInfo += "水位下线报警\r\n";
+                } else if(infos[5].equals(Constans.CMD_SET_BLUTOOTH)){
+                    mInfo += "设置蓝牙\r\n";
                 }
 
                 if (infos[6].equals(Constans.SET_RESUALT_SUCCESS) ) {
@@ -163,14 +165,14 @@ public class TextFieldObserver extends JPanel implements ObserverData,ActionList
                     mInfo += "设置失败！\r\n";
                 }
             }
+            log.info("{}",mInfo);
+            textArea1.append(mInfo);
+            mInfo = "";
+            textArea1.append("------------------------\n");
+            textArea1.selectAll();
+            textArea1.setCaretPosition(textArea1.getSelectedText().length());
+            textArea1.requestFocus();
         }
-        log.info("{}",mInfo);
-        textArea1.append(mInfo);
-        mInfo = "";
-        textArea1.append("------------------------\n");
-        textArea1.selectAll();
-        textArea1.setCaretPosition(textArea1.getSelectedText().length());
-        textArea1.requestFocus();
     }
 
     @Override

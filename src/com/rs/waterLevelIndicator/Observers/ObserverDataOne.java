@@ -33,6 +33,5 @@ public class ObserverDataOne implements ObserverData{
         if(string.startsWith("devid")&&string.length()>50)
         InsertInToDatabase(msg);
         //���뵽���ݿ�
-
     }
 }

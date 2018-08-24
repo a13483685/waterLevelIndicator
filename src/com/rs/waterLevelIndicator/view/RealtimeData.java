@@ -4,7 +4,10 @@
 
 package com.rs.waterLevelIndicator.view;
 
+import com.rs.waterLevelIndicator.Observers.ObserverData;
 import com.rs.waterLevelIndicator.dao.SenserDataDao;
+import com.rs.waterLevelIndicator.interfaces.DevTreeSelectListener;
+import com.rs.waterLevelIndicator.model.DevSelectEvent;
 import com.rs.waterLevelIndicator.model.SensorData;
 import com.rs.waterLevelIndicator.net.TCPThreadServer;
 import com.rs.waterLevelIndicator.utils.Constans;
@@ -22,108 +25,144 @@ import static com.rs.waterLevelIndicator.view.MainFrm.devTree;
 /**
  * @author xz
  */
-public class RealtimeData extends JPanel {
-    private static final int KONG_GAO = 0;
-    private static final int UP_LOAD = 0;
-    private static final int UP_LIMIT = 1;
-    private static final int DOWN_LIMIT = 2;
-    private static final int GPS_SIGNAL = 3;
-    private static final int COM_STATUS = 4;
-    private static final int WATT = 4;
-    private static final int TIME = 5;
-    private static final int WATER_LEVEL = 6;
-    private static final int DEV_STATUS = 6;
+public class RealtimeData extends JPanel implements ObserverData,DevTreeSelectListener {
+
+    private static final int DEV_NAME= 0;
+    private static final int UP_LOAD = 1;
+    private static final int UP_LIMIT = 2;
+    private static final int DOWN_LIMIT = 3;
+    private static final int GPS_SIGNAL = 4;
+    private static final int WATT = 5;
+    private static final int TIME = 6;
+    private static final int DEV_STATUS = 7;
     private JScrollPane scrollPane1;
-     private JTable tableContents;
+    private JTable tableContents;
     private boolean isFirstEnter = true;
-
+    private String selectId = "";
+    private boolean newSelect = false;
 //定时执行 刷新界面
-    private void SetData() {
-        //查询数据库最近一条的记录
-        SenserDataDao senserDataDao = new SenserDataDao();
-
+    private void SetData(String msg) {
+        String downLimit ;
+        String konggao ;
+        String gpsSignal ;
+        String upload ;
+        String comStatus ;
+        String upLimit ;
+        String time  ;
+        String watt  ;
+        String dev_id = "";
+        String waterLevel ;
         SensorData sensorData = null;
-        if(isFirstEnter)
-        {
-            //首次进来，在文件中读取
+        if(isFirstEnter || newSelect) {
+            //首次进来，dev_id在文件中读取
+            //首次进来,或者在设备数中重新选择了设备，查询的是数据库的信息
             String lastSelectedDevToFile = FunctionHelper.getLastSelectedDevToFile();
             Constans.mWhichDevIsSelected = lastSelectedDevToFile;
+            dev_id = Constans.mWhichDevIsSelected;
+            SenserDataDao senserDataDao = new SenserDataDao();
+            if(Constans.mWhichDevIsSelected.equals("all")){
+                sensorData = senserDataDao.selectLastRecord(Constans.DEFAULT_SELECTED_DEV);
+            } else {
+                sensorData = senserDataDao.selectLastRecord(Constans.mWhichDevIsSelected);
+            }
             isFirstEnter = false;
-        }
-        sensorData = senserDataDao.selectLastRecord(Constans.mWhichDevIsSelected);
-        if(Constans.mWhichDevIsSelected.equals("all")){
-            sensorData = senserDataDao.selectLastRecord(Constans.DEFAULT_SELECTED_DEV);
-        }
-        String downLimit = sensorData.getDownLimit();
-        String gaokong = sensorData.getGaokong();
-        String gpsSignal = sensorData.getGpsSignal();
-        String upload = sensorData.getUpload();
-        String comStatus = sensorData.getComStatus();
-        String upLimit = sensorData.getUpLimit();
-        String time = sensorData.getTime();
-        String watt = sensorData.getWatt();
-        String dev_id = sensorData.getDev_id();
-        String waterLevel = sensorData.getWaterLevel();
-        String devStatus = sensorData.getDevStatus();
+            newSelect = false;
+        }else {//之后的数据为实时数据
+            String[] infos = msg.split(",");
+            if(infos.length == 22) {
+                dev_id = infos[1];//
+//                if(dev_id.equals(Constans.mWhichDevIsSelected )){//只有和选中id一样的时候，才显示在界面上
+                    sensorData = new SensorData();
+                    sensorData.setDev_id(dev_id);
 
-//        System.out.println("SetData is :"+"downLimit is :"+downLimit+
-//                "gaokong is :"+gaokong+
-//                "gpsSignal is :"+gpsSignal+
-//                "upload is :"+upload+
-//                "comStatus is :"+comStatus+
-//                "upLimit is :"+upLimit+
-//                "time is :"+time+
-//                "watt is :"+watt+
-//                "dev_id is :"+dev_id+
-//                "waterLevel is :"+waterLevel+
-//                "devStatus is :"+devStatus
-//        );
-        for (int i = 0; i < 10; i++) {
-            switch (i) {
-//                case KONG_GAO:
-//                    datas[i][2] = gaokong;
-//                    break;
-                case UP_LOAD:
-                    datas[i][2] = upload;
-                    break;
-                case UP_LIMIT:
-                    datas[i][2] = upLimit;
-                    break;
-                case DOWN_LIMIT:
-                    datas[i][2] = downLimit;
-                    break;
-                case GPS_SIGNAL:
-                    datas[i][2] = gpsSignal;
-                    break;
-//                case COM_STATUS:
-//                    datas[i][2] = comStatus;
-//                    break;
-                case WATT:
-                    datas[i][2] = watt;
-                    break;
-                case TIME:
-                    datas[i][2] = time;//预留
-                    break;
-//                case WATER_LEVEL:
-//                    datas[i][2] = waterLevel;
-//                    break;
-                case DEV_STATUS:
-                    datas[i][2] = devStatus;
-                    break;
+                    konggao = infos[3];
+                    sensorData.setGaokong(konggao);
+
+                    upload = infos[5];
+
+                    sensorData.setUpload(upload);
+
+                    upLimit = infos[7];
+
+                    sensorData.setUpLimit(upLimit);
+
+                    downLimit = infos[9];
+
+                    sensorData.setDownLimit(downLimit);
+
+                    watt = infos[11];
+
+                    sensorData.setWatt(watt);
+
+                    gpsSignal = infos[13];
+                    sensorData.setGpsSignal(gpsSignal);
+
+                    comStatus = infos[15];
+                    sensorData.setComStatus(comStatus);
+
+                    time = infos[17];
+                    sensorData.setTime(time);
+
+                    waterLevel = infos[19];
+                    sensorData.setWaterLevel(waterLevel);
+
+                    String devStatus = infos[21];
+                    sensorData.setDevStatus(devStatus);
+//                    System.out.println(sensorData.toString());
+//                }
             }
         }
+        if(dev_id.equals(Constans.mWhichDevIsSelected )) {//只有和选中id一样的时候，才显示在界面上
+            downLimit = sensorData.getDownLimit();
+            gpsSignal = sensorData.getGpsSignal();
+            upload = sensorData.getUpload();
+            upLimit = sensorData.getUpLimit();
+            time = sensorData.getTime();
+            watt = sensorData.getWatt();
+            dev_id = sensorData.getDev_id();
+            for (int i = 0; i < 7; i++) {
+                switch (i) {
+                    case DEV_NAME:
+                        datas[i][2] = dev_id;
+                        break;
+                    case UP_LOAD:
+                        datas[i][2] = upload;
+                        break;
+                    case UP_LIMIT:
+                        datas[i][2] = upLimit;
+                        break;
+                    case DOWN_LIMIT:
+                        datas[i][2] = downLimit;
+                        break;
+                    case GPS_SIGNAL:
+                        datas[i][2] = gpsSignal;
+                        break;
+                    case WATT:
+                        datas[i][2] = watt;
+                        break;
+                    case TIME:
+                        datas[i][2] = time;//预留
+                        break;
+                    case DEV_STATUS:
+//                        datas[i][2] = devStatus;
+                        break;
+                }
+            }
+        }
+        initTable();
     }
     Object[][] datas = new Object[][]{
 //            {1, "空高", "全部中断", ""},
-            {1, "上报水位", "全部中断", "m"},
-            {2, "水位上线报警", "未知", "m"},
-            {3, "水位下限报警", "未知", "m"},
-            {4, "GPS信号强度", "未知", "dB"},
+            {1, "当前选择设备", "未知", "-"},
+            {2, "上报水位", "全部中断", "m"},
+            {3, "水位上线报警", "未知", "m"},
+            {4, "水位下限报警", "未知", "m"},
+            {5, "GPS信号强度", "未知", "dB"},
 //            {6, "通讯状态", "未知", null},
-            {5,"电压","未知","v"},
-            {6, "时间", "2018-07-04 13：59：58", "-"},
+            {6,"电压","未知","v"},
+            {7, "时间", "2018-07-04 13：59：58", "-"},
 //            {9, "水位", "未知", null},
-            {7, "设备状态", "未知", "-"},
+//            {7, "设备状态", "未知", "-"},
     };
     String[] titles = new String[]{"序号", "量名称", "量值", "单位"};
 
@@ -131,12 +170,14 @@ public class RealtimeData extends JPanel {
 //        TCPThreadServer tcpThreadServer = new TCPThreadServer();
 //        new Thread(tcpThreadServer).start();
         initView();
+        SetData("");
+//        initTable();
     }
 
     private void initView() {
         scrollPane1 = new JScrollPane();
+//        initTimer();
 //        initTable();
-        initTimer();
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
         layout.setHorizontalGroup(
@@ -180,23 +221,34 @@ public class RealtimeData extends JPanel {
         tableContents.setPreferredScrollableViewportSize(null);
         tableContents.setAlignmentX(2.5F);
         scrollPane1.setViewportView(tableContents);
+
     }
 
-    private void initTimer() {
-        Timer timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-      //          System.out.println("comming....");
-                SetData();
-                initTable();
-//                scrollPane1.validate();
-//                scrollPane1.updateUI();
-//                tableContents.validate();
-//                tableContents.updateUI();
-            }
-        };
-        timer.schedule(timerTask,0,2000);
-    }
+//    private void initTimer() {
+//        Timer timer = new Timer();
+//        TimerTask timerTask = new TimerTask() {
+//            @Override
+//            public void run() {
+//                SetData();
+//                initTable();
+//            }
+//        };
+//        timer.schedule(timerTask,0,2000);
+//    }
 
+    @Override
+    public void update(String string) {
+        System.out.println("RealtimeData msg is :"+string);
+        SetData(string);
+//        initTable();
+    }
+//设备数选择改变了
+    @Override
+    public void selectChanged(DevSelectEvent e) {
+        selectId = e.getValue();
+        newSelect = true;
+        SetData("");
+//        initTable();
+        System.out.println( "dev id changed to:   "+selectId);
+    }
 }

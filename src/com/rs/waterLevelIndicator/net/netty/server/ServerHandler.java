@@ -7,10 +7,9 @@ import com.rs.waterLevelIndicator.utils.Constans;
 import com.rs.waterLevelIndicator.utils.FunctionHelper;
 import com.rs.waterLevelIndicator.utils.StringUtil;
 import com.rs.waterLevelIndicator.view.DeviceMonitorJpanel;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelId;
-import io.netty.channel.SimpleChannelInboundHandler;
+import com.rs.waterLevelIndicator.view.MainFrm;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.*;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
@@ -41,8 +40,8 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
 		observerDataOne= new ObserverDataOne();
 		observers.add(observerDataOne);
 		members = new HashMap<>();
-//		observers.add(DeviceMonitorJpanel.mLogContent);
-
+		observers.add(DeviceMonitorJpanel.mLogContent);
+		observers.add(MainFrm.realtimeData);
 	}
 	//2.覆盖了 handlerAdded() 事件处理方法。每当从服务端收到新的客户端连接时，客户端的 Channel 存入 ChannelGroup列表中，并通知列表中的其他客户端 Channel
 	@Override
@@ -88,6 +87,15 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
 		}else {
 			if(observers.contains(DeviceMonitorJpanel.mLogContent)){
 				observers.remove(DeviceMonitorJpanel.mLogContent);
+			}
+		}
+
+		if(MainFrm.realtimeData !=null){
+			if(!observers.contains(MainFrm.realtimeData))
+				observers.add(MainFrm.realtimeData);
+		}else {
+			if(observers.contains(MainFrm.realtimeData)){
+				observers.remove(MainFrm.realtimeData);
 			}
 		}
 
@@ -141,8 +149,18 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
 	 */
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-		cause.printStackTrace();
+		System.out.println("捕获到异常");
+//		cause.printStackTrace();
+//		ctx.close();
+		closeOnFlush(ctx.channel());
 	}
+
+	private void closeOnFlush(Channel ch) {
+		if(ch.isActive())
+		ch.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);
+	}
+
+
 	public static void sendMsgToAll(String msg){
 		for (Channel channel : channels){
 			channel.writeAndFlush(msg+"\n");

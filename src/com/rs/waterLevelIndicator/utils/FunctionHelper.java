@@ -33,6 +33,10 @@ public class FunctionHelper {
         }
     }
 
+    /**
+     *
+     * @return 上次一选择的设备
+     */
     public static String getLastSelectedDevToFile(){
         String Path="d:\\"+ "devSelected" + ".json";
         BufferedReader reader = null;

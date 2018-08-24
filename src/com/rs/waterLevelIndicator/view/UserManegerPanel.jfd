@@ -4,116 +4,111 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :p:21:p, comp scrollPane1:::p:1051:p, space ::28:x}, seq {space :::p, par l {comp panel2::l:::x, comp panel1::l:::x, comp panel3::t:::x}, space :::p}}"
-			"$verticalGroup": "par l {seq l {comp panel2:::p:34:p, space :::p, comp panel1:::p::p, space ::55:x, comp panel3:::p:92:p, space :p:37:p, comp scrollPane1:::p::p, space :p:27:p}}"
+			"$horizontalGroup": "par l {seq {par l {seq l {space :::p, comp label5:::p::p, space ::812:x, comp label6:::p:69:p}, seq {space :p:31:p, par l {comp scrollPane1::l::948:x, seq l {par l {seq l {comp label2:::p:79:p, space :p:34:p, comp label1:::p:74:p, space :p:35:p, comp label3:::p:69:p}, seq l {par l {seq l {comp label13:::p::p, space :6:6:p, comp textField4:::p:150:p}, seq l {comp label16:::p::p, space :6:6:p, comp comboBox4:::p:165:p}}, space :p:46:p, par l {seq {comp label14:::p::p, space :18:18:p, comp textField5:::p:150:p}, seq {comp label17:::p::p, space s:::p, comp comboBox5:::p:150:p}}, space :p:59:p, par l:::p {seq {comp label18:::p:101:p, space :::x, comp comboBox6:::p:156:p}, seq {comp label15:::p::p, space :18:18:p, comp textField6:::p:156:p}}}}, space :0:83:x}}}}, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :0:18:x, par t {comp label6:::p:35:p, comp label5:::p:35:p}, space :::p, par b {comp label2::b:p:46:p, comp label1::b:p:43:p, comp label3::b:p:46:p}, space s:::p, par l {seq l {space :1:1:p, comp label13:::p::p}, comp textField4:::p::p, seq l {space :6:6:p, comp label14:::p::p}, comp textField5:::p::p, seq l {space :6:6:p, comp label15:::p::p}, comp textField6:::p::p}, space :18:18:p, par l {comp comboBox4:::p::p, par b {comp label17::b:p::p, comp comboBox5::b:p::p}, par b:l {comp label18::b:p::p, comp comboBox6::b:p::p}, seq l {space :7:7:p, comp label16:::p::p}}, space :p:38:p, comp scrollPane1:::p::p, space :p:35:p}}"
 		} ) {
 			name: "this"
 			"preferredSize": new java.awt.Dimension( 1100, 700 )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :::p, comp label2:::p::p, space :p:26:p, comp label1:::p::p, space :p:28:p, comp label3:::p::p, space ::896:x}}"
-				"$verticalGroup": "par l {seq t {space ::7:x, par b {comp label1::b:p::p, comp label2::b:p::p, comp label3::b:p::p}, space :::p}}"
-			} ) {
-				name: "panel1"
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label1"
-					"text": "删除"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/images/删除.png" )
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label2"
-					"text": "添加"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/images/添加.png" )
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label3"
-					"text": "修改"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/images/修改.png" )
-				} )
-			} )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :::p, comp label5:::p::p, space ::949:x, comp label6:::p::p, space :p:21:p}}"
-				"$verticalGroup": "par l {seq l {space :::p, par b {comp label5::b:p:26:p, comp label6::b:p::p}, space :::x}}"
-			} ) {
-				name: "panel2"
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label5"
-					"text": "用户列表"
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\用户列表.png" )
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label6"
-					"text": "刷新"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/images/刷新.png" )
-				} )
-			} )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :p:47:p, par l:::p {seq {comp label10:::p::p, space :::p, comp comboBox1:::::x}, seq {comp label7:::p::p, space :::p, comp textField1:::p:150:p}}, space :p:91:p, par l:::p {seq {comp label8:::p::p, space s:::p, comp textField2:::p:150:p}, seq {comp label11:::p::p, space s:::p, comp comboBox2:::::x}}, space :p:85:p, par l {comp label9:::p::p, comp label12:::p:79:p}, space s:::p, par l:::p {comp textField3::::150:x, comp comboBox3::::150:x}, space :p:46:p, comp button1:::p:90:p, space ::45:x}}"
-				"$verticalGroup": "par l {seq l {space :p:12:p, par b {comp label7::b:p::p, comp textField1::b:p::p, comp textField3::b:p::p, comp label9::b:p::p, comp textField2::b:p::p, comp label8::b:p::p}, space s:::p, par b {comp label10::b:p::p, comp comboBox1::b:p::p, comp label11::b:p::p, comp comboBox2::b:p::p, comp comboBox3::b:p::p, comp button1::b:p::p, comp label12::b:p::p}, space :::x}}"
-			} ) {
-				name: "panel3"
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label7"
-					"text": "姓名："
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\用户名.png" )
-				} )
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "textField1"
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label8"
-					"text": "账号："
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\用户列表 (1).png" )
-				} )
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "textField2"
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label9"
-					"text": "联系电话："
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\电话.png" )
-				} )
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "textField3"
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label10"
-					"text": "单位："
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\事业单位 (1).png" )
-				} )
-				add( new FormComponent( "javax.swing.JComboBox" ) {
-					name: "comboBox1"
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label11"
-					"text": "职位："
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\职位.png" )
-				} )
-				add( new FormComponent( "javax.swing.JComboBox" ) {
-					name: "comboBox2"
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label12"
-					"text": "角色："
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\角色权限.png" )
-				} )
-				add( new FormComponent( "javax.swing.JComboBox" ) {
-					name: "comboBox3"
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button1"
-					"text": "搜索"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/images/查询.png" )
-				} )
-			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTable" ) {
 					name: "table1"
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
 				} )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label6"
+				"text": "刷新"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/images/刷新.png" )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 5, false )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label5"
+				"text": "用户列表"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/images/用户列表.png" )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "添加"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/images/添加.png" )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "删除"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/images/删除.png" )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "修改"
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/images/修改.png" )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label13"
+				"text": "姓名："
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/images/用户名.png" )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField4"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label14"
+				"text": "账号："
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/images/用户列表 (1).png" )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField5"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label15"
+				"text": "联系电话："
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/images/电话.png" )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField6"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label16"
+				"text": "单位："
+				"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\事业单位 (1).png" )
+				"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 0, 3, false )
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "comboBox4"
+				"font": #SwingDerivedFont0
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label17"
+				"text": "职位："
+				"icon": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\职位.png" )
+				"font": #SwingDerivedFont0
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "comboBox5"
+				"font": #SwingDerivedFont0
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label18"
+				"text": "角色："
+				"icon": new com.jformdesigner.model.SwingIcon( 0, "/images/角色权限.png" )
+				"font": #SwingDerivedFont0
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "comboBox6"
+				"font": #SwingDerivedFont0
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 1100, 700 )
+			"size": new java.awt.Dimension( 985, 700 )
 		} )
 	}
 }
