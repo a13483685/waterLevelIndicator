@@ -23,6 +23,7 @@ import static com.rs.waterLevelIndicator.customView.DevTree.getWhichDevIsSelecte
 import static com.rs.waterLevelIndicator.view.MainFrm.devTree;
 
 /**
+ * 实时显示table
  * @author xz
  */
 public class RealtimeData extends JPanel implements ObserverData,DevTreeSelectListener {
