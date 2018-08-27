@@ -23,7 +23,7 @@ public class WindowOpacity {
 	
 	public WindowOpacity(JFrame jframe) {
 		// 窗口设置淡入淡出代码段
-		AWTUtilities.setWindowOpacity(jframe, 0f);
+//		AWTUtilities.setWindowOpacity(jframe, 0f);
 		ActionListener lisener = new ActionListener() {
 
 			float alpha = 0;
@@ -31,7 +31,7 @@ public class WindowOpacity {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (alpha < 0.9) {
-					AWTUtilities.setWindowOpacity(jframe, alpha += 0.1);
+//					AWTUtilities.setWindowOpacity(jframe, alpha += 0.1);
 				} else {
 					AWTUtilities.setWindowOpacity(jframe, 1);
 					Timer source = (Timer) e.getSource();

@@ -1,8 +1,12 @@
 package com.rs.waterLevelIndicator.utils;
 
+import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
+import java.awt.*;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 
 public class FunctionHelper {
     public static void SaveSelectedDevToFile(String selectedDev){
@@ -71,5 +75,51 @@ public class FunctionHelper {
         lFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String gRtnStr = lFormat.format(new Date());
         return gRtnStr;
+    }
+
+    /**
+
+     * frame中的控件自适应frame大小：改变大小位置和字体
+
+     * @param frame 要控制的窗体
+
+     * @param proportionW 当前和原始的比例
+
+     */
+
+    public static void modifyComponentSize(JFrame frame, float proportionW, float proportionH){
+        try
+        {
+            Component[] components = frame.getRootPane().getContentPane().getComponents();
+            for(Component co:components)
+            {
+                float locX = co.getX() * proportionW;
+                float locY = co.getY() * proportionH;
+                float width = co.getWidth() * proportionW;
+                float height = co.getHeight() * proportionH;
+                co.setLocation((int)locX, (int)locY);
+                co.setSize((int)width, (int)height);
+                int size = (int)(5*co.getFont().getSize() * proportionH);
+                Font font = new Font(co.getFont().getFontName(), co.getFont().getStyle(), size);
+                co.setFont(font);
+            }
+        }
+        catch (Exception e)
+        {
+            // TODO: handle exception
+        }
+    }
+
+    //统一界面字体
+    public static void InitGlobalFont(Font font) {
+        FontUIResource fontRes = new FontUIResource(font);
+        for (Enumeration<Object> keys = UIManager.getDefaults().keys();
+             keys.hasMoreElements(); ) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get(key);
+            if (value instanceof FontUIResource) {
+                UIManager.put(key, fontRes);
+            }
+        }
     }
 }

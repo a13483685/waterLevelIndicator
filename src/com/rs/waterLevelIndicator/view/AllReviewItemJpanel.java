@@ -4,10 +4,13 @@
 
 package com.rs.waterLevelIndicator.view;
 
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
 import com.jgoodies.forms.factories.*;
+import com.rs.waterLevelIndicator.customView.WindowOpacity;
+import info.clearthought.layout.*;
 
 /**
  * @author xz
@@ -44,6 +47,7 @@ public class AllReviewItemJpanel extends JPanel {
         mOKButton = new JButton();
 
         //======== this ========
+        setMinimumSize(new Dimension(1500, 950));
 
         //======== tabbedPane2 ========
         {
@@ -195,9 +199,9 @@ public class AllReviewItemJpanel extends JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup()
-                .addGroup(layout.createSequentialGroup()
+                .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addGap(40, 40, 40)
-                    .addGroup(layout.createParallelGroup()
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                         .addComponent(tabbedPane2)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(tabbedPane3, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE)

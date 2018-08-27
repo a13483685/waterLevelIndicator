@@ -13,6 +13,7 @@ import com.rs.waterLevelIndicator.net.netty.server.Server;
 import com.rs.waterLevelIndicator.net.netty.server.ServerHandler;
 import com.rs.waterLevelIndicator.utils.Constans;
 import com.rs.waterLevelIndicator.utils.StringUtil;
+import sun.applet.Main;
 
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -98,12 +99,12 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
         setParMsg = new SetParMsg();
 
         label5 = new JLabel();
-        separator1 = compFactory.createSeparator("\u8bbe\u5907\u84dd\u7259\u914d\u7f6e");
+        separator1 = compFactory.createSeparator("设备蓝牙配置");
         mDevNameCb = new JComboBox();
         for(String key:devInfos.keySet()){
             mDevNameCb.addItem(key);
         }
-        separator2 = compFactory.createSeparator("\u8bbe\u5907\u53c2\u6570\u914d\u7f6e");
+        separator2 = compFactory.createSeparator("设备参数配置");
         label3 = new JLabel();
         mOpenSelect = new JCheckBox();
         mOpenSelect.setSelected(true);
@@ -145,10 +146,10 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
                 label2.setText("\u53c2\u6570\u503c\uff1a");
 
                 //---- mReadPara ----
-                mReadPara.setText("\u8bfb\u53c2");
+                mReadPara.setText("读数据");
 
                 //---- mSetPara ----
-                mSetPara.setText("\u8bbe\u53c2");
+                mSetPara.setText("设置参数");
 
                 //---- label5 ----
                 label5.setText("\u8bbe\u5907\u540d\uff1a");
@@ -162,6 +163,7 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
                 //---- mOKButton ----
                 mOKButton.setText("\u786e\u5b9a");
 
+                //tabbedPane5 参数设备布局
                 GroupLayout panel1Layout = new GroupLayout(panel1);
                 panel1.setLayout(panel1Layout);
                 panel1Layout.setHorizontalGroup(
@@ -169,57 +171,64 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
                         .addGroup(panel1Layout.createSequentialGroup()
                             .addGroup(panel1Layout.createParallelGroup()
                                 .addGroup(panel1Layout.createSequentialGroup()
-                                    .addGap(36, 36, 36)
+                                    .addGap(MainFrm.screenWidth/20, MainFrm.screenWidth/20, MainFrm.screenWidth/20)
                                     .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+
                                         .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(label2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(panel1Layout.createParallelGroup()
-                                        .addComponent(mParaValTextField,GroupLayout.DEFAULT_SIZE, 100, 100)
-                                        .addComponent(mParacomboBox,GroupLayout.DEFAULT_SIZE, 120, 120))
-                                    .addGap(36, 36, 36))
+                                    .addGroup(panel1Layout.createParallelGroup()//水平大小
+
+                                        .addComponent(mParaValTextField,GroupLayout.DEFAULT_SIZE, MainFrm.screenWidth/10, MainFrm.screenWidth/10)//参数值的长度
+                                        .addComponent(mParacomboBox,GroupLayout.DEFAULT_SIZE, MainFrm.screenWidth/10, MainFrm.screenWidth/10))//参数名称下拉框的长度
+                                    .addGap(MainFrm.screenHeight/20, MainFrm.screenHeight/20, MainFrm.screenHeight/20))
                                 .addGroup(panel1Layout.createSequentialGroup()
                                     .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                         .addGroup(panel1Layout.createSequentialGroup()
-                                            .addGap(35, 35, 35)
+                                            .addGap(MainFrm.screenWidth/20, MainFrm.screenWidth/20, MainFrm.screenWidth/20)
                                             .addComponent(mReadPara)
-                                            .addGap(18, 18, 18)
+                                            .addGap(MainFrm.screenWidth/15, MainFrm.screenWidth/15, MainFrm.screenWidth/15)
                                             .addComponent(mSetPara))
                                         .addGroup(panel1Layout.createSequentialGroup()
                                             .addContainerGap()
-                                            .addComponent(separator1, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
+                                            .addComponent(separator1, GroupLayout.DEFAULT_SIZE, MainFrm.screenWidth/20, Short.MAX_VALUE))
                                         .addGroup(panel1Layout.createSequentialGroup()
                                             .addContainerGap()
-                                            .addComponent(separator2, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
+                                            .addComponent(separator2, GroupLayout.DEFAULT_SIZE, MainFrm.screenWidth/20, Short.MAX_VALUE))
                                         .addGroup(panel1Layout.createSequentialGroup()
-                                            .addGap(35, 35, 35)
+                                                .addGap(MainFrm.screenWidth/20, MainFrm.screenWidth/20, MainFrm.screenWidth/20)
                                             .addGroup(panel1Layout.createParallelGroup()
                                                 .addComponent(label5)
                                                 .addComponent(label3)
                                                 .addComponent(mOKButton))
                                             .addGap(18, 18, 18)
                                             .addGroup(panel1Layout.createParallelGroup()
-                                                .addComponent(mDevNameCb, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(mDevNameCb, GroupLayout.PREFERRED_SIZE, MainFrm.screenWidth/10, GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(mOpenSelect))))
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, MainFrm.screenWidth/12, MainFrm.screenWidth/12)
+
+                                ))
                             .addGroup(panel1Layout.createParallelGroup()
                                 .addComponent(mPrintHistory)
-                                .addComponent(mLogContent, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE))
-                            .addContainerGap()
+                                .addComponent(mLogContent, GroupLayout.PREFERRED_SIZE,MainFrm.screenWidth/3 , GroupLayout.PREFERRED_SIZE))
+//                            .addContainerGap()
                         )
                 );
                 panel1Layout.setVerticalGroup(
                     panel1Layout.createParallelGroup()
                         .addGroup(panel1Layout.createSequentialGroup()
-                            .addGap(11, 11, 11)
+                            .addGap(MainFrm.screenHeight/50, MainFrm.screenHeight/50, MainFrm.screenHeight/50)
                             .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                 .addComponent(mPrintHistory)
                                 .addComponent(separator2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addGap(MainFrm.screenHeight/40, MainFrm.screenHeight/40, MainFrm.screenHeight/40)
                             .addGroup(panel1Layout.createParallelGroup()
                                 .addGroup(panel1Layout.createSequentialGroup()
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+//                                            .addGap(MainFrm.screenHeight/20)
                                         .addComponent(label1)
+//                                            .addGap(MainFrm.screenHeight/20)
                                         .addComponent(mParacomboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addGroup(panel1Layout.createParallelGroup()
@@ -227,10 +236,12 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
                                         .addComponent(mParaValTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addGap(MainFrm.screenHeight/20)
                                         .addComponent(mSetPara)
                                         .addComponent(mReadPara))
                                     .addGap(13, 13, 13)
                                     .addComponent(separator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(MainFrm.screenHeight/40, MainFrm.screenHeight/40, MainFrm.screenHeight/40)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(label5)
@@ -239,11 +250,11 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
                                     .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(label3)
                                         .addComponent(mOpenSelect))
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,28,28)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,MainFrm.screenHeight/100,MainFrm.screenHeight/100)
                                     .addComponent(mOKButton))
                                 .addGroup(panel1Layout.createSequentialGroup()
                                     .addGap(25, 25, 25)
-                                    .addComponent(mLogContent, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(mLogContent, GroupLayout.PREFERRED_SIZE, MainFrm.screenHeight/4, GroupLayout.PREFERRED_SIZE)))
                             .addContainerGap(14, Short.MAX_VALUE))
                 );
             }
@@ -268,28 +279,30 @@ public class DeviceMonitorJpanel extends JPanel implements ActionListener,ItemLi
 
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
-        layout.setHorizontalGroup(
+        layout.setHorizontalGroup(//界面的水平布局
                 layout.createParallelGroup()
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
-                                .addComponent(devTree, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
+                                .addComponent(devTree, GroupLayout.PREFERRED_SIZE, MainFrm.screenWidth/4, GroupLayout.PREFERRED_SIZE)
+                                .addGap(MainFrm.screenWidth/12, MainFrm.screenWidth/12, MainFrm.screenWidth/12)//设备树和右边控件的距离
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(tabbedPane3)
-                                        .addComponent(tabbedPane5))
+                                        .addComponent(tabbedPane3,GroupLayout.PREFERRED_SIZE, MainFrm.screenWidth*3/5, GroupLayout.PREFERRED_SIZE)//表格的行大小
+                                        .addComponent(tabbedPane5,GroupLayout.PREFERRED_SIZE, MainFrm.screenWidth*3/5, GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup()
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
+                                .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup()
-                                        .addComponent(devTree)
+                                        .addComponent(devTree,GroupLayout.PREFERRED_SIZE, MainFrm.screenHeight*17/20, GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(tabbedPane3, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(tabbedPane5, GroupLayout.PREFERRED_SIZE, 332, GroupLayout.PREFERRED_SIZE)))
-                                .addGap(34, 34, 34))
+                                                .addComponent(tabbedPane3, GroupLayout.PREFERRED_SIZE, MainFrm.screenHeight*2/5, GroupLayout.PREFERRED_SIZE)
+//                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, MainFrm.screenHeight/3, Short.MAX_VALUE)
+                                                .addGap(MainFrm.screenHeight/15, MainFrm.screenHeight/15, MainFrm.screenHeight/15)//tabbedPane3，tabbedPane5的间隔
+                                                .addComponent(tabbedPane5, GroupLayout.PREFERRED_SIZE, MainFrm.screenHeight*4/10, GroupLayout.PREFERRED_SIZE)))
+//                                .addGap(70, 70, 70)
+)
         );
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }

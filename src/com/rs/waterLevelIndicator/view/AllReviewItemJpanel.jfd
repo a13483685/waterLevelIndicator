@@ -5,9 +5,10 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 			"$horizontalGroup": "par l {seq l {space :p:40:p, comp tabbedPane2:::p:267:p, space :p:29:p, par l {comp tabbedPane3:::p:580:p, comp tabbedPane5::::0:x}, space ::24:x}}"
-			"$verticalGroup": "par l {seq l {space :p:40:p, par l {comp tabbedPane2:::::x, seq {comp tabbedPane3:::p:269:p, space :::x, comp tabbedPane5:::p:332:p}}, space :p:34:p}}"
+			"$verticalGroup": "par l {seq t {space :p:40:p, par t {comp tabbedPane2:::::x, seq {comp tabbedPane3:::p:269:p, space :::x, comp tabbedPane5:::p:332:p}}, space :p:34:p}}"
 		} ) {
 			name: "this"
+			"minimumSize": new java.awt.Dimension( 1500, 950 )
 			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
 				name: "tabbedPane2"
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -96,7 +97,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 940, 675 )
+			"size": new java.awt.Dimension( 940, 685 )
 		} )
 	}
 }

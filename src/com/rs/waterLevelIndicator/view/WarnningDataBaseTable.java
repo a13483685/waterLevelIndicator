@@ -40,11 +40,11 @@ public class WarnningDataBaseTable extends BaseDataBaseTable{
 
     @Override
     public void initWidth4Table() {
-        mRealSensorData.getColumnModel().getColumn(0).setPreferredWidth(140);
-        mRealSensorData.getColumnModel().getColumn(1).setPreferredWidth(90);
-        mRealSensorData.getColumnModel().getColumn(2).setPreferredWidth(70);
-        mRealSensorData.getColumnModel().getColumn(3).setPreferredWidth(70);
-        mRealSensorData.getColumnModel().getColumn(4).setPreferredWidth(70);
-        mRealSensorData.getColumnModel().getColumn(5).setPreferredWidth(140);
+        mRealSensorData.getColumnModel().getColumn(0).setPreferredWidth(MainFrm.screenWidth*3/5*14/59);
+        mRealSensorData.getColumnModel().getColumn(1).setPreferredWidth(MainFrm.screenWidth*3/5*9/59);
+        mRealSensorData.getColumnModel().getColumn(2).setPreferredWidth(MainFrm.screenWidth*3/5*7/59);
+        mRealSensorData.getColumnModel().getColumn(3).setPreferredWidth(MainFrm.screenWidth*3/5*7/59);
+        mRealSensorData.getColumnModel().getColumn(4).setPreferredWidth(MainFrm.screenWidth*3/5*7/59);
+        mRealSensorData.getColumnModel().getColumn(5).setPreferredWidth(MainFrm.screenWidth*3/5*14/59);
     }
 }

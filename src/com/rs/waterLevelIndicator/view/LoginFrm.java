@@ -1,13 +1,10 @@
 package com.rs.waterLevelIndicator.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
 import javax.swing.GroupLayout.Alignment;
-import java.awt.Font;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -16,6 +13,7 @@ import com.rs.waterLevelIndicator.customView.WindowOpacity;
 import com.rs.waterLevelIndicator.dao.AdminDao;
 import com.rs.waterLevelIndicator.model.Admin;
 import com.rs.waterLevelIndicator.model.UserType;
+import com.rs.waterLevelIndicator.utils.FunctionHelper;
 import com.rs.waterLevelIndicator.utils.StringUtil;
 import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
 import org.jvnet.substance.SubstanceLookAndFeel;
@@ -25,6 +23,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 
+import static com.rs.waterLevelIndicator.utils.FunctionHelper.InitGlobalFont;
+import static com.rs.waterLevelIndicator.view.MainFrm.*;
+
 public class LoginFrm extends JFrame {
 
 	private JPanel contentPane;
@@ -33,6 +34,8 @@ public class LoginFrm extends JFrame {
 	private JTextField mTextFieldPassword;
 	private JLabel label_2;
 	private JComboBox mComboBoxUserSlect;
+	private static int screenWidth1;
+	private static int screenHeight1;
 
 
 	/**
@@ -50,10 +53,24 @@ public class LoginFrm extends JFrame {
 //		}
 
 
+//		try {
+//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());//操作系统的界面风格
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (InstantiationException e) {
+//			e.printStackTrace();
+//		} catch (IllegalAccessException e) {
+//			e.printStackTrace();
+//		} catch (UnsupportedLookAndFeelException e) {
+//			e.printStackTrace();
+//		}
+
+
+		initSize();
 		try {
 			// 设置窗口边框样式
-			BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.translucencyAppleLike;
-//			BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
+//			BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.translucencyAppleLike;
+			BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
 			org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
 			UIManager.put("RootPane.setupButtonVisible", false);
 		} catch (Exception e) {
@@ -71,7 +88,12 @@ public class LoginFrm extends JFrame {
 			}
 		});
 	}
-
+	//初始化界面大小
+	private static void initSize() {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		screenWidth1 = screenSize.width;
+		screenHeight1 = screenSize.height;
+	}
 	/**
 	 * Create the frame.
 	 */
@@ -79,7 +101,7 @@ public class LoginFrm extends JFrame {
 		new WindowOpacity(this);
 		setTitle("\u767B\u5F55\u754C\u9762");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(50, 50, 450, 330);
+		setBounds(screenWidth1/2, screenHeight1/2, 390, 290);
 		contentPane = new JPanel();
 //		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -129,7 +151,7 @@ public class LoginFrm extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 										.addGroup(gl_contentPane.createSequentialGroup()
-												.addGap(55)
+												.addGap(50)
 												.addComponent(lblNewLabel))
 										.addGroup(gl_contentPane.createSequentialGroup()
 												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -139,16 +161,17 @@ public class LoginFrm extends JFrame {
 																		.addComponent(label_2)
 																		.addComponent(mLabelPassword)
 																		.addComponent(mLabelUserName))
-																.addGap(12))
+																.addGap(20)
+														)
 														.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-																.addContainerGap(107, Short.MAX_VALUE)
 																.addComponent(mButtonLogin)
 																.addPreferredGap(ComponentPlacement.RELATED)))
 												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 														.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-																.addComponent(mTextFieldPassword)
+//																.addGap(60)
+																.addComponent(mTextFieldPassword, 140, 140, 140)
 																.addComponent(mTextFieldUserName, 140, 140, 140)
-																.addComponent(mComboBoxUserSlect, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+																.addComponent(mComboBoxUserSlect, 140, 140, 140))
 														.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 																.addComponent(mButtonReset)
 																.addGap(20)
@@ -172,7 +195,7 @@ public class LoginFrm extends JFrame {
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 										.addComponent(mComboBoxUserSlect, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(label_2))
-								.addGap(12)
+								.addGap(20)
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 										.addComponent(mButtonReset)
 										.addComponent(mButtonLogin))

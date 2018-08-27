@@ -147,11 +147,11 @@ public class HistoryDbPanel extends JPanel {
             //======== mTables ========
             {
 
-                mTables.addTab("\u5386\u53f2\u8bb0\u5f55", mHistoryTable);
+                mTables.addTab("历史纪录", mHistoryTable);
 
-                mTables.addTab("\u4e8b\u4ef6\u8bb0\u5f55", mEventTable);
+                mTables.addTab("事件记录", mEventTable);
 
-                mTables.addTab("\u62a5\u8b66\u8bb0\u5f55", mWarnningTable);
+                mTables.addTab("报警记录", mWarnningTable);
 
                 mTables.addChangeListener(new ChangeListener() {
                     @Override
@@ -169,10 +169,10 @@ public class HistoryDbPanel extends JPanel {
             }
 
             //---- mStartTimeButton ----
-            mStartTimeButton.setText("\u8d77\u59cb\u65f6\u95f4");
+            mStartTimeButton.setText("起始时间");
 
             //---- mEndTimeButton ----
-            mEndTimeButton.setText("\u7ed3\u675f\u65f6\u95f4");
+            mEndTimeButton.setText("结束时间");
 
             //---- label1 ----
             label1.setText("\u8d77\u59cb\u65f6\u95f4\uff1a");
@@ -239,26 +239,29 @@ public class HistoryDbPanel extends JPanel {
                 panel1Layout.setHorizontalGroup(
                     panel1Layout.createParallelGroup()
                         .addGroup(panel1Layout.createSequentialGroup()
-                            .addGap(47, 47, 47)
+                            .addGap(MainFrm.screenWidth/8, MainFrm.screenWidth/8, MainFrm.screenWidth/8)
                             .addComponent(label3)
                             .addGap(14, 14, 14)
                             .addComponent(mNum)
                             .addGap(18, 18, 18)
                             .addComponent(label5, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-                            .addGap(2, 2, 2)
+                            .addGap(MainFrm.screenWidth/100, MainFrm.screenWidth/100, MainFrm.screenWidth/100)
                             .addComponent(label4)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(mTotalPage)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(label6)
-                            .addGap(18, 18, 18)
-                            .addComponent(mFirstPage)
+                            .addGap(MainFrm.screenWidth/100, MainFrm.screenWidth/100, MainFrm.screenWidth/100)
+                            .addComponent(mFirstPage).addGap(MainFrm.screenWidth/100, MainFrm.screenWidth/100, MainFrm.screenWidth/100)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(mPrePage)
+                                .addGap(MainFrm.screenWidth/100, MainFrm.screenWidth/100, MainFrm.screenWidth/100)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(mNextPage)
+                                .addGap(MainFrm.screenWidth/100, MainFrm.screenWidth/100, MainFrm.screenWidth/100)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(mFinalPage)
+                                .addGap(MainFrm.screenWidth/100, MainFrm.screenWidth/100, MainFrm.screenWidth/100)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(label11)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -266,6 +269,7 @@ public class HistoryDbPanel extends JPanel {
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(label12, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(MainFrm.screenWidth/100, MainFrm.screenWidth/100, MainFrm.screenWidth/100)
                             .addComponent(go, GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
                             .addContainerGap())
                 );
@@ -298,10 +302,11 @@ public class HistoryDbPanel extends JPanel {
             panel2Layout.setHorizontalGroup(
                 panel2Layout.createParallelGroup()
                     .addGroup(panel2Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+//                        .addGap(26, 26, 26)
                         .addGroup(panel2Layout.createParallelGroup()
-                            .addComponent(mTables, GroupLayout.PREFERRED_SIZE, 620, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mTables, GroupLayout.PREFERRED_SIZE, MainFrm.screenWidth*3/5, GroupLayout.PREFERRED_SIZE)
                             .addGroup(panel2Layout.createSequentialGroup()
+                                    .addGap(MainFrm.screenWidth/4)
                                 .addComponent(label1)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(mStartTimeButton, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)
@@ -313,8 +318,9 @@ public class HistoryDbPanel extends JPanel {
                                 .addComponent(mQueryButton, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(mRefreshButton, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
+
                             .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(10, Short.MAX_VALUE))
+                    )
             );
             panel2Layout.setVerticalGroup(
                 panel2Layout.createParallelGroup()
@@ -328,7 +334,7 @@ public class HistoryDbPanel extends JPanel {
                             .addComponent(label1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
                             .addComponent(label2))
                         .addGap(18, 18, 18)
-                        .addComponent(mTables, GroupLayout.PREFERRED_SIZE, 537, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(mTables, GroupLayout.PREFERRED_SIZE, MainFrm.screenHeight*15/20, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panel1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(26, Short.MAX_VALUE))
@@ -340,9 +346,9 @@ public class HistoryDbPanel extends JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup()
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(24, 24, 24)
-                    .addComponent(devTree, GroupLayout.PREFERRED_SIZE, 313, GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
+                    .addGap(40, 40, 40)
+                    .addComponent(devTree, GroupLayout.PREFERRED_SIZE, MainFrm.screenWidth/4, GroupLayout.PREFERRED_SIZE)
+                    .addGap(MainFrm.screenWidth/12, MainFrm.screenWidth/12, MainFrm.screenWidth/12)//设备树和右边控件的距离
                     .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addContainerGap())
         );
@@ -352,7 +358,7 @@ public class HistoryDbPanel extends JPanel {
                     .addGroup(layout.createParallelGroup()
                         .addGroup(layout.createSequentialGroup()
                             .addGap(22, 22, 22)
-                            .addComponent(devTree, GroupLayout.PREFERRED_SIZE, 590, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(devTree,GroupLayout.PREFERRED_SIZE, MainFrm.screenHeight*17/20, GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))

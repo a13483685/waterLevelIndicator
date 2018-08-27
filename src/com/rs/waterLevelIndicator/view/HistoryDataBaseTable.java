@@ -53,18 +53,18 @@ public class HistoryDataBaseTable extends BaseDataBaseTable{
     }
 
      public void initWidth4Table(){
-        mRealSensorData.getColumnModel().getColumn(0).setPreferredWidth(50);
-        mRealSensorData.getColumnModel().getColumn(1).setPreferredWidth(70);
-        mRealSensorData.getColumnModel().getColumn(2).setPreferredWidth(70);
-        mRealSensorData.getColumnModel().getColumn(3).setPreferredWidth(70);
-        mRealSensorData.getColumnModel().getColumn(4).setPreferredWidth(70);
-        mRealSensorData.getColumnModel().getColumn(5).setPreferredWidth(80);
+        mRealSensorData.getColumnModel().getColumn(0).setPreferredWidth(MainFrm.screenWidth*3/5*5/59);
+        mRealSensorData.getColumnModel().getColumn(1).setPreferredWidth(MainFrm.screenWidth*3/5*7/59);
+        mRealSensorData.getColumnModel().getColumn(2).setPreferredWidth(MainFrm.screenWidth*3/5*7/59);
+        mRealSensorData.getColumnModel().getColumn(3).setPreferredWidth(MainFrm.screenWidth*3/5*7/59);
+        mRealSensorData.getColumnModel().getColumn(4).setPreferredWidth(MainFrm.screenWidth*3/5*7/59);
+        mRealSensorData.getColumnModel().getColumn(5).setPreferredWidth(MainFrm.screenWidth*3/5*8/59);
         TableColumn column = mRealSensorData.getColumnModel().getColumn(6);
-        column.setPreferredWidth(110);
-        DefaultTableCellRenderer render = new DefaultTableCellRenderer();//设置监听器
-        render.setHorizontalAlignment(SwingConstants.LEFT);//居中对齐
-        column.setCellRenderer(render);
-        mRealSensorData.getColumnModel().getColumn(7).setPreferredWidth(70);
+        column.setPreferredWidth(MainFrm.screenWidth*3/5*11/59);
+//        DefaultTableCellRenderer render = new DefaultTableCellRenderer();//设置监听器
+//        render.setHorizontalAlignment(SwingConstants.LEFT);//居中对齐
+//        column.setCellRenderer(render);
+        mRealSensorData.getColumnModel().getColumn(7).setPreferredWidth(MainFrm.screenWidth*3/5*7/59);
     }
 //分页查询
     public JScrollPane initHistoryRecordTable(DbPageMesReq req){

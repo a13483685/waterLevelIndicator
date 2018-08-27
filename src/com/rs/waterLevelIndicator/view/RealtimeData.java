@@ -12,6 +12,7 @@ import com.rs.waterLevelIndicator.model.SensorData;
 import com.rs.waterLevelIndicator.net.TCPThreadServer;
 import com.rs.waterLevelIndicator.utils.Constans;
 import com.rs.waterLevelIndicator.utils.FunctionHelper;
+import sun.swing.table.DefaultTableCellHeaderRenderer;
 
 import java.awt.*;
 import java.util.Timer;
@@ -30,12 +31,13 @@ public class RealtimeData extends JPanel implements ObserverData,DevTreeSelectLi
 
     private static final int DEV_NAME= 0;
     private static final int UP_LOAD = 1;
-    private static final int UP_LIMIT = 2;
-    private static final int DOWN_LIMIT = 3;
-    private static final int GPS_SIGNAL = 4;
-    private static final int WATT = 5;
-    private static final int TIME = 6;
-    private static final int DEV_STATUS = 7;
+    private static final int KONG_GAO = 2;
+    private static final int UP_LIMIT = 3;
+    private static final int DOWN_LIMIT = 4;
+    private static final int GPS_SIGNAL = 5;
+    private static final int WATT = 6;
+    private static final int TIME = 7;
+    private static final int DEV_STATUS = 8;
     private JScrollPane scrollPane1;
     private JTable tableContents;
     private boolean isFirstEnter = true;
@@ -116,12 +118,13 @@ public class RealtimeData extends JPanel implements ObserverData,DevTreeSelectLi
         if(dev_id.equals(Constans.mWhichDevIsSelected )) {//只有和选中id一样的时候，才显示在界面上
             downLimit = sensorData.getDownLimit();
             gpsSignal = sensorData.getGpsSignal();
+            konggao = sensorData.getGaokong();
             upload = sensorData.getUpload();
             upLimit = sensorData.getUpLimit();
             time = sensorData.getTime();
             watt = sensorData.getWatt();
             dev_id = sensorData.getDev_id();
-            for (int i = 0; i < 7; i++) {
+            for (int i = 0; i < 8; i++) {
                 switch (i) {
                     case DEV_NAME:
                         datas[i][2] = dev_id;
@@ -129,6 +132,8 @@ public class RealtimeData extends JPanel implements ObserverData,DevTreeSelectLi
                     case UP_LOAD:
                         datas[i][2] = upload;
                         break;
+                    case KONG_GAO:
+                        datas[i][2] = konggao;
                     case UP_LIMIT:
                         datas[i][2] = upLimit;
                         break;
@@ -156,12 +161,13 @@ public class RealtimeData extends JPanel implements ObserverData,DevTreeSelectLi
 //            {1, "空高", "全部中断", ""},
             {1, "当前选择设备", "未知", "-"},
             {2, "上报水位", "全部中断", "m"},
-            {3, "水位上线报警", "未知", "m"},
-            {4, "水位下限报警", "未知", "m"},
-            {5, "GPS信号强度", "未知", "dB"},
+            {3,"空高","未知","m"},
+            {4, "水位上线报警", "未知", "m"},
+            {5, "水位下限报警", "未知", "m"},
+            {6, "GPS信号强度", "未知", "dB"},
 //            {6, "通讯状态", "未知", null},
-            {6,"电压","未知","v"},
-            {7, "时间", "2018-07-04 13：59：58", "-"},
+            {7,"电压","未知","v"},
+            {8, "时间", "2018-07-04 13：59：58", "-"},
 //            {9, "水位", "未知", null},
 //            {7, "设备状态", "未知", "-"},
     };
@@ -184,19 +190,20 @@ public class RealtimeData extends JPanel implements ObserverData,DevTreeSelectLi
         layout.setHorizontalGroup(
                 layout.createParallelGroup()
                         .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+//                                .addContainerGap()
+                                .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, MainFrm.screenWidth/3, Short.MAX_VALUE)
                                 .addContainerGap())
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup()
                         .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 10, Short.MAX_VALUE)
-                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE))
+//                                .addGap(0, 10, Short.MAX_VALUE)
+                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, MainFrm.screenHeight/2, GroupLayout.PREFERRED_SIZE))
         );
     }
 
     private void initTable() {
+        System.out.println("screen val is :"+MainFrm.screenWidth +","+MainFrm.screenHeight);
         tableContents = new JTable();
 
         tableContents.setModel(new DefaultTableModel(datas, titles) {
@@ -215,12 +222,29 @@ public class RealtimeData extends JPanel implements ObserverData,DevTreeSelectLi
                 return columnEditable[columnIndex];
             }
         });
+        //设置表头居中显示
+        //设置表头居中显示
+        DefaultTableCellHeaderRenderer hr = new DefaultTableCellHeaderRenderer();
+        hr.setHorizontalAlignment(JLabel.CENTER);
+        tableContents.getTableHeader().setDefaultRenderer(hr);
 
+
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();//单元格渲染器
+
+        tcr.setHorizontalAlignment(JLabel.CENTER);//居中显示
+        tableContents.setDefaultRenderer(Object.class, tcr);//设置渲染器
         TableColumnModel cm = tableContents.getColumnModel();
+
+
+
+
+
         cm.getColumn(0).setResizable(false);
         cm.getColumn(0).setMinWidth(35);
+
         tableContents.setPreferredScrollableViewportSize(null);
         tableContents.setAlignmentX(2.5F);
+        tableContents.setRowHeight(MainFrm.screenHeight/2/13);//每一列的高度
         scrollPane1.setViewportView(tableContents);
 
     }

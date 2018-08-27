@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp mContentPanel::t:::x}"
-			"$verticalGroup": "par l {comp mContentPanel::t:::x}"
+			"$horizontalGroup": "par l {comp mContentPanel::l:::x, seq l {space :::p, comp panel2:::p::p, space ::12:x}}"
+			"$verticalGroup": "par l {seq l {comp mContentPanel:::::x, space :::p, comp panel2:::p::p, space :::p}}"
 		} ) {
 			name: "this"
 			"$sizePolicy": 1
@@ -14,9 +14,39 @@ new FormModel {
 			"iconImage": new com.jformdesigner.model.SwingIcon( 1, "F:\\work\\java\\waterLevelIndicator\\src\\images\\系统部署.png" )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 				"$horizontalGroup": "par l {space :0:998:x}"
-				"$verticalGroup": "par l {space :0:445:x}"
+				"$verticalGroup": "par l {space :0:392:x}"
 			} ) {
 				name: "mContentPanel"
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq l {space :::p, comp label5:::p::p, space :::p, comp mTotalDev:::p::p, space :p:62:p, comp label6:::p::p, space :::p, comp mOnlineDev:::p::p, space :p:62:p, comp label7:::p::p, space :::p, comp mNowUse:::p::p, space ::619:x}}"
+				"$verticalGroup": "par l {comp label7:::::x, comp label6::t:::x, comp label5::t:::x, comp mOnlineDev::t:::x, comp mNowUse::t:::x, comp mTotalDev::t:::x}"
+			} ) {
+				name: "panel2"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label5"
+					"text": "总设备："
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "mTotalDev"
+					"text": "1"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label6"
+					"text": "在线设备："
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "mOnlineDev"
+					"text": "1"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label7"
+					"text": "当前选择设备："
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "mNowUse"
+					"text": "1"
+				} )
 			} )
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "menuBar1"
@@ -127,8 +157,8 @@ new FormModel {
 				} )
 			}
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 5, 5 )
-			"size": new java.awt.Dimension( 1000, 500 )
+			"location": new java.awt.Point( 10, 10 )
+			"size": new java.awt.Dimension( 1000, 505 )
 		} )
 	}
 }

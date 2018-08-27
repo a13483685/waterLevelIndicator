@@ -21,43 +21,38 @@ import com.rs.waterLevelIndicator.utils.Constans;
 import com.rs.waterLevelIndicator.utils.FunctionHelper;
 import com.rs.waterLevelIndicator.utils.ImagePanel;
 
+import static com.rs.waterLevelIndicator.utils.FunctionHelper.InitGlobalFont;
+
 /**
  * @author xz
  */
 public class MainFrm extends JFrame implements MouseListener,ActionListener{
+    private JToolBar toolBar1;
+    private JPanel panel2;
+    private JLabel label5;
+    private JLabel mTotalDev;
+    private JLabel label6;
+    private JLabel mOnlineDev;
+    private JLabel label7;
+    private JLabel mNowUse;
+    public static int screenWidth;
+    public static int screenHeight;
+    public static float proportionW = 0;
+    public static float proportionH = 0;
 
-    public static RealtimeData realtimeData = new RealtimeData();
-    static JTabbedPane devTree = new DevTree();
-//    private final TcpServerNonBlockingNIO tcpServerNonBlockingNIO;
+    public static RealtimeData realtimeData = null;
+    static JTabbedPane devTree = null;
+
+
+    //    private final TcpServerNonBlockingNIO tcpServerNonBlockingNIO;
     //    private final ChatServer server;
 
     public MainFrm() {
-          //设置静态变量
-        //有bug 如果文件不存在
+        InitGlobalFont(new Font("宋体", Font.PLAIN, 16));
         new WindowOpacity(this);
+
         String lastSelectedDevToFile = FunctionHelper.getLastSelectedDevToFile();
         Constans.mWhichDevIsSelected = lastSelectedDevToFile;
-//        TCPThreadServer tcpThreadServer = new TCPThreadServer();
-//        new Thread(tcpThreadServer).start();
-
-        //Tcp开启
-//        tcpServerNonBlockingNIO = new TcpServerNonBlockingNIO();//接受没问题
-
-//        new Thread(){
-//            @Override
-//            public void run() {
-//                try {
-//                    Server.main();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                super.run();
-//            }
-//        }.start();
-//        Server server = new ChatServer(6666);
-//        new Thread(server).start();
-
-
         new Thread(){
             @Override
             public void run() {
@@ -66,8 +61,26 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
             }
         }.start();
         initComponents();
+//        initSize();
+        realtimeData = new RealtimeData();
+        devTree = new DevTree();
         createHome();
-        this.setResizable(false);
+//        this.setResizable(false);
+    }
+
+    //初始化界面大小
+    private void initSize() {
+        int fraWidth = this.getWidth();//frame的宽
+        int fraHeight = this.getHeight();//frame的高
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        screenWidth = screenSize.width;
+        screenHeight = screenSize.height;
+        this.setSize(screenWidth, screenHeight);
+        this.setLocation(0, 0);
+        proportionW = screenWidth /fraWidth;//宽高的缩放比例
+        proportionH = screenHeight /fraHeight;
+        FunctionHelper.modifyComponentSize(this, proportionW, proportionH);
+        this.toFront();
     }
 
 
@@ -135,6 +148,17 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
         mAboutUs = new JMenuItem();
         mContentPanel = new JPanel();
         mDeviceMonitor = new JPanel();
+
+        panel2 = new JPanel();
+        label5 = new JLabel();
+        mTotalDev = new JLabel();
+        label6 = new JLabel();
+        mOnlineDev = new JLabel();
+        label7 = new JLabel();
+        mNowUse = new JLabel();
+        setSize(1500, 1000);
+        setLocationRelativeTo(getOwner());
+        initSize();
         //======== this ========
         setTitle("窨井水位计远程管理系统");
         setAlwaysOnTop(true);
@@ -144,7 +168,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
 
         //======== menuBar1 ========
         {
-            menuBar1.setPreferredSize(new Dimension(544, 40));
+            menuBar1.setPreferredSize(new Dimension(screenWidth*1/3, 40));
 
             //======== mHomePage ========
             {
@@ -299,28 +323,89 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
                 mDeviceMonitor.setLayout(mDeviceMonitorLayout);
                 mDeviceMonitorLayout.setHorizontalGroup(
                     mDeviceMonitorLayout.createParallelGroup()
-                        .addGap(0, 978, Short.MAX_VALUE)
+                        .addGap(0, MainFrm.screenWidth, Short.MAX_VALUE)
                 );
                 mDeviceMonitorLayout.setVerticalGroup(
                     mDeviceMonitorLayout.createParallelGroup()
-                        .addGap(0, 433, Short.MAX_VALUE)
+                        .addGap(0, MainFrm.screenHeight*9/20, Short.MAX_VALUE)
                 );
             }
             mContentPanel.add(mDeviceMonitor, "card1");
         }
+        //======== panel2 ========
+        {
+
+            //---- label5 ----
+            label5.setText("\u603b\u8bbe\u5907\uff1a");
+
+            //---- mTotalDev ----
+            mTotalDev.setText("1");
+
+            //---- label6 ----
+            label6.setText("\u5728\u7ebf\u8bbe\u5907\uff1a");
+
+            //---- mOnlineDev ----
+            mOnlineDev.setText("1");
+
+            //---- label7 ----
+            label7.setText("\u5f53\u524d\u9009\u62e9\u8bbe\u5907\uff1a");
+
+            //---- mNowUse ----
+            mNowUse.setText("1");
+
+            GroupLayout panel2Layout = new GroupLayout(panel2);
+            panel2.setLayout(panel2Layout);
+            panel2Layout.setHorizontalGroup(
+                    panel2Layout.createParallelGroup()
+                            .addGroup(panel2Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(label5)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(mTotalDev)
+                                    .addGap(62, 62, 62)
+                                    .addComponent(label6)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(mOnlineDev)
+                                    .addGap(62, 62, 62)
+                                    .addComponent(label7)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(mNowUse)
+                                    .addContainerGap(619, Short.MAX_VALUE))
+            );
+            panel2Layout.setVerticalGroup(
+                    panel2Layout.createParallelGroup()
+                            .addComponent(label7, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(label6, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(label5, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mOnlineDev, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mNowUse, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mTotalDev, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            );
+        }
+
+
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addComponent(mContentPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                contentPaneLayout.createParallelGroup()
+                        .addComponent(mContentPanel, GroupLayout.DEFAULT_SIZE, MainFrm.screenWidth, Short.MAX_VALUE)
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(panel2, GroupLayout.PREFERRED_SIZE, MainFrm.screenWidth, GroupLayout.PREFERRED_SIZE)
+//                                .addContainerGap(12, Short.MAX_VALUE)
+)
         );
         contentPaneLayout.setVerticalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addComponent(mContentPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                contentPaneLayout.createParallelGroup()
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                .addComponent(mContentPanel, GroupLayout.DEFAULT_SIZE, MainFrm.screenHeight*19/20, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panel2, GroupLayout.PREFERRED_SIZE, MainFrm.screenHeight*1/30, GroupLayout.PREFERRED_SIZE)
+//                                .addContainerGap()
+)
         );
-        setSize(1100, 800);
-        setLocationRelativeTo(getOwner());
+
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -375,7 +460,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
 
     }
 
-    //
+    //设备监控界面
     private void devicesMonitor() {
 //        mContentPanel.add(new DeviceMonitorJpanel(server));
         mContentPanel.add(new DeviceMonitorJpanel());
