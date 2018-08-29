@@ -5,9 +5,11 @@ import com.rs.waterLevelIndicator.dao.DevicesDao;
 import com.rs.waterLevelIndicator.dao.SenserDataDao;
 import com.rs.waterLevelIndicator.interfaces.DevTreeSelectListener;
 import com.rs.waterLevelIndicator.manage.RegistDevSelectChange;
+import com.rs.waterLevelIndicator.manage.StatusBarChange;
 import com.rs.waterLevelIndicator.model.DevSelectEvent;
 import com.rs.waterLevelIndicator.model.Device;
 import com.rs.waterLevelIndicator.model.SensorData;
+import com.rs.waterLevelIndicator.model.StatusbarEvent;
 import com.rs.waterLevelIndicator.utils.Constans;
 import com.rs.waterLevelIndicator.utils.FunctionHelper;
 import com.rs.waterLevelIndicator.view.DeviceInfoFrm;
@@ -37,7 +39,11 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
     JMenuItem mDevInfoItem;//设备信息
     public static Map<String,String> devInfos = new HashMap<>();
     public static Map<String,String> addressInfos = new HashMap<>();
-    RegistDevSelectChange registDevSelectChange = null;
+    RegistDevSelectChange registDevSelectChange = null;//通知RealtimeData
+
+    StatusBarChange registStatusBarChange =null;//通知状态栏
+    StatusbarEvent statusbarEvent = null;
+
 
 
     private DefaultMutableTreeNode selNode;
@@ -45,8 +51,14 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
 
     public DevTree(){
         initComponents();
+        statusbarEvent = new StatusbarEvent();//状态栏信息
+
         registDevSelectChange = new RegistDevSelectChange();
         registDevSelectChange.addListener(MainFrm.realtimeData);
+
+
+        registStatusBarChange = new StatusBarChange();//状态栏
+        registStatusBarChange.addListener(MainFrm.mDevStatusBar);
     }
 
     private void initComponents() {
@@ -145,6 +157,10 @@ public class DevTree extends JTabbedPane implements ActionListener,DevDbOberver 
                 DevExist = true;
             }
             registDevSelectChange.setValue(Constans.mWhichDevIsSelected);
+
+//            statusbarEvent.setSelectedDev(Constans.mWhichDevIsSelected);
+            registStatusBarChange.setSelectDev(Constans.mWhichDevIsSelected);
+            
             if(!DevExist){
                 JOptionPane.showMessageDialog(this,"无设备数据");
             }

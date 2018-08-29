@@ -130,7 +130,7 @@ public class DevicesDao extends BaseDao {
         return devices;
     }
 
-    public int getTotalNum() throws SQLException {
+    public int getTotalNum()  {
         PreparedStatement ps = null;
         ResultSet resultSet = null;
         int total = 0;
@@ -144,10 +144,18 @@ public class DevicesDao extends BaseDao {
             e.printStackTrace();
         }finally {
             if(resultSet!=null){
-                resultSet.close();
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
             if(ps !=null){
-                ps.close();
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
 //            if(con !=null){
 //                con.close();

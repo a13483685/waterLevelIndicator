@@ -3,6 +3,8 @@ package com.rs.waterLevelIndicator.net.netty.server;
 import com.rs.waterLevelIndicator.Observers.ObserverData;
 import com.rs.waterLevelIndicator.Observers.ObserverDataOne;
 import com.rs.waterLevelIndicator.dao.EventTypeDao;
+import com.rs.waterLevelIndicator.manage.StatusBarChange;
+import com.rs.waterLevelIndicator.model.StatusbarEvent;
 import com.rs.waterLevelIndicator.utils.Constans;
 import com.rs.waterLevelIndicator.utils.FunctionHelper;
 import com.rs.waterLevelIndicator.utils.StringUtil;
@@ -19,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 服务端消息处理
@@ -29,19 +32,28 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
 
 	public static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 	public static String mInfo = "";
-	ObserverDataOne observerDataOne = null;
-	List<ObserverData> observers = new ArrayList<>();
+	ObserverDataOne observerDataOne = null;//插入数据库
+	List<ObserverData> observers = new ArrayList<>();//当有数据来，要同时给的观察者集合
+	StatusBarChange registStatusbarChange =null;
+	StatusbarEvent statusbarEvent = null;
+
 	private String info;
 	public Logger log = null;
 	public static HashMap<String,String> members ;//用于记录设备号和通道号的对应关系
+	public static int mConnectCount = 0;
+
 
 	public ServerHandler(){
+		statusbarEvent = new StatusbarEvent();//状态栏信息
 		log = LoggerFactory.getLogger(ServerHandler.class);
 		observerDataOne= new ObserverDataOne();
 		observers.add(observerDataOne);
 		members = new HashMap<>();
-		observers.add(DeviceMonitorJpanel.mLogContent);
-		observers.add(MainFrm.realtimeData);
+		observers.add(DeviceMonitorJpanel.mLogContent);//mLogContent 日志框
+		observers.add(MainFrm.realtimeData);//realtimeData table中更新内容
+
+		registStatusbarChange = new StatusBarChange();//状态栏
+		registStatusbarChange.addListener(MainFrm.mDevStatusBar);
 	}
 	//2.覆盖了 handlerAdded() 事件处理方法。每当从服务端收到新的客户端连接时，客户端的 Channel 存入 ChannelGroup列表中，并通知列表中的其他客户端 Channel
 	@Override
@@ -51,26 +63,39 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
 		channels.writeAndFlush("[SERVER] - " + incoming.remoteAddress() + " channel_id :" + incoming.id() + " 加入\n");
 		//添加到channelGroup 通道组
 		channels.add(ctx.channel());
+//		mConnectCount.get();
+//		System.out.println("当前连接数："+ ++mConnectCount);
+		statusbarEvent.setOnLineDevNum(String.valueOf(++mConnectCount));
+		registStatusbarChange.setOnlineDevNum(statusbarEvent.getOnLineDevNum());
 	}
 
 	@Override
 	public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
 		Channel incoming = ctx.channel();
-
 		// Broadcast a message to multiple Channels
 		channels.writeAndFlush("[SERVER] - " + incoming.remoteAddress() + " 离开\n");
-
+//		mConnectCount.get();
+//		System.out.println("当前连接数："+ --mConnectCount);
+		statusbarEvent.setOnLineDevNum(String.valueOf(--mConnectCount));
+		registStatusbarChange.setOnlineDevNum(statusbarEvent.getOnLineDevNum());
 		// A closed Channel is automatically removed from ChannelGroup,
 		// so there is no need to do "channels.remove(ctx.channel());"
 		}
 
+	/**
+	 * 接收到数据之后的处理
+ 	 * @param ctx
+	 * @param msg
+	 * @throws Exception
+	 */
 	@Override
 	protected void messageReceived(ChannelHandlerContext ctx, String msg) throws Exception {
+
 		Channel incoming = ctx.channel();
 		String channelId = incoming.id().asShortText();
 		info = msg.trim();
 		log.info("netty 接收到的数据{}",info);
-		if(msg.startsWith("devid")){
+		if(msg.startsWith("devid")){//处理上下线
 			String[] infos = info.split(",");
 			String devId = infos[1];
 			if(!members.containsKey(channelId)){
@@ -100,7 +125,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
 		}
 
 		for (ObserverData observerData:observers){
-			if(info.startsWith("head")|| info.startsWith("devid")){
+			if(info.startsWith("head")|| info.startsWith("devid")){//客户端发送回来的消息，通知观察者
 				observerData.update(info);
 			}
 		}

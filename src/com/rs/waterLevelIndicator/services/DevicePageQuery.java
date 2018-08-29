@@ -28,11 +28,7 @@ public class DevicePageQuery implements MessageMapper<Device> {
     @Override
     public int getMessageNum() {
         int totalNum = 0;
-        try {
-            totalNum = devicesDao.getTotalNum();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        totalNum = devicesDao.getTotalNum();
         return totalNum;
     }
 

@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.*;
 
+import com.rs.waterLevelIndicator.customView.DevStatusBar;
 import com.rs.waterLevelIndicator.customView.DevTree;
 import com.rs.waterLevelIndicator.customView.FileChooser;
 import com.rs.waterLevelIndicator.customView.WindowOpacity;
@@ -29,16 +30,22 @@ import static com.rs.waterLevelIndicator.utils.FunctionHelper.InitGlobalFont;
 public class MainFrm extends JFrame implements MouseListener,ActionListener{
     private JToolBar toolBar1;
     private JPanel panel2;
-    private JLabel label5;
-    private JLabel mTotalDev;
-    private JLabel label6;
-    private JLabel mOnlineDev;
-    private JLabel label7;
-    private JLabel mNowUse;
+//    private JPanel panel2;
+//    private JLabel label5;
+//    private JLabel mTotalDev;
+//    private JLabel label6;
+//    private JLabel mOnlineDev;
+//    private JLabel label7;
+//    private JLabel mNowUse;
+//
+//    private JLabel lable8;
+//    private JLabel mBluetoothStatus;
     public static int screenWidth;
     public static int screenHeight;
     public static float proportionW = 0;
     public static float proportionH = 0;
+
+    public static DevStatusBar mDevStatusBar = null;
 
     public static RealtimeData realtimeData = null;
     static JTabbedPane devTree = null;
@@ -64,6 +71,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
 //        initSize();
         realtimeData = new RealtimeData();
         devTree = new DevTree();
+
         createHome();
 //        this.setResizable(false);
     }
@@ -148,14 +156,16 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
         mAboutUs = new JMenuItem();
         mContentPanel = new JPanel();
         mDeviceMonitor = new JPanel();
-
-        panel2 = new JPanel();
-        label5 = new JLabel();
-        mTotalDev = new JLabel();
-        label6 = new JLabel();
-        mOnlineDev = new JLabel();
-        label7 = new JLabel();
-        mNowUse = new JLabel();
+        mDevStatusBar = new DevStatusBar();
+//        panel2 = new DevStatusBar().initView();
+//        label5 = new JLabel();
+//        mTotalDev = new JLabel();
+//        label6 = new JLabel();
+//        mOnlineDev = new JLabel();
+//        label7 = new JLabel();
+//        mNowUse = new JLabel();
+//        lable8 = new JLabel();
+//        mBluetoothStatus = new JLabel();
         setSize(1500, 1000);
         setLocationRelativeTo(getOwner());
         initSize();
@@ -335,56 +345,62 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
         //======== panel2 ========
         {
 
-            //---- label5 ----
-            label5.setText("\u603b\u8bbe\u5907\uff1a");
+//            //---- label5 ----
+//            label5.setText("\u603b\u8bbe\u5907\uff1a");
+//
+//            //---- mTotalDev ----
+//            mTotalDev.setText("1");
+//
+//            //---- label6 ----
+//            label6.setText("\u5728\u7ebf\u8bbe\u5907\uff1a");
+//
+//            //---- mOnlineDev ----
+//            mOnlineDev.setText("1");
+//
+//            //---- label7 ----
+//            label7.setText("\u5f53\u524d\u9009\u62e9\u8bbe\u5907\uff1a");
+//
+//            //---- mNowUse ----
+//            mNowUse.setText("1");
+//
+//            lable8.setText("蓝牙连接状态:");
+//            mBluetoothStatus.setText("未知");
 
-            //---- mTotalDev ----
-            mTotalDev.setText("1");
-
-            //---- label6 ----
-            label6.setText("\u5728\u7ebf\u8bbe\u5907\uff1a");
-
-            //---- mOnlineDev ----
-            mOnlineDev.setText("1");
-
-            //---- label7 ----
-            label7.setText("\u5f53\u524d\u9009\u62e9\u8bbe\u5907\uff1a");
-
-            //---- mNowUse ----
-            mNowUse.setText("1");
-
-            GroupLayout panel2Layout = new GroupLayout(panel2);
-            panel2.setLayout(panel2Layout);
-            panel2Layout.setHorizontalGroup(
-                    panel2Layout.createParallelGroup()
-                            .addGroup(panel2Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(label5)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(mTotalDev)
-                                    .addGap(62, 62, 62)
-                                    .addComponent(label6)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(mOnlineDev)
-                                    .addGap(62, 62, 62)
-                                    .addComponent(label7)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(mNowUse)
-                                    .addContainerGap(619, Short.MAX_VALUE))
-            );
-            panel2Layout.setVerticalGroup(
-                    panel2Layout.createParallelGroup()
-                            .addComponent(label7, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(label6, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(label5, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(mOnlineDev, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(mNowUse, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(mTotalDev, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            );
+//            GroupLayout panel2Layout = new GroupLayout(panel2);
+//            panel2.setLayout(panel2Layout);
+//            panel2Layout.setHorizontalGroup(
+//                    panel2Layout.createParallelGroup()
+//                            .addGroup(panel2Layout.createSequentialGroup()
+//                                    .addContainerGap()
+//                                    .addComponent(label5)
+//                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+//                                    .addComponent(mTotalDev)
+//                                    .addGap(62, 62, 62)
+//                                    .addComponent(label6)
+//                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+//                                    .addComponent(mOnlineDev)
+//                                    .addGap(62, 62, 62)
+//                                    .addComponent(label7)
+//                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+//                                    .addComponent(mNowUse)
+//                                    .addGap(62, 62, 62)
+//                                    .addComponent(lable8)
+//                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+//                                    .addComponent(mBluetoothStatus)
+//                                    .addContainerGap(619, Short.MAX_VALUE))
+//            );
+//            panel2Layout.setVerticalGroup(
+//                    panel2Layout.createParallelGroup()
+//                            .addComponent(label7, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//                            .addComponent(label6, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//                            .addComponent(label5, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//                            .addComponent(mOnlineDev, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//                            .addComponent(mNowUse, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//                            .addComponent(mTotalDev, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//                            .addComponent(lable8, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//                            .addComponent(mBluetoothStatus, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//            );
         }
-
-
-
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
@@ -392,7 +408,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
                         .addComponent(mContentPanel, GroupLayout.DEFAULT_SIZE, MainFrm.screenWidth, Short.MAX_VALUE)
                         .addGroup(contentPaneLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(panel2, GroupLayout.PREFERRED_SIZE, MainFrm.screenWidth, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(mDevStatusBar, GroupLayout.PREFERRED_SIZE, MainFrm.screenWidth, GroupLayout.PREFERRED_SIZE)
 //                                .addContainerGap(12, Short.MAX_VALUE)
 )
         );
@@ -401,7 +417,7 @@ public class MainFrm extends JFrame implements MouseListener,ActionListener{
                         .addGroup(contentPaneLayout.createSequentialGroup()
                                 .addComponent(mContentPanel, GroupLayout.DEFAULT_SIZE, MainFrm.screenHeight*19/20, Short.MAX_VALUE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(panel2, GroupLayout.PREFERRED_SIZE, MainFrm.screenHeight*1/30, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(mDevStatusBar, GroupLayout.PREFERRED_SIZE, MainFrm.screenHeight*1/30, GroupLayout.PREFERRED_SIZE)
 //                                .addContainerGap()
 )
         );
